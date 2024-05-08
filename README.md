@@ -1,19 +1,16 @@
 # Neopywal.nvim
 
-Neopywal.nvim is a maintained and modified version of
-[pywal.nvim](https://github.com/AlphaTechnolog/pywal.nvim), aiming to support
-a transparent background, better colorscheme and more plugins.
+**Neopywal.nvim** is a maintained and enhanced iteration of [pywal.nvim](https://github.com/AlphaTechnolog/pywal.nvim), designed to offer support for transparent backgrounds, a refined colorscheme, and an expanded range of supported plugins.
 
-Pywal.nvim was a reimplementation of [pywal.vim](https://github.com/dylanaraps/wal.vim), however,
-both projects were discontinued and became public archives.
+**Pywal.nvim** was initially inspired by [pywal.vim](https://github.com/dylanaraps/wal.vim), however both projects eventually ceased active development and became public archives.
 
+**Neopywal.nvim** distinguishes itself by being written entirely in Lua, was well as offering extended plugin compatibility compared to its predecessor. This Lua foundation allows the use of plugins such as Telescope or NvimTree, which are exclusively written in Lua and lack native support in wal.vim.
 
-Neopywal.nvim is totally written in lua, with extra plugin support when compared with pywal.nvim.
-Lua is a better choice if you use plugins also written in lua like Telescope or
-NvimTree that aren't supported by default in wal.vim.
-
-This plugin takes advantage of termguicolors (which was unsupported by wal.vim)
-and won't use/declare any `ctermbg` or `ctermfg`.
+Key Features:
+- Written exclusively in Lua
+- Enhanced plugin support
+- Utilizes termguicolors for color rendering, a feature absent in wal.vim
+- Does not use any `ctermbg` or `ctermfg` declarations
 
 ## Screenshots
 
