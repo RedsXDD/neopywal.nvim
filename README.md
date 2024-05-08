@@ -115,9 +115,9 @@ lualine.setup {
 You can put this to your config to activate the feline config:
 
 ```lua
-local present, feline = pcall(require, "feline")
+local has_feline, feline = pcall(require, "feline")
 
-if not present then
+if not has_feline then
   return
 end
 
