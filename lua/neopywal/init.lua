@@ -5,7 +5,7 @@ local highlights = require("neopywal.highlights")
 function M.setup()
 	local colors = core.get_colors()
 	vim.opt.termguicolors = true
-	highlights.highlight_all(colors)
+	highlights.apply_highlights(colors)
 end
 
 return M
