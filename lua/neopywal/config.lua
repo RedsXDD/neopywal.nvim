@@ -7,6 +7,7 @@ local M = {}
 
 M.highlights_base = function (colors)
 	local theme = {}
+	local integrations = {}
 
 	local filetypes = {
 		"markdown",
@@ -83,23 +84,20 @@ M.highlights_base = function (colors)
 		"mini.pick",
 	}
 
-	local merge_to_theme = function (source_table)
-		for key, value in pairs(source_table) do
-			theme[key] = value
-		end
-	end
-
-	-- Merge the tables
-	merge_to_theme(require("neopywal.groups.ui").get(colors))
-	merge_to_theme(require("neopywal.groups.syntax").get(colors))
-
 	for _, filetype in ipairs(filetypes) do
-		merge_to_theme(require("neopywal.groups.filetypes." .. filetype).get(colors))
+		integrations = vim.tbl_deep_extend("force", integrations, require("neopywal.groups.filetypes." .. filetype).get(colors))
 	end
 
 	for _, plugin in ipairs(plugins) do
-		merge_to_theme(require("neopywal.groups.plugins." .. plugin).get(colors))
+		integrations = vim.tbl_deep_extend("force", integrations, require("neopywal.groups.plugins." .. plugin).get(colors))
 	end
+
+	theme = vim.tbl_deep_extend("force",
+		theme,
+		integrations,
+		require("neopywal.groups.ui").get(colors),
+		require("neopywal.groups.syntax").get(colors)
+	)
 
 	return theme
 end
