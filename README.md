@@ -1,16 +1,17 @@
 # Neopywal.nvim
 
-**Neopywal.nvim** is a maintained and enhanced iteration of [pywal.nvim](https://github.com/AlphaTechnolog/pywal.nvim), designed to offer support for transparent backgrounds, a refined colorscheme, and an expanded range of supported plugins.
+**Neopywal.nvim** is a maintained and enhanced iteration of [pywal.nvim](https://github.com/AlphaTechnolog/pywal.nvim), designed to offer support for transparent backgrounds, a refined colorscheme, an expanded range of supported plugins and color improvements to a variety of file formats.
 
 **Pywal.nvim** was initially inspired by [pywal.vim](https://github.com/dylanaraps/wal.vim), however both projects eventually ceased active development and became public archives.
 
-**Neopywal.nvim** distinguishes itself by being written entirely in Lua, was well as offering extended plugin compatibility compared to its predecessor. This Lua foundation allows the use of plugins such as Telescope or NvimTree, which are exclusively written in Lua and lack native support in wal.vim.
+**Neopywal.nvim** distinguishes itself by being written entirely in Lua, was well as offering extended plugin compatibility and file format improvements when compared to it's predecessor. This Lua foundation allows the customization of plugins such as Telescope or NvimTree, which are exclusively written in Lua and lack native support in wal.vim.
 
 Key Features:
-- Written exclusively in Lua
-- Enhanced plugin support
-- Utilizes termguicolors for color rendering, a feature absent in wal.vim
-- Does not use any `ctermbg` or `ctermfg` declarations
+- Written exclusively in Lua.
+- Enhanced plugin support.
+- Improved coloring for a collection of file formats.
+- Utilizes termguicolors for color rendering, a feature absent in wal.vim.
+- Does not use any `ctermbg` or `ctermfg` declarations.
 
 ## Screenshots
 
@@ -48,6 +49,56 @@ As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins
 - [Mini.files](https://github.com/echasnovski/mini.files)
 - [Mini.hipatterns](https://github.com/echasnovski/mini.hipatterns)
 - [Mini.pick](https://github.com/echasnovski/mini.pick)
+
+## Improved File Formats
+
+- C/C++/C#
+- Clojure
+- Cmake
+- Common lisp
+- Css
+- Dart
+- Diff
+- Elixir
+- Erlang
+- Git Commit
+- Go
+- Haskell
+- Help
+- Html
+- Ini
+- Java
+- Javascript
+- Javascript React
+- Json
+- Kotlin
+- Latex
+- Less
+- Lua
+- Makefile
+- Markdown
+- Matlab
+- ObjectiveC
+- Ocaml
+- Perl
+- Php
+- Powershell
+- Python
+- ReStructuredText
+- Ruby
+- Rust
+- Sass
+- Scala
+- Shell
+- Swift
+- Toml
+- Typescript
+- VimL
+- Xml
+- Yaml
+- Zsh
+
+> Honestly with this alone you could ditch treesitter xdd.
 
 ## Installation
 
@@ -89,7 +140,7 @@ Or with vim script:
 colorscheme neopywal
 ```
 
-> NOTE: This will automatically set `vim.opt.termguicolors` to true
+> NOTE: The colorscheme will automatically set the `vim.opt.termguicolors` option to true
 
 ## Activating lualine theme
 
