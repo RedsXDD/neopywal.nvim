@@ -2,7 +2,7 @@
 
 local M = {}
 
-M.get = function(colors, options)
+M.get = function(options, colors)
 	local theme = {
 		--: neoclide/coc.nvim {{{
 		CocHighlightText             = { bold = true },
