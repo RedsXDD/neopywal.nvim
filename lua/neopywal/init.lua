@@ -119,7 +119,7 @@ function M.setup(options)
 
 	local colors = M.get_colors()
 	vim.opt.termguicolors = true
-	apply_highlights(colors)
+	apply_highlights(options, colors)
 end
 
 return M
