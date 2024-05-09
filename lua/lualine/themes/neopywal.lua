@@ -3,8 +3,7 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 
-local core = require("neopywal.core")
-local colors = core.get_colors()
+local colors = require("neopywal").get_colors()
 
 local neopywal = {}
 

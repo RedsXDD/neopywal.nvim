@@ -178,13 +178,12 @@ feline.setup({
 
 Then you should see the feline bar working successfully.
 
-## Using the core to get the colors
+## Using the get_colors() function to import the colors
 
-If you want to get the colors into a lua dictionary:
+If you want to import the colors into a lua dictionary:
 
 ```lua
-local neopywal_core = require("neopywal.core")
-local colors = neopywal_core.get_colors()
+local colors = require("neopywal").get_colors()
 ```
 
 ## How it works

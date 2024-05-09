@@ -26,7 +26,7 @@ local assets = {
 	slim_dot = "•",
 }
 
-local colors = require("neopywal.core").get_colors()
+local colors = require("neopywal").get_colors()
 
 -- settings
 local sett = {
