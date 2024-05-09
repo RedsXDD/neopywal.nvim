@@ -1,7 +1,7 @@
 local M = {}
 
 local get_highlights = function(colors)
-	local filetypes = {
+	local fileformats = {
 		"markdown",
 		"reStructuredText",
 		"latex",
@@ -78,8 +78,8 @@ local get_highlights = function(colors)
 
 	local extra_highlights = {}
 
-	for _, filetype in ipairs(filetypes) do
-		extra_highlights = vim.tbl_deep_extend("force", extra_highlights, require("neopywal.groups.filetypes." .. filetype).get(colors))
+	for _, fileformat in ipairs(fileformats) do
+		extra_highlights = vim.tbl_deep_extend("force", extra_highlights, require("neopywal.groups.fileformats." .. fileformat).get(colors))
 	end
 
 	for _, plugin in ipairs(plugins) do
