@@ -7,7 +7,7 @@ local M = {}
 
 M.get_highlights = function (colors)
 	return {
-		--: Common highlight groups: {{{
+		-- Common highlight groups:
 		--: UI: {{{
 		Normal                    = { bg = colors.background, fg = colors.foreground },
 		NormalNC                  = { link = "Normal" },
@@ -120,8 +120,8 @@ M.get_highlights = function (colors)
 		Ignore         = { fg = colors.color8 },
 		Underlined     = { underline = true },
 		--: }}}
-		--: }}}
-		--: Extended file types: {{{
+
+		-- Extended file types:
 		--: Markdown: {{{
 		--: builtin: {{{
 		markdownH1                = { bg = colors.background, fg = colors.color1, bold = true },
@@ -1217,9 +1217,8 @@ M.get_highlights = function (colors)
 		helpSpecial        = { fg = colors.color5 },
 		helpSectionDelim   = { fg = colors.color8 },
 		--: }}}
-		--: }}}
-		--: Plugins: {{{
-		--: Dependency highlights {{{
+
+		-- Plugins:
 		--: neoclide/coc.nvim {{{
 		CocHighlightText             = { bold = true },
 		CocHoverRange                = { bold = true, underline = true },
@@ -1324,7 +1323,6 @@ M.get_highlights = function (colors)
 		DiagnosticUnderlineWarn  = { link = "DiagnosticWarn", undercurl = true },
 		DiagnosticUnderlineInfo  = { link = "DiagnosticInfo", undercurl = true },
 		DiagnosticUnderlineHint  = { link = "DiagnosticHint", undercurl = true },
-		--: }}}
 		--: }}}
 		--: Lazy.nvim {{{
 		LazyProgressTodo  = { link = "LineNr" },
@@ -2388,7 +2386,6 @@ M.get_highlights = function (colors)
 		--: highlight! link agitDiffAdd diffAdded
 		--: highlight! link agitDiffHeader Blue
 		--: highlight! link agitAuthor Yellow
-		--: }}}
 		--: }}}
 		--: }}}
 	}
