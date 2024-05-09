@@ -114,9 +114,8 @@ local function apply_highlights(options, colors)
 	end
 end
 
-function M.setup(options)
-	M.options = vim.tbl_deep_extend("force", {}, defaults_options, options or {})
-
+function M.setup(user_options)
+	local options = vim.tbl_deep_extend("force", {}, defaults_options, user_options or {})
 	local colors = M.get_colors()
 	vim.opt.termguicolors = true
 	apply_highlights(options, colors)
