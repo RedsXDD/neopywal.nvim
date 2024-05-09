@@ -2,10 +2,10 @@ local M = {}
 
 M.get_highlights = function(colors)
 	local theme = vim.tbl_deep_extend("force",
-		require("neopywal.groups.ui").get(colors),
-		require("neopywal.groups.syntax").get(colors),
-		require("neopywal.groups.fileformats").get(colors),
-		require("neopywal.groups.plugins").get(colors),
+		require("neopywal.config.ui").get(colors),
+		require("neopywal.config.syntax").get(colors),
+		require("neopywal.config.fileformats").get(colors),
+		require("neopywal.config.plugins").get(colors),
 		{})
 
 	return theme
