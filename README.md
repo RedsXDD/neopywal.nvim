@@ -17,38 +17,37 @@ Key Features:
 ![01](./.screenshots/01.png)
 ![02](./.screenshots/02.png)
 
-## External Plugin Support
+## Plugin Support
 
-- Diff
-- Coc
-- Ale
-- GitGutter
-- Nvim-cmp
-- Nvim-lspconfig
-- Lazy.nvim
-- Nvim-treesitter
-- Neo-tree
-- BufferLine
-- Which-key
-- Dashboard-nvim
-- Alpha-nvim
-- Indent-blankline
-- Netrw
-- Undotree
-- Telescope
-- Feline
-- Lualine
-- Gitsigns
+- [Lazy.nvim](https://github.com/folke/lazy.nvim)
+- [Coc](https://github.com/neoclide/coc.nvim)
+- [Ale](https://github.com/dense-analysis/ale)
+- [GitGutter](https://github.com/airblade/vim-gitgutter)
+- [Nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [Nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [Nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+- [BufferLine](https://github.com/akinsho/bufferline.nvim)
+- [Which-key](https://github.com/folke/which-key.nvim)
+- [Dashboard-nvim](https://github.com/nvimdev/dashboard-nvim)
+- [Alpha-nvim](https://github.com/goolord/alpha-nvim)
+- [Indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+- [Undotree](https://github.com/mbbill/undotree)
+- [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+- [Feline](https://github.com/freddiehaddad/feline.nvim)
+- [Lualine](https://github.com/nvim-lualine/lualine.nvim)
+- [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
+- [Netrw](https://github.com/vim.org/netrw)
 
 As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins, such as:
-- Mini.indentscope
-- Mini.statusline
-- Mini.tabline
-- Mini.starter
-- Mini.cursorword
-- Mini.files
-- Mini.hipatterns
-- Mini.pick
+- [Mini.indentscope](https://github.com/echasnovski/mini.indentscope)
+- [Mini.statusline](https://github.com/echasnovski/mini.statusline)
+- [Mini.tabline](https://github.com/echasnovski/mini.tabline)
+- [Mini.starter](https://github.com/echasnovski/mini.starter)
+- [Mini.cursorword](https://github.com/echasnovski/mini.cursorword)
+- [Mini.files](https://github.com/echasnovski/mini.files)
+- [Mini.hipatterns](https://github.com/echasnovski/mini.hipatterns)
+- [Mini.pick](https://github.com/echasnovski/mini.pick)
 
 ## Installation
 
