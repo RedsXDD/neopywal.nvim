@@ -19,6 +19,7 @@ Key Features:
 
 ## Plugin Support
 
+- Netrw
 - [Lazy.nvim](https://github.com/folke/lazy.nvim)
 - [Coc](https://github.com/neoclide/coc.nvim)
 - [Ale](https://github.com/dense-analysis/ale)
@@ -37,7 +38,6 @@ Key Features:
 - [Feline](https://github.com/freddiehaddad/feline.nvim)
 - [Lualine](https://github.com/nvim-lualine/lualine.nvim)
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
-- [Netrw](https://github.com/vim.org/netrw)
 
 As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins, such as:
 - [Mini.indentscope](https://github.com/echasnovski/mini.indentscope)
@@ -171,6 +171,6 @@ let color15 = "#A6ADC8"
 The theme only reads the file variables and then it creates a colors dictionary that
 can be used to create a theme based in it's colors.
 
-## Enjoy
+## Enjoy ⭐
 
 If you like this work you can give it a star :)
