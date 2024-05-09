@@ -2,7 +2,7 @@ local M = {}
 
 M.get = function(colors)
 	return {
-		-- Lazy.nvim
+		-- folke/lazy.nvim
 		LazyProgressTodo  = { link = "LineNr" },
 		LazyProgressDone  = { link = "Constant" },
 		LazySpecial       = { link = "@punctuation.special" },
