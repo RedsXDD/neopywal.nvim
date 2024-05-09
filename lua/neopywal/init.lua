@@ -106,9 +106,9 @@ function M.get_colors()
 	}
 end
 
-local function apply_highlights(options, colors)
+local function apply_highlights(colors)
 	local theme = require("neopywal.theme")
-	local base_highlights = theme.get_highlights(options, colors)
+	local base_highlights = theme.get_highlights(colors)
 	for group, properties in pairs(base_highlights) do
 		vim.api.nvim_set_hl(0, group, properties)
 	end
@@ -116,9 +116,10 @@ end
 
 function M.setup(user_options)
 	local options = vim.tbl_deep_extend("force", {}, defaults_options, user_options or {})
+
 	local colors = M.get_colors()
 	vim.opt.termguicolors = true
-	apply_highlights(options, colors)
+	apply_highlights(colors)
 end
 
 return M
