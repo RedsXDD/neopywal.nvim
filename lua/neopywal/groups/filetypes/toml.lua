@@ -7,6 +7,7 @@ M.get = function(colors)
 		tomlKey        = { fg = colors.color1 },
 		tomlBoolean    = { fg = colors.color4 },
 		tomlString     = { fg = colors.color2 },
+		tomlTableArray = { link = "tomlTable" },
 	}
 end
 

@@ -57,6 +57,7 @@ M.get = function(colors)
 		TelescopeResultsComment         = { link = "Comment" },
 		TelescopeResultsNumber          = { link = "Number" },
 		TelescopeResultsIdentifier      = { link = "Identifier" },
+		TelescopeResultsLineNr          = { link = "LineNr" },
 	}
 end
 

@@ -64,6 +64,7 @@ M.get = function(colors)
 		BufferLinePick                      = { fg = colors.color7 },
 		BufferLinePickVisible               = { fg = colors.color7 },
 		BufferLinePickSelected              = { fg = colors.color7, bold = true, italic = true },
+
 		-- DevIcons Coloring
 		-- BufferLineDevIconPy.typed            = { bg = colors.background, fg = colors.color7 },
 		BufferLineDevIconDefaultSelected      = { bg = colors.background, fg = colors.color7, bold = true },

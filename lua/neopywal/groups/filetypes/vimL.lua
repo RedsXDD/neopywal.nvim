@@ -20,6 +20,7 @@ M.get = function(colors)
 		vimAutoCmdSfxList = { fg = colors.color11 },
 		vimSynType        = { fg = colors.color11 },
 		vimHiBang         = { fg = colors.color11 },
+		vimSet            = { fg = colors.color4, italic = true },
 	}
 end
 

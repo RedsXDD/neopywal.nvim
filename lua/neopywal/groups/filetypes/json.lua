@@ -8,6 +8,7 @@ M.get = function(colors)
 		jsonBoolean = { fg = colors.color4 },
 		jsonNoise   = { fg = colors.color8 },
 		jsonQuote   = { fg = colors.color8 },
+		jsonBraces  = { fg = colors.foreground },
 	}
 end
 

@@ -10,6 +10,7 @@ M.get = function(colors)
 		MiniFilesFile           = {},
 		MiniFilesNormal         = { link = "NormalFloat" },
 		MiniFilesTitle          = { link = "Comment" },
+		MiniFilesTitleFocused   = { link = "FloatTitle" },
 	}
 end
 

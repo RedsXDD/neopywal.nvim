@@ -106,6 +106,7 @@ M.get = function(colors)
 		cmakeKWuse_mangled_mesa                 = { fg = colors.colors2 },
 		cmakeKWvariable_requires                = { fg = colors.colors2 },
 		cmakeKWvariable_watch                   = { fg = colors.colors2 },
+		cmakeKWwrite_file                       = { fg = colors.colors2 },
 	}
 end
 

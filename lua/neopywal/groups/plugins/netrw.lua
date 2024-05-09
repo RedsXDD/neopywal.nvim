@@ -13,6 +13,7 @@ M.get = function(colors)
 		netrwList     = { fg = colors.color3 },
 		netrwHelpCmd  = { fg = colors.color4 },
 		netrwCmdSep   = { fg = colors.color8 },
+		netrwVersion  = { fg = colors.color5 },
 	}
 end
 

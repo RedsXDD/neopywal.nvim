@@ -158,7 +158,9 @@ M.get = function(colors)
 		["@lsp.typemod.variable.defaultLibrary"]   = { link = "@variable.builtin" },
 		["@lsp.typemod.variable.injected"]         = { link = "@variable" },
 		["@lsp.typemod.variable.static"]           = { link = "@constant" },
+
 		-- NOTE: maybe add these with distinct highlights?
+		-- ["@lsp.typemod.variable.globalScope"] (global variables)
 	}
 end
 

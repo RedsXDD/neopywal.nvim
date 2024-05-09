@@ -12,6 +12,7 @@ M.get = function(colors)
 		UndotreeTimeStamp   = { fg = colors.color8 },
 		UndotreeHead        = { fg = colors.color5 },
 		UndotreeBranch      = { fg = colors.color4 },
+		UndotreeSavedSmall  = { fg = colors.color1 },
 	}
 end
 

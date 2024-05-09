@@ -42,6 +42,7 @@ M.get = function (colors)
 		SpecialComment = { fg = colors.color8, italic = true },
 		Todo           = { fg = colors.color4, bold = true, italic = true },
 		Ignore         = { fg = colors.color8 },
+		Underlined     = { underline = true },
 	}
 end
 

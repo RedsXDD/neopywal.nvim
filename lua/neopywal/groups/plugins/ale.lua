@@ -13,6 +13,7 @@ M.get = function(colors)
 		ALEVirtualTextWarning      = { fg = colors.color8 },
 		ALEVirtualTextInfo         = { fg = colors.color8 },
 		ALEVirtualTextStyleError   = { link = "ALEVirtualTextError" },
+		ALEVirtualTextStyleWarning = { link = "ALEVirtualTextWarning" },
 	}
 end
 

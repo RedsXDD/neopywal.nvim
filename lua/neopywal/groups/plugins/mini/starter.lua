@@ -11,6 +11,7 @@ M.get = function(colors)
 		MiniStarterItemBullet = { link = "Delimiter" },
 		MiniStarterItemPrefix = { fg = colors.foreground, bold = true, italic = true },
 		MiniStarterSection    = { fg = colors.color6, bold = true, italic = true },
+		MiniStarterQuery      = { fg = colors.color1 },
 	}
 end
 

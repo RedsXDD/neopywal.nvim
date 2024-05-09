@@ -12,6 +12,7 @@ M.get = function(colors)
 		MiniStatuslineModeDevInfo  = { link = "StatusLine", bold = true },
 		MiniStatuslineModeFilename = { link = "StatusLineNC", bold = true },
 		MiniStatuslineModeFileInfo = { link = "StatusLineNC", bold = true },
+		MiniStatuslineModeInactive = { link = "Normal", bold = true },
 	}
 end
 

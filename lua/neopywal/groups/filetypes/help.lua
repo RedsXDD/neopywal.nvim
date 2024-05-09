@@ -12,6 +12,7 @@ M.get = function(colors)
 		helpCommand        = { fg = colors.color3 },
 		helpExample        = { fg = colors.color2 },
 		helpSpecial        = { fg = colors.color5 },
+		helpSectionDelim   = { fg = colors.color8 },
 	}
 end
 

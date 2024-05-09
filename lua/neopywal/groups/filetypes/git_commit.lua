@@ -10,6 +10,7 @@ M.get = function(colors)
 		gitcommitUnmerged  = { fg = colors.color8 },
 		gitcommitOnBranch  = { fg = colors.color8 },
 		gitcommitArrow     = { fg = colors.color8 },
+		gitcommitFile      = { fg = colors.color2 },
 	}
 end
 

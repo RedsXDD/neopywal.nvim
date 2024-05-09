@@ -44,6 +44,7 @@ M.get = function(colors)
 		CocExplorerTimeCreated       = { fg = colors.color5 },
 		CocExplorerTimeModified      = { fg = colors.color5 },
 		CocExplorerFileRootName      = { fg = colors.color11 },
+		CocExplorerBufferNameVisible = { fg = colors.color2 },
 	}
 end
 

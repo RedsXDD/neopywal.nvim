@@ -10,6 +10,7 @@ M.get = function(colors)
 		WhichKeyValue     = { link = "Comment" },
 		WhichKeySeparator = { link = "Comment" },
 		WhichKeyBorder    = { link = "FloatBorder" },
+		WhichKeyFloat     = { link = "NormalFloat" },
 	}
 end
 

@@ -33,6 +33,7 @@ M.get = function(colors)
 		DiagnosticUnderlineError = { link = "DiagnosticError", undercurl = true },
 		DiagnosticUnderlineWarn  = { link = "DiagnosticWarn", undercurl = true },
 		DiagnosticUnderlineInfo  = { link = "DiagnosticInfo", undercurl = true },
+		DiagnosticUnderlineHint  = { link = "DiagnosticHint", undercurl = true },
 	}
 end
 

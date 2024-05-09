@@ -9,6 +9,7 @@ M.get = function(colors)
 		CmpItemAbbrMatch          = { fg = colors.color4 },
 		CmpItemAbbrMatchFuzzy     = { fg = colors.color5 },
 		CmpItemKind               = { fg = colors.color4 },
+		CmpItemMenu               = { fg = colors.color2 },
 	}
 end
 

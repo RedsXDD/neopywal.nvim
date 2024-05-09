@@ -7,6 +7,7 @@ M.get = function(colors)
 		AlphaHeader      = { fg = colors.color4 },
 		AlphaHeaderLabel = { fg = colors.color11 },
 		AlphaFooter      = { fg = colors.color4 },
+		AlphaButtons     = { fg = colors.color6 },
 	}
 end
 

@@ -51,6 +51,7 @@ M.get = function(colors)
 		NeoTreeBufferNumber         = { link = "SpecialChar" },
 		NeoTreeMessage              = { link = "Comment", italic = true },
 		NeoTreeFadeText1            = { link = "Comment" },
+		NeoTreeFadeText2            = { link = "Comment" },
 	}
 end
 

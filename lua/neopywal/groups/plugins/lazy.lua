@@ -35,6 +35,7 @@ M.get = function(colors)
 		LazyReasonEvent   = { link = "Constant" },
 		LazyReasonPlugin  = { link = "Special" },
 		LazyTaskError     = { link = "ErrorMsg" },
+		LazyBackdrop      = { bg = "#000000" },
 	}
 end
 

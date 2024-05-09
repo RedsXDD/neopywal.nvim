@@ -9,6 +9,7 @@ M.get = function(colors)
 		DashboardFooter   = { fg = colors.color4 },
 		DashboardKey      = { fg = colors.color11 },
 		DashboardDesc     = { fg = colors.color6 },
+		DashboardIcon     = { fg = colors.color6, bold = true },
 	}
 end
 

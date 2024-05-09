@@ -10,6 +10,7 @@ M.get = function(colors)
 		diffNewFile   = { fg = colors.color11 },
 		diffFile      = { fg = colors.color5 },
 		diffLine      = { fg = colors.color8 },
+		diffIndexLine = { fg = colors.color5 },
 	}
 end
 

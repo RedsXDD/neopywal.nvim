@@ -15,6 +15,7 @@ M.get = function(colors)
 		MiniPickMatchRanges   = { fg = colors.color4 },
 		MiniPickPreviewLine   = { link = "CursorLine" },
 		MiniPickPreviewRegion = { link = "IncSearch" },
+		MiniPickPrompt        = { link = "FloatTitle" },
 	}
 end
 
