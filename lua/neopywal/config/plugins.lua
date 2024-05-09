@@ -2,7 +2,7 @@
 
 local M = {}
 
-M.get_highlights = function(colors)
+M.get = function(colors)
 	return {
 		--: neoclide/coc.nvim {{{
 		CocHighlightText             = { bold = true },
