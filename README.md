@@ -32,14 +32,13 @@ Key Features:
 - Which-key
 - Dashboard-nvim
 - Alpha-nvim
-- Indent-Blankline
+- Indent-blankline
 - Netrw
 - Undotree
 - Telescope
 - Feline
 - Lualine
 - Gitsigns
-- Indent-BlankLine
 
 As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins, such as:
 - Mini.indentscope
@@ -91,7 +90,7 @@ Or with vim script:
 colorscheme neopywal
 ```
 
-> It will set automatically the `vim.opt.termguicolors` to true
+> NOTE: This will automatically set `vim.opt.termguicolors` to true
 
 ## Activating lualine theme
 
@@ -113,13 +112,11 @@ You can put this to your config to activate the feline config:
 
 ```lua
 local has_feline, feline = pcall(require, "feline")
-
 if not has_feline then
   return
 end
 
 local has_neopywal, neopywal = pcall(require, "neopywal.feline")
-
 if not has_neopywal then
   return
 end
