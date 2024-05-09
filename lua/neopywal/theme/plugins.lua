@@ -2,8 +2,8 @@
 
 local M = {}
 
-M.get = function(colors)
-	return {
+M.get = function(colors, options)
+	local theme = {
 		--: neoclide/coc.nvim {{{
 		CocHighlightText             = { bold = true },
 		CocHoverRange                = { bold = true, underline = true },
@@ -886,15 +886,6 @@ M.get = function(colors)
 		MiniTablineTabpagesection  = { bg = colors.color4, fg = colors.background, bold = true },
 		--: }}}
 		--: mini.starter {{{
-		MiniStarterCurrent    = { link = "CursorLine" },
-		MiniStarterHeader     = { fg = colors.color4, bold = true, italic = true },
-		MiniStarterFooter     = { fg = colors.color5, bold = true, italic = true },
-		MiniStarterInactive   = { link = "Comment" },
-		MiniStarterItem       = { link = "Normal" },
-		MiniStarterItemBullet = { link = "Delimiter" },
-		MiniStarterItemPrefix = { fg = colors.foreground, bold = true, italic = true },
-		MiniStarterSection    = { fg = colors.color6, bold = true, italic = true },
-		MiniStarterQuery      = { fg = colors.color1 },
 		--: }}}
 		--: mini.cursorword {{{
 		MiniCursorword        = { bg = colors.color8, bold = true },
@@ -932,6 +923,28 @@ M.get = function(colors)
 		MiniPickPrompt        = { link = "FloatTitle" },
 		--: }}}
 		--: }}}
+	}
+
+	if options.plugins.mini and options.plugins.mini.starter then
+		vim.tbl_deep_extend("force", theme,
+		{
+			MiniStarterCurrent    = { link = "CursorLine" },
+			MiniStarterHeader     = { fg = colors.color4, bold = true, italic = true },
+			MiniStarterFooter     = { fg = colors.color5, bold = true, italic = true },
+			MiniStarterInactive   = { link = "Comment" },
+			MiniStarterItem       = { link = "Normal" },
+			MiniStarterItemBullet = { link = "Delimiter" },
+			MiniStarterItemPrefix = { fg = colors.foreground, bold = true, italic = true },
+			MiniStarterSection    = { fg = colors.color6, bold = true, italic = true },
+			MiniStarterQuery      = { fg = colors.color1 },
+		})
+	end
+
+	return theme
+end
+
+return M
+
 		--: Not configured {{{
 		--: junegunn/vim-plug{{{
 		--: call s:HL("plug1", s:palette.red, s:palette.none, "bold")
@@ -1173,7 +1186,3 @@ M.get = function(colors)
 		--: highlight! link agitAuthor Yellow
 		--: }}}
 		--: }}}
-	}
-end
-
-return M

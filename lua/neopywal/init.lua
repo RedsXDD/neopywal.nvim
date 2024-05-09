@@ -76,11 +76,11 @@ local defaults_options = {
 			statusline = true,
 			tabline = true,
 		},
-	}
+	},
 }
 
 function M.get_colors()
-	vim.cmd [[ source $HOME/.cache/wal/colors-wal.vim ]]
+	vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
 
 	return {
 		transparent = "NONE",
@@ -106,9 +106,9 @@ function M.get_colors()
 	}
 end
 
-local function apply_highlights(colors)
-	local config = require("neopywal.config")
-	local base_highlights = config.get_highlights(colors)
+local function apply_highlights(options, colors)
+	local theme = require("neopywal.theme")
+	local base_highlights = theme.get_highlights(options, colors)
 	for group, properties in pairs(base_highlights) do
 		vim.api.nvim_set_hl(0, group, properties)
 	end
