@@ -747,7 +747,7 @@ M.get = function(colors)
 		BufferLineDevIconBat                  = { link = "BufferLineDevIconDefault" },
 		--: }}}
 		--: }}}
-		--: liuchengxu/vim-which-key {{{
+		--: folke/which-key.nvim {{{
 		WhichKey          = { fg = colors.color1 },
 		WhichKeyGroup     = { fg = colors.color11 },
 		WhichKeyDesc      = { fg = colors.color6 },
