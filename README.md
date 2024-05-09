@@ -1,16 +1,12 @@
 # Neopywal.nvim
 
-**Neopywal.nvim** is a maintained and enhanced iteration of [pywal.nvim](https://github.com/AlphaTechnolog/pywal.nvim), designed to offer support for transparent backgrounds, a refined colorscheme, an expanded range of supported plugins and color improvements to a variety of file formats.
+**Neopywal.nvim** is an improved and maintained version of [pywal.nvim](https://github.com/AlphaTechnolog/pywal.nvim), which on itself was a updated version of [wal.vim](https://github.com/dylanaraps/wal.vim).
 
-**Pywal.nvim** was initially inspired by [pywal.vim](https://github.com/dylanaraps/wal.vim), however both projects eventually ceased active development and became public archives.
+**Neopywal** offers lots of additional features when compared to it's predecessor, such as:
 
-**Neopywal.nvim** distinguishes itself by being written entirely in Lua, was well as offering extended plugin compatibility and file format improvements when compared to it's predecessor. This Lua foundation allows the customization of plugins such as Telescope or NvimTree, which are exclusively written in Lua and lack native support in wal.vim.
-
-Key Features:
-- Written exclusively in Lua.
 - Enhanced plugin support.
-- Improved coloring for a collection of file formats.
-- Utilizes termguicolors for color rendering, a feature absent in wal.vim.
+- Improved coloring for a variety of file formats.
+- Exclusively utilizes termguicolors for color rendering, a feature absent in wal.vim.
 - Does not use any `ctermbg` or `ctermfg` declarations.
 
 ## Screenshots
@@ -18,9 +14,9 @@ Key Features:
 ![01](./.screenshots/01.png)
 ![02](./.screenshots/02.png)
 
-## Plugin Support
+## Supported plugins:
 
-- Netrw
+- [Netrw](https://www.vim.org/scripts/script.php?script_id=1075)
 - [Lazy.nvim](https://github.com/folke/lazy.nvim)
 - [Coc](https://github.com/neoclide/coc.nvim)
 - [Ale](https://github.com/dense-analysis/ale)
@@ -61,7 +57,7 @@ As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins
 - Diff
 - Elixir
 - Erlang
-- Git Commit
+- Git commit
 - Go
 - Haskell
 - Help
@@ -98,7 +94,7 @@ As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins
 - Yaml
 - Zsh
 
-> Honestly with this alone you could ditch treesitter xdd.
+> Honestly with this alone you could ditch treesitter xd.
 
 ## Installation
 
@@ -132,6 +128,7 @@ To activate the theme, call this in your neovim config:
 ```lua
 local neopywal = require("neopywal")
 neopywal.setup()
+vim.cmd.colorscheme("neopywal")
 ```
 
 Or with vim script:
@@ -190,7 +187,7 @@ local colors = require("neopywal").get_colors()
 
 Pywal automatically generates a file called `colors-wal.vim` in
 `~/.cache/wal/colors-wal.vim`, the file contains all the colors that are necessary
-to make a Vim/Neovim colorscheme, it looks like this:
+to make the colorscheme, it looks like this:
 
 ```vim
 " Special
@@ -218,8 +215,7 @@ let color14 = "#94E2D5"
 let color15 = "#A6ADC8"
 ```
 
-The theme only reads the file variables and then it creates a colors dictionary that
-can be used to create a theme based in it's colors.
+The theme only reads the file variables and creates a colors dictionary that can be used to generate a theme based on it's colors.
 
 ## Enjoy ⭐
 
