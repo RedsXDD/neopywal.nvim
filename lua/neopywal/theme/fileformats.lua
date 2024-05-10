@@ -1,26 +1,24 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
+local fileformats = require("neopywal").options.fileformats
 
-local function is_fileformat_true(fileformat_option, highlights)
-	-- Retrieve fileformats table from neopywal options.
-	local fileformats_table = require("neopywal").options.fileformats
-
-	-- Safety check: Return empty table if fileformats_table is empty.
-	if next(fileformats_table) == nil then
-		return {}
-	end
-
-	-- If fileformat_option is a boolean, return highlights if it's true, otherwise return an empty table.
-	if type(fileformats_table[fileformat_option]) == "boolean" then
-		return fileformats_table[fileformat_option] and highlights or {}
+local function apply_fileformat(option, highlights)
+	-- If option is a boolean, return highlights if it's true, otherwise return an empty table.
+	if type(fileformats[option]) == "boolean" then
+		return fileformats[option] and highlights or {}
 	end
 end
 
 M.get = function(colors)
+	-- Safety check: Return empty table if fileformats is empty.
+	if next(fileformats) == nil then
+		return {}
+	end
+
 	return vim.tbl_deep_extend("force", {},
 		--: Markdown: {{{
-		is_fileformat_true("markdown", {
+		apply_fileformat("markdown", {
 			--: builtin: {{{
 			markdownH1                = { bg = colors.background, fg = colors.color1, bold = true },
 			markdownH2                = { bg = colors.background, fg = colors.color11, bold = true },
@@ -66,7 +64,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: ReStructuredText: {{{
-		is_fileformat_true("restructuredtext", {
+		apply_fileformat("restructuredtext", {
 			--: builtin: https://github.com/marshallward/vim-restructuredtext{{{
 			rstStandaloneHyperlink                   = { bg = colors.background, fg = colors.color5, underline = true },
 			rstEmphasis                              = { bg = colors.background, fg = colors.foreground, italic = true },
@@ -82,7 +80,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: LaTex: {{{
-		is_fileformat_true("latex", {
+		apply_fileformat("latex", {
 			--: builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_TEX{{{
 			texStatement    = { fg = colors.color4, italic = true },
 			texOnlyMath     = { fg = colors.color8 },
@@ -98,7 +96,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Html: {{{
-		is_fileformat_true("html", {
+		apply_fileformat("html", {
 			--: builtin: https://notabug.org/jorgesumle/vim-html-syntax{{{
 			htmlH1                  = { bg = colors.background, fg = colors.color1, bold = true },
 			htmlH2                  = { bg = colors.background, fg = colors.color11, bold = true },
@@ -126,7 +124,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Xml: {{{
-		is_fileformat_true("xml", {
+		apply_fileformat("xml", {
 			--: builtin: https://github.com/chrisbra/vim-xml-ftplugin{{{
 			xmlTag            = { fg = colors.color2 },
 			xmlEndTag         = { fg = colors.color4 },
@@ -144,7 +142,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: CSS: {{{
-		is_fileformat_true("css", {
+		apply_fileformat("css", {
 			--: builtin: https://github.com/JulesWang/css.vim{{{
 			cssStringQ        = { fg = colors.color2 },
 			cssStringQQ       = { fg = colors.color2 },
@@ -177,7 +175,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: SASS: {{{
-		is_fileformat_true("sass", {
+		apply_fileformat("sass", {
 			--: scss-syntax: https://github.com/cakebaker/scss-syntax.vim{{{
 			scssMixinName              = { fg = colors.color11 },
 			scssSelectorChar           = { fg = colors.color11 },
@@ -195,7 +193,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: LESS: {{{
-		is_fileformat_true("less", {
+		apply_fileformat("less", {
 			--: vim-less: https://github.com/groenewege/vim-less{{{
 			lessMixinChar = { fg = colors.color8 },
 			lessClass     = { fg = colors.color1 },
@@ -204,7 +202,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: JavaScript: {{{
-		is_fileformat_true("javascript", {
+		apply_fileformat("javascript", {
 			--: builtin: http://www.fleiner.com/vim/syntax/javascript.vim{{{
 			javaScriptNull       = { fg = colors.color11, italic = true },
 			javaScriptIdentifier = { fg = colors.color4, italic = true },
@@ -391,7 +389,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: JavaScript React: {{{
-		is_fileformat_true("javascript_react", {
+		apply_fileformat("javascript_react", {
 			--: vim-jsx-pretty: https://github.com/maxmellon/vim-jsx-pretty{{{
 			jsxTagName    = { fg = colors.color1, italic = true },
 			jsxOpenPunct  = { fg = colors.color2 },
@@ -402,7 +400,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: TypeScript: {{{
-		is_fileformat_true("typescript", {
+		apply_fileformat("typescript", {
 			--: vim-typescript: https://github.com/leafgarland/typescript-vim{{{
 			typescriptStorageClass           = { fg = colors.color1 },
 			typescriptEndColons              = { fg = colors.foreground },
@@ -557,7 +555,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Dart: {{{
-		is_fileformat_true("dart", {
+		apply_fileformat("dart", {
 			--: dart-lang: https://github.com/dart-lang/dart-vim-plugin{{{
 			dartCoreClasses   = { fg = colors.color4, italic = true },
 			dartTypeName      = { fg = colors.color4, italic = true },
@@ -570,7 +568,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: C/C++: {{{
-		is_fileformat_true("c_cpp", {
+		apply_fileformat("c_cpp", {
 			--: vim-cpp-enhanced-highlight: https://github.com/octol/vim-cpp-enhanced-highlight{{{
 			cLabel          = { fg = colors.color1 },
 			cppSTLnamespace = { fg = colors.color4, italic = true },
@@ -606,7 +604,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: ObjectiveC: {{{
-		is_fileformat_true("objectivec", {
+		apply_fileformat("objectivec", {
 			--: builtin: {{{
 			objcModuleImport      = { fg = colors.color1 },
 			objcException         = { fg = colors.color1 },
@@ -618,7 +616,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: C#: {{{
-		is_fileformat_true("c_sharp", {
+		apply_fileformat("c_sharp", {
 			--: builtin: https://github.com/nickspoons/vim-cs{{{
 			csUnspecifiedStatement   = { fg = colors.color1 },
 			csStorage                = { fg = colors.color1 },
@@ -632,7 +630,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Python: {{{
-		is_fileformat_true("python", {
+		apply_fileformat("python", {
 			--: builtin: {{{
 			pythonBuiltin       = { fg = colors.color4, italic = true },
 			pythonExceptions    = { fg = colors.color1 },
@@ -674,7 +672,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 			--: Lua: {{{
-		is_fileformat_true("lua", {
+		apply_fileformat("lua", {
 			--: builtin: {{{
 			luaFunc     = { fg = colors.color2 },
 			luaFunction = { fg = colors.color1 },
@@ -697,7 +695,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Java: {{{
-		is_fileformat_true("java", {
+		apply_fileformat("java", {
 			--: builtin: {{{
 			javaClassDecl  = { fg = colors.color1 },
 			javaMethodDecl = { fg = colors.color1 },
@@ -715,7 +713,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Kotlin: {{{
-		is_fileformat_true("kotlin", {
+		apply_fileformat("kotlin", {
 			--: kotlin-vim: https://github.com/udalov/kotlin-vim{{{
 			ktSimpleInterpolation       = { fg = colors.color5 },
 			ktComplexInterpolation      = { fg = colors.color5 },
@@ -726,7 +724,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Scala: {{{
-		is_fileformat_true("scala", {
+		apply_fileformat("scala", {
 			--: builtin: https://github.com/derekwyatt/vim-scala{{{
 			scalaNameDefinition        = { fg = colors.foreground },
 			scalaInterpolationBoundary = { fg = colors.color5 },
@@ -738,7 +736,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Go: {{{
-		is_fileformat_true("go", {
+		apply_fileformat("go", {
 			--: builtin: https://github.com/google/vim-ft-go{{{
 			goDirective = { fg = colors.color1 },
 			goConstants = { fg = colors.color11, italic = true },
@@ -754,7 +752,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Rust: {{{
-		is_fileformat_true("rust", {
+		apply_fileformat("rust", {
 			--: builtin: https://github.com/rust-lang/rust.vim{{{
 			rustStructure     = { fg = colors.color1 },
 			rustIdentifier    = { fg = colors.color11, italic = true },
@@ -773,7 +771,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Swift: {{{
-		is_fileformat_true("swift", {
+		apply_fileformat("swift", {
 			--: swift.vim: https://github.com/keith/swift.vim{{{
 			swiftInterpolatedWrapper = { fg = colors.color5 },
 			swiftInterpolatedString  = { fg = colors.color5 },
@@ -785,7 +783,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: PHP: {{{
-		is_fileformat_true("php", {
+		apply_fileformat("php", {
 			--: builtin: https://jasonwoof.com/gitweb/?p=vim-syntax.git;a=blob;f=php.vim;hb=HEAD{{{
 			phpVarSelector       = { fg = colors.foreground },
 			phpIdentifier        = { fg = colors.foreground },
@@ -811,7 +809,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Ruby: {{{
-		is_fileformat_true("ruby", {
+		apply_fileformat("ruby", {
 			--: builtin: https://github.com/vim-ruby/vim-ruby{{{
 			rubyKeywordAsMethod        = { fg = colors.color2 },
 			rubyInterpolation          = { fg = colors.color5 },
@@ -827,7 +825,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Haskell: {{{
-		is_fileformat_true("haskell", {
+		apply_fileformat("haskell", {
 			--: haskell-vim: https://github.com/neovimhaskell/haskell-vim{{{
 			haskellBrackets        = { fg = colors.foreground },
 			haskellIdentifier      = { fg = colors.color11, italic = true },
@@ -841,7 +839,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Perl: {{{
-		is_fileformat_true("perl", {
+		apply_fileformat("perl", {
 			--: builtin: https://github.com/vim-perl/vim-perl{{{
 			perlStatementPackage    = { fg = colors.color1 },
 			perlStatementInclude    = { fg = colors.color1 },
@@ -859,7 +857,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: OCaml: {{{
-		is_fileformat_true("ocaml", {
+		apply_fileformat("ocaml", {
 			--: builtin: https://github.com/rgrinberg/vim-ocaml{{{
 			ocamlArrow         = { fg = colors.color1 },
 			ocamlEqual         = { fg = colors.color1 },
@@ -879,7 +877,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Erlang: {{{
-		is_fileformat_true("erlang", {
+		apply_fileformat("erlang", {
 			--: builtin: https://github.com/vim-erlang/vim-erlang-runtime{{{
 			erlangAtom           = { fg = colors.foreground },
 			erlangVariable       = { fg = colors.foreground },
@@ -893,7 +891,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Elixir: {{{
-		is_fileformat_true("elixir", {
+		apply_fileformat("elixir", {
 			--: vim-elixir: https://github.com/elixir-editors/vim-elixir{{{
 			elixirStringDelimiter        = { fg = colors.color3 },
 			elixirKeyword                = { fg = colors.color1 },
@@ -923,7 +921,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Common Lisp: {{{
-		is_fileformat_true("common_lisp", {
+		apply_fileformat("common_lisp", {
 			--: builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_LISP{{{
 			lispAtomMark = { fg = colors.color5 },
 			lispKey      = { fg = colors.color11 },
@@ -932,7 +930,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Clojure: {{{
-		is_fileformat_true("clojure", {
+		apply_fileformat("clojure", {
 			--: builtin: https://github.com/guns/vim-clojure-static{{{
 			clojureMacro    = { fg = colors.color1 },
 			clojureFunc     = { fg = colors.color2 },
@@ -947,7 +945,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Matlab: {{{
-		is_fileformat_true("matlab", {
+		apply_fileformat("matlab", {
 			--: builtin: {{{
 			matlabSemicolon          = { fg = colors.foreground },
 			matlabFunction           = { fg = colors.color1, italic = true },
@@ -961,7 +959,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Shell: {{{
-		is_fileformat_true("shell", {
+		apply_fileformat("shell", {
 			--: builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_SH{{{
 			shRange         = { fg = colors.foreground },
 			shOption        = { fg = colors.color5 },
@@ -978,7 +976,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Zsh: {{{
-		is_fileformat_true("zsh", {
+		apply_fileformat("zsh", {
 			--: builtin: https://github.com/chrisbra/vim-zsh{{{
 			zshOption   = { fg = colors.color4, italic = true },
 			zshSubst    = { fg = colors.color11 },
@@ -987,7 +985,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: PowerShell: {{{
-		is_fileformat_true("powershell", {
+		apply_fileformat("powershell", {
 			--: vim-ps1: https://github.com/PProvost/vim-ps1{{{
 			ps1FunctionInvocation     = { fg = colors.color2 },
 			ps1FunctionDeclaration    = { fg = colors.color2 },
@@ -997,7 +995,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: VimL: {{{
-		is_fileformat_true("viml", {
+		apply_fileformat("viml", {
 			vimLet            = { fg = colors.color1 },
 			vimFunction       = { fg = colors.color2 },
 			vimIsCommand      = { fg = colors.foreground },
@@ -1019,7 +1017,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Makefile: {{{
-		is_fileformat_true("makefile", {
+		apply_fileformat("makefile", {
 			makeIdent      = { fg = colors.color5 },
 			makeSpecTarget = { fg = colors.color4, italic = true },
 			makeTarget     = { fg = colors.color11 },
@@ -1027,7 +1025,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: CMake: {{{
-		is_fileformat_true("cmake", {
+		apply_fileformat("cmake", {
 			cmakeCommand                            = { fg = colors.color1 },
 			cmakeKWconfigure_package_config_file    = { fg = colors.color4, italic = true },
 			cmakeKWwrite_basic_package_version_file = { fg = colors.color4, italic = true },
@@ -1135,7 +1133,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Json: {{{
-		is_fileformat_true("json", {
+		apply_fileformat("json", {
 			jsonKeyword = { fg = colors.color1 },
 			jsonString  = { fg = colors.color2 },
 			jsonBoolean = { fg = colors.color4 },
@@ -1145,14 +1143,14 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Yaml: {{{
-		is_fileformat_true("yaml", {
+		apply_fileformat("yaml", {
 			yamlKey      = { fg = colors.color1 },
 			yamlConstant = { fg = colors.color4, italic = true },
 			yamlString   = { fg = colors.color2 },
 		}),
 		--: }}}
 		--: Toml: {{{
-		is_fileformat_true("toml", {
+		apply_fileformat("toml", {
 			tomlTable      = { bg = colors.background, fg = colors.color5, bold = true },
 			tomlKey        = { fg = colors.color1 },
 			tomlBoolean    = { fg = colors.color4 },
@@ -1161,7 +1159,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Diff: {{{
-		is_fileformat_true("diff", {
+		apply_fileformat("diff", {
 			diffAdded     = { fg = colors.color2 },
 			diffRemoved   = { fg = colors.color1 },
 			diffChanged   = { fg = colors.color4 },
@@ -1173,7 +1171,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Git Commit: {{{
-		is_fileformat_true("git_commit", {
+		apply_fileformat("git_commit", {
 			gitcommitSummary   = { fg = colors.color1 },
 			gitcommitUntracked = { fg = colors.color8 },
 			gitcommitDiscarded = { fg = colors.color8 },
@@ -1185,7 +1183,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: INI: {{{
-		is_fileformat_true("ini", {
+		apply_fileformat("ini", {
 			dosiniHeader = { fg = colors.color1, bold = true },
 			dosiniLabel  = { fg = colors.color4 },
 			dosiniValue  = { fg = colors.color2 },
@@ -1193,7 +1191,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Help: {{{
-		is_fileformat_true("help", {
+		apply_fileformat("help", {
 			helpNote           = { fg = colors.color5, bold = true },
 			helpHeadline       = { fg = colors.color1, bold = true },
 			helpHeader         = { fg = colors.color11, bold = true },
