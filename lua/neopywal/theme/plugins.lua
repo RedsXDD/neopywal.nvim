@@ -1,38 +1,40 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
+local P = require("neopywal").options.plugins
 
-local function is_plugin_true(plugin_option, highlights)
-	-- Retrieve plugins table from neopywal options.
-	local plugins_table = require("neopywal").options.plugins
+local function apply_plugin(option, highlights)
+	local plugin = P
 
-	-- Safety check: Return empty table if plugins_table is empty.
-	if next(plugins_table) == nil then
-		return {}
-	end
-
-	-- If plugin_option is a boolean, return highlights if it's true, otherwise return an empty table.
-	if type(plugins_table[plugin_option]) == "boolean" then
-		return plugins_table[plugin_option] and highlights or {}
+	-- If option is a boolean, return highlights if it's true, otherwise return an empty table.
+	if type(plugin[option]) == "boolean" then
+		return plugin[option] and highlights or {}
 	end
 
 	-- Iterate through nested options.
-	for nested_plugin in string.gmatch(plugin_option, "([^%.]+)") do
-		-- Check if plugins_table is a table and nested_plugin exists.
-		if type(plugins_table) ~= "table" or plugins_table[nested_plugin] == nil then
-			return {} -- Return empty table if nested option was not found.
+	for nested_option in string.gmatch(option, "([^%.]+)") do
+		-- Check if current_plugins is a table and nested_plugin exists.
+		if plugin[nested_option] == nil then
+			return highlights -- Return highlights if nested option was not found.
 		end
-		plugins_table = plugins_table[nested_plugin] -- Update plugins_table for next iteration.
+		plugin = plugin[nested_option] -- Update current_plugins for next iteration.
 	end
 
-	-- Return highlights if the final plugin_option is true, otherwise return an empty table.
-	return plugins_table and highlights or {}
+	-- Return highlights if the final option is true, otherwise return an empty table.
+	return plugin and highlights or {}
 end
 
 M.get = function(colors)
-	return vim.tbl_deep_extend("force", {},
+	-- Safety check: Return empty table if plugins is empty.
+	if type(P) ~= "table" or next(P) == nil then
+		return {}
+	end
+
+	return vim.tbl_deep_extend(
+		"force",
+		{},
 		--: neoclide/coc.nvim {{{
-		is_plugin_true("coc", {
+		apply_plugin("coc", {
 			CocHighlightText = { bold = true },
 			CocHoverRange = { bold = true, underline = true },
 			CocHintHighlight = { fg = colors.color2, undercurl = true },
@@ -78,7 +80,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: dense-analysis/ale {{{
-		is_plugin_true("ale", {
+		apply_plugin("ale", {
 			ALEError = { fg = colors.color1, undercurl = true },
 			ALEWarning = { fg = colors.color3, undercurl = true },
 			ALEInfo = { fg = colors.color4, undercurl = true },
@@ -93,7 +95,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: airblade/vim-gitgutter {{{
-		is_plugin_true("git_gutter", {
+		apply_plugin("git_gutter", {
 			GitGutterAdd = { fg = colors.color2 },
 			GitGutterChange = { fg = colors.color4 },
 			GitGutterDelete = { fg = colors.color1 },
@@ -101,7 +103,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: hrsh7th/nvim-cmp {{{
-		is_plugin_true("nvim_cmp", {
+		apply_plugin("nvim_cmp", {
 			CmpDocumentationBorder = { link = "FloatBorder" },
 			CmpItemAbbr = { fg = colors.foreground },
 			CmpItemAbbrDeprecated = { fg = colors.color2 },
@@ -112,7 +114,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: neovim/nvim-lspconfig {{{
-		is_plugin_true("lspconfig", {
+		apply_plugin("lspconfig", {
 			LspInlayHint = { link = "NonText" },
 			LspDiagnosticsHint = { fg = colors.color6 },
 			LspDiagnosticsInformation = { fg = colors.color7 },
@@ -147,7 +149,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: Lazy.nvim {{{
-		is_plugin_true("lazy", {
+		apply_plugin("lazy", {
 			LazyProgressTodo = { link = "LineNr" },
 			LazyProgressDone = { link = "Constant" },
 			LazySpecial = { link = "@punctuation.special" },
@@ -184,7 +186,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: nvim-treesitter/nvim-treesitter {{{
-		is_plugin_true("treesitter", {
+		apply_plugin("treesitter", {
 			["@annotation"] = { link = "PreProc" },
 			["@attribute"] = { link = "PreProc" },
 			["@boolean"] = { link = "Boolean" },
@@ -346,7 +348,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: nvim-neo-tree/neo-tree.nvim {{{
-		is_plugin_true("neotree", {
+		apply_plugin("neotree", {
 			NeoTreeDirectoryName = { link = "Directory" },
 			NeoTreeDirectoryIcon = { link = "Directory" },
 			NeoTreeNormal = { link = "Normal" },
@@ -399,7 +401,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: akinsho/bufferline.nvim {{{
-		is_plugin_true("bufferline", {
+		apply_plugin("bufferline", {
 			BufferLineBackground = { link = "TabLine" },
 			BufferLineFill = { link = "TabLineFill" },
 			BufferLineGroupLabel = { fg = colors.color7 },
@@ -794,7 +796,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: folke/which-key.nvim {{{
-		is_plugin_true("which_key", {
+		apply_plugin("which_key", {
 			WhichKey = { fg = colors.color1 },
 			WhichKeyGroup = { fg = colors.color11 },
 			WhichKeyDesc = { fg = colors.color6 },
@@ -806,7 +808,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: nvimdev/dashboard-nvim {{{
-		is_plugin_true("dashboard", {
+		apply_plugin("dashboard", {
 			DashboardShortCut = { fg = colors.color6 },
 			DashboardHeader = { fg = colors.color4 },
 			DashboardCenter = { fg = colors.color5 },
@@ -817,7 +819,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: goolord/alpha-nvim {{{
-		is_plugin_true("alpha", {
+		apply_plugin("alpha", {
 			AlphaShortcut = { fg = colors.color11 },
 			AlphaHeader = { fg = colors.color4 },
 			AlphaHeaderLabel = { fg = colors.color11 },
@@ -826,13 +828,13 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: lukas-reineke/indent-blankline.nvim {{{
-		is_plugin_true("indent_blankline", {
+		apply_plugin("indent_blankline", {
 			IndentBlanklineChar = { link = "Comment" },
 		}),
 		--: }}}
 		--: vim.org/netrw {{{
 		--: https://www.vim.org/scripts/script.php?script_id=1075
-		is_plugin_true("netrw", {
+		apply_plugin("netrw", {
 			netrwDir = { link = "Directory" },
 			netrwClassify = { fg = colors.color2 },
 			netrwLink = { fg = colors.color8 },
@@ -846,7 +848,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: mbbill/undotree {{{
-		is_plugin_true("undotree", {
+		apply_plugin("undotree", {
 			UndotreeSavedBig = { fg = colors.color1, bold = true },
 			UndotreeNode = { fg = colors.color4 },
 			UndotreeNodeCurrent = { fg = colors.color5 },
@@ -860,7 +862,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: nvim-telescope/telescope.nvim {{{
-		is_plugin_true("telescope", {
+		apply_plugin("telescope", {
 			TelescopeNormal = { link = "Normal" },
 			TelescopeBorder = { link = "FloatBorder" },
 			TelescopeSelection = { link = "CursorLine" },
@@ -920,13 +922,13 @@ M.get = function(colors)
 		--: }}}
 		--: mini.nvim {{{
 		--: mini.indentscope {{{
-		is_plugin_true("mini.indentscope", {
+		apply_plugin("mini.indentscope", {
 			MiniIndentscopeSymbol = { link = "Comment" },
 			MiniIndentscopeSymbolOff = { link = "MiniIndentscopeSymbol" },
 		}),
 		--: }}}
 		--: mini.statusline {{{
-		is_plugin_true("mini.statusline", {
+		apply_plugin("mini.statusline", {
 			MiniStatuslineModeNormal = { bg = colors.color4, fg = colors.background, bold = true },
 			MiniStatuslineModeVisual = { bg = colors.color5, fg = colors.background, bold = true },
 			MiniStatuslineModeInsert = { bg = colors.color6, fg = colors.background, bold = true },
@@ -940,7 +942,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: mini.tabline {{{
-		is_plugin_true("mini.tabline", {
+		apply_plugin("mini.tabline", {
 			MiniTablineCurrent = { bg = colors.color4, fg = colors.background, bold = true, italic = true },
 			MiniTablineFill = { link = "TabLineFill" },
 			MiniTablineVisible = { link = "TabLine" },
@@ -952,13 +954,13 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: mini.cursorword {{{
-		is_plugin_true("mini.cursorword", {
+		apply_plugin("mini.cursorword", {
 			MiniCursorword = { bg = colors.color8, bold = true },
 			MiniCursorwordCurrent = { link = "MiniCursorword" },
 		}),
 		--: }}}
 		--: mini.files {{{
-		is_plugin_true("mini.files", {
+		apply_plugin("mini.files", {
 			MiniFilesBorder = { link = "FloatBorder" },
 			MiniFilesBorderModified = { link = "DiagnosticVirtualTextWarn" },
 			MiniFilesCursorLine = { link = "CursorLine" },
@@ -970,7 +972,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: mini.hipatterns {{{
-		is_plugin_true("mini.hipatterns", {
+		apply_plugin("mini.hipatterns", {
 			MiniHipatternsFixme = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
 			MiniHipatternsHack = { bg = colors.color11, fg = colors.background, bold = true, italic = true },
 			MiniHipatternsTodo = { bg = colors.color4, fg = colors.background, bold = true, italic = true },
@@ -978,7 +980,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: mini.pick {{{
-		is_plugin_true("mini.pick", {
+		apply_plugin("mini.pick", {
 			MiniPickBorder = { link = "FloatBorder" },
 			MiniPickBorderBusy = { link = "DiagnosticVirtualTextWarn" },
 			MiniPickBorderText = { link = "FloatTitle" },
@@ -995,7 +997,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: mini.starter: {{{
-		is_plugin_true("mini.starter", {
+		apply_plugin("mini.starter", {
 			MiniStarterCurrent = { link = "CursorLine" },
 			MiniStarterHeader = { fg = colors.color4, bold = true, italic = true },
 			MiniStarterFooter = { fg = colors.color5, bold = true, italic = true },
@@ -1008,7 +1010,8 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: }}}
-	{})
+		{}
+	)
 end
 
 return M
