@@ -4,21 +4,15 @@ local M = {}
 local F = require("neopywal").options.fileformats
 
 local function apply_fileformat(option, highlights)
-	-- If option is a boolean, return highlights if it's true, otherwise return an empty table.
-	if type(F[option]) == "boolean" then
-		return F[option] and highlights or {}
-	end
-end
-
-M.get = function(colors)
-	-- Safety check: Return empty table if fileformats is empty.
-	if next(F) == nil then
+	if type(F[option]) ~= "boolean" then
 		return {}
 	end
 
-	return vim.tbl_deep_extend(
-		"force",
-		{},
+	return F[option] and highlights or {}
+end
+
+M.get = function(colors)
+	return vim.tbl_deep_extend("force", {},
 		--: Markdown: {{{
 		apply_fileformat("markdown", {
 			--: builtin: {{{
@@ -1212,8 +1206,7 @@ M.get = function(colors)
 			helpSectionDelim = { fg = colors.color8 },
 		}),
 		--: }}}
-		{}
-	)
+	{})
 end
 
 return M

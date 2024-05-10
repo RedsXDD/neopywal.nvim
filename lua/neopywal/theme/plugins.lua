@@ -4,35 +4,29 @@ local M = {}
 local P = require("neopywal").options.plugins
 
 local function apply_plugin(option, highlights)
-	local plugin = P
-
-	-- If option is a boolean, return highlights if it's true, otherwise return an empty table.
-	if type(plugin[option]) == "boolean" then
-		return plugin[option] and highlights or {}
+	local keys = {}
+	for key in option:gmatch("[^.]+") do
+		table.insert(keys, key)
 	end
 
-	-- Iterate through nested options.
-	for nested_option in string.gmatch(option, "([^%.]+)") do
-		-- Check if current_plugins is a table and nested_plugin exists.
-		if plugin[nested_option] == nil then
-			return highlights -- Return highlights if nested option was not found.
+	local value = P
+	for _, key in ipairs(keys) do
+		if type(value) == "table" and value[key] ~= nil then
+			value = value[key]
+		else
+			return {}
 		end
-		plugin = plugin[nested_option] -- Update current_plugins for next iteration.
 	end
 
-	-- Return highlights if the final option is true, otherwise return an empty table.
-	return plugin and highlights or {}
-end
-
-M.get = function(colors)
-	-- Safety check: Return empty table if plugins is empty.
-	if type(P) ~= "table" or next(P) == nil then
+	if type(value) ~= "boolean" then
 		return {}
 	end
 
-	return vim.tbl_deep_extend(
-		"force",
-		{},
+	return value and highlights or {}
+end
+
+M.get = function(colors)
+	return vim.tbl_deep_extend("force", {},
 		--: neoclide/coc.nvim {{{
 		apply_plugin("coc", {
 			CocHighlightText = { bold = true },
@@ -1010,8 +1004,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: }}}
-		{}
-	)
+	{})
 end
 
 return M
