@@ -37,6 +37,7 @@
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
 As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins, such as:
+
 - [Mini.indentscope](https://github.com/echasnovski/mini.indentscope)
 - [Mini.statusline](https://github.com/echasnovski/mini.statusline)
 - [Mini.tabline](https://github.com/echasnovski/mini.tabline)
@@ -101,24 +102,119 @@ As well as many of [mini.nvim](https://github.com/echasnovski/mini.nvim) plugins
 You can install this plugin with the following plugin managers:
 
 [lazy.nvim](https://github.com/folke/lazy.nvim)
+
 ```lua
 {
-  "RedsXDD/neopywal.nvim",
-  name = "neopywal",
-  lazy = false,
-  priority = 1000,
-  opts = {},
+    "RedsXDD/neopywal.nvim",
+    name = "neopywal",
+    lazy = false,
+    priority = 1000,
+    opts = {},
 }
 ```
 
 [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
 ```lua
 use { "RedsXDD/neopywal.nvim", as = 'neopywal' }
 ```
 
 [vim-plug](https://github.com/junegunn/vim-plug)
+
 ```vim
 Plug 'RedsXDD/neopywal.nvim', { 'as': 'neopywal' }
+```
+
+## Configuration
+
+Neopywal offers some configuration options for enabling or disabling highlights.
+
+```lua
+require("neopywal").setup({
+    -- Setting default_fileformats/default_plugins options to false disables all highlights groups for fileformats/plugins unless the user specifies the use for certain groups manually.
+    default_fileformats = true,
+    default_plugins = true,
+
+    -- Fileformat highlights that are enabled by default.
+    fileformats = {
+        c_cpp = true,
+        clojure = true,
+        cmake = true,
+        git_commit = true,
+        c_sharp = true,
+        css = true,
+        dart = true,
+        diff = true,
+        elixir = true,
+        erlang = true,
+        go = true,
+        haskell = true,
+        help = true,
+        html = true,
+        ini = true,
+        java = true,
+        json = true,
+        javascript_react = true,
+        javascript = true,
+        kotlin = true,
+        latex = true,
+        less = true,
+        common_lisp = true,
+        lua = true,
+        makefile = true,
+        markdown = true,
+        matlab = true,
+        objectivec = true,
+        ocaml = true,
+        perl = true,
+        php = true,
+        powershell = true,
+        python = true,
+        restructuredtext = true,
+        ruby = true,
+        rust = true,
+        sass = true,
+        scala = true,
+        shell = true,
+        swift = true,
+        toml = true,
+        typescript = true,
+        viml = true,
+        xml = true,
+        yaml = true,
+        zsh = true,
+    },
+
+    -- Plugin highlights that are enabled by default.
+    plugins = {
+        ale = true,
+        alpha = true,
+        bufferline = true,
+        nvim_cmp = true,
+        coc = true,
+        dashboard = true,
+        git_gutter = true,
+        indent_blankline = true,
+        lazy = true,
+        lspconfig = true,
+        neotree = true,
+        netrw = true,
+        telescope = true,
+        treesitter = true,
+        undotree = true,
+        which_key = true,
+        mini = {
+            cursorword = true,
+            files = true,
+            hipatterns = true,
+            indentscope = true,
+            pick = true,
+            starter = true,
+            statusline = true,
+            tabline = true,
+        },
+    },
+})
 ```
 
 ## Activate theme
@@ -147,9 +243,9 @@ Place this in your lualine config:
 local lualine = require("lualine")
 
 lualine.setup {
-  options = {
-    theme = "neopywal",
-  },
+    options = {
+        theme = "neopywal",
+    },
 }
 ```
 
@@ -160,16 +256,16 @@ You can put this to your config to activate the feline config:
 ```lua
 local has_feline, feline = pcall(require, "feline")
 if not has_feline then
-  return
+    return
 end
 
 local has_neopywal, neopywal = pcall(require, "neopywal.feline")
 if not has_neopywal then
-  return
+    return
 end
 
 feline.setup({
-  components = neopywal,
+    components = neopywal,
 })
 ```
 
