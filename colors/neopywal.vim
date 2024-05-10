@@ -1,1 +1,1 @@
-lua require("neopywal").setup()
+lua require("neopywal").load()

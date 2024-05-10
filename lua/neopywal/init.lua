@@ -1,83 +1,87 @@
-local M = {}
-
-local defaults_options = {
-	fileformats = {
-		c_cpp = true,
-		clojure = true,
-		cmake = true,
-		commit = true,
-		c_sharp = true,
-		css = true,
-		dart = true,
-		diff = true,
-		elixir = true,
-		erlang = true,
-		go = true,
-		haskell = true,
-		help = true,
-		html = true,
-		ini = true,
-		java = true,
-		json = true,
-		js_react = true,
-		js = true,
-		kotlin = true,
-		latex = true,
-		less = true,
-		lisp = true,
-		lua = true,
-		makefile = true,
-		markdown = true,
-		matlab = true,
-		objectivec = true,
-		ocaml = true,
-		perl = true,
-		php = true,
-		power_shell = true,
-		python = true,
-		restructuredtext = true,
-		ruby = true,
-		rust = true,
-		sass = true,
-		scala = true,
-		shell = true,
-		swift = true,
-		toml = true,
-		typescript = true,
-		viml = true,
-		xml = true,
-		yaml = true,
-		zsh = true,
-	},
-	plugins = {
-		ale = true,
-		alpha = true,
-		bufferline = true,
-		cmp = true,
-		coc = true,
-		dashboard = true,
-		git_gutter = true,
-		indent_blankline = true,
-		lazy = true,
-		lspconfig = true,
-		neotree = true,
-		netrw = true,
-		telescope = true,
-		treesitter = true,
-		undotree = true,
-		which_key = true,
-		mini = {
-			cursorword = true,
-			files = true,
-			hipatterns = true,
-			indentscope = true,
-			pick = true,
-			starter = true,
-			statusline = true,
-			tabline = true,
+local M = {
+	default_options = {
+		default_fileformats = true,
+		fileformats = {
+			c_cpp = true,
+			clojure = true,
+			cmake = true,
+			commit = true,
+			c_sharp = true,
+			css = true,
+			dart = true,
+			diff = true,
+			elixir = true,
+			erlang = true,
+			go = true,
+			haskell = true,
+			help = true,
+			html = true,
+			ini = true,
+			java = true,
+			json = true,
+			js_react = true,
+			js = true,
+			kotlin = true,
+			latex = true,
+			less = true,
+			lisp = true,
+			lua = true,
+			makefile = true,
+			markdown = true,
+			matlab = true,
+			objectivec = true,
+			ocaml = true,
+			perl = true,
+			php = true,
+			power_shell = true,
+			python = true,
+			restructuredtext = true,
+			ruby = true,
+			rust = true,
+			sass = true,
+			scala = true,
+			shell = true,
+			swift = true,
+			toml = true,
+			typescript = true,
+			viml = true,
+			xml = true,
+			yaml = true,
+			zsh = true,
+		},
+		default_plugins = true,
+		plugins = {
+			ale = true,
+			alpha = true,
+			bufferline = true,
+			cmp = true,
+			coc = true,
+			dashboard = true,
+			git_gutter = true,
+			indent_blankline = true,
+			lazy = true,
+			lspconfig = true,
+			neotree = true,
+			netrw = true,
+			telescope = true,
+			treesitter = true,
+			undotree = true,
+			which_key = true,
+			mini = {
+				cursorword = true,
+				files = true,
+				hipatterns = true,
+				indentscope = true,
+				pick = true,
+				starter = false,
+				statusline = true,
+				tabline = true,
+			},
 		},
 	},
 }
+
+M.options = M.default_options
 
 function M.get_colors()
 	vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
@@ -114,12 +118,21 @@ local function apply_highlights(colors)
 	end
 end
 
-function M.setup(user_options)
-	local options = vim.tbl_deep_extend("force", {}, defaults_options, user_options or {})
-
+local did_setup = false
+function M.load()
+	if not did_setup then M.setup() end
 	local colors = M.get_colors()
 	vim.opt.termguicolors = true
 	apply_highlights(colors)
+end
+
+function M.setup(user_conf)
+	did_setup = true
+	-- User configuration setup steps:
+	user_conf = user_conf or {}
+	if user_conf.default_fileformats == false then M.default_options.fileformats = {} end
+	if user_conf.default_plugins == false then M.default_options.plugins = {} end
+	M.options = vim.tbl_deep_extend("keep", {}, user_conf, M.default_options)
 end
 
 return M
