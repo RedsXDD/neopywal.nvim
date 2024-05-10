@@ -30,7 +30,7 @@ local function is_plugin_true(plugin_option, highlights)
 end
 
 M.get = function(colors)
-	local theme = vim.tbl_deep_extend("force", {},
+	return vim.tbl_deep_extend("force", {},
 		--: neoclide/coc.nvim {{{
 		is_plugin_true("coc", {
 			CocHighlightText = { bold = true },
@@ -1009,8 +1009,6 @@ M.get = function(colors)
 		--: }}}
 		--: }}}
 	{})
-
-	return theme
 end
 
 return M

@@ -18,7 +18,7 @@ local function is_fileformat_true(fileformat_option, highlights)
 end
 
 M.get = function(colors)
-	local theme = vim.tbl_deep_extend("force", {},
+	return vim.tbl_deep_extend("force", {},
 		--: Markdown: {{{
 		is_fileformat_true("markdown", {
 			--: builtin: {{{
@@ -1207,8 +1207,6 @@ M.get = function(colors)
 		}),
 		--: }}}
 	{})
-
-	return theme
 end
 
 return M
