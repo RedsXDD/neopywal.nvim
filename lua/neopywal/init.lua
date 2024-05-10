@@ -5,7 +5,7 @@ local M = {
 			c_cpp = true,
 			clojure = true,
 			cmake = true,
-			commit = true,
+			git_commit = true,
 			c_sharp = true,
 			css = true,
 			dart = true,
@@ -19,12 +19,12 @@ local M = {
 			ini = true,
 			java = true,
 			json = true,
-			js_react = true,
-			js = true,
+			javascript_react = true,
+			javascript = true,
 			kotlin = true,
 			latex = true,
 			less = true,
-			lisp = true,
+			common_lisp = true,
 			lua = true,
 			makefile = true,
 			markdown = true,
@@ -33,7 +33,7 @@ local M = {
 			ocaml = true,
 			perl = true,
 			php = true,
-			power_shell = true,
+			powershell = true,
 			python = true,
 			restructuredtext = true,
 			ruby = true,
@@ -54,7 +54,7 @@ local M = {
 			ale = true,
 			alpha = true,
 			bufferline = true,
-			cmp = true,
+			nvim_cmp = true,
 			coc = true,
 			dashboard = true,
 			git_gutter = true,
@@ -73,7 +73,7 @@ local M = {
 				hipatterns = true,
 				indentscope = true,
 				pick = true,
-				starter = false,
+				starter = true,
 				statusline = true,
 				tabline = true,
 			},
@@ -111,10 +111,15 @@ function M.get_colors()
 end
 
 local function apply_highlights(colors)
-	local theme = require("neopywal.theme")
-	local base_highlights = theme.get_highlights(colors)
-	for group, properties in pairs(base_highlights) do
-		vim.api.nvim_set_hl(0, group, properties)
+	local theme = vim.tbl_deep_extend("force",
+		require("neopywal.theme.ui").get(colors),
+		require("neopywal.theme.syntax").get(colors),
+		require("neopywal.theme.fileformats").get(colors),
+		require("neopywal.theme.plugins").get(colors),
+		{})
+
+	for highlight_group, properties in pairs(theme) do
+		vim.api.nvim_set_hl(0, highlight_group, properties)
 	end
 end
 
@@ -128,7 +133,8 @@ end
 
 function M.setup(user_conf)
 	did_setup = true
-	-- User configuration setup steps:
+
+	-- User configuration setup:
 	user_conf = user_conf or {}
 	if user_conf.default_fileformats == false then M.default_options.fileformats = {} end
 	if user_conf.default_plugins == false then M.default_options.plugins = {} end
