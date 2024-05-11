@@ -89,6 +89,7 @@ function M.get_colors()
 
 	return {
 		transparent = "NONE",
+		none = "NONE",
 		background = vim.g.background,
 		foreground = vim.g.foreground,
 		cursor = vim.g.cursor,
