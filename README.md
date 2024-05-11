@@ -105,13 +105,15 @@ You can install this plugin with the following plugin managers:
 [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
-{
-    "RedsXDD/neopywal.nvim",
-    name = "neopywal",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-}
+require("lazy").setup({
+    {
+        "RedsXDD/neopywal.nvim",
+        name = "neopywal",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+})
 ```
 
 [packer.nvim](https://github.com/wbthomason/packer.nvim)
@@ -142,7 +144,8 @@ Or with vim script:
 colorscheme neopywal
 ```
 
-> NOTE: The colorscheme will automatically set the `vim.opt.termguicolors` option to true
+> [!Note]
+> The colorscheme will automatically set the `vim.opt.termguicolors` option to true
 
 ## Activating lualine theme
 
@@ -182,7 +185,7 @@ Then you should see the feline bar working successfully.
 
 ## Configuration
 
-Neopywal offers some configuration options for enabling or disabling highlights.
+There is no need to call `setup` if you don't want to change the default options and settings.
 
 ```lua
 require("neopywal").setup({
@@ -318,6 +321,19 @@ If you want to import the colors into a lua dictionary:
 
 ```lua
 local colors = require("neopywal").get_colors()
+```
+
+Then you can apply the colors in a way similar to the one found in `custom_highlights = {}`
+E.g:
+
+```lua
+local colors = require("neopywal").get_colors()
+
+return {
+    color_var1 = { colors.color1 }
+    color_var2 = { colors.color2 }
+    color_var3 = { colors.color3 }
+}
 ```
 
 ## How it works
