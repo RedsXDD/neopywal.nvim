@@ -90,6 +90,7 @@ function M.get_colors()
 	vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
 
 	return {
+		none = "NONE",
 		transparent = "NONE",
 		background = user_colors.background or vim.g.background,
 		foreground = user_colors.foreground or vim.g.foreground,
