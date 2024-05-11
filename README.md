@@ -13,6 +13,7 @@
 
 ![01](./.screenshots/01.png)
 ![02](./.screenshots/02.png)
+![03](./.screenshots/03.png)
 
 ## Supported plugins:
 
@@ -125,98 +126,6 @@ use { "RedsXDD/neopywal.nvim", as = 'neopywal' }
 Plug 'RedsXDD/neopywal.nvim', { 'as': 'neopywal' }
 ```
 
-## Configuration
-
-Neopywal offers some configuration options for enabling or disabling highlights.
-
-```lua
-require("neopywal").setup({
-    -- Setting default_fileformats/default_plugins options to false disables all highlights groups for fileformats/plugins unless the user specifies the use for certain groups manually.
-    default_fileformats = true,
-    default_plugins = true,
-
-    -- Fileformat highlights that are enabled by default.
-    fileformats = {
-        c_cpp = true,
-        clojure = true,
-        cmake = true,
-        git_commit = true,
-        c_sharp = true,
-        css = true,
-        dart = true,
-        diff = true,
-        elixir = true,
-        erlang = true,
-        go = true,
-        haskell = true,
-        help = true,
-        html = true,
-        ini = true,
-        java = true,
-        json = true,
-        javascript_react = true,
-        javascript = true,
-        kotlin = true,
-        latex = true,
-        less = true,
-        common_lisp = true,
-        lua = true,
-        makefile = true,
-        markdown = true,
-        matlab = true,
-        objectivec = true,
-        ocaml = true,
-        perl = true,
-        php = true,
-        powershell = true,
-        python = true,
-        restructuredtext = true,
-        ruby = true,
-        rust = true,
-        sass = true,
-        scala = true,
-        shell = true,
-        swift = true,
-        toml = true,
-        typescript = true,
-        viml = true,
-        xml = true,
-        yaml = true,
-        zsh = true,
-    },
-
-    -- Plugin highlights that are enabled by default.
-    plugins = {
-        ale = true,
-        alpha = true,
-        bufferline = true,
-        nvim_cmp = true,
-        coc = true,
-        dashboard = true,
-        git_gutter = true,
-        indent_blankline = true,
-        lazy = true,
-        lspconfig = true,
-        neotree = true,
-        netrw = true,
-        telescope = true,
-        treesitter = true,
-        undotree = true,
-        which_key = true,
-        mini = {
-            cursorword = true,
-            files = true,
-            hipatterns = true,
-            indentscope = true,
-            pick = true,
-            starter = true,
-            statusline = true,
-            tabline = true,
-        },
-    },
-})
-```
-
 ## Activate theme
 
 To activate the theme, call this in your neovim config:
@@ -271,6 +180,93 @@ feline.setup({
 
 Then you should see the feline bar working successfully.
 
+## Configuration
+
+Neopywal offers some configuration options for enabling or disabling highlights.
+
+```lua
+require("neopywal").setup({
+    default_fileformats = true,
+    default_plugins = true,
+    fileformats = {
+        c_cpp = true,
+        clojure = true,
+        cmake = true,
+        git_commit = true,
+        c_sharp = true,
+        css = true,
+        dart = true,
+        diff = true,
+        elixir = true,
+        erlang = true,
+        go = true,
+        haskell = true,
+        help = true,
+        html = true,
+        ini = true,
+        java = true,
+        json = true,
+        javascript_react = true,
+        javascript = true,
+        kotlin = true,
+        latex = true,
+        less = true,
+        common_lisp = true,
+        lua = true,
+        makefile = true,
+        markdown = true,
+        matlab = true,
+        objectivec = true,
+        ocaml = true,
+        perl = true,
+        php = true,
+        powershell = true,
+        python = true,
+        restructuredtext = true,
+        ruby = true,
+        rust = true,
+        sass = true,
+        scala = true,
+        shell = true,
+        swift = true,
+        toml = true,
+        typescript = true,
+        viml = true,
+        xml = true,
+        yaml = true,
+        zsh = true,
+    },
+    plugins = {
+        ale = true,
+        alpha = true,
+        bufferline = true,
+        nvim_cmp = true,
+        coc = true,
+        dashboard = true,
+        git_gutter = true,
+        indent_blankline = true,
+        lazy = true,
+        lspconfig = true,
+        neotree = true,
+        netrw = true,
+        telescope = true,
+        treesitter = true,
+        undotree = true,
+        which_key = true,
+        mini = {
+            cursorword = true,
+            files = true,
+            hipatterns = true,
+            indentscope = true,
+            pick = true,
+            starter = true,
+            statusline = true,
+            tabline = true,
+        },
+    },
+})
+```
+
 ## Using the get_colors() function to import the colors
 
 If you want to import the colors into a lua dictionary:
@@ -287,7 +283,7 @@ to make the colorscheme, it looks like this:
 
 ```vim
 " Special
-let wallpaper  = "/home/user/Pictures/catppuccin.png"
+let wallpaper  = "/home/user/Pictures/wallpaper.png"
 let background = "#1E1E2E"
 let foreground = "#CDD6F4"
 let cursor     = "#F5E0DC"
