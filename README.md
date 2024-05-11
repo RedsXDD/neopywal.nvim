@@ -312,7 +312,7 @@ require("neopywal").setup({
             Comment = { fg = colors.color3 }
             TabLineSel = { bg = colors.color5 },
             FloatBorder = { bg = colors.color1 },
-            Pmenu = { bg = colors.none },
+            Pmenu = { bg = colors.color6 },
         }
     end
 })
