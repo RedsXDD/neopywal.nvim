@@ -345,6 +345,20 @@ color14 = Bright cyan.
 color15 = Bright white.
 ```
 
+Neopywal also allows the user to set transparency for highlight groups using the `transparent` color variable, for example:
+
+```lua
+require("neopywal").setup({
+    custom_highlights = function (colors)
+        return {
+            Normal = { bg = colors.none },
+        }
+    end
+})
+```
+
+This would assign the background property for the `Normal` highlight group the `none` color variable, essentially making the Neovim background transparent.
+
 ## Using the get_colors() function to import the colors
 
 If you want to import the colors into a lua dictionary:
