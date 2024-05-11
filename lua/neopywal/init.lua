@@ -3,6 +3,7 @@ local M = {}
 local default_options = {
 	default_fileformats = true,
 	default_plugins = true,
+	custom_highlights = {},
 	fileformats = {
 		c_cpp = true,
 		clojure = true,
@@ -112,6 +113,11 @@ end
 
 local function apply_highlights(colors)
 	local theme = vim.tbl_deep_extend("force",
+	local user_highlights = M.options.custom_highlights
+	if type(user_highlights) == "function" then user_highlights = user_highlights(colors) end
+
+	local theme = vim.tbl_deep_extend("keep",
+		user_highlights,
 		require("neopywal.theme.ui").get(colors),
 		require("neopywal.theme.syntax").get(colors),
 		require("neopywal.theme.fileformats").get(colors),
