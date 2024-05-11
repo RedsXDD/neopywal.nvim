@@ -1,5 +1,5 @@
 - Add support for the following user options:
-    transparent_background = false, -- disables setting the background color.
+    transparent_background = false, -- disables setting the transparent background color.
     no_italic = false, -- Force no italic
     no_bold = false, -- Force no bold
     no_underline = false, -- Force no underline
