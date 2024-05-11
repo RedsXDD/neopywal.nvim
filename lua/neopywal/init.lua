@@ -114,8 +114,8 @@ end
 local did_setup = false
 function M.load()
 	if not did_setup then M.setup() end
-	local colors = M.get_colors()
 
+	local colors = M.get_colors()
 	vim.opt.termguicolors = true
 
 	local user_highlights = M.options.custom_highlights
