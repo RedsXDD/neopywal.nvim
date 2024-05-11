@@ -112,7 +112,8 @@ function M.get_colors()
 end
 
 local function apply_highlights(colors)
-	local theme = vim.tbl_deep_extend("force",
+	vim.opt.termguicolors = true
+
 	local user_highlights = M.options.custom_highlights
 	if type(user_highlights) == "function" then user_highlights = user_highlights(colors) end
 
@@ -133,7 +134,6 @@ local did_setup = false
 function M.load()
 	if not did_setup then M.setup() end
 	local colors = M.get_colors()
-	vim.opt.termguicolors = true
 	apply_highlights(colors)
 end
 
