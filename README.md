@@ -6,8 +6,8 @@
 
 - Enhanced plugin support.
 - Improved coloring for a variety of file formats.
-- Exclusively utilizes termguicolors for color rendering, a feature absent in wal.vim.
-- Does not use any `ctermbg` or `ctermfg` declarations.
+- Ability to change default color definitions.
+- Ability for the user to set their own custom highlight group definitions.
 
 ## Screenshots
 
