@@ -272,7 +272,7 @@ require("neopywal").setup({
 })
 ```
 
-## Customizing colors and highlight groups.
+## Customizing colors
 
 Color definitions can be overwritten using the `custom_colors` option, for example:
 
@@ -303,7 +303,9 @@ require("neopywal").setup({
 })
 ```
 
-Highlight groups can also be overwritten using `custom_highlights` option, for example:
+## Customizing highlight groups.
+
+Highlight groups can be overwritten using `custom_highlights` option, for example:
 
 ```lua
 require("neopywal").setup({
