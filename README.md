@@ -303,6 +303,20 @@ require("neopywal").setup({
 })
 ```
 
+You can also define your own color variables, for example:
+
+```lua
+require("neopywal").setup({
+    custom_colors = {
+        red = "#ff0000"
+        green = "#00ff00"
+        blue = "#0000ff"
+    },
+})
+```
+
+Custom color variables are gonna be automatically exported with the `get_colors()` function and can used normally just like any other color variable.
+
 ## Customizing highlight groups.
 
 Highlight groups can be overwritten using `custom_highlights` option, for example:
