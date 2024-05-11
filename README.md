@@ -191,6 +191,7 @@ There is no need to call `setup` if you don't want to change the default options
 require("neopywal").setup({
     default_fileformats = true,
     default_plugins = true,
+    custom_colors = {},
     custom_highlights = {},
     fileformats = {
         c_cpp = true,
@@ -271,9 +272,38 @@ require("neopywal").setup({
 })
 ```
 
-## Customizing highlights
+## Customizing colors and highlight groups.
 
-Highlight groups can be overwritten using custom_highlights option in the setting, for example:
+Color definitions can be overwritten using the custom_colors option, for example:
+
+```lua
+require("neopywal").setup({
+    -- Here's a color template for the catppuccin colorscheme:
+    custom_colors = {
+        background = "#1E1E2E",
+        foreground = "#CDD6F4",
+        cursor = "#F5E0DC",
+        color0 = "#45475A",
+        color1 = "#F38BA8",
+        color2 = "#A6E3A1",
+        color3 = "#F9E2AF",
+        color4 = "#89B4FA",
+        color5 = "#F5C2E7",
+        color6 = "#94E2D5",
+        color7 = "#BAC2DE",
+        color8 = "#585B70",
+        color9 = "#F38BA8",
+        color10 = "#A6E3A1",
+        color11 = "#F9E2AF",
+        color12 = "#89B4FA",
+        color13 = "#F5C2E7",
+        color14 = "#94E2D5",
+        color15 = "#A6ADC8",
+    },
+})
+```
+
+Highlight groups can also be overwritten using custom_highlights option, for example:
 
 ```lua
 require("neopywal").setup({
