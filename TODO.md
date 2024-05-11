@@ -1,5 +1,4 @@
 - Global variable C auto calls require("neopywal").get_colors().
-- highlights_overides table for user configuration.
 - Add support for the following plugins:
 
     - Some of catppuccin.nvim and tokyonight.nvim supportted plugins such as nvim-ufo.
