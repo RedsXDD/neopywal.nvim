@@ -188,6 +188,7 @@ Neopywal offers some configuration options for enabling or disabling highlights.
 require("neopywal").setup({
     default_fileformats = true,
     default_plugins = true,
+    custom_highlights = {},
     fileformats = {
         c_cpp = true,
         clojure = true,
@@ -265,6 +266,50 @@ require("neopywal").setup({
         },
     },
 })
+```
+
+## Customizing highlights
+
+Highlight groups can be overwritten using custom_highlights option in the setting, for example:
+
+```lua
+require("neopywal").setup({
+    custom_highlights = function (colors)
+        return {
+            Comment = { fg = colors.color3 }
+            TabLineSel = { bg = colors.color5 },
+            FloatBorder = { bg = colors.color1 },
+            Pmenu = { bg = colors.none },
+        }
+    end
+})
+```
+
+> [!Note]
+> Neopywal defines colors exactly the same way pywal does, aka with base16.
+
+Here's a table of all the possible color options that can be used:
+
+```lua
+background = Background color.
+foreground = Foreground color.
+none = Transparent color.
+color0 = Black.
+color1 = Red.
+color2 = Green.
+color3 = Yellow.
+color4 = Blue.
+color5 = Magenta.
+color6 = Cyan.
+color7 = Bright white.
+color8 = Bright black.
+color9 = Bright red.
+color10 = Bright green.
+color11 = Bright yellow.
+color12 = Bright blue.
+color13 = Bright magenta.
+color14 = Bright cyan.
+color15 = Bright white.
 ```
 
 ## Using the get_colors() function to import the colors
