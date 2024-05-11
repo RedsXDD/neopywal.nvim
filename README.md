@@ -7,7 +7,7 @@
 - Enhanced plugin support.
 - Improved coloring for a variety of file formats.
 - Ability to change default color definitions.
-- Ability for the user to set their own custom highlight group definitions.
+- Ability to change pre-defined highlight groups.
 
 ## Screenshots
 
