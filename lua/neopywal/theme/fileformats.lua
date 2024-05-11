@@ -1,14 +1,14 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local F = require("neopywal").options.fileformats
+local O = require("neopywal").options.fileformats
 
 local function apply_fileformat(option, highlights)
-	if type(F[option]) ~= "boolean" then
+	if type(O[option]) ~= "boolean" then
 		return {}
 	end
 
-	return F[option] and highlights or {}
+	return O[option] and highlights or {}
 end
 
 M.get = function(colors)

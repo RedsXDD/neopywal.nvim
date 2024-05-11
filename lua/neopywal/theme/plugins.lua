@@ -1,7 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local P = require("neopywal").options.plugins
+local O = require("neopywal").options.plugins
 
 local function apply_plugin(option, highlights)
 	local keys = {}
@@ -9,7 +9,7 @@ local function apply_plugin(option, highlights)
 		table.insert(keys, key)
 	end
 
-	local value = P
+	local value = O
 	for _, key in ipairs(keys) do
 		if type(value) == "table" and value[key] ~= nil then
 			value = value[key]
