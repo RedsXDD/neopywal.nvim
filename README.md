@@ -344,13 +344,13 @@ color14 = Bright cyan.
 color15 = Bright white.
 ```
 
-Neopywal also allows the user to set transparency for highlight groups using the `transparent` color variable, for example:
+Neopywal also allows the user to set transparency for highlight groups using either the `transparent` or the `none` color variables, for example:
 
 ```lua
 require("neopywal").setup({
     custom_highlights = function (colors)
         return {
-            Normal = { bg = colors.none },
+            Normal = { bg = colors.none }, -- bg = colors.transparent has the same effect.
         }
     end
 })
