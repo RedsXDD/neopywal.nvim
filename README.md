@@ -321,12 +321,11 @@ require("neopywal").setup({
 > [!Note]
 > Neopywal defines colors exactly the same way pywal does, aka with base16.
 
-Here's a table of all the possible color options that can be used:
+Here's a table of all the possible color options and what are their meaning.
 
 ```lua
 background = Background color.
 foreground = Foreground color.
-none = Transparent color.
 color0 = Black.
 color1 = Red.
 color2 = Green.
