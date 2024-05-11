@@ -88,7 +88,6 @@ function M.get_colors()
 	vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
 
 	return {
-		transparent = "NONE",
 		none = "NONE",
 		background = vim.g.background,
 		foreground = vim.g.foreground,
@@ -112,7 +111,11 @@ function M.get_colors()
 	}
 end
 
-local function apply_highlights(colors)
+local did_setup = false
+function M.load()
+	if not did_setup then M.setup() end
+	local colors = M.get_colors()
+
 	vim.opt.termguicolors = true
 
 	local user_highlights = M.options.custom_highlights
@@ -129,13 +132,6 @@ local function apply_highlights(colors)
 	for highlight_group, properties in pairs(theme) do
 		vim.api.nvim_set_hl(0, highlight_group, properties)
 	end
-end
-
-local did_setup = false
-function M.load()
-	if not did_setup then M.setup() end
-	local colors = M.get_colors()
-	apply_highlights(colors)
 end
 
 function M.setup(user_conf)
