@@ -419,6 +419,12 @@ color14 = Bright cyan.
 color15 = Bright white.
 ```
 
+> [!Note]
+> As April 26, 2024 Pywal is officially deprecated, so it's not recommended to use it (even tho you can).
+
+One idea to mitigate that problem would be to use a fork that's feature compatible with pywal, or that at very least exports the same color variables that are necessary for this plugin to work, my personal recommendation would be to use [pywal16](https://github.com/eylles/pywal16) by [ellyes](https://github.com/eylles), but anything works for this plugin as long as there's a file under `~/.cache/wal/colors-wal.vim` with the same contents as described above.
+
+
 ## Enjoy ⭐
 
 If you like this work you can give it a star :)
