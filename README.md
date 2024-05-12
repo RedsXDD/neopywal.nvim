@@ -334,32 +334,6 @@ require("neopywal").setup({
 })
 ```
 
-> [!Note]
-> Neopywal defines colors exactly the same way pywal does, aka with base16.
-
-Here's a table of all the possible color options and what are their meaning.
-
-```lua
-background = Background color.
-foreground = Foreground color.
-color0 = Black.
-color1 = Red.
-color2 = Green.
-color3 = Yellow.
-color4 = Blue.
-color5 = Magenta.
-color6 = Cyan.
-color7 = Bright white.
-color8 = Bright black.
-color9 = Bright red.
-color10 = Bright green.
-color11 = Bright yellow.
-color12 = Bright blue.
-color13 = Bright magenta.
-color14 = Bright cyan.
-color15 = Bright white.
-```
-
 Neopywal also allows the user to set transparency for highlight groups using either the `transparent` or the `none` color variables, for example:
 
 ```lua
@@ -426,8 +400,27 @@ let color13 = "#F5C2E7"
 let color14 = "#94E2D5"
 let color15 = "#A6ADC8"
 ```
+Here's a list with the variable names and their meaning:
 
 The theme only reads the file variables and creates a colors dictionary that can be used to generate a theme based on it's colors.
+```lua
+color0 = Black.
+color1 = Red.
+color2 = Green.
+color3 = Yellow.
+color4 = Blue.
+color5 = Magenta.
+color6 = Cyan.
+color7 = Bright white.
+color8 = Bright black.
+color9 = Bright red.
+color10 = Bright green.
+color11 = Bright yellow.
+color12 = Bright blue.
+color13 = Bright magenta.
+color14 = Bright cyan.
+color15 = Bright white.
+```
 
 ## Enjoy ⭐
 
