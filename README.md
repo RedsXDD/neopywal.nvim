@@ -371,9 +371,7 @@ return {
 
 ## How it works
 
-Pywal automatically generates a file called `colors-wal.vim` in
-`~/.cache/wal/colors-wal.vim`, the file contains all the colors that are necessary
-to make the colorscheme, it looks like this:
+Pywal automatically generates a file called `colors-wal.vim` in `~/.cache/wal/colors-wal.vim`, the file contains all the colors variables that are necessary to create a color dictionary that can be used to generate a Neovim colorscheme. The file looks like this:
 
 ```vim
 " Special
@@ -402,7 +400,6 @@ let color15 = "#A6ADC8"
 ```
 Here's a list with the variable names and their meaning:
 
-The theme only reads the file variables and creates a colors dictionary that can be used to generate a theme based on it's colors.
 ```lua
 color0 = Black.
 color1 = Red.
