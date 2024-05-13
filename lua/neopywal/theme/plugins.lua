@@ -965,14 +965,14 @@ M.get = function(colors)
 		--: }}}
 		--: mini.tabline {{{
 		apply_plugin("mini.tabline", {
-			MiniTablineCurrent = { bg = colors.color4, fg = colors.background, bold = true, italic = true },
+			MiniTablineCurrent = { bg = colors.color0, fg = colors.color4, bold = true, italic = true },
 			MiniTablineFill = { link = "TabLineFill" },
 			MiniTablineVisible = { link = "TabLine" },
 			MiniTablineHidden = { link = "MiniTablineVisible" },
-			MiniTablineModifiedCurrent = { bg = colors.color3, fg = colors.background, bold = true, italic = true },
+			MiniTablineModifiedCurrent = { bg = colors.color0, fg = colors.color3, bold = true, italic = true },
 			MiniTablineModifiedVisible = { fg = colors.color6 },
 			MiniTablineModifiedHidden = { fg = colors.color5 },
-			MiniTablineTabpagesection = { bg = colors.color4, fg = colors.background, bold = true },
+			MiniTablineTabpagesection = { bg = colors.color0, fg = colors.color4, bold = true },
 		}),
 		--: }}}
 		--: mini.cursorword {{{

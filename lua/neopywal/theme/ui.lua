@@ -57,7 +57,7 @@ M.get = function(colors)
 		StatusLineTermNC          = { link = "StatusLine" },
 		TabLine                   = { link = "Normal" },
 		TabLineFill               = { link = "TabLine" },
-		TabLineSel                = { fg = colors.color4, bold = true, italic = true },
+		TabLineSel                = { bg = colors.color0, fg = colors.color4, bold = true, italic = true },
 		VertSplit                 = { fg = colors.color7 },
 		Visual                    = { bg = colors.color5, fg = colors.background, bold = true },
 		VisualNOS                 = { link = "Visual", underline = true },
