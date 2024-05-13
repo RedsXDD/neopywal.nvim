@@ -820,9 +820,9 @@ M.get = function(colors)
 		--: folke/which-key.nvim {{{
 		apply_plugin("which_key", {
 			WhichKey = { fg = colors.color1 },
-			WhichKeyGroup = { fg = colors.color11 },
-			WhichKeyDesc = { fg = colors.color6 },
-			WhichKeySeperator = { link = "Comment" },
+			WhichKeyGroup = { fg = colors.color6 },
+			WhichKeyDesc = { fg = colors.foreground },
+			WhichKeySeperator = { fg = colors.color11 },
 			WhichKeyValue = { link = "Comment" },
 			WhichKeySeparator = { link = "Comment" },
 			WhichKeyBorder = { link = "FloatBorder" },
