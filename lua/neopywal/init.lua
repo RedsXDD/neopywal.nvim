@@ -1,6 +1,7 @@
 local M = {}
 
 local default_options = {
+	use_wallust = false,
 	default_fileformats = true,
 	default_plugins = true,
 	custom_colors = {},
@@ -86,7 +87,11 @@ local default_options = {
 M.options = default_options
 
 function M.get_colors()
-	vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
+	if M.options.use_wallust then
+		vim.cmd([[ source $HOME/.cache/wallust/colors_neopywal.vim ]])
+	else
+		vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
+	end
 
 	local user_colors = M.options.custom_colors
 	local pywal_colors = {
