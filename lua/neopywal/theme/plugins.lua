@@ -107,6 +107,7 @@ M.get = function(colors)
 			CmpItemAbbrMatchFuzzy        = { bg = colors.none, fg = colors.color5 },
 			CmpItemKind                  = { bg = colors.none, fg = colors.foreground },
 			CmpItemMenu                  = { bg = colors.none, fg = colors.color2 },
+			CmpItemKindDefault           = { bg = colors.none, fg = colors.foreground },
 			CmpItemAbbrDefault           = { bg = colors.none, fg = colors.foreground },
 			CmpItemAbbrDeprecatedDefault = { bg = colors.none, fg = colors.color8, strikethrough = true },
 			CmpItemAbbrMatchDefault      = { bg = colors.none, fg = colors.foreground },
@@ -114,7 +115,6 @@ M.get = function(colors)
 			CmpItemMenuDefault           = { bg = colors.none, fg = colors.foreground },
 
 			-- Kind support:
-			CmpItemKindDefault       = { bg = colors.none, fg = colors.foreground },
 			CmpItemKindSnippet       = { bg = colors.none, fg = colors.color5 },
 			CmpItemKindKeyword       = { bg = colors.none, fg = colors.color1 },
 			CmpItemKindText          = { bg = colors.none, fg = colors.color6 },
