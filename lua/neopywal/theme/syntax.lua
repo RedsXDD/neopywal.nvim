@@ -1,4 +1,5 @@
 local M = {}
+local O = require("neopywal").options
 
 M.get = function(colors)
 	return {
@@ -22,7 +23,7 @@ M.get = function(colors)
 		Error          = { fg = colors.color1 },
 		Label          = { fg = colors.color5 },
 		Special        = { fg = colors.color5 },
-		SpecialChar    = { fg = colors.color5 },
+		SecialChar    = { fg = colors.color5 },
 		SpecialComment = { fg = colors.color8, italic = true },
 		Substitute     = { bg = colors.color4, fg = colors.background, bold = true },
 		Variable       = { fg = colors.color4 },
@@ -30,9 +31,9 @@ M.get = function(colors)
 		String         = { fg = colors.color3 },
 		Character      = { fg = colors.color3 },
 		Number         = { fg = colors.color5 },
-		Float          = { fg = colors.color5 },
-		NormalFloat    = { bg = colors.background },
-		FloatBorder    = { bg = colors.none },
+		Float          = { bg = O.transparent and colors.none or colors.background, fg = colors.color5 },
+		NormalFloat    = { bg = O.transparent and colors.none or colors.background },
+		FloatBorder    = { bg = O.transparent and colors.none or colors.background },
 		FloatTitle     = { fg = colors.color2, bold = true, italic = true },
 		Function       = { fg = colors.color2 },
 		Operator       = { fg = colors.color1 },

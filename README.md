@@ -189,6 +189,7 @@ There is no need to call `setup` if you don't want to change the default options
 
 ```lua
 require("neopywal").setup({
+    transparent = false,
     use_wallust = false,
     default_fileformats = true, -- Setting this to false disables all file format highlights.
     default_plugins = true, -- Setting this to false disables all plugin highlights.

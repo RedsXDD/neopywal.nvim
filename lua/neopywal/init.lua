@@ -1,6 +1,7 @@
 local M = {}
 
 local default_options = {
+	transparent = false,
 	use_wallust = false,
 	default_fileformats = true,
 	default_plugins = true,
@@ -131,9 +132,9 @@ function M.load()
 	local user_highlights = M.options.custom_highlights
 	if type(user_highlights) == "function" then user_highlights = user_highlights(colors) end
 
+	require("neopywal.theme.terminal").get(colors)
 	local theme = vim.tbl_deep_extend("keep", {},
 		user_highlights,
-		require("neopywal.theme.terminal").get(colors),
 		require("neopywal.theme.ui").get(colors),
 		require("neopywal.theme.syntax").get(colors),
 		require("neopywal.theme.fileformats").get(colors),

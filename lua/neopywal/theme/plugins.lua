@@ -1,7 +1,8 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
 local M = {}
-local O = require("neopywal").options.plugins
+local O = require("neopywal").options
+local P = O.plugins
 
 local function apply_plugin(option, highlights)
 	local keys = {}
@@ -9,7 +10,7 @@ local function apply_plugin(option, highlights)
 		table.insert(keys, key)
 	end
 
-	local value = O
+	local value = P
 	for _, key in ipairs(keys) do
 		if type(value) == "table" and value[key] ~= nil then
 			value = value[key]
@@ -98,41 +99,49 @@ M.get = function(colors)
 		--: }}}
 		--: hrsh7th/nvim-cmp {{{
 		apply_plugin("nvim_cmp", {
-			CmpDocumentationBorder = { link = "FloatBorder" },
-			CmpItemAbbr = { fg = colors.foreground },
-			CmpItemAbbrDeprecated = { fg = colors.color2 },
-			CmpItemAbbrMatch = { fg = colors.color4 },
-			CmpItemAbbrMatchFuzzy = { fg = colors.color5 },
-			CmpItemKind = { fg = colors.foreground },
-			CmpItemMenu = { fg = colors.color2 },
+			CmpDocumentation             = { link = "FloatBorder" },
+			CmpDocumentationBorder       = { link = "FloatBorder" },
+			CmpItemAbbr                  = { bg = colors.none, fg = colors.foreground },
+			CmpItemAbbrDeprecated        = { bg = colors.none, fg = colors.color2, strikethrough = true },
+			CmpItemAbbrMatch             = { bg = colors.none, fg = colors.color4 },
+			CmpItemAbbrMatchFuzzy        = { bg = colors.none, fg = colors.color5 },
+			CmpItemKind                  = { bg = colors.none, fg = colors.foreground },
+			CmpItemMenu                  = { bg = colors.none, fg = colors.color2 },
+			CmpItemAbbrDefault           = { bg = colors.none, fg = colors.foreground },
+			CmpItemAbbrDeprecatedDefault = { bg = colors.none, fg = colors.color8, strikethrough = true },
+			CmpItemAbbrMatchDefault      = { bg = colors.none, fg = colors.foreground },
+			CmpItemAbbrMatchFuzzyDefault = { bg = colors.none, fg = colors.foreground },
+			CmpItemMenuDefault           = { bg = colors.none, fg = colors.foreground },
 
 			-- Kind support:
-			CmpItemKindSnippet = { fg = colors.color5 },
-			CmpItemKindKeyword = { fg = colors.color1 },
-			CmpItemKindText = { fg = colors.color6 },
-			CmpItemKindMethod = { fg = colors.color4 },
-			CmpItemKindConstructor = { fg = colors.color4 },
-			CmpItemKindFunction = { fg = colors.color4 },
-			CmpItemKindFolder = { fg = colors.color4 },
-			CmpItemKindModule = { fg = colors.color4 },
-			CmpItemKindConstant = { fg = colors.color11 },
-			CmpItemKindField = { fg = colors.color2 },
-			CmpItemKindProperty = { fg = colors.color2 },
-			CmpItemKindEnum = { fg = colors.color2 },
-			CmpItemKindUnit = { fg = colors.color2 },
-			CmpItemKindClass = { fg = colors.color3 },
-			CmpItemKindVariable = { fg = colors.color3 },
-			CmpItemKindFile = { fg = colors.color4 },
-			CmpItemKindInterface = { fg = colors.color3 },
-			CmpItemKindColor = { fg = colors.color1 },
-			CmpItemKindReference = { fg = colors.color1 },
-			CmpItemKindEnumMember = { fg = colors.color1 },
-			CmpItemKindStruct = { fg = colors.color4 },
-			CmpItemKindValue = { fg = colors.color11 },
-			CmpItemKindEvent = { fg = colors.color4 },
-			CmpItemKindOperator = { fg = colors.color4 },
-			CmpItemKindTypeParameter = { fg = colors.color4 },
-			CmpItemKindCopilot = { fg = colors.color6 },
+			CmpItemKindDefault       = { bg = colors.none, fg = colors.foreground },
+			CmpItemKindSnippet       = { bg = colors.none, fg = colors.color5 },
+			CmpItemKindKeyword       = { bg = colors.none, fg = colors.color1 },
+			CmpItemKindText          = { bg = colors.none, fg = colors.color6 },
+			CmpItemKindMethod        = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindConstructor   = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindFunction      = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindFolder        = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindModule        = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindConstant      = { bg = colors.none, fg = colors.color11 },
+			CmpItemKindField         = { bg = colors.none, fg = colors.color2 },
+			CmpItemKindProperty      = { bg = colors.none, fg = colors.color2 },
+			CmpItemKindEnum          = { bg = colors.none, fg = colors.color2 },
+			CmpItemKindUnit          = { bg = colors.none, fg = colors.color2 },
+			CmpItemKindClass         = { bg = colors.none, fg = colors.color3 },
+			CmpItemKindVariable      = { bg = colors.none, fg = colors.color3 },
+			CmpItemKindFile          = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindInterface     = { bg = colors.none, fg = colors.color3 },
+			CmpItemKindColor         = { bg = colors.none, fg = colors.color1 },
+			CmpItemKindReference     = { bg = colors.none, fg = colors.color1 },
+			CmpItemKindEnumMember    = { bg = colors.none, fg = colors.color1 },
+			CmpItemKindStruct        = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindValue         = { bg = colors.none, fg = colors.color11 },
+			CmpItemKindEvent         = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindOperator      = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindTypeParameter = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindCopilot       = { bg = colors.none, fg = colors.color6 },
+			CmpItemKindTabNine       = { bg = colors.none, fg = colors.color6 },
 		}),
 		--: }}}
 		--: neovim/nvim-lspconfig {{{
@@ -972,7 +981,7 @@ M.get = function(colors)
 			MiniTablineModifiedCurrent = { bg = colors.color0, fg = colors.color3, bold = true, italic = true },
 			MiniTablineModifiedVisible = { fg = colors.color6 },
 			MiniTablineModifiedHidden = { fg = colors.color5 },
-			MiniTablineTabpagesection = { bg = colors.color0, fg = colors.color4, bold = true },
+			MiniTablineTabpagesection = { bg = O.transparent and colors.none or colors.color0, fg = colors.color4, bold = true },
 		}),
 		--: }}}
 		--: mini.cursorword {{{
