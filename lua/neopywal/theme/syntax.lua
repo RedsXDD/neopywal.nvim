@@ -23,7 +23,7 @@ M.get = function(colors)
 		Error          = { fg = colors.color1 },
 		Label          = { fg = colors.color5 },
 		Special        = { fg = colors.color5 },
-		SecialChar    = { fg = colors.color5 },
+		SecialChar     = { fg = colors.color5 },
 		SpecialComment = { fg = colors.color8, italic = true },
 		Substitute     = { bg = colors.color4, fg = colors.background, bold = true },
 		Variable       = { fg = colors.color4 },
