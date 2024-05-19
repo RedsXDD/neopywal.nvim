@@ -1,7 +1,7 @@
 local M = {}
 
 local default_options = {
-	transparent = false,
+	transparent = true,
 	use_wallust = false,
 	default_fileformats = true,
 	default_plugins = true,
