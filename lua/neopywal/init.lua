@@ -163,8 +163,7 @@ function M.load()
 		"keep",
 		{},
 		user_highlights,
-		require("neopywal.theme.ui").get(colors),
-		require("neopywal.theme.syntax").get(colors),
+		require("neopywal.theme.editor").get(colors),
 		require("neopywal.theme.fileformats").get(colors),
 		require("neopywal.theme.plugins").get(colors),
 		{}
