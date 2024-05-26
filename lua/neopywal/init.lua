@@ -1,6 +1,7 @@
 local M = {}
 
 local default_options = {
+	dim_inactive = true,
 	transparent = true,
 	use_wallust = false,
 	default_fileformats = true,

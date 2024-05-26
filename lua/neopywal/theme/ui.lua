@@ -1,11 +1,15 @@
 local M = {}
 local O = require("neopywal").options
 
+local mix = function (color, option, factor)
+	require("neopywal").mix(color, option, factor)
+end
+
 M.get = function(colors)
 	return {
 		-- UI:
-		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground },
-		NormalNC = { link = "Normal" }, -- normal text in non-current windows.
+		Normal = { bg = O.transparent and colors.none or colors.ackground, fg = colors.foreground },
+		NormalNC = { bg = O.dim_inactive and mix(colors.background, "black", 30) or colors.background }, -- normal text in non-current windows.
 		Terminal = { link = "Normal" },
 		EndOfBuffer = { fg = colors.background },
 		Folded = { bg = colors.color0, fg = colors.foreground, bold = true },
