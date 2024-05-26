@@ -119,7 +119,7 @@ function M.get_colors()
 	end
 
 	local user_colors = M.options.custom_colors
-	local pywal_colors = {
+	return vim.tbl_deep_extend("keep", {}, user_colors, {
 		none = "NONE",
 		transparent = "NONE",
 		background = vim.g.background,
@@ -141,9 +141,7 @@ function M.get_colors()
 		color13 = vim.g.color13,
 		color14 = vim.g.color14,
 		color15 = vim.g.color15,
-	}
-
-	return vim.tbl_deep_extend("keep", {}, user_colors, pywal_colors)
+	})
 end
 
 local did_setup = false
