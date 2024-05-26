@@ -26,7 +26,7 @@ M.get = function(colors)
 		SecialChar     = { fg = colors.color5 },
 		SpecialComment = { fg = colors.color8, italic = true },
 		Substitute     = { bg = colors.color4, fg = colors.background, bold = true },
-		Variable       = { fg = colors.color4 },
+		Variable       = { fg = colors.foreground },
 		Boolean        = { fg = colors.color5 },
 		String         = { fg = colors.color3 },
 		Character      = { fg = colors.color3 },
