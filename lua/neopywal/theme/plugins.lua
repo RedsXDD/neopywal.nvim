@@ -1,7 +1,8 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
 local M = {}
-local O = require("neopywal").options
+local P = require("neopywal")
+local O = P.options
 
 local function apply_plugin(option, highlights)
 	local keys = {}
@@ -83,9 +84,9 @@ M.get = function(colors)
 			ALEErrorSign = { fg = colors.color1 },
 			ALEWarningSign = { fg = colors.color3 },
 			ALEInfoSign = { fg = colors.color4 },
-			ALEVirtualTextError = { fg = colors.color8 },
-			ALEVirtualTextWarning = { fg = colors.color8 },
-			ALEVirtualTextInfo = { fg = colors.color8 },
+			ALEVirtualTextError = { link = "DiagnosticError" },
+			ALEVirtualTextWarning = { link = "DiagnosticWarn" },
+			ALEVirtualTextInfo = { link = "DiagnosticInfo" },
 			ALEVirtualTextStyleError = { link = "ALEVirtualTextError" },
 			ALEVirtualTextStyleWarning = { link = "ALEVirtualTextWarning" },
 		}),
@@ -148,10 +149,10 @@ M.get = function(colors)
 		--: neovim/nvim-lspconfig {{{
 		apply_plugin("lspconfig", {
 			LspInlayHint = { link = "NonText" },
-			LspDiagnosticsHint = { fg = colors.color6 },
-			LspDiagnosticsInformation = { fg = colors.color7 },
-			LspDiagnosticsWarning = { fg = colors.color11 },
-			LspDiagnosticsError = { fg = colors.color1 },
+			LspDiagnosticsHint = { link = "DiagnosticHint" },
+			LspDiagnosticsInformation = { link = "DiagnosticInfo" },
+			LspDiagnosticsWarning = { link = "DiagnosticWarn" },
+			LspDiagnosticsError = { link = "DiagnosticError" },
 			LspReferenceText = { bold = true },
 			LspReferenceRead = { bold = true },
 			LspReferenceWrite = { bold = true },
@@ -162,12 +163,6 @@ M.get = function(colors)
 			LspInfoFiletype = { link = "Type" },
 			LspCodeLens = { link = "Comment" },
 			LspSignatureActiveParameter = { link = "Visual" },
-
-			DiagnosticError = { link = "LspDiagnosticsError" },
-			DiagnosticWarn = { link = "LspDiagnosticsWarning" },
-			DiagnosticInfo = { link = "LspDiagnosticsInformation" },
-			DiagnosticHint = { link = "LspDiagnosticsHint" },
-			DiagnosticUnnecessary = { link = "Comment" },
 
 			DiagnosticVirtualTextError = { link = "DiagnosticError" },
 			DiagnosticVirtualTextWarn = { link = "DiagnosticWarn" },
@@ -186,7 +181,7 @@ M.get = function(colors)
 			LazyProgressDone = { link = "Constant" },
 			LazySpecial = { link = "SpecialChar" },
 			LazyDir = { fg = colors.color11 },
-			LazyNoCond = { fg = colors.color11 },
+			LazyNoCond = { link = "DiagnosticWarn" },
 			LazyNormal = { link = "NormalFloat" },
 			LazyValue = { link = "String" },
 			LazyUrl = { fg = colors.color11 },
@@ -975,7 +970,7 @@ M.get = function(colors)
 		--: }}}
 		--: mini.tabline {{{
 		apply_plugin("mini.tabline", {
-			MiniTablineCurrent = { bg = colors.color0, fg = colors.color4, bold = true, italic = true },
+			MiniTablineCurrent = { link = "TabLineSel" },
 			MiniTablineFill = { link = "TabLineFill" },
 			MiniTablineVisible = { link = "TabLine" },
 			MiniTablineHidden = { link = "MiniTablineVisible" },
@@ -998,7 +993,7 @@ M.get = function(colors)
 		--: mini.files {{{
 		apply_plugin("mini.files", {
 			MiniFilesBorder = { link = "FloatBorder" },
-			MiniFilesBorderModified = { fg = colors.color11 },
+			MiniFilesBorderModified = { link = "DiagnosticWarn" },
 			MiniFilesCursorLine = { link = "CursorLine" },
 			MiniFilesDirectory = { link = "Directory" },
 			MiniFilesFile = {},
@@ -1018,12 +1013,12 @@ M.get = function(colors)
 		--: mini.pick {{{
 		apply_plugin("mini.pick", {
 			MiniPickBorder = { link = "FloatBorder" },
-			MiniPickBorderBusy = { fg = colors.color11 },
+			MiniPickBorderBusy = { link = "DiagnosticWarn" },
 			MiniPickBorderText = { link = "FloatTitle" },
 			MiniPickIconDirectory = { link = "Directory" },
 			MiniPickNormal = { link = "NormalFloat" },
 			MiniPickIconFile = { link = "MiniPickNormal" },
-			MiniPickHeader = { fg = colors.color6 },
+			MiniPickHeader = { link = "DiagnosticHint" },
 			MiniPickMatchCurrent = { link = "CursorLine" },
 			MiniPickMatchMarked = { link = "Visual" },
 			MiniPickMatchRanges = { fg = colors.color4 },
