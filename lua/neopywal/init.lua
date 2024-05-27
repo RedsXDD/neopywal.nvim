@@ -166,6 +166,7 @@ function M.load()
 		require("neopywal.theme.editor").get(colors),
 		require("neopywal.theme.fileformats").get(colors),
 		require("neopywal.theme.plugins").get(colors),
+		M.options.plugins.treesitter and require("neopywal.theme.treesitter").get(colors) or {},
 		{}
 	)
 
