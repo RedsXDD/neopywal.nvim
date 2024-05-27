@@ -117,33 +117,33 @@ M.get = function(colors)
 			CmpItemMenuDefault = { bg = colors.none, fg = colors.foreground },
 
 			-- Kind support:
-			CmpItemKindSnippet = { bg = colors.none, fg = colors.color5 },
-			CmpItemKindKeyword = { bg = colors.none, fg = colors.color1 },
-			CmpItemKindText = { bg = colors.none, fg = colors.color6 },
-			CmpItemKindMethod = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindConstructor = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindFunction = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindFolder = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindModule = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindConstant = { bg = colors.none, fg = colors.color11 },
-			CmpItemKindField = { bg = colors.none, fg = colors.color2 },
-			CmpItemKindProperty = { bg = colors.none, fg = colors.color2 },
-			CmpItemKindEnum = { bg = colors.none, fg = colors.color2 },
-			CmpItemKindUnit = { bg = colors.none, fg = colors.color2 },
-			CmpItemKindClass = { bg = colors.none, fg = colors.color3 },
-			CmpItemKindVariable = { bg = colors.none, fg = colors.color3 },
-			CmpItemKindFile = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindInterface = { bg = colors.none, fg = colors.color3 },
-			CmpItemKindColor = { bg = colors.none, fg = colors.color1 },
-			CmpItemKindReference = { bg = colors.none, fg = colors.color1 },
-			CmpItemKindEnumMember = { bg = colors.none, fg = colors.color1 },
-			CmpItemKindStruct = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindValue = { bg = colors.none, fg = colors.color11 },
-			CmpItemKindEvent = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindOperator = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindTypeParameter = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindKeyword = { bg = colors.none, fg = colors.color1 }, -- Link Keyword
+			CmpItemKindOperator = { bg = colors.none, fg = colors.color1 }, -- Link Operator
+			CmpItemKindEnum = { link = "CmpItemKindKeyword" },
+			CmpItemKindFunction = { bg = colors.none, fg = colors.color2 }, -- Link Function
+			CmpItemKindField = { bg = colors.none, fg = colors.color2 }, -- Link @variable.member
+			CmpItemKindProperty = { bg = colors.none, fg = colors.color2 }, -- Link @property
+			CmpItemKindMethod = { link = "CmpItemKindFunction" },
+			CmpItemKindColor = { bg = colors.none, fg = colors.color3 },
+			CmpItemKindInterface = { bg = colors.none, fg = colors.color4 },
+			CmpItemKindFolder = { bg = colors.none, fg = colors.color4 }, -- Link Directory
+			CmpItemKindVariable = { bg = colors.none, fg = colors.color4 }, -- Link Variable
+			CmpItemKindEvent = { link = "CmpItemKindVariable" },
+			CmpItemKindConstructor = { bg = colors.none, fg = colors.color5 }, -- Link Special
+			CmpItemKindModule = { bg = colors.none, fg = colors.color5 }, -- Link Include
+			CmpItemKindUnit = { bg = colors.none, fg = colors.color5 }, -- Link Number
+			CmpItemKindSnippet = { link = "CmpItemKindModule" },
+			CmpItemKindClass = { bg = colors.none, fg = colors.color6 }, -- Link StorageClass
+			CmpItemKindStruct = { bg = colors.none, fg = colors.color6 }, -- Link Structure
 			CmpItemKindCopilot = { bg = colors.none, fg = colors.color6 },
 			CmpItemKindTabNine = { bg = colors.none, fg = colors.color6 },
+			CmpItemKindTypeParameter = { bg = colors.none, fg = colors.color11 }, -- Link Identifier
+			CmpItemKindConstant = { bg = colors.none, fg = colors.color11 }, -- Link Constant
+			CmpItemKindValue = { link = "CmpItemKindConstant" },
+			CmpItemKindEnumMember = { link = "CmpItemKindConstant" },
+			CmpItemKindText = { bg = colors.none, fg = U.lighten(colors.background, 30) },
+			CmpItemKindFile = { link = "CmpItemKindText" },
+			CmpItemKindReference = { link = "CmpItemKindText" },
 		}),
 		--: }}}
 		--: neovim/nvim-lspconfig {{{
