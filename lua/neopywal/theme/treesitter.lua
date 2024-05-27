@@ -1,7 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local P = require("neopywal")
+local U = require("neopywal.util")
 
 M.get = function(colors)
 	-- Reference: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
@@ -97,7 +97,7 @@ M.get = function(colors)
 			["@markup.underline"] = { link = "Underlined" }, -- underlined text
 			["@markup.heading"] = { link = "Title" }, -- titles like: # Example
 			["@markup.math"] = { link = "Special" }, -- math environments (e.g. `$ ... $` in LaTeX)
-			["@markup.quote"] = { fg = P.mix(colors.color1, "white", 20), bold = true }, -- block quotes
+			["@markup.quote"] = { fg = U.lighten(colors.color1, 20), bold = true }, -- block quotes
 			["@markup.environment"] = { link = "Macro" }, -- text environments of markup languages
 			["@markup.environment.name"] = { link = "Type" }, -- text indicating the type of an environment
 			["@markup.link"] = { link = "Tag" }, -- text references, footnotes, citations, etc.

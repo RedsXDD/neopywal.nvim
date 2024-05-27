@@ -1,8 +1,8 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
 local M = {}
-local P = require("neopywal")
-local O = P.options
+local U = require("neopywal.util")
+local O = require("neopywal").options
 
 local function apply_plugin(option, highlights)
 	local keys = {}
@@ -813,7 +813,7 @@ M.get = function(colors)
 			MiniTablineVisible = { link = "TabLine" },
 			MiniTablineHidden = { link = "MiniTablineVisible" },
 			MiniTablineModifiedCurrent = {
-				bg = P.mix(colors.background, "white", 10),
+				bg = U.lighten(colors.background, 10),
 				fg = colors.color3,
 				bold = true,
 				italic = true,
@@ -821,7 +821,7 @@ M.get = function(colors)
 			MiniTablineModifiedVisible = { fg = colors.color6 },
 			MiniTablineModifiedHidden = { fg = colors.color5 },
 			MiniTablineTabpagesection = {
-				bg = O.transparent and colors.none or P.mix(colors.background, "white", 10),
+				bg = O.transparent and colors.none or U.lighten(colors.background, 10),
 				fg = colors.color4,
 				bold = true,
 				italic = true,

@@ -1,14 +1,14 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
 local M = {}
-local P = require("neopywal")
-local O = P.options
+local U = require("neopywal.util")
+local O = require("neopywal").options
 
 M.get = function(colors)
 	return {
 		--: Neovim {{{
 		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- normal text
-		NormalNC = { bg = O.dim_inactive and P.mix(colors.background, "black", 10) or colors.background }, -- normal text in non-current windows.
+		NormalNC = { bg = O.dim_inactive and U.darken(colors.background, 10) or colors.background }, -- normal text in non-current windows.
 		-- Terminal = { },
 		NormalFloat = { bg = O.transparent and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { bg = O.transparent and colors.none or colors.background }, -- Border used in floating windows.
@@ -20,7 +20,7 @@ M.get = function(colors)
 		ToolbarLine = { fg = colors.foreground },
 		ToolbarButton = { bg = colors.color4, fg = colors.background, bold = true },
 		VertSplit = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- the column separating vertically split windows
-		Visual = { bg = P.mix(colors.background, "white", 10), fg = colors.color5, bold = true }, -- Visual mode selection.
+		Visual = { bg = U.lighten(colors.background, 10), fg = colors.color5, bold = true }, -- Visual mode selection.
 		VisualNOS = { link = "Visual", strikethrough = true }, -- Visual mode selection when vim is "Not Owning the Selection".
 		healthError = { fg = colors.color1 },
 		healthSuccess = { fg = colors.color2 },
@@ -28,7 +28,7 @@ M.get = function(colors)
 		debugPC = { bg = colors.color2, fg = colors.color8 }, -- used for highlighting the current line in terminal-debug
 		debugBreakpoint = { bg = colors.color1, fg = colors.color8 }, -- used for breakpoint colors in terminal-debug
 		SignColumn = { bg = O.transparent and colors.none or colors.background, fg = colors.color8 }, -- column where |signs| are displayed.
-		Folded = { bg = P.mix(colors.background, "white", 10), bold = true }, -- Line used for closed folds.
+		Folded = { bg = U.lighten(colors.background, 10), bold = true }, -- Line used for closed folds.
 		FoldColumn = { link = "SignColumn" }, -- 'foldcolumn'
 		--: }}}
 		--: Cursor {{{
@@ -40,7 +40,7 @@ M.get = function(colors)
 		-- TermCursor   = { }, -- cursor in a focused terminal.
 		-- TermCursorNC = { }, -- cursor in an unfocused terminal.
 		LineNr = { link = "SignColumn" }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-		CursorLine = { bg = P.mix(colors.background, "black", 10) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+		CursorLine = { bg = U.darken(colors.background, 10) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
 		ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
 		CursorColumn = { link = "CursorLine" }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
 		CursorLineNr = { link = "CursorLine" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -67,7 +67,7 @@ M.get = function(colors)
 		WildMenu = { bg = colors.color4, fg = colors.background, bold = true }, -- Current match in 'wildmenu' completion.
 		Question = { fg = colors.color3 }, -- |hit-enter| prompt and yes/no questions
 		QuickFixLine = { fg = colors.color4, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-		MsgArea = { fg = P.mix(colors.foreground, "black", 20) }, -- Area for messages and cmdline
+		MsgArea = { fg = U.darken(colors.foreground, 20) }, -- Area for messages and cmdline
 		MsgSeparator = { link = "Normal" }, -- Separator for scrolled messages, `msgsep` flag of 'display'
 		--: }}}
 		--: Search {{{
@@ -78,10 +78,10 @@ M.get = function(colors)
 		--: Pmenu {{{
 		Pmenu = {
 			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none
-				or P.mix(colors.background, "white", 10),
+				or U.lighten(colors.background, 10),
 		}, -- Popup menu: normal item.
-		PmenuSel = { bg = P.mix(colors.background, "black", 10), bold = true, italic = true }, -- Popup menu: selected item.
-		PmenuSbar = { bg = P.mix(colors.background, "white", 20) }, -- Popup menu: scrollbar.
+		PmenuSel = { bg = U.darken(colors.background, 10), bold = true, italic = true }, -- Popup menu: selected item.
+		PmenuSbar = { bg = U.lighten(colors.background, 20) }, -- Popup menu: scrollbar.
 		PmenuThumb = { link = "PmenuSel" }, -- Popup menu: Thumb of the scrollbar.
 		--: }}}
 		--: Spell {{{
@@ -92,7 +92,7 @@ M.get = function(colors)
 		--: }}}
 		--: Statusline {{{
 		StatusLine = {
-			bg = O.transparent and colors.none or P.mix(colors.background, "white", 20),
+			bg = O.transparent and colors.none or U.lighten(colors.background, 20),
 			fg = colors.foreground,
 		}, -- status line of current window.
 		StatusLineNC = { link = "StatusLine" }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
@@ -105,7 +105,7 @@ M.get = function(colors)
 		TabLine = { link = "Normal" }, -- tab pages line, not active tab page label.
 		TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
 		TabLineSel = {
-			bg = P.mix(colors.background, "white", 10),
+			bg = U.lighten(colors.background, 10),
 			fg = colors.color4,
 			bold = true,
 			italic = true,

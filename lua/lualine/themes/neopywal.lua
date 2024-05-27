@@ -3,8 +3,8 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 
-local C = require("neopywal")
-local colors = C.get_colors()
+local U = require("neopywal.util")
+local colors = require("neopywal").get_colors()
 
 -- Fix background colors for separators on the edge of statusline.
 vim.api.nvim_set_hl(0, "StatusLine", { bg = colors.background, fg = colors.foreground })
@@ -14,8 +14,8 @@ local neopywal = {}
 neopywal.normal = {
 	a = { bg = colors.color4, fg = colors.background, gui = "bold" },
 	b = { bg = colors.foreground, fg = colors.background, gui = "bold" },
-	c = { bg = C.mix(colors.background, "white", 20), fg = colors.foreground, gui = "bold" },
-	x = { bg = C.mix(colors.background, "white", 20), fg = colors.foreground, gui = "bold" },
+	c = { bg = U.lighten(colors.background, 20), fg = colors.foreground, gui = "bold" },
+	x = { bg = U.lighten(colors.background, 20), fg = colors.foreground, gui = "bold" },
 	y = { bg = colors.foreground, fg = colors.background, gui = "bold" },
 	z = { bg = colors.color4, fg = colors.background, gui = "bold" },
 }
