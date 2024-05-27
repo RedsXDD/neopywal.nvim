@@ -800,10 +800,10 @@ M.get = function(colors)
 			MiniStatuslineModeCommand = { bg = colors.color1, fg = colors.background, bold = true },
 			MiniStatuslineModeReplace = { bg = colors.color2, fg = colors.background, bold = true },
 			MiniStatuslineModeOther = { bg = colors.color3, fg = colors.background, bold = true },
-			MiniStatuslineModeDevInfo = { link = "StatusLine", bold = true },
-			MiniStatuslineModeFilename = { link = "StatusLineNC", bold = true },
-			MiniStatuslineModeFileInfo = { link = "StatusLineNC", bold = true },
-			MiniStatuslineModeInactive = { link = "Normal", bold = true },
+			MiniStatuslineModeDevInfo = { link = "StatusLine" },
+			MiniStatuslineModeFilename = { link = "StatusLineNC" },
+			MiniStatuslineModeFileInfo = { link = "StatusLineNC" },
+			MiniStatuslineModeInactive = { link = "StatusLineNC" },
 		}),
 		--: }}}
 		--: mini.tabline {{{
@@ -812,19 +812,25 @@ M.get = function(colors)
 			MiniTablineFill = { link = "TabLineFill" },
 			MiniTablineVisible = { link = "TabLine" },
 			MiniTablineHidden = { link = "MiniTablineVisible" },
-			MiniTablineModifiedCurrent = { bg = colors.color0, fg = colors.color3, bold = true, italic = true },
+			MiniTablineModifiedCurrent = {
+				bg = P.mix(colors.background, "white", 10),
+				fg = colors.color3,
+				bold = true,
+				italic = true,
+			},
 			MiniTablineModifiedVisible = { fg = colors.color6 },
 			MiniTablineModifiedHidden = { fg = colors.color5 },
 			MiniTablineTabpagesection = {
-				bg = O.transparent and colors.none or colors.color0,
+				bg = O.transparent and colors.none or P.mix(colors.background, "white", 10),
 				fg = colors.color4,
 				bold = true,
+				italic = true,
 			},
 		}),
 		--: }}}
 		--: mini.cursorword {{{
 		apply_plugin("mini.cursorword", {
-			MiniCursorword = { bg = colors.color8, bold = true },
+			MiniCursorword = { underline = true },
 			MiniCursorwordCurrent = { link = "MiniCursorword" },
 		}),
 		--: }}}
