@@ -148,14 +148,13 @@ M.get = function(colors)
 		--: }}}
 		--: neovim/nvim-lspconfig {{{
 		apply_plugin("lspconfig", {
+			-- These groups are for the native LSP client. Some other LSP clients may
+			-- use these groups, or use their own. Consult your LSP client's documentation.
+
+			LspReferenceText = { bold = true }, -- used for highlighting "text" references
+			LspReferenceRead = { bold = true }, -- used for highlighting "read" references
+			LspReferenceWrite = { bold = true }, -- used for highlighting "write" references
 			LspInlayHint = { link = "NonText" },
-			LspDiagnosticsHint = { link = "DiagnosticHint" },
-			LspDiagnosticsInformation = { link = "DiagnosticInfo" },
-			LspDiagnosticsWarning = { link = "DiagnosticWarn" },
-			LspDiagnosticsError = { link = "DiagnosticError" },
-			LspReferenceText = { bold = true },
-			LspReferenceRead = { bold = true },
-			LspReferenceWrite = { bold = true },
 			LspInfoTitle = { link = "Title" },
 			LspInfoTip = { link = "Comment" },
 			LspInfoList = { link = "Function" },
@@ -164,15 +163,20 @@ M.get = function(colors)
 			LspCodeLens = { link = "Comment" },
 			LspSignatureActiveParameter = { link = "Visual" },
 
-			DiagnosticVirtualTextError = { link = "DiagnosticError" },
-			DiagnosticVirtualTextWarn = { link = "DiagnosticWarn" },
-			DiagnosticVirtualTextInfo = { link = "DiagnosticInfo" },
-			DiagnosticVirtualTextHint = { link = "DiagnosticHint" },
+			LspDiagnosticsHint = { link = "DiagnosticHint" },
+			LspDiagnosticsInformation = { link = "DiagnosticInfo" },
+			LspDiagnosticsWarning = { link = "DiagnosticWarn" },
+			LspDiagnosticsError = { link = "DiagnosticError" },
 
-			DiagnosticUnderlineError = { link = "DiagnosticError", undercurl = true },
-			DiagnosticUnderlineWarn = { link = "DiagnosticWarn", undercurl = true },
-			DiagnosticUnderlineInfo = { link = "DiagnosticInfo", undercurl = true },
-			DiagnosticUnderlineHint = { link = "DiagnosticHint", undercurl = true },
+			DiagnosticVirtualTextError = { bg = U.alpha(colors.color1, 0.2), fg = colors.color1 }, -- Used for "Error" diagnostic virtual text
+			DiagnosticVirtualTextWarn = { bg = U.alpha(colors.color11, 0.2), fg = colors.color11 }, -- Used for "Warning" diagnostic virtual text
+			DiagnosticVirtualTextInfo = { bg = U.alpha(colors.foreground, 0.2), fg = colors.foreground }, -- Used for "Information" diagnostic virtual text
+			DiagnosticVirtualTextHint = { bg = U.alpha(colors.color6, 0.2), fg = colors.color6 }, -- Used for "Hint" diagnostic virtual text
+
+			DiagnosticUnderlineError = { sp = colors.color1, undercurl = true }, -- Used to underline "Error" diagnostics
+			DiagnosticUnderlineWarn = { sp = colors.color11, undercurl = true }, -- Used to underline "Warning" diagnostics
+			DiagnosticUnderlineInfo = { sp = colors.foreground, undercurl = true }, -- Used to underline "Information" diagnostics
+			DiagnosticUnderlineHint = { sp = colors.color6, undercurl = true }, -- Used to underline "Hint" diagnostics
 		}),
 		--: }}}
 		--: Lazy.nvim {{{
