@@ -72,7 +72,7 @@ M.get = function(colors)
 			CocExplorerTimeAccessed = { fg = colors.color5 },
 			CocExplorerTimeCreated = { fg = colors.color5 },
 			CocExplorerTimeModified = { fg = colors.color5 },
-			CocExplorerFileRootName = { fg = colors.color11 },
+			CocExplorerFileRootName = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			CocExplorerBufferNameVisible = { fg = colors.color2 },
 		}),
 		--: }}}
@@ -137,8 +137,8 @@ M.get = function(colors)
 			CmpItemKindStruct = { bg = colors.none, fg = colors.color6 }, -- Link Structure
 			CmpItemKindCopilot = { bg = colors.none, fg = colors.color6 },
 			CmpItemKindTabNine = { bg = colors.none, fg = colors.color6 },
-			CmpItemKindTypeParameter = { bg = colors.none, fg = colors.color11 }, -- Link Identifier
-			CmpItemKindConstant = { bg = colors.none, fg = colors.color11 }, -- Link Constant
+			CmpItemKindTypeParameter = { bg = colors.none, fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Link Identifier
+			CmpItemKindConstant = { bg = colors.none, fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Link Constant
 			CmpItemKindValue = { link = "CmpItemKindConstant" },
 			CmpItemKindEnumMember = { link = "CmpItemKindConstant" },
 			CmpItemKindText = { bg = colors.none, fg = U.lighten(colors.background, 30) },
@@ -169,12 +169,12 @@ M.get = function(colors)
 			LspDiagnosticsError = { link = "DiagnosticError" },
 
 			DiagnosticVirtualTextError = { bg = U.alpha(colors.color1, 0.2), fg = colors.color1 }, -- Used for "Error" diagnostic virtual text
-			DiagnosticVirtualTextWarn = { bg = U.alpha(colors.color11, 0.2), fg = colors.color11 }, -- Used for "Warning" diagnostic virtual text
+			DiagnosticVirtualTextWarn = { bg = U.alpha(U.blend(colors.color1, colors.color3, 0.5), 0.2), fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Used for "Warning" diagnostic virtual text
 			DiagnosticVirtualTextInfo = { bg = U.alpha(colors.foreground, 0.2), fg = colors.foreground }, -- Used for "Information" diagnostic virtual text
 			DiagnosticVirtualTextHint = { bg = U.alpha(colors.color6, 0.2), fg = colors.color6 }, -- Used for "Hint" diagnostic virtual text
 
 			DiagnosticUnderlineError = { sp = colors.color1, undercurl = true }, -- Used to underline "Error" diagnostics
-			DiagnosticUnderlineWarn = { sp = colors.color11, undercurl = true }, -- Used to underline "Warning" diagnostics
+			DiagnosticUnderlineWarn = { sp = U.blend(colors.color1, colors.color3, 0.5), undercurl = true }, -- Used to underline "Warning" diagnostics
 			DiagnosticUnderlineInfo = { sp = colors.foreground, undercurl = true }, -- Used to underline "Information" diagnostics
 			DiagnosticUnderlineHint = { sp = colors.color6, undercurl = true }, -- Used to underline "Hint" diagnostics
 		}),
@@ -184,11 +184,11 @@ M.get = function(colors)
 			LazyProgressTodo = { link = "LineNr" },
 			LazyProgressDone = { link = "Constant" },
 			LazySpecial = { link = "SpecialChar" },
-			LazyDir = { fg = colors.color11 },
+			LazyDir = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			LazyNoCond = { link = "DiagnosticWarn" },
 			LazyNormal = { link = "NormalFloat" },
 			LazyValue = { link = "String" },
-			LazyUrl = { fg = colors.color11 },
+			LazyUrl = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			LazyLocal = { link = "Constant" },
 			LazyProp = { link = "Conceal" },
 			LazyDimmed = { link = "Conceal" },
@@ -226,7 +226,7 @@ M.get = function(colors)
 			NeoTreeIndentMarker = { link = "NeoTreeExpander" },
 			NeoTreeRootName = { link = "Directory" },
 			NeoTreeSymbolicLinkTarget = { fg = colors.color6 },
-			NeoTreeModified = { fg = colors.color11 },
+			NeoTreeModified = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 
 			NeoTreeGitIgnored = { link = "Comment" },
 			NeoTreeGitModified = { link = "NeoTreeModified" },
@@ -326,9 +326,9 @@ M.get = function(colors)
 			BufferLineDiagnostic = { fg = colors.color2 },
 			BufferLineDiagnosticVisible = { fg = colors.color2 },
 			BufferLineDiagnosticSelected = { fg = colors.color2, bold = true, italic = true },
-			BufferLineModified = { fg = colors.color11 },
-			BufferLineModifiedVisible = { fg = colors.color11 },
-			BufferLineModifiedSelected = { fg = colors.color11, bold = true, italic = true },
+			BufferLineModified = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			BufferLineModifiedVisible = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			BufferLineModifiedSelected = { fg = U.blend(colors.color1, colors.color3, 0.5), bold = true, italic = true },
 			BufferLinePick = { fg = colors.color7 },
 			BufferLinePickVisible = { fg = colors.color7 },
 			BufferLinePickSelected = { fg = colors.color7, bold = true, italic = true },
@@ -669,7 +669,7 @@ M.get = function(colors)
 			WhichKey = { fg = colors.color1 },
 			WhichKeyGroup = { fg = colors.color6 },
 			WhichKeyDesc = { fg = colors.foreground },
-			WhichKeySeperator = { fg = colors.color11 },
+			WhichKeySeperator = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			WhichKeyValue = { link = "Comment" },
 			WhichKeySeparator = { link = "Comment" },
 			WhichKeyBorder = { link = "FloatBorder" },
@@ -682,16 +682,16 @@ M.get = function(colors)
 			DashboardHeader = { fg = colors.color4 },
 			DashboardCenter = { fg = colors.color5 },
 			DashboardFooter = { fg = colors.color4 },
-			DashboardKey = { fg = colors.color11 },
+			DashboardKey = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			DashboardDesc = { fg = colors.color6 },
 			DashboardIcon = { fg = colors.color6, bold = true },
 		}),
 		--: }}}
 		--: goolord/alpha-nvim {{{
 		apply_plugin("alpha", {
-			AlphaShortcut = { fg = colors.color11 },
+			AlphaShortcut = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			AlphaHeader = { fg = colors.color4 },
-			AlphaHeaderLabel = { fg = colors.color11 },
+			AlphaHeaderLabel = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			AlphaFooter = { fg = colors.color4 },
 			AlphaButtons = { fg = colors.color6 },
 		}),
@@ -853,7 +853,7 @@ M.get = function(colors)
 		--: mini.hipatterns {{{
 		apply_plugin("mini.hipatterns", {
 			MiniHipatternsFixme = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
-			MiniHipatternsHack = { bg = colors.color11, fg = colors.background, bold = true, italic = true },
+			MiniHipatternsHack = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true, italic = true },
 			MiniHipatternsTodo = { link = "Todo" },
 			MiniHipatternsNote = { link = "Note" },
 		}),

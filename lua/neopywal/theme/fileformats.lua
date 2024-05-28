@@ -1,6 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
+local U = require("neopywal.util")
 local O = require("neopywal").options.fileformats
 
 local function apply_fileformat(option, highlights)
@@ -17,7 +18,7 @@ M.get = function(colors)
 		apply_fileformat("markdown", {
 			--: builtin: {{{
 			markdownH1 = { bg = colors.background, fg = colors.color1, bold = true },
-			markdownH2 = { bg = colors.background, fg = colors.color11, bold = true },
+			markdownH2 = { bg = colors.background, fg = U.blend(colors.color1, colors.color3, 0.5), bold = true },
 			markdownH3 = { bg = colors.background, fg = colors.color3, bold = true },
 			markdownH4 = { bg = colors.background, fg = colors.color2, bold = true },
 			markdownH5 = { bg = colors.background, fg = colors.color4, bold = true },
@@ -81,12 +82,12 @@ M.get = function(colors)
 			texStatement = { fg = colors.color4, italic = true },
 			texOnlyMath = { fg = colors.color8 },
 			texDefName = { fg = colors.color3 },
-			texNewCmd = { fg = colors.color11 },
+			texNewCmd = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			texCmdName = { fg = colors.color4 },
 			texBeginEnd = { fg = colors.color1 },
 			texBeginEndName = { fg = colors.color2 },
 			texDocType = { fg = colors.color1, italic = true },
-			texDocTypeArgs = { fg = colors.color11 },
+			texDocTypeArgs = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			texInputFile = { fg = colors.color2 },
 			--: }}}
 		}),
@@ -95,7 +96,7 @@ M.get = function(colors)
 		apply_fileformat("html", {
 			--: builtin: https://notabug.org/jorgesumle/vim-html-syntax{{{
 			htmlH1 = { bg = colors.background, fg = colors.color1, bold = true },
-			htmlH2 = { bg = colors.background, fg = colors.color11, bold = true },
+			htmlH2 = { bg = colors.background, fg = U.blend(colors.color1, colors.color3, 0.5), bold = true },
 			htmlH3 = { bg = colors.background, fg = colors.color3, bold = true },
 			htmlH4 = { bg = colors.background, fg = colors.color2, bold = true },
 			htmlH5 = { bg = colors.background, fg = colors.color4, bold = true },
@@ -131,7 +132,7 @@ M.get = function(colors)
 			xmlTag = { fg = colors.color2 },
 			xmlEndTag = { fg = colors.color4 },
 			xmlTagName = { fg = colors.color1, italic = true },
-			xmlEqual = { fg = colors.color11 },
+			xmlEqual = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			xmlAttrib = { fg = colors.color4 },
 			xmlEntity = { fg = colors.color1 },
 			xmlEntityPunct = { fg = colors.color1 },
@@ -151,9 +152,9 @@ M.get = function(colors)
 			cssAttrComma = { fg = colors.color8 },
 			cssBraces = { fg = colors.color8 },
 			cssTagName = { fg = colors.color5 },
-			cssClassNameDot = { fg = colors.color11 },
+			cssClassNameDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			cssClassName = { fg = colors.color1 },
-			cssFunctionName = { fg = colors.color11 },
+			cssFunctionName = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			cssAttr = { fg = colors.color2 },
 			cssCommonAttr = { fg = colors.color2 },
 			cssProp = { fg = colors.color4 },
@@ -161,10 +162,10 @@ M.get = function(colors)
 			cssPseudoClassFn = { fg = colors.color2 },
 			cssPseudoClass = { fg = colors.color3 },
 			cssImportant = { fg = colors.color1 },
-			cssSelectorOp = { fg = colors.color11 },
-			cssSelectorOp2 = { fg = colors.color11 },
+			cssSelectorOp = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			cssSelectorOp2 = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			cssColor = { fg = colors.color2 },
-			cssUnitDecorators = { fg = colors.color11 },
+			cssUnitDecorators = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			cssValueLength = { fg = colors.color2 },
 			cssValueInteger = { fg = colors.color2 },
 			cssValueNumber = { fg = colors.color2 },
@@ -179,8 +180,8 @@ M.get = function(colors)
 		--: SASS: {{{
 		apply_fileformat("sass", {
 			--: scss-syntax: https://github.com/cakebaker/scss-syntax.vim{{{
-			scssMixinName = { fg = colors.color11 },
-			scssSelectorChar = { fg = colors.color11 },
+			scssMixinName = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			scssSelectorChar = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			scssSelectorName = { fg = colors.color1 },
 			scssInterpolationDelimiter = { fg = colors.color3 },
 			scssVariableValue = { fg = colors.color2 },
@@ -188,7 +189,7 @@ M.get = function(colors)
 			scssBoolean = { fg = colors.color5 },
 			scssVariableAssignment = { fg = colors.color8 },
 			scssAttribute = { fg = colors.color2 },
-			scssFunctionName = { fg = colors.color11 },
+			scssFunctionName = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			scssVariable = { fg = colors.foreground },
 			scssAmpersand = { fg = colors.color5 },
 			--: }}}
@@ -199,14 +200,14 @@ M.get = function(colors)
 			--: vim-less: https://github.com/groenewege/vim-less{{{
 			lessMixinChar = { fg = colors.color8 },
 			lessClass = { fg = colors.color1 },
-			lessFunction = { fg = colors.color11 },
+			lessFunction = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			--: }}}
 		}),
 		--: }}}
 		--: JavaScript: {{{
 		apply_fileformat("javascript", {
 			--: builtin: http://www.fleiner.com/vim/syntax/javascript.vim{{{
-			javaScriptNull = { fg = colors.color11, italic = true },
+			javaScriptNull = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			javaScriptIdentifier = { fg = colors.color4, italic = true },
 			javaScriptParens = { fg = colors.foreground },
 			javaScriptBraces = { fg = colors.foreground },
@@ -222,11 +223,11 @@ M.get = function(colors)
 			jsBrackets = { fg = colors.foreground },
 			jsObjectBraces = { fg = colors.foreground },
 			jsThis = { fg = colors.color4, italic = true },
-			jsUndefined = { fg = colors.color11, italic = true },
-			jsNull = { fg = colors.color11, italic = true },
-			jsNan = { fg = colors.color11, italic = true },
-			jsSuper = { fg = colors.color11, italic = true },
-			jsPrototype = { fg = colors.color11, italic = true },
+			jsUndefined = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
+			jsNull = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
+			jsNan = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
+			jsSuper = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
+			jsPrototype = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			jsFunction = { fg = colors.color1 },
 			jsGlobalNodeObjects = { fg = colors.color4, italic = true },
 			jsGlobalObjects = { fg = colors.color4, italic = true },
@@ -247,7 +248,7 @@ M.get = function(colors)
 			jsBlockLabel = { fg = colors.color5 },
 			jsFunctionKey = { fg = colors.color2 },
 			jsClassDefinition = { fg = colors.color4, italic = true },
-			jsDot = { fg = colors.color11 },
+			jsDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			jsSpreadExpression = { fg = colors.color5 },
 			jsSpreadOperator = { fg = colors.color2 },
 			jsModuleKeyword = { fg = colors.color4, italic = true },
@@ -265,7 +266,7 @@ M.get = function(colors)
 			javascriptPropertyNameString = { fg = colors.foreground },
 			javascriptFuncArg = { fg = colors.foreground },
 			javascriptObjectLiteral = { fg = colors.color2 },
-			javascriptIdentifier = { fg = colors.color11, italic = true },
+			javascriptIdentifier = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			javascriptArrowFunc = { fg = colors.color1 },
 			javascriptTemplate = { fg = colors.color5 },
 			javascriptTemplateSubstitution = { fg = colors.color5 },
@@ -273,7 +274,7 @@ M.get = function(colors)
 			javascriptNodeGlobal = { fg = colors.color4, italic = true },
 			javascriptDocTags = { fg = colors.color1, italic = true },
 			javascriptDocNotation = { fg = colors.color4 },
-			javascriptClassSuper = { fg = colors.color11, italic = true },
+			javascriptClassSuper = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			javascriptClassName = { fg = colors.color4, italic = true },
 			javascriptClassSuperName = { fg = colors.color4, italic = true },
 			javascriptOperator = { fg = colors.color1 },
@@ -282,19 +283,19 @@ M.get = function(colors)
 			javascriptLabel = { fg = colors.color5 },
 			javascriptEndColons = { fg = colors.color8 },
 			javascriptObjectLabelColon = { fg = colors.color8 },
-			javascriptDotNotation = { fg = colors.color11 },
-			javascriptGlobalArrayDot = { fg = colors.color11 },
-			javascriptGlobalBigIntDot = { fg = colors.color11 },
-			javascriptGlobalDateDot = { fg = colors.color11 },
-			javascriptGlobalJSONDot = { fg = colors.color11 },
-			javascriptGlobalMathDot = { fg = colors.color11 },
-			javascriptGlobalNumberDot = { fg = colors.color11 },
-			javascriptGlobalObjectDot = { fg = colors.color11 },
-			javascriptGlobalPromiseDot = { fg = colors.color11 },
-			javascriptGlobalRegExpDot = { fg = colors.color11 },
-			javascriptGlobalStringDot = { fg = colors.color11 },
-			javascriptGlobalSymbolDot = { fg = colors.color11 },
-			javascriptGlobalURLDot = { fg = colors.color11 },
+			javascriptDotNotation = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalArrayDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalBigIntDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalDateDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalJSONDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalMathDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalNumberDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalObjectDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalPromiseDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalRegExpDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalStringDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalSymbolDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			javascriptGlobalURLDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			javascriptMethod = { fg = colors.color2 },
 			javascriptMethodName = { fg = colors.color2 },
 			javascriptObjectMethodName = { fg = colors.color2 },
@@ -440,7 +441,7 @@ M.get = function(colors)
 			typescriptClassName = { fg = colors.color4, italic = true },
 			typescriptClassHeritage = { fg = colors.color4, italic = true },
 			typescriptInterfaceHeritage = { fg = colors.color4, italic = true },
-			typescriptIdentifier = { fg = colors.color11, italic = true },
+			typescriptIdentifier = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			typescriptGlobal = { fg = colors.color4, italic = true },
 			typescriptOperator = { fg = colors.color1 },
 			typescriptNodeGlobal = { fg = colors.color4, italic = true },
@@ -455,24 +456,24 @@ M.get = function(colors)
 			typescriptExceptions = { fg = colors.color1 },
 			typescriptCastKeyword = { fg = colors.color1 },
 			typescriptOptionalMark = { fg = colors.color1 },
-			typescriptNull = { fg = colors.color11, italic = true },
+			typescriptNull = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			typescriptMappedIn = { fg = colors.color1 },
 			typescriptFuncTypeArrow = { fg = colors.color1 },
 			typescriptTernaryOp = { fg = colors.color1 },
 			typescriptParenExp = { fg = colors.foreground },
 			typescriptIndexExpr = { fg = colors.foreground },
-			typescriptDotNotation = { fg = colors.color11 },
-			typescriptGlobalNumberDot = { fg = colors.color11 },
-			typescriptGlobalStringDot = { fg = colors.color11 },
-			typescriptGlobalArrayDot = { fg = colors.color11 },
-			typescriptGlobalObjectDot = { fg = colors.color11 },
-			typescriptGlobalSymbolDot = { fg = colors.color11 },
-			typescriptGlobalMathDot = { fg = colors.color11 },
-			typescriptGlobalDateDot = { fg = colors.color11 },
-			typescriptGlobalJSONDot = { fg = colors.color11 },
-			typescriptGlobalRegExpDot = { fg = colors.color11 },
-			typescriptGlobalPromiseDot = { fg = colors.color11 },
-			typescriptGlobalURLDot = { fg = colors.color11 },
+			typescriptDotNotation = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalNumberDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalStringDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalArrayDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalObjectDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalSymbolDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalMathDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalDateDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalJSONDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalRegExpDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalPromiseDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			typescriptGlobalURLDot = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			typescriptGlobalMethod = { fg = colors.color2 },
 			typescriptDOMStorageMethod = { fg = colors.color2 },
 			typescriptFileMethod = { fg = colors.color2 },
@@ -565,7 +566,7 @@ M.get = function(colors)
 			dartTypeDef = { fg = colors.color1 },
 			dartClassDecl = { fg = colors.color1 },
 			dartLibrary = { fg = colors.color1 },
-			dartMetadata = { fg = colors.color11, italic = true },
+			dartMetadata = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			--: }}}
 		}),
 		--: }}}
@@ -585,10 +586,10 @@ M.get = function(colors)
 			cppSTLVariable = { fg = colors.color4, italic = true },
 			--: }}}
 			--: chromatica: https://github.com/arakashic/chromatica.nvim{{{
-			Member = { fg = colors.color11, italic = true },
+			Member = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			-- Variable            = { fg = colors.foreground },
 			Namespace = { fg = colors.color4, italic = true },
-			EnumConstant = { fg = colors.color11, italic = true },
+			EnumConstant = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			chromaticaException = { fg = colors.color1 },
 			chromaticaCast = { fg = colors.color1 },
 			OperatorOverload = { fg = colors.color1 },
@@ -599,9 +600,9 @@ M.get = function(colors)
 			--: vim-lsp-cxx-highlight https://github.com/jackguo380/vim-lsp-cxx-highlight{{{
 			LspCxxHlSkippedRegion = { fg = colors.color8 },
 			LspCxxHlSkippedRegionBeginEnd = { fg = colors.color1 },
-			LspCxxHlGroupEnumConstant = { fg = colors.color11, italic = true },
+			LspCxxHlGroupEnumConstant = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			LspCxxHlGroupNamespace = { fg = colors.color4, italic = true },
-			LspCxxHlGroupMemberVariable = { fg = colors.color11, italic = true },
+			LspCxxHlGroupMemberVariable = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			--: }}}
 		}),
 		--: }}}
@@ -636,35 +637,35 @@ M.get = function(colors)
 			--: builtin: {{{
 			pythonBuiltin = { fg = colors.color4, italic = true },
 			pythonExceptions = { fg = colors.color1 },
-			pythonDecoratorName = { fg = colors.color11, italic = true },
+			pythonDecoratorName = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			--: }}}
 			--: python-syntax: https://github.com/vim-python/python-syntax{{{
 			pythonExClass = { fg = colors.color4, italic = true },
 			pythonBuiltinType = { fg = colors.color4, italic = true },
-			pythonBuiltinObj = { fg = colors.color11, italic = true },
-			pythonDottedName = { fg = colors.color11, italic = true },
+			pythonBuiltinObj = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
+			pythonDottedName = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			pythonBuiltinFunc = { fg = colors.color2 },
 			pythonFunction = { fg = colors.color2 },
-			pythonDecorator = { fg = colors.color11, italic = true },
+			pythonDecorator = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			pythonInclude = { link = "Inclue" },
 			pythonImport = { link = "PreProc" },
 			pythonOperator = { fg = colors.color1 },
 			pythonConditional = { fg = colors.color1 },
 			pythonRepeat = { fg = colors.color1 },
 			pythonException = { fg = colors.color1 },
-			pythonNone = { fg = colors.color11, italic = true },
+			pythonNone = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			pythonCoding = { fg = colors.color8 },
 			pythonDot = { fg = colors.color8 },
 			--: }}}
 			--: semshi: https://github.com/numirias/semshi{{{
-			semshiUnresolved = { bg = colors.background, fg = colors.color11, undercurl = true },
+			semshiUnresolved = { bg = colors.background, fg = U.blend(colors.color1, colors.color3, 0.5), undercurl = true },
 			semshiImported = { fg = colors.color4, italic = true },
-			semshiParameter = { fg = colors.color11, italic = true },
+			semshiParameter = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			semshiParameterUnused = { fg = colors.color8 },
 			semshiSelf = { fg = colors.color4, italic = true },
 			semshiGlobal = { fg = colors.color2 },
 			semshiBuiltin = { fg = colors.color2 },
-			semshiAttribute = { fg = colors.color11, italic = true },
+			semshiAttribute = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			semshiLocal = { fg = colors.color1 },
 			semshiFree = { fg = colors.color1 },
 			semshiSelected = { link = "CocHighlightText" },
@@ -704,7 +705,7 @@ M.get = function(colors)
 			javaVarArg = { fg = colors.foreground },
 			javaAnnotation = { fg = colors.color5 },
 			javaUserLabel = { fg = colors.color5 },
-			javaTypedef = { fg = colors.color11, italic = true },
+			javaTypedef = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			javaParen = { fg = colors.foreground },
 			javaParen1 = { fg = colors.foreground },
 			javaParen2 = { fg = colors.foreground },
@@ -721,7 +722,7 @@ M.get = function(colors)
 			ktComplexInterpolation = { fg = colors.color5 },
 			ktComplexInterpolationBrace = { fg = colors.color5 },
 			ktStructure = { fg = colors.color1 },
-			ktKeyword = { fg = colors.color11, italic = true },
+			ktKeyword = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			--: }}}
 		}),
 		--: }}}
@@ -741,14 +742,14 @@ M.get = function(colors)
 		apply_fileformat("go", {
 			--: builtin: https://github.com/google/vim-ft-go{{{
 			goDirective = { fg = colors.color1 },
-			goConstants = { fg = colors.color11, italic = true },
+			goConstants = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			goDeclType = { fg = colors.color1 },
 			--: }}}
 			--: polyglot: {{{
 			goPackage = { fg = colors.color1 },
 			goImport = { fg = colors.color1 },
 			goBuiltins = { fg = colors.color2 },
-			goPredefinedIdentifiers = { fg = colors.color11, italic = true },
+			goPredefinedIdentifiers = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			goVar = { fg = colors.color1 },
 			--: }}}
 		}),
@@ -757,14 +758,14 @@ M.get = function(colors)
 		apply_fileformat("rust", {
 			--: builtin: https://github.com/rust-lang/rust.vim{{{
 			rustStructure = { fg = colors.color1 },
-			rustIdentifier = { fg = colors.color11, italic = true },
+			rustIdentifier = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			rustModPath = { fg = colors.color4, italic = true },
 			rustModPathSep = { fg = colors.color8 },
-			rustSelf = { fg = colors.color11, italic = true },
-			rustSuper = { fg = colors.color11, italic = true },
+			rustSelf = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
+			rustSuper = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			rustDeriveTrait = { fg = colors.color5 },
 			rustEnumVariant = { fg = colors.color5 },
-			rustMacroVariable = { fg = colors.color11, italic = true },
+			rustMacroVariable = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			rustAssert = { fg = colors.color2 },
 			rustPanic = { fg = colors.color2 },
 			rustPubScopeCrate = { fg = colors.color4, italic = true },
@@ -779,7 +780,7 @@ M.get = function(colors)
 			swiftInterpolatedString = { fg = colors.color5 },
 			swiftProperty = { fg = colors.foreground },
 			swiftTypeDeclaration = { fg = colors.color1 },
-			swiftClosureArgument = { fg = colors.color11, italic = true },
+			swiftClosureArgument = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			swiftStructure = { fg = colors.color1 },
 			--: }}}
 		}),
@@ -806,7 +807,7 @@ M.get = function(colors)
 			phpMethod = { fg = colors.color2 },
 			phpClass = { fg = colors.color4, italic = true },
 			phpSuperglobals = { fg = colors.color4, italic = true },
-			phpNullValue = { fg = colors.color11, italic = true },
+			phpNullValue = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			--: }}}
 		}),
 		--: }}}
@@ -830,7 +831,7 @@ M.get = function(colors)
 		apply_fileformat("haskell", {
 			--: haskell-vim: https://github.com/neovimhaskell/haskell-vim{{{
 			haskellBrackets = { fg = colors.foreground },
-			haskellIdentifier = { fg = colors.color11, italic = true },
+			haskellIdentifier = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			haskellDecl = { fg = colors.color1 },
 			haskellType = { fg = colors.color4, italic = true },
 			haskellDeclKeyword = { fg = colors.color1 },
@@ -868,7 +869,7 @@ M.get = function(colors)
 			ocamlModPath = { fg = colors.color2 },
 			ocamlFullMod = { fg = colors.color2 },
 			ocamlModule = { fg = colors.color4, italic = true },
-			ocamlConstructor = { fg = colors.color11 },
+			ocamlConstructor = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			ocamlModParam = { fg = colors.foreground },
 			ocamlModParam1 = { fg = colors.foreground },
 			ocamlAnyVar = { fg = colors.color6 },
@@ -900,7 +901,7 @@ M.get = function(colors)
 			elixirInterpolation = { fg = colors.color5 },
 			elixirInterpolationDelimiter = { fg = colors.color5 },
 			elixirSelf = { fg = colors.color4, italic = true },
-			elixirPseudoVariable = { fg = colors.color11, italic = true },
+			elixirPseudoVariable = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			elixirModuleDefine = { fg = colors.color1 },
 			elixirBlockDefinition = { fg = colors.color1 },
 			elixirDefine = { fg = colors.color1 },
@@ -926,7 +927,7 @@ M.get = function(colors)
 		apply_fileformat("common_lisp", {
 			--: builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_LISP{{{
 			lispAtomMark = { fg = colors.color5 },
-			lispKey = { fg = colors.color11 },
+			lispKey = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			lispFunc = { fg = colors.color2 },
 			--: }}}
 		}),
@@ -936,7 +937,7 @@ M.get = function(colors)
 			--: builtin: https://github.com/guns/vim-clojure-static{{{
 			clojureMacro = { fg = colors.color1 },
 			clojureFunc = { fg = colors.color2 },
-			clojureConstant = { fg = colors.color11, italic = true },
+			clojureConstant = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true },
 			clojureSpecial = { fg = colors.color1 },
 			clojureDefine = { fg = colors.color1 },
 			clojureKeyword = { fg = colors.color4 },
@@ -981,7 +982,7 @@ M.get = function(colors)
 		apply_fileformat("zsh", {
 			--: builtin: https://github.com/chrisbra/vim-zsh{{{
 			zshOption = { fg = colors.color4, italic = true },
-			zshSubst = { fg = colors.color11 },
+			zshSubst = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			zshFunction = { fg = colors.color2 },
 			--: }}}
 		}),
@@ -1012,9 +1013,9 @@ M.get = function(colors)
 			vimOption = { fg = colors.color4, italic = true },
 			vimUserAttrbKey = { fg = colors.color4, italic = true },
 			vimUserAttrb = { fg = colors.color2 },
-			vimAutoCmdSfxList = { fg = colors.color11 },
-			vimSynType = { fg = colors.color11 },
-			vimHiBang = { fg = colors.color11 },
+			vimAutoCmdSfxList = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			vimSynType = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			vimHiBang = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			vimSet = { fg = colors.color4, italic = true },
 		}),
 		--: }}}
@@ -1022,7 +1023,7 @@ M.get = function(colors)
 		apply_fileformat("makefile", {
 			makeIdent = { fg = colors.color5 },
 			makeSpecTarget = { fg = colors.color4, italic = true },
-			makeTarget = { fg = colors.color11 },
+			makeTarget = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			makeCommands = { fg = colors.color1 },
 		}),
 		--: }}}
@@ -1166,7 +1167,7 @@ M.get = function(colors)
 			diffRemoved = { fg = colors.color1 },
 			diffChanged = { fg = colors.color4 },
 			diffOldFile = { fg = colors.color3 },
-			diffNewFile = { fg = colors.color11 },
+			diffNewFile = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			diffFile = { fg = colors.color5 },
 			diffLine = { fg = colors.color8 },
 			diffIndexLine = { fg = colors.color5 },
@@ -1196,7 +1197,7 @@ M.get = function(colors)
 		apply_fileformat("help", {
 			helpNote = { fg = colors.color5, bold = true },
 			helpHeadline = { fg = colors.color1, bold = true },
-			helpHeader = { fg = colors.color11, bold = true },
+			helpHeader = { fg = U.blend(colors.color1, colors.color3, 0.5), bold = true },
 			helpURL = { fg = colors.color2, underline = true },
 			helpHyperTextEntry = { fg = colors.color4, bold = true },
 			helpHyperTextJump = { fg = colors.color4 },

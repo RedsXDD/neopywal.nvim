@@ -1,4 +1,5 @@
 local M = {}
+local U = require("neopywal.util")
 
 function M.get(colors)
 	return {
@@ -13,7 +14,7 @@ function M.get(colors)
 		terminal_color_8  = colors.color8,
 		terminal_color_9  = colors.color9,
 		terminal_color_10 = colors.color10,
-		terminal_color_11 = colors.color11,
+		terminal_color_11 = U.blend(colors.color1, colors.color3, 0.5),
 		terminal_color_12 = colors.color12,
 		terminal_color_13 = colors.color13,
 		terminal_color_14 = colors.color14,

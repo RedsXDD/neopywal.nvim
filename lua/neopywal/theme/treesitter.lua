@@ -26,7 +26,7 @@ M.get = function(colors)
 			--: }}}
 			--: Literals {{{
 			["@string"] = { link = "String" }, -- For strings.
-			["@string.documentation"] = { fg = colors.color11 }, -- For strings documenting code (e.g. Python docstrings).
+			["@string.documentation"] = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- For strings documenting code (e.g. Python docstrings).
 			["@string.regexp"] = { fg = colors.color6 }, -- For regexes.
 			["@string.escape"] = { fg = colors.color5 }, -- For escape characters within a string.
 			["@string.special"] = { link = "Special" }, -- other special strings (e.g. dates)
@@ -128,7 +128,7 @@ M.get = function(colors)
 			--: }}}
 			--: Markdown {{{
 			["@markup.heading.1.markdown"] = { fg = colors.color1 },
-			["@markup.heading.2.markdown"] = { fg = colors.color11 },
+			["@markup.heading.2.markdown"] = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			["@markup.heading.3.markdown"] = { fg = colors.color3 },
 			["@markup.heading.4.markdown"] = { fg = colors.color2 },
 			["@markup.heading.5.markdown"] = { fg = colors.color4 },
@@ -143,8 +143,8 @@ M.get = function(colors)
 			["@property.class.css"] = { fg = colors.color3 },
 			["@type.css"] = { fg = colors.color5 },
 			["@type.tag.css"] = { fg = colors.color5 },
-			["@string.plain.css"] = { fg = colors.color11 },
-			["@number.css"] = { fg = colors.color11 },
+			["@string.plain.css"] = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			["@number.css"] = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			--: }}}
 			--: Toml {{{
 			["@property.toml"] = { fg = colors.color4 }, -- Differentiates between string and properties

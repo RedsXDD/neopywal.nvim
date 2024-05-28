@@ -72,7 +72,7 @@ M.get = function(colors)
 		--: }}}
 		--: Search {{{
 		Search = { bg = colors.color2, fg = colors.background, bold = true }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
-		IncSearch = { bg = colors.color11, fg = colors.background, bold = true }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+		IncSearch = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 		Substitute = { bg = colors.color4, fg = colors.background, bold = true }, -- |:substitute| replacement text highlighting
 		--: }}}
 		--: Pmenu {{{
@@ -120,13 +120,13 @@ M.get = function(colors)
 		]]
 		--: Variable types {{{
 		Variable = { fg = colors.color4 }, -- (preferred) any variable.
-		Constant = { fg = colors.color11, italic = true }, -- (preferred) any constant
+		Constant = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true }, -- (preferred) any constant
 		String = { fg = colors.color3 }, -- a string constant: "this is a string"
 		Character = { fg = colors.color3 }, -- a character constant: 'c', '\n'
 		Number = { fg = colors.color5 }, -- a number constant: 234, 0xff
 		Boolean = { fg = colors.color5 }, -- a boolean constant: TRUE, FALSE
 		Float = { fg = colors.color5 }, -- a floating point constant: 2.3e10
-		Identifier = { fg = colors.color11, italic = true }, -- (preferred) any variable name
+		Identifier = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true }, -- (preferred) any variable name
 		Function = { fg = colors.color2 }, -- function name (also: methods for classes)
 		--: }}}
 		--: Statements {{{
@@ -155,7 +155,7 @@ M.get = function(colors)
 		--: Special {{{
 		Special = { fg = colors.color5 }, -- (preferred) any special symbol
 		SecialChar = { fg = colors.color5 }, -- special character in a constant
-		Tag = { fg = colors.color11 }, -- you can use CTRL-] on this
+		Tag = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- you can use CTRL-] on this
 		Delimiter = { fg = colors.foreground }, -- character that needs attention
 		SpecialComment = { fg = colors.color8, italic = true }, -- special things inside a comment
 		--: }}}
@@ -171,12 +171,12 @@ M.get = function(colors)
 		Todo = { bg = colors.color4, fg = colors.background, bold = true, italic = true }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 		Note = { bg = colors.foreground, fg = colors.background, bold = true, italic = true },
 		Hint = { bg = colors.color6, fg = colors.background, bold = true, italic = true },
-		Warn = { bg = colors.color11, fg = colors.background, bold = true, italic = true },
+		Warn = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true, italic = true },
 		Err = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
 		--: }}}
 		--: Diagnostics {{{
 		DiagnosticError = { fg = colors.color1 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticWarn = { fg = colors.color11 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticWarn = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticInfo = { fg = colors.foreground }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticHint = { fg = colors.color6 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticUnnecessary = { fg = colors.color8 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
