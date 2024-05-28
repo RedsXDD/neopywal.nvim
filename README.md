@@ -189,12 +189,31 @@ There is no need to call `setup` if you don't want to change the default options
 
 ```lua
 require("neopywal").setup({
-    transparent = false,
+    -- Used a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
+    -- pywal template at `~/.cache/wal/colors-wal.vim`
     use_wallust = false,
-    default_fileformats = true, -- Setting this to false disables all file format highlights.
-    default_plugins = true, -- Setting this to false disables all plugin highlights.
+
+    -- Sets the background color of certain highlight groups to be transparent.
+    -- Useful specially when running Neovim on the Alacritty terminal with a terminal opacity < 1.
+    transparent = false,
+
+    -- With this option you can overwrite all the base colors the colorscheme uses.
     custom_colors = {},
+
+    -- With this option you can overwrite any and all highlight groups set by the colorscheme.
     custom_highlights = {},
+
+    -- Dims the background when another window is focused.
+    dim_inactive = true,
+
+    -- Setting this to false disables all default file format highlights.
+    -- Useful if you want to enable specific file format options.
+    default_fileformats = true,
+
+    -- Setting this to false disables all default plugin highlights.
+    -- Useful if you want to enable specific plugin options.
+    default_plugins = true,
+
     fileformats = {
         c_cpp = true,
         clojure = true,
@@ -243,6 +262,7 @@ require("neopywal").setup({
         yaml = true,
         zsh = true,
     },
+
     plugins = {
         ale = true,
         alpha = true,
@@ -317,7 +337,7 @@ require("neopywal").setup({
 })
 ```
 
-Custom color variables are gonna be automatically exported with the `get_colors()` function and can used normally just like any other color variable.
+Custom color variables are gonna be automatically exported with the `get_colors()` function and can used normally when using the `get_colors()` function or when defining custom highlight groups.
 
 ## Customizing highlight groups.
 
@@ -325,7 +345,7 @@ Highlight groups can be overwritten using `custom_highlights` option, for exampl
 
 ```lua
 require("neopywal").setup({
-    custom_highlights = function (colors)
+    custom_highlights = function(colors)
         return {
             Comment = { fg = colors.color3 }
             TabLineSel = { bg = colors.color5 },
@@ -342,7 +362,7 @@ Neopywal also allows the user to set transparency for highlight groups using eit
 require("neopywal").setup({
     custom_highlights = function (colors)
         return {
-            Normal = { bg = colors.none }, -- bg = colors.transparent has the same effect.
+            Normal = { bg = colors.none }, -- `bg = colors.transparent` has the same effect.
         }
     end
 })
@@ -350,16 +370,17 @@ require("neopywal").setup({
 
 This would assign the background property for the `Normal` highlight group the `none` color variable, essentially making the Neovim background transparent.
 
-## Using the get_colors() function to import the colors
+## Importing colors
 
-If you want to import the colors into a lua dictionary:
+You can use the function `get_colors()` if you want to import the colors into a lua dictionary:
 
 ```lua
 local colors = require("neopywal").get_colors()
 ```
 
 Then you can apply the colors in a way similar to the one found in `custom_highlights = {}`
-E.g:
+
+### Example
 
 ```lua
 local colors = require("neopywal").get_colors()
@@ -370,6 +391,53 @@ return {
     color_var3 = { colors.color3 }
 }
 ```
+
+## Improving imported colors
+
+There's a neat set of functions inside `util.lua`, such as:
+
+```lua
+require("neopywal.util").darken(color, factor)
+require("neopywal.util").lighten(color, factor)
+require("neopywal.util").blend(color1, color2, factor)
+```
+
+The `darken()` and `lighten()` functions are able to create new colors by darkening/lightening existing colors. Both functions take two parameters, the first one is the color you want to modify, the second is an integer that defines how much each color will be darken/lighten.
+
+### Example
+
+```lua
+local colors = require("neopywal").get_colors()
+local U = require("neopywal.util")
+
+color_var1 = { U.lighten(colors.color1, 30) }
+color_var2 = { U.darken(colors.color2, 30) }
+```
+
+The `blend()` function combines two colors to create a new color that is a mixture of the two input colors. The function takes three parameters:
+
+* The first two parameters define the colors to be blended.
+* The third `factor` parameter is a number between 0 and 1 that determines the proportion of each color in the final output.
+
+### Example
+
+In this example:
+
+* `color_var1` will be identical to `colors.color1`.
+* `color_var2` will be identical to `colors.color3`.
+* `color_var3` will be a 50/50 mix of `colors.color1` and `colors.color3`.
+
+```lua
+local colors = require("neopywal").get_colors()
+local U = require("neopywal.util")
+
+color_var1 = { U.darken(colors.color1, colors.color3, 0) }
+color_var2 = { U.darken(colors.color1, colors.color3, 1) }
+color_var3 = { U.blend(colors.color1, colors.color3, 0.5) }
+```
+
+> [!Note]
+> All color parameters on util.lua functions have to be in hexadecimal format.
 
 ## How it works
 
@@ -443,6 +511,7 @@ Here are the contents that should be copied of to them:
 let background = "{{background}}"
 let foreground = "{{foreground}}"
 let cursor     = "{{cursor}}"
+
 let color0  = "{{color0}}"
 let color1  = "{{color1}}"
 let color2  = "{{color2}}"
