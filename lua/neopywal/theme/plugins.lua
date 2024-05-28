@@ -168,10 +168,22 @@ M.get = function(colors)
 			LspDiagnosticsWarning = { link = "DiagnosticWarn" },
 			LspDiagnosticsError = { link = "DiagnosticError" },
 
-			DiagnosticVirtualTextError = { bg = U.alpha(colors.color1, 0.2), fg = colors.color1 }, -- Used for "Error" diagnostic virtual text
-			DiagnosticVirtualTextWarn = { bg = U.alpha(U.blend(colors.color1, colors.color3, 0.5), 0.2), fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Used for "Warning" diagnostic virtual text
-			DiagnosticVirtualTextInfo = { bg = U.alpha(colors.foreground, 0.2), fg = colors.foreground }, -- Used for "Information" diagnostic virtual text
-			DiagnosticVirtualTextHint = { bg = U.alpha(colors.color6, 0.2), fg = colors.color6 }, -- Used for "Hint" diagnostic virtual text
+			DiagnosticVirtualTextError = {
+				bg = U.blend(colors.color1, colors.background, 0.2),
+				fg = colors.color1,
+			}, -- Used for "Error" diagnostic virtual text
+			DiagnosticVirtualTextWarn = {
+				bg = U.blend(U.blend(colors.color1, colors.color3, 0.5), colors.background, 0.2),
+				fg = U.blend(colors.color1, colors.color3, 0.5),
+			}, -- Used for "Warning" diagnostic virtual text
+			DiagnosticVirtualTextInfo = {
+				bg = U.blend(colors.foreground, colors.background, 0.2),
+				fg = colors.foreground,
+			}, -- Used for "Information" diagnostic virtual text
+			DiagnosticVirtualTextHint = {
+				bg = U.blend(colors.color6, colors.background, 0.2),
+				fg = colors.color6,
+			}, -- Used for "Hint" diagnostic virtual text
 
 			DiagnosticUnderlineError = { sp = colors.color1, undercurl = true }, -- Used to underline "Error" diagnostics
 			DiagnosticUnderlineWarn = { sp = U.blend(colors.color1, colors.color3, 0.5), undercurl = true }, -- Used to underline "Warning" diagnostics
@@ -853,7 +865,12 @@ M.get = function(colors)
 		--: mini.hipatterns {{{
 		apply_plugin("mini.hipatterns", {
 			MiniHipatternsFixme = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
-			MiniHipatternsHack = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true, italic = true },
+			MiniHipatternsHack = {
+				bg = U.blend(colors.color1, colors.color3, 0.5),
+				fg = colors.background,
+				bold = true,
+				italic = true,
+			},
 			MiniHipatternsTodo = { link = "Todo" },
 			MiniHipatternsNote = { link = "Note" },
 		}),

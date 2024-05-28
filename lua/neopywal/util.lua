@@ -1,5 +1,4 @@
 local M = {}
-local colors = require("neopywal").get_colors()
 
 -- Function to ensure a color value is within the valid range
 local function ensureColor(color)
@@ -55,7 +54,6 @@ function M.blend(color1, color2, factor)
 	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
-
 -- Function to darken a color by a specified factor
 function M.darken(color, factor)
 	local rgb_color = hexToRgb(color)
@@ -80,11 +78,6 @@ function M.lighten(color, factor)
 
 	-- Convert the lightened RGB color back to hexadecimal and return it
 	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
-end
-
--- Function to set the alpha channel of a color
-function M.alpha(color, alpha)
-	return M.blend(color, colors.background, alpha)
 end
 
 return M
