@@ -8,7 +8,7 @@ M.get = function(colors)
 	return {
 		--: Neovim {{{
 		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- normal text
-		NormalNC = { bg = O.dim_inactive and U.darken(colors.background, 10) or colors.background }, -- normal text in non-current windows.
+		NormalNC = { bg = O.dim_inactive and U.darken(colors.background, 5) or colors.background }, -- normal text in non-current windows.
 		-- Terminal = { },
 		NormalFloat = { bg = O.transparent and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { bg = O.transparent and colors.none or colors.background }, -- Border used in floating windows.
@@ -27,7 +27,10 @@ M.get = function(colors)
 		healthWarning = { fg = colors.color3 },
 		debugPC = { bg = colors.color2, fg = colors.color8 }, -- used for highlighting the current line in terminal-debug
 		debugBreakpoint = { bg = colors.color1, fg = colors.color8 }, -- used for breakpoint colors in terminal-debug
-		SignColumn = { bg = O.transparent and colors.none or colors.background, fg = colors.color8 }, -- column where |signs| are displayed.
+		SignColumn = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			fg = colors.color8,
+		}, -- column where |signs| are displayed.
 		Folded = { bg = U.lighten(colors.background, 10), bold = true }, -- Line used for closed folds.
 		FoldColumn = { link = "SignColumn" }, -- 'foldcolumn'
 		--: }}}
@@ -40,7 +43,7 @@ M.get = function(colors)
 		-- TermCursor   = { }, -- cursor in a focused terminal.
 		-- TermCursorNC = { }, -- cursor in an unfocused terminal.
 		LineNr = { link = "SignColumn" }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-		CursorLine = { bg = U.darken(colors.background, 10) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+		CursorLine = { bg = U.lighten(colors.background, 20) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
 		ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
 		CursorColumn = { link = "CursorLine" }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
 		CursorLineNr = { link = "CursorLine" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -101,10 +104,12 @@ M.get = function(colors)
 		--: Tabline {{{
 		WinBar = { link = "StatusLine" }, -- window bar
 		WinBarNC = { link = "StatusLineNC" }, -- window bar in inactive windows
-		TabLine = { link = "Normal" }, -- tab pages line, not active tab page label.
-		TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
+		TabLine = { link = "TabLineFill" }, -- tab pages line, not active tab page label.
+		TabLineFill = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 8),
+		}, -- tab pages line, where there are no labels.
 		TabLineSel = {
-			bg = U.lighten(colors.background, 10),
+			bg = colors.background,
 			fg = colors.color4,
 			bold = true,
 			italic = true,
