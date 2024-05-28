@@ -120,7 +120,7 @@ M.get = function(colors)
 		]]
 		--: Variable types {{{
 		Variable = { fg = colors.color4 }, -- (preferred) any variable.
-		Constant = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true }, -- (preferred) any constant
+		Constant = { fg = colors.color3, italic = true }, -- (preferred) any constant
 		String = { fg = colors.color3 }, -- a string constant: "this is a string"
 		Character = { fg = colors.color3 }, -- a character constant: 'c', '\n'
 		Number = { fg = colors.color5 }, -- a number constant: 234, 0xff
