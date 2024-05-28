@@ -1,7 +1,29 @@
 local M = {}
 
+-- Function to ensure a color value is within the valid range
+local function ensureColor(color)
+	local result = color
+
+	-- Ensure the blended value is not less than 0
+	-- This prevents the color from being too dark
+	result = math.max(0, result)
+
+	-- Ensure the blended value is not more than 255
+	-- This prevents the color from being too bright
+	result = math.min(result, 255)
+
+	-- Round the blended value to the nearest integer
+	-- This ensures the color value is a whole number
+	result = math.floor(result + 0.5)
+
+	return result
+end
+
 -- Function to convert a hexadecimal color code to RGB values
 local function hexToRgb(hex_color)
+	-- Convert the hex color code to lowercase
+	hex_color = string.lower(hex_color)
+
 	-- Use pattern matching to extract the red, green, and blue components from the hex color code
 	local r, g, b = hex_color:match("#(%x%x)(%x%x)(%x%x)")
 
@@ -18,14 +40,14 @@ function M.darken(color, factor)
 	-- Convert the input color from hexadecimal to RGB
 	local rgb_color = hexToRgb(color)
 
-	-- Subtract the factor from each component of the RGB color, but don't go below 0
-	-- math.min ensures that the result is not less than 0, and not more than 255
-	rgb_color[1] = math.min(rgb_color[1] - factor, 255)
-	rgb_color[2] = math.min(rgb_color[2] - factor, 255)
-	rgb_color[3] = math.min(rgb_color[3] - factor, 255)
+	-- Function to blend a single channel of each color.
+	local blendChannel = function(index)
+		local blend = (rgb_color[index] - factor) -- Subtract the factor from each component of the RGB color
+		return ensureColor(blend)
+	end
 
 	-- Convert the darkened RGB color back to hexadecimal and return it
-	return string.format("#%02x%02x%02x", rgb_color[1], rgb_color[2], rgb_color[3])
+	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
 -- Function to lighten a color by a specified factor
@@ -33,14 +55,14 @@ function M.lighten(color, factor)
 	-- Convert the input color from hexadecimal to RGB
 	local rgb_color = hexToRgb(color)
 
-	-- Add the factor to each component of the RGB color, but don't go above 255
-	-- math.min ensures that the result is not more than 255
-	rgb_color[1] = math.min(rgb_color[1] + factor, 255)
-	rgb_color[2] = math.min(rgb_color[2] + factor, 255)
-	rgb_color[3] = math.min(rgb_color[3] + factor, 255)
+	-- Function to blend a single channel of each color.
+	local blendChannel = function(index)
+		local blend = (rgb_color[index] + factor) -- Add the factor from each component of the RGB color
+		return ensureColor(blend)
+	end
 
 	-- Convert the lightened RGB color back to hexadecimal and return it
-	return string.format("#%02x%02x%02x", rgb_color[1], rgb_color[2], rgb_color[3])
+	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
 -- Function to set the alpha channel of a color
@@ -53,20 +75,16 @@ function M.alpha(color, alpha)
 	local rgb_color = hexToRgb(color)
 
 	-- Create a helper color, which is black (RGB: 0, 0, 0)
-	local helper_color = hexToRgb("#000000")
+	local colors = require("neopywal").get_colors()
+	local helper_color = hexToRgb(colors.background)
 
 	-- Function to blend a single channel of each color.
 	local blendChannel = function(index)
 		local blend = (alpha * rgb_color[index] + ((1 - alpha) * helper_color[index]))
-
-		blend = math.max(0, blend) -- Ensure the blended value is not less than 0
-		blend = math.min(blend, 255) -- Ensure the blended value is not more than 255
-		blend = math.floor(blend + 0.5) -- Round the blended value to the nearest integer
-
-		return blend
+		return ensureColor(blend)
 	end
 
-	-- Use the blendChannel() to blend each channel of the color, and return the result as a hexadecimal string
+	-- Convert the generated RGB color back to hexadecimal and return it
 	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
