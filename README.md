@@ -194,7 +194,7 @@ require("neopywal").setup({
     use_wallust = false,
 
     -- Sets the background color of certain highlight groups to be transparent.
-    -- Useful specially when running Neovim on the Alacritty terminal with a terminal opacity < 1.
+    -- Use this when your terminal opacity is < 1.
     transparent = false,
 
     -- With this option you can overwrite all the base colors the colorscheme uses.
