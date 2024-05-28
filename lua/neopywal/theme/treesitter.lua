@@ -176,9 +176,9 @@ M.get = function(colors)
 			["@function.method.call.php"] = { link = "Function" },
 			--: }}}
 			--: C/CPP {{{
-			["@type.builtin.c"] = { fg = colors.color3 },
+			["@type.builtin.c"] = { link = "Identifier" }, -- int, float, char, etc.
+			["@type.builtin.cpp"] = { link = "Identifier" }, -- int, float, char, etc.
 			["@property.cpp"] = { fg = colors.foreground },
-			["@type.builtin.cpp"] = { fg = colors.color3 },
 			--: }}}
 			--: Gitcommit {{{
 			["@comment.warning.gitcommit"] = { fg = colors.color3 },
