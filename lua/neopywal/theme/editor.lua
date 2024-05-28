@@ -180,11 +180,26 @@ M.get = function(colors)
 		Err = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
 		--: }}}
 		--: Diagnostics {{{
-		DiagnosticError = { fg = colors.color1 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticWarn = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticInfo = { fg = colors.foreground }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticHint = { fg = colors.color6 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-		DiagnosticUnnecessary = { fg = colors.color8 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticError = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			fg = colors.color1,
+		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticWarn = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			fg = U.blend(colors.color1, colors.color3, 0.5),
+		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticInfo = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			fg = colors.foreground,
+		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticHint = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			fg = colors.color6,
+		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
+		DiagnosticUnnecessary = {
+			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			fg = colors.color8,
+		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		--: }}}
 		--: }}}
 	}
