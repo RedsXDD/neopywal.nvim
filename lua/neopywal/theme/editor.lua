@@ -77,8 +77,7 @@ M.get = function(colors)
 		--: }}}
 		--: Pmenu {{{
 		Pmenu = {
-			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none
-				or U.lighten(colors.background, 10),
+			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none or U.lighten(colors.background, 10),
 		}, -- Popup menu: normal item.
 		PmenuSel = { bg = U.darken(colors.background, 10), bold = true, italic = true }, -- Popup menu: selected item.
 		PmenuSbar = { bg = U.lighten(colors.background, 20) }, -- Popup menu: scrollbar.
