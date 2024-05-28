@@ -36,6 +36,26 @@ local function hexToRgb(hex_color)
 	}
 end
 
+-- This function blends two colors together based on a given factor.
+-- The factor can be a number between 0 and 1, or a hexadecimal color code.
+function M.blend(color1, color2, factor)
+	-- If the factor is a string, it's assumed to be a hexadecimal color code.
+	-- We convert it to a number and divide it by 255 to get a value between 0 and 1.
+	factor = type(factor) == "string" and (tonumber(factor, 16) / 0xff) or factor
+
+	local rgb_color1 = hexToRgb(color1)
+	local rgb_color2 = hexToRgb(color2)
+
+	local blendChannel = function(i)
+		local result = (factor * rgb_color1[i] + ((1 - factor) * rgb_color2[i]))
+		return ensureColor(result)
+	end
+
+	-- Convert the generated RGB color back to hexadecimal and return it
+	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
+end
+
+
 -- Function to darken a color by a specified factor
 function M.darken(color, factor)
 	local rgb_color = hexToRgb(color)
@@ -64,39 +84,7 @@ end
 
 -- Function to set the alpha channel of a color
 function M.alpha(color, alpha)
-	-- If alpha is a string, convert it from hexadecimal to a decimal value between 0 and 1
-	-- Otherwise, assume alpha is already a decimal value
-	alpha = type(alpha) == "string" and (tonumber(alpha, 16) / 0xff) or alpha
-
-	local rgb_color = hexToRgb(color)
-	local helper_color = hexToRgb(colors.background)
-
-	local blendChannel = function(index)
-		local blend = (alpha * rgb_color[index] + ((1 - alpha) * helper_color[index]))
-		return ensureColor(blend)
-	end
-
-	-- Convert the generated RGB color back to hexadecimal and return it
-	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
-end
-
--- This function blends two colors together based on a given factor.
--- The factor can be a number between 0 and 1, or a hexadecimal color code.
-function M.blend(color1, color2, factor)
-	-- If the factor is a string, it's assumed to be a hexadecimal color code.
-	-- We convert it to a number and divide it by 255 to get a value between 0 and 1.
-	factor = type(factor) == "string" and (tonumber(factor, 16) / 0xff) or factor
-
-	local rgb_color1 = hexToRgb(color1)
-	local rgb_color2 = hexToRgb(color2)
-
-	local blendChannel = function(i)
-		local result = (factor * rgb_color1[i] + ((1 - factor) * rgb_color2[i]))
-		return ensureColor(result)
-	end
-
-	-- Convert the generated RGB color back to hexadecimal and return it
-	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
+	return M.blend(color, colors.background, alpha)
 end
 
 return M
