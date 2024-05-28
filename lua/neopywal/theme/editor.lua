@@ -8,7 +8,11 @@ M.get = function(colors)
 	return {
 		--: Neovim {{{
 		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- normal text
-		NormalNC = { bg = O.dim_inactive and U.darken(colors.background, 5) or colors.background }, -- normal text in non-current windows.
+		NormalNC = {
+			bg = O.transparent and colors.none
+				or O.dim_inactive and U.darken(colors.background, 5)
+				or colors.background,
+		}, -- normal text in non-current windows.
 		-- Terminal = { },
 		NormalFloat = { bg = O.transparent and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { bg = O.transparent and colors.none or colors.background }, -- Border used in floating windows.
