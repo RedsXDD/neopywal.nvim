@@ -24,8 +24,8 @@ M.get = function(colors)
 		ToolbarLine = { fg = colors.foreground },
 		ToolbarButton = { bg = colors.color4, fg = colors.background, bold = true },
 		VertSplit = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- the column separating vertically split windows
-		Visual = { bg = U.lighten(colors.background, 10), fg = colors.color5, bold = true }, -- Visual mode selection.
-		VisualNOS = { link = "Visual", strikethrough = true }, -- Visual mode selection when vim is "Not Owning the Selection".
+		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true }, -- Visual mode selection.
+		VisualNOS = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true, strikethrough = true }, -- Visual mode selection when vim is "Not Owning the Selection".
 		healthError = { fg = colors.color1 },
 		healthSuccess = { fg = colors.color2 },
 		healthWarning = { fg = colors.color3 },
