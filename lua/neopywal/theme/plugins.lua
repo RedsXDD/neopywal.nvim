@@ -171,18 +171,22 @@ M.get = function(colors)
 			DiagnosticVirtualTextError = {
 				bg = U.blend(colors.color1, colors.background, 0.2),
 				fg = colors.color1,
+				bold = true,
 			}, -- Used for "Error" diagnostic virtual text
 			DiagnosticVirtualTextWarn = {
 				bg = U.blend(U.blend(colors.color1, colors.color3, 0.5), colors.background, 0.2),
 				fg = U.blend(colors.color1, colors.color3, 0.5),
+				bold = true,
 			}, -- Used for "Warning" diagnostic virtual text
 			DiagnosticVirtualTextInfo = {
 				bg = U.blend(colors.foreground, colors.background, 0.2),
 				fg = colors.foreground,
+				bold = true,
 			}, -- Used for "Information" diagnostic virtual text
 			DiagnosticVirtualTextHint = {
 				bg = U.blend(colors.color6, colors.background, 0.2),
 				fg = colors.color6,
+				bold = true,
 			}, -- Used for "Hint" diagnostic virtual text
 
 			DiagnosticUnderlineError = { sp = colors.color1, undercurl = true }, -- Used to underline "Error" diagnostics
