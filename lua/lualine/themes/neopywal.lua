@@ -13,11 +13,13 @@ local neopywal = {}
 
 neopywal.normal = {
 	a = { bg = colors.color4, fg = colors.background, gui = "bold" },
-	b = { bg = colors.foreground, fg = colors.background, gui = "bold" },
-	c = { bg = U.lighten(colors.background, 20), fg = colors.foreground, gui = "bold" },
-	x = { bg = U.lighten(colors.background, 20), fg = colors.foreground, gui = "bold" },
-	y = { bg = colors.foreground, fg = colors.background, gui = "bold" },
 	z = { bg = colors.color4, fg = colors.background, gui = "bold" },
+
+	b = { bg = U.blend(colors.color8, colors.background, 0.5), fg = colors.foreground, gui = "bold" },
+	y = { bg = U.blend(colors.color8, colors.background, 0.5), fg = colors.foreground, gui = "bold" },
+
+	c = { bg = U.blend(colors.color8, colors.background, 0.3), fg = colors.foreground, gui = "bold" },
+	x = { bg = U.blend(colors.color8, colors.background, 0.3), fg = colors.foreground, gui = "bold" },
 }
 
 neopywal.visual = {
