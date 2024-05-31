@@ -113,7 +113,7 @@ M.get = function(colors)
 			bg = O.transparent and colors.none or U.darken(colors.background, 8),
 		}, -- tab pages line, where there are no labels.
 		TabLineSel = {
-			bg = colors.background,
+			bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
 			fg = colors.color4,
 			bold = true,
 			italic = true,
