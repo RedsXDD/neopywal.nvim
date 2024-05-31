@@ -25,7 +25,12 @@ M.get = function(colors)
 		ToolbarButton = { bg = colors.color4, fg = colors.background, bold = true },
 		VertSplit = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- the column separating vertically split windows
 		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true }, -- Visual mode selection.
-		VisualNOS = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true, strikethrough = true }, -- Visual mode selection when vim is "Not Owning the Selection".
+		VisualNOS = {
+			bg = U.blend(colors.color5, colors.background, 0.2),
+			fg = colors.color5,
+			bold = true,
+			strikethrough = true,
+		}, -- Visual mode selection when vim is "Not Owning the Selection".
 		healthError = { fg = colors.color1 },
 		healthSuccess = { fg = colors.color2 },
 		healthWarning = { fg = colors.color3 },
@@ -182,6 +187,15 @@ M.get = function(colors)
 		Hint = { bg = colors.color6, fg = colors.background, bold = true, italic = true },
 		Warn = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true, italic = true },
 		Err = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
+		URLlink = { fg = colors.color4, italic = true, underline = true },
+
+		-- Rainbow
+		rainbow1 = { fg = colors.color1 },
+		rainbow2 = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+		rainbow3 = { fg = colors.color3 },
+		rainbow4 = { fg = colors.color2 },
+		rainbow5 = { fg = colors.color4 },
+		rainbow6 = { fg = colors.color5 },
 		--: }}}
 		--: Diagnostics {{{
 		DiagnosticError = {
