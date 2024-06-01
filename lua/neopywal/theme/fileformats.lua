@@ -33,11 +33,11 @@ M.get = function(colors)
 			markdownCode = { link = "Function" },
 			markdownCodeBlock = { link = "Function" },
 			markdownCodeDelimiter = { link = "Delimiter" },
-			markdownBlockquote = { link = "SpecialComment" },
+			markdownBlockquote = { link = "Normal" },
 			markdownListMarker = { link = "SpecialChar" },
 			markdownOrderedListMarker = { link = "SpecialChar" },
 			markdownRule = { link = "PreProc" },
-			markdownHeadingRule = { link = "SpecialComment" },
+			markdownHeadingRule = { link = "Normal" },
 			markdownUrlDelimiter = { link = "Delimiter" },
 			markdownLinkDelimiter = { link = "Delimiter" },
 			markdownLinkTextDelimiter = { link = "Delimiter" },
@@ -112,11 +112,11 @@ M.get = function(colors)
 			htmlUnderline = { link = "Underlined" },
 			htmlUnderlineItalic = { underline = true, italic = true },
 			htmlItalic = { italic = true },
-			htmlTag = { link = "Tag" },
+			htmlTag = { link = "Delimiter" },
 			htmlEndTag = { link = "Delimiter" },
 			htmlTagN = { link = "Tag" },
-			htmlTagName = { link = "Tag" },
-			htmlArg = { link = "Identifier" },
+			htmlTagName = { link = "Label" },
+			htmlArg = { link = "Type" },
 			htmlScriptTag = { link = "SpecialChar" },
 			htmlSpecialTagName = { link = "Special" },
 			htmlString = { link = "String" },
@@ -126,16 +126,16 @@ M.get = function(colors)
 		--: Xml: {{{
 		apply_fileformat("xml", {
 			--: builtin: https://github.com/chrisbra/vim-xml-ftplugin{{{
-			xmlTag = { link = "Tag" },
+			xmlTag = { link = "Delimiter" },
 			xmlEndTag = { link = "Delimiter" },
-			xmlTagName = { link = "Tag" },
+			xmlTagName = { link = "Label" },
 			xmlEqual = { link = "Statement" },
 			xmlAttrib = { link = "Type" },
 			xmlEntity = { link = "Identifier" },
 			xmlEntityPunct = { link = "Identifier" },
 			xmlDocTypeDecl = { link = "Type" },
 			xmlDocTypeKeyword = { link = "Keyword" },
-			xmlCdataStart = { link = "SpecialComment" },
+			xmlCdataStart = { link = "Normal" },
 			xmlCdataCdata = { link = "PreProc" },
 			xmlString = { link = "String" },
 			--: }}}
@@ -146,7 +146,7 @@ M.get = function(colors)
 			--: builtin: https://github.com/JulesWang/css.vim{{{
 			cssStringQ = { link = "String" },
 			cssStringQQ = { link = "cssStringQ" },
-			cssAttrComma = { link = "SpecialComment" },
+			cssAttrComma = { link = "Normal" },
 			cssBraces = { link = "SpecialChar" },
 			cssTagName = { link = "Tag" },
 			cssClassNameDot = { link = "Delimiter" },
@@ -154,7 +154,7 @@ M.get = function(colors)
 			cssFunctionName = { link = "Function" },
 			cssAttr = { link = "Type" },
 			cssCommonAttr = { link = "Type" },
-			cssProp = { link = "PreProc" },
+			cssProp = { link = "Statement" },
 			cssPseudoClassId = { link = "Identifier" },
 			cssPseudoClassFn = { link = "Function" },
 			cssPseudoClass = { link = "String" },
@@ -169,8 +169,8 @@ M.get = function(colors)
 			cssValueAngle = { link = "Float" },
 			cssValueTime = { link = "Float" },
 			cssValueFrequency = { link = "Float" },
-			cssVendor = { link = "SpecialComment" },
-			cssNoise = { link = "SpecialComment" },
+			cssVendor = { link = "Normal" },
+			cssNoise = { link = "Normal" },
 			--: }}}
 		}),
 		--: }}}
@@ -195,7 +195,7 @@ M.get = function(colors)
 		--: LESS: {{{
 		apply_fileformat("less", {
 			--: vim-less: https://github.com/groenewege/vim-less{{{
-			lessMixinChar = { link = "SpecialComment" },
+			lessMixinChar = { link = "Normal" },
 			lessClass = { link = "Identifier" },
 			lessFunction = { link = "Function" },
 			--: }}}
@@ -214,8 +214,8 @@ M.get = function(colors)
 			javaScriptMessage = { link = "javaScriptGlobal" },
 			--: }}}
 			--: vim-javascript: https://github.com/pangloss/vim-javascript{{{
-			jsNoise = { link = "SpecialComment" },
-			Noise = { link = "SpecialComment" },
+			jsNoise = { link = "Normal" },
+			Noise = { link = "Normal" },
 			jsParens = { link = "SpecialChar" },
 			jsBrackets = { link = "SpecialChar" },
 			jsObjectBraces = { link = "SpecialChar" },
@@ -233,7 +233,7 @@ M.get = function(colors)
 			jsFuncArgs = { link = "Identifier" },
 			jsObjectProp = { link = "PreProc" },
 			jsVariableDef = { link = "Variable" },
-			jsObjectKey = { link = "SpecialComment" },
+			jsObjectKey = { link = "Normal" },
 			jsParen = { link = "SpecialChar" },
 			jsParenIfElse = { link = "Conditional" },
 			jsParenRepeat = { link = "Repeat" },
@@ -650,7 +650,7 @@ M.get = function(colors)
 			pythonRepeat = { link = "Repeat" },
 			pythonException = { link = "Exception" },
 			pythonNone = { link = "Constant" },
-			pythonCoding = { link = "SpecialComment" },
+			pythonCoding = { link = "Normal" },
 			pythonDot = { link = "Identifier" },
 			--: }}}
 			--: semshi: https://github.com/numirias/semshi{{{
@@ -684,7 +684,7 @@ M.get = function(colors)
 			luaSpecialValue = { link = "Special" },
 			luaBraces = { link = "SpecialChar" },
 			luaBuiltIn = { link = "Special" },
-			luaNoise = { link = "SpecialComment" },
+			luaNoise = { link = "Normal" },
 			luaLabel = { link = "Label" },
 			luaFuncTable = { link = "Special" },
 			luaFuncArgName = { link = "Identifier" },
@@ -960,11 +960,11 @@ M.get = function(colors)
 		--: Shell: {{{
 		apply_fileformat("shell", {
 			--: builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_SH{{{
-			shRange = { link = "Statement" },
+			shRange = { fg = colors.foreground },
 			shOption = { link = "Special" },
 			shQuote = { link = "String" },
 			shVariable = { link = "Variable" },
-			shDerefSimple = { link = "Type" },
+			shDerefSimple = { link = "Variable" },
 			shDerefVar = { link = "Variable" },
 			shDerefSpecial = { link = "Special" },
 			shDerefOff = { link = "Type" },
@@ -978,8 +978,9 @@ M.get = function(colors)
 		apply_fileformat("zsh", {
 			--: builtin: https://github.com/chrisbra/vim-zsh{{{
 			zshOption = { link = "Statement" },
-			zshSubst = { link = "Type" },
+			zshSubst = { link = "Variable" },
 			zshFunction = { link = "Function" },
+			zshOperator = { link = "Operator" },
 			--: }}}
 		}),
 		--: }}}
@@ -1001,15 +1002,15 @@ M.get = function(colors)
 			vimUserFunc = { link = "Function" },
 			vimFuncName = { link = "Function" },
 			vimMap = { link = "Define" },
-			vimNotation = { link = "Special" },
-			vimMapLhs = { link = "Special" },
-			vimMapRhs = { link = "Special" },
+			vimNotation = { link = "Identifier" },
+			vimMapLhs = { link = "Identifier" },
+			vimMapRhs = { link = "Identifier" },
 			vimSetEqual = { link = "Identifier" },
-			vimSetSep = { link = "Identifier" },
+			vimSetSep = { link = "SpecialChar" },
 			vimOption = { link = "Variable" },
 			vimUserAttrbKey = { link = "Type" },
 			vimUserAttrb = { link = "Identifier" },
-			vimAutoCmdSfxList = { link = "Statement" },
+			vimAutoCmdSfxList = { link = "Special" },
 			vimSynType = { link = "Type" },
 			vimHiBang = { link = "Identifier" },
 			vimSet = { link = "Statement" },
@@ -1019,8 +1020,8 @@ M.get = function(colors)
 		apply_fileformat("makefile", {
 			makeIdent = { link = "Variable" },
 			makeSpecTarget = { link = "Special" },
-			makeTarget = { link = "Identifier" },
-			makeCommands = { link = "Function" },
+			makeTarget = { link = "Function" },
+			makeCommands = { link = "Identifier" },
 		}),
 		--: }}}
 		--: CMake: {{{
@@ -1133,10 +1134,10 @@ M.get = function(colors)
 		--: }}}
 		--: Json: {{{
 		apply_fileformat("json", {
-			jsonKeyword = { link = "Keyword" },
+			jsonKeyword = { link = "Function" },
 			jsonString = { link = "String" },
 			jsonBoolean = { link = "Boolean" },
-			jsonNoise = { link = "SpecialComment" },
+			jsonNoise = { link = "Normal" },
 			jsonQuote = { link = "String" },
 			jsonBraces = { link = "SpecialChar" },
 		}),
