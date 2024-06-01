@@ -62,7 +62,7 @@ M.get = function(colors)
 		["@keyword.modifier"] = { link = "Keyword" }, -- For keywords modifying other constructs (e.g. `const`, `static`, `public`)
 		["@keyword.type"] = { link = "Keyword" }, -- For keywords describing composite types (e.g. `struct`, `enum`)
 		["@keyword.coroutine"] = { link = "Keyword" }, -- For keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
-		["@keyword.function"] = { link = "Function" }, -- For keywords used to define a function.
+		["@keyword.function"] = { link = "Define" }, -- For keywords used to define a function.
 		["@keyword.operator"] = { link = "Operator" }, -- For new keyword operator
 		["@keyword.import"] = { link = "Include" }, -- For includes: #include in C, use or extern crate in Rust, or require in Lua.
 		["@keyword.repeat"] = { link = "Repeat" }, -- For keywords related to loops.
@@ -154,6 +154,7 @@ M.get = function(colors)
 		--: }}}
 		--: Lua {{{
 		["@constructor.lua"] = { link = "Special" }, -- For constructor calls and definitions: = { } in Lua.
+		["@keyword.function.lua"] = { link = "Function" }, -- For function definitions in Lua.
 		--: }}}
 		--: Typescript {{{
 		["@property.typescript"] = { fg = colors.color5 },
