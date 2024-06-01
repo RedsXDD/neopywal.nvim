@@ -14,8 +14,8 @@ M.get = function(colors)
 				or colors.background,
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
-		NormalFloat = { bg = O.transparent and colors.none or colors.background }, -- Normal text in floating windows.
-		FloatBorder = { bg = O.transparent and colors.none or colors.background }, -- Border used in floating windows.
+		NormalFloat = { bg = colors.background }, -- Normal text in floating windows.
+		FloatBorder = { bg = colors.background }, -- Border used in floating windows.
 		FloatTitle = { fg = colors.color2, bold = true, italic = true }, -- Title text in floating windows.
 		Comment = { fg = colors.color8, italic = true }, -- any comment
 		NonText = { fg = colors.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
