@@ -4,6 +4,7 @@ local default_options = {
 	dim_inactive = true,
 	transparent = true,
 	use_wallust = false,
+	terminal = true,
 	default_fileformats = true,
 	default_plugins = true,
 	custom_colors = {},
@@ -134,9 +135,11 @@ function M.load()
 		user_highlights = user_highlights(colors)
 	end
 
-	local terminal_theme = require("neopywal.theme.terminal").get(colors)
-	for color_option, color in pairs(terminal_theme) do
-		vim.g[color_option] = color
+	if M.options.terminal == true then
+		local terminal_theme = require("neopywal.theme.terminal").get(colors)
+		for color_option, color in pairs(terminal_theme) do
+			vim.g[color_option] = color
+		end
 	end
 
 	local theme = vim.tbl_deep_extend(

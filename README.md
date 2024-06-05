@@ -206,6 +206,9 @@ require("neopywal").setup({
     -- Dims the background when another window is focused.
     dim_inactive = true,
 
+    -- Apply colorscheme for Neovim's terminal.
+    terminal = true,
+
     -- Setting this to false disables all default file format highlights.
     -- Useful if you want to enable specific file format options.
     default_fileformats = true,
