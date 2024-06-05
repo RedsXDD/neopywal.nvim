@@ -10,7 +10,7 @@ M.get = function(colors)
 		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- normal text
 		NormalNC = {
 			bg = O.transparent and colors.none
-				or O.dim_inactive and U.darken(colors.background, 5)
+				or O.dim_inactive and U.blend(colors.background, colors.color8, 0.9)
 				or colors.background,
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
@@ -37,10 +37,10 @@ M.get = function(colors)
 		debugPC = { bg = colors.color2, fg = colors.color8 }, -- used for highlighting the current line in terminal-debug
 		debugBreakpoint = { bg = colors.color1, fg = colors.color8 }, -- used for breakpoint colors in terminal-debug
 		SignColumn = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color8,
 		}, -- column where |signs| are displayed.
-		Folded = { bg = U.lighten(colors.background, 10), bold = true }, -- Line used for closed folds.
+		Folded = { bg = U.blend(colors.background, colors.color8, 0.9), bold = true }, -- Line used for closed folds.
 		FoldColumn = { link = "SignColumn" }, -- 'foldcolumn'
 		--: }}}
 		--: Cursor {{{
@@ -52,11 +52,11 @@ M.get = function(colors)
 		-- TermCursor   = { }, -- cursor in a focused terminal.
 		-- TermCursorNC = { }, -- cursor in an unfocused terminal.
 		LineNr = { link = "SignColumn" }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-		CursorLine = { bg = U.lighten(colors.background, 20) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
-		ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
+		CursorLine = { bg = U.blend(colors.background, colors.foreground, 0.9) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
 		CursorColumn = { link = "CursorLine" }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
 		CursorLineNr = { link = "CursorLine" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 		CursorLineFold = { link = "SignColumn" }, -- Line used when hovering over closed folds.
+		ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
 		--: }}}
 		--: Diff {{{
 		DiffAdd = { fg = colors.color10 }, -- diff mode: Added line |diff.txt|.
@@ -111,10 +111,8 @@ M.get = function(colors)
 		--: Tabline {{{
 		WinBar = { link = "StatusLine" }, -- window bar
 		WinBarNC = { link = "StatusLineNC" }, -- window bar in inactive windows
-		TabLine = { link = "TabLineFill" }, -- tab pages line, not active tab page label.
-		TabLineFill = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 8),
-		}, -- tab pages line, where there are no labels.
+		TabLine = { bg = U.blend(colors.background, colors.color8, 0.9), fg = colors.foreground }, -- tab pages line, not active tab page label.
+		TabLineFill = { link = "SignColumn" }, -- tab pages line, where there are no labels.
 		TabLineSel = {
 			bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
 			fg = colors.color4,
@@ -197,23 +195,23 @@ M.get = function(colors)
 		--: }}}
 		--: Diagnostics {{{
 		DiagnosticError = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color1,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticWarn = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = U.blend(colors.color1, colors.color3, 0.5),
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticInfo = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.foreground,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticHint = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color6,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticUnnecessary = {
-			bg = O.transparent and colors.none or U.darken(colors.background, 5),
+			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color8,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		--: }}}
