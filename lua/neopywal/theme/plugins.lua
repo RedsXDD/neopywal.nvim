@@ -212,9 +212,9 @@ M.get = function(colors)
 			LazyCommitIssue = { link = "Number" },
 			LazyCommitScope = { italic = true },
 			LazyCommit = { link = "Identifier" },
-			LazyH1 = { bg = U.lighten(colors.background, 40), bold = true },
+			LazyH1 = { bg = U.blend(colors.background, colors.foreground, 0.7), bold = true }, -- Non-selected buttons.
 			LazyH2 = { bold = true },
-			LazyButton = { bg = U.lighten(colors.background, 15), bold = true },
+			LazyButton = { bg = U.blend(colors.background, colors.foreground, 0.9), bold = true }, -- Selected buttons.
 			LazyReasonRuntime = { link = "Macro" },
 			LazyComment = { link = "Comment" },
 			LazyReasonRequire = { link = "Include" },
