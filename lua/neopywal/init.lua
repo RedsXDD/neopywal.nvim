@@ -134,7 +134,11 @@ function M.load()
 		user_highlights = user_highlights(colors)
 	end
 
-	require("neopywal.theme.terminal").get(colors)
+	local terminal_theme = require("neopywal.theme.terminal").get(colors)
+	for color_option, color in pairs(terminal_theme) do
+		vim.g[color_option] = color
+	end
+
 	local theme = vim.tbl_deep_extend(
 		"keep",
 		{},
