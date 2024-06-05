@@ -111,11 +111,11 @@ M.get = function(colors)
 		--: Tabline {{{
 		WinBar = { link = "StatusLine" }, -- window bar
 		WinBarNC = { link = "StatusLineNC" }, -- window bar in inactive windows
-		TabLine = { bg = U.blend(colors.background, colors.color8, 0.9), fg = colors.foreground }, -- tab pages line, not active tab page label.
+		TabLine = { link = "SignColumn" }, -- tab pages line, not active tab page label.
 		TabLineFill = { link = "SignColumn" }, -- tab pages line, where there are no labels.
 		TabLineSel = {
 			bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
-			fg = colors.color4,
+			fg = colors.foreground,
 			bold = true,
 			italic = true,
 		}, -- tab pages line, active tab page label.

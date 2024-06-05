@@ -150,6 +150,7 @@ function M.load()
 		require("neopywal.theme.fileformats").get(colors),
 		require("neopywal.theme.plugins").get(colors),
 		M.options.plugins.treesitter and require("neopywal.theme.treesitter").get(colors) or {},
+		M.options.plugins.bufferline and require("neopywal.theme.bufferline").get(colors) or {},
 		{}
 	)
 
