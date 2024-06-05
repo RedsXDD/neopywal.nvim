@@ -197,22 +197,27 @@ M.get = function(colors)
 		DiagnosticError = {
 			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color1,
+			bold = true,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticWarn = {
 			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = U.blend(colors.color1, colors.color3, 0.5),
+			bold = true,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticInfo = {
 			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.foreground,
+			bold = true,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticHint = {
 			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color6,
+			bold = true,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		DiagnosticUnnecessary = {
 			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
 			fg = colors.color8,
+			bold = true,
 		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
 		--: }}}
 		--: }}}
