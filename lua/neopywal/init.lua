@@ -161,13 +161,17 @@ end
 
 function M.setup(user_conf)
 	did_setup = true
+
+	-- Load user configuration:
 	user_conf = user_conf or {}
 	if user_conf.default_fileformats == false then
 		default_options.fileformats = {}
 	end
+
 	if user_conf.default_plugins == false then
 		default_options.plugins = {}
 	end
+
 	M.options = vim.tbl_deep_extend("keep", {}, user_conf, default_options)
 end
 
