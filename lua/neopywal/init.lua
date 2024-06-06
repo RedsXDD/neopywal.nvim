@@ -173,6 +173,10 @@ function M.setup(user_conf)
 	end
 
 	M.options = vim.tbl_deep_extend("keep", {}, user_conf, default_options)
+
+	if vim.g.neovide then
+		M.options.transparent = false
+	end
 end
 
 return M
