@@ -89,10 +89,44 @@ local default_options = {
 M.options = default_options
 
 function M.get_colors()
+	---@diagnostic disable: param-type-mismatch
+	local colorscheme_file = ""
 	if M.options.use_wallust then
-		vim.cmd([[ source $HOME/.cache/wallust/colors_neopywal.vim ]])
+		colorscheme_file = "$HOME/.cache/wallust/colors_neopywal.vim"
 	else
-		vim.cmd([[ source $HOME/.cache/wal/colors-wal.vim ]])
+		colorscheme_file = "$HOME/.cache/wal/colors-wal.vim"
+	end
+
+	if not pcall(vim.cmd, "source " .. colorscheme_file) then
+		vim.notify(
+			"Neopywal: Colorscheme file "
+				.. colorscheme_file
+				.. " could not be loaded, falling back to builtin colorscheme.",
+			vim.log.levels.WARN
+		)
+
+		-- Reference: https://github.com/joshdick/onedark.vim
+		vim.cmd([[
+			let background = "#282C34"
+			let foreground = "#C8CCD4"
+			let cursor = "#C8CCD4"
+			let color0 = "#282C34"
+			let color1 = "#E06C75"
+			let color2 = "#98C379"
+			let color3 = "#E5C07B"
+			let color4 = "#61AFEF"
+			let color5 = "#C678DD"
+			let color6 = "#56B6C2"
+			let color7 = "#ABB2BF"
+			let color8 = "#545862"
+			let color9 = "#E06C75"
+			let color10 = "#98C379"
+			let color11 = "#E5C07B"
+			let color12 = "#61AFEF"
+			let color13 = "#C678DD"
+			let color14 = "#56B6C2"
+			let color15 = "#C8CCD4"
+		]])
 	end
 
 	local user_colors = M.options.custom_colors
@@ -172,7 +206,8 @@ function M.setup(user_conf)
 		default_options.plugins = {}
 	end
 
-	M.options = vim.tbl_deep_extend("keep", {}, vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
+	M.options =
+		vim.tbl_deep_extend("keep", {}, vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
 end
 
 return M
