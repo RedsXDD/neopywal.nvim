@@ -88,7 +88,10 @@ M.get = function(colors)
 		Substitute = { bg = colors.color4, fg = colors.background, bold = true }, -- |:substitute| replacement text highlighting
 		--: }}}
 		--: Pmenu {{{
-		Pmenu = { bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none or U.blend(colors.background, colors.foreground, 0.85) }, -- Popup menu: normal item.
+		Pmenu = {
+			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none
+				or U.blend(colors.background, colors.foreground, 0.85),
+		}, -- Popup menu: normal item.
 		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), bold = true, italic = true }, -- Popup menu: selected item.
 		PmenuSbar = { bg = U.blend(colors.background, colors.foreground, 0.95) }, -- Popup menu: scrollbar.
 		PmenuThumb = { link = "PmenuSel" }, -- Popup menu: Thumb of the scrollbar.
