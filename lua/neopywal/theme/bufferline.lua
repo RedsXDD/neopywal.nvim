@@ -81,7 +81,7 @@ M.get = function(colors)
 		-- Modified icon.
 		BufferLineModified = { link = "BufferLineBuffer" }, -- Icon color for non-selected modified buffers.
 		BufferLineModifiedVisible = { link = "BufferLineBufferVisible" }, -- Icon color for selected modified buffer on non-current windows.
-		BufferLineModifiedSelected = { bg = colors.background, fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Icon color for selected modified buffer.
+		BufferLineModifiedSelected = { bg = O.transparent and colors.none or colors.background, fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Icon color for selected modified buffer.
 
 		-- String that's duplicated from two buffers.
 		BufferLineDuplicate = { link = "BufferLineBuffer" }, -- String from a non-selected buffer that's duplicated.
