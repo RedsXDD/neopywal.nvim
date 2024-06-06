@@ -172,11 +172,7 @@ function M.setup(user_conf)
 		default_options.plugins = {}
 	end
 
-	M.options = vim.tbl_deep_extend("keep", {}, user_conf, default_options)
-
-	if vim.g.neovide then
-		M.options.transparent = false
-	end
+	M.options = vim.tbl_deep_extend("keep", {}, vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
 end
 
 return M
