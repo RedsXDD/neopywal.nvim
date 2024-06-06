@@ -438,19 +438,14 @@ M.get = function(colors)
 			MiniTablineVisible = { link = "TabLine" },
 			MiniTablineHidden = { link = "MiniTablineVisible" },
 			MiniTablineModifiedCurrent = {
-				bg = colors.background,
-				fg = colors.color3,
+				bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
+				fg = U.blend(colors.color1, colors.color3, 0.5),
 				bold = true,
 				italic = true,
 			},
-			MiniTablineModifiedVisible = { fg = colors.color6 },
-			MiniTablineModifiedHidden = { fg = colors.color5 },
-			MiniTablineTabpagesection = {
-				bg = O.transparent and colors.none or colors.background,
-				fg = colors.color4,
-				bold = true,
-				italic = true,
-			},
+			MiniTablineModifiedVisible = { link = "MiniTablineVisible" },
+			MiniTablineModifiedHidden = { link = "MiniTablineModifiedVisible" },
+			MiniTablineTabpagesection = { link = "MiniTablineCurrent" },
 		}),
 		--: }}}
 		--: mini.cursorword {{{
