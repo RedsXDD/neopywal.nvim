@@ -91,6 +91,9 @@ M.get = function(colors)
 			ALEVirtualTextStyleWarning = { link = "ALEVirtualTextWarning" },
 		}),
 		--: }}}
+		--: rcarriga/nvim-notify {{{
+		{ NotifyBackground = { bg = colors.background } },
+		--: }}}
 		--: airblade/vim-gitgutter {{{
 		apply_plugin("git_gutter", {
 			GitGutterAdd = { fg = colors.color2 },
