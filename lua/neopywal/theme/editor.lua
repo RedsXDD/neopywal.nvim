@@ -10,20 +10,26 @@ M.get = function(colors)
 		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- normal text
 		NormalNC = {
 			bg = O.transparent and colors.none
-				or O.dim_inactive and U.blend(colors.background, colors.color8, 0.9)
+				or O.dim_inactive and U.darken(colors.background, 5)
 				or colors.background,
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
-		NormalFloat = { link = "Normal" }, -- Normal text in floating windows.
+		NormalFloat = { bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { link = "NormalFloat" }, -- Border used in floating windows.
 		FloatTitle = { fg = colors.color2, bold = true, italic = true }, -- Title text in floating windows.
 		Comment = { fg = colors.color8, italic = true }, -- any comment
 		NonText = { fg = colors.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 		EndOfBuffer = { fg = colors.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
 		Title = { fg = colors.color4, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
-		ToolbarLine = { fg = colors.foreground },
-		ToolbarButton = { bg = colors.color4, fg = colors.background, bold = true },
-		VertSplit = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- the column separating vertically split windows
+		VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
+		WinSeparator = {
+			bg = O.transparent and colors.none
+				or O.dim_inactive and U.darken(colors.background, 5)
+				or colors.background,
+			fg = O.transparent and colors.foreground
+				or O.dim_inactive and U.darken(colors.background, 5)
+				or colors.background,
+		}, -- the column separating vertically split windows
 		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true }, -- Visual mode selection.
 		VisualNOS = {
 			bg = U.blend(colors.color5, colors.background, 0.2),
@@ -36,11 +42,8 @@ M.get = function(colors)
 		healthWarning = { fg = colors.color3 },
 		debugPC = { bg = colors.color2, fg = colors.color8 }, -- used for highlighting the current line in terminal-debug
 		debugBreakpoint = { bg = colors.color1, fg = colors.color8 }, -- used for breakpoint colors in terminal-debug
-		SignColumn = {
-			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
-			fg = colors.color8,
-		}, -- column where |signs| are displayed.
-		Folded = { bg = U.blend(colors.background, colors.color8, 0.9), bold = true }, -- Line used for closed folds.
+		SignColumn = { fg = colors.color8 }, -- column where |signs| are displayed.
+		Folded = { link = "CursorLine" }, -- Line used for closed folds.
 		FoldColumn = { link = "SignColumn" }, -- 'foldcolumn'
 		--: }}}
 		--: Cursor {{{
@@ -104,7 +107,7 @@ M.get = function(colors)
 		--: }}}
 		--: Statusline {{{
 		StatusLine = {
-			bg = O.transparent and colors.none or U.lighten(colors.background, 20),
+			bg = O.transparent and colors.none or U.blend(colors.color8, colors.background, 0.3),
 			fg = colors.foreground,
 		}, -- status line of current window.
 		StatusLineNC = { link = "StatusLine" }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
@@ -112,10 +115,10 @@ M.get = function(colors)
 		StatusLineTermNC = { link = "StatusLineNC" }, -- status lines of not-current terminal windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
 		--: }}}
 		--: Tabline {{{
-		WinBar = { link = "StatusLine" }, -- window bar
-		WinBarNC = { link = "StatusLineNC" }, -- window bar in inactive windows
-		TabLine = { link = "SignColumn" }, -- tab pages line, not active tab page label.
-		TabLineFill = { link = "SignColumn" }, -- tab pages line, where there are no labels.
+		WinBar = { link = "TabLineFill" }, -- Per-buffer tabline.
+		WinBarNC = { link = "NormalNC" }, -- Per-buffer tabline on inactive buffers.
+		TabLine = { bg = O.transparent and colors.none or U.blend(colors.background, colors.foreground, 0.9) }, -- tab pages line, not active tab page label.
+		TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
 		TabLineSel = {
 			bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
 			fg = colors.foreground,
@@ -197,31 +200,11 @@ M.get = function(colors)
 		rainbow6 = { fg = colors.color5 },
 		--: }}}
 		--: Diagnostics {{{
-		DiagnosticError = {
-			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
-			fg = colors.color1,
-			bold = true,
-		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticWarn = {
-			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
-			fg = U.blend(colors.color1, colors.color3, 0.5),
-			bold = true,
-		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticInfo = {
-			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
-			fg = colors.foreground,
-			bold = true,
-		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticHint = {
-			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
-			fg = colors.color6,
-			bold = true,
-		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticUnnecessary = {
-			bg = O.transparent and colors.none or U.blend(colors.background, colors.color8, 0.9),
-			fg = colors.color8,
-			bold = true,
-		}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticError = { fg = colors.color1, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticWarn = { fg = U.blend(colors.color1, colors.color3, 0.5), bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticInfo = { fg = colors.foreground, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticHint = { fg = colors.color6, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticUnnecessary = { fg = colors.color8, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		--: }}}
 		--: }}}
 	}
