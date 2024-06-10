@@ -68,43 +68,41 @@ local M = {
 	-- indicator_selected = {},
 
 	-- Diagnostics.
-	-- diagnostic = {},
-	-- diagnostic_visible = {},
+	diagnostic = { bg = unselected_bg, fg = colors.color8 },
+	diagnostic_visible = { bg = unselected_bg, fg = colors.color8 },
 	-- diagnostic_selected = {},
 
-
 	-- Buffer with errors.
-	-- error = {}, -- Non-selected buffers with errors.
-	-- error_visible = {}, -- Selected buffer with errors on non-current windows.
+	error = { bg = unselected_bg, fg = colors.color8 }, -- Non-selected buffers with errors.
+	error_visible = { bg = unselected_bg, fg = colors.color8 }, -- Selected buffer with errors on non-current windows.
 	-- error_selected = {}, -- Selected buffer with errors.
-	-- error_diagnostic = {},
-	-- error_diagnostic_visible = {},
+	error_diagnostic = { bg = unselected_bg, fg = colors.color8 },
+	error_diagnostic_visible = { bg = unselected_bg, fg = colors.color8 },
 	-- error_diagnostic_selected = {},
 
 	-- Buffer with warnings.
-	-- warning = {}, -- Non-selected buffers with warnings.
-	-- warning_visible = {}, -- Selected buffer with warnings on non-current windows.
+	warning = { bg = unselected_bg, fg = colors.color8 }, -- Non-selected buffers with warnings.
+	warning_visible = { bg = unselected_bg, fg = colors.color8 }, -- Selected buffer with warnings on non-current windows.
 	-- warning_selected = {}, -- Selected buffer with warnings.
-	-- warning_diagnostic = {},
-	-- warning_diagnostic_visible = {},
+	warning_diagnostic = { bg = unselected_bg, fg = colors.color8 },
+	warning_diagnostic_visible = { bg = unselected_bg, fg = colors.color8 },
 	-- warning_diagnostic_selected = {},
 
 	-- Buffer with hints.
-	-- hint = {}, -- Non-selected buffers with hints.
-	-- hint_visible = {}, -- Selected buffer with hints on non-current windows.
+	hint = { bg = unselected_bg, fg = colors.color8 }, -- Non-selected buffers with hints.
+	hint_visible = { bg = unselected_bg, fg = colors.color8 }, -- Selected buffer with hints on non-current windows.
 	-- hint_selected = {}, -- Selected buffer with hints.
-	-- hint_diagnostic = {},
-	-- hint_diagnostic_visible = {},
+	hint_diagnostic = { bg = unselected_bg, fg = colors.color8 },
+	hint_diagnostic_visible = { bg = unselected_bg, fg = colors.color8 },
 	-- hint_diagnostic_selected = {},
 
 	-- Buffer with informations.
-	-- info = {}, -- Non-selected buffers with informations.
-	-- info_visible = {}, -- Selected buffer with informations on non-current windows.
+	info = { bg = unselected_bg, fg = colors.color8 }, -- Non-selected buffers with informations.
+	info_visible = { bg = unselected_bg, fg = colors.color8 }, -- Selected buffer with informations on non-current windows.
 	-- info_selected = {}, -- Selected buffer with informations.
-	-- info_diagnostic = {},
-	-- info_diagnostic_visible = {},
+	info_diagnostic = { bg = unselected_bg, fg = colors.color8 },
+	info_diagnostic_visible = { bg = unselected_bg, fg = colors.color8 },
 	-- info_diagnostic_selected = {},
-
 }
 
 return M
