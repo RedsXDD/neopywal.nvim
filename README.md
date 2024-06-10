@@ -161,6 +161,31 @@ lualine.setup {
 }
 ```
 
+## Activating bufferline theme
+
+> [!NOTE]
+> Bufferline needs to be loaded after setting up neopywal or it will highlight incorrectly.
+
+```lua
+config = function()
+    require("bufferline").setup({
+        highlights = require("neopywal.bufferline").setup()
+    })
+end
+```
+
+Overriding configurations can be done inside the setup() function, see `:h bufferline-highlights` for detailed explanations:
+
+```lua
+local colors = require("neopywal").get_colors()
+bufferline.setup({
+    highlights = require("neopywal.bufferline").setup({
+        fill = { bg = colors.color1 },
+        background = { fg = "#00ff00" },
+    })
+})
+```
+
 ## Activating the feline theme (untested with Neopywal)
 
 You can put this to your config to activate the feline config:
@@ -269,7 +294,6 @@ require("neopywal").setup({
     plugins = {
         ale = true,
         alpha = true,
-        bufferline = true,
         nvim_cmp = true,
         coc = true,
         dashboard = true,
