@@ -26,9 +26,7 @@ M.get = function(colors)
 			bg = O.transparent and colors.none
 				or O.dim_inactive and U.darken(colors.background, 5)
 				or colors.background,
-			fg = O.transparent and colors.foreground
-				or O.dim_inactive and U.darken(colors.background, 5)
-				or colors.background,
+			fg = colors.color8
 		}, -- the column separating vertically split windows
 		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true }, -- Visual mode selection.
 		VisualNOS = {
