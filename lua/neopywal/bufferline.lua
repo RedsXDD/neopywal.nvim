@@ -1,5 +1,9 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
+-- Bufferline: akinsho/bufferline.nvim
+-- Reference: see `:h bufferline-highlights`
+
+local M = {}
 local O = require("neopywal").options
 local U = require("neopywal.util")
 local colors = require("neopywal").get_colors()
@@ -8,9 +12,7 @@ local fill_bg = O.transparent and colors.background or U.blend(colors.background
 local unselected_bg = O.transparent and colors.none or U.blend(colors.background, colors.foreground, 0.85)
 local selected_bg = O.transparent and colors.none or colors.background
 
--- Bufferline: akinsho/bufferline.nvim
--- Reference: see `:h bufferline-highlights`
-local M = {
+local default_options = {
 	-- Filler background color of tabline.
 	fill = { bg = fill_bg },
 
@@ -104,5 +106,11 @@ local M = {
 	info_diagnostic_visible = { bg = unselected_bg, fg = colors.color8 },
 	-- info_diagnostic_selected = {},
 }
+
+function M.setup(user_conf)
+	user_conf = user_conf or {}
+	local highlights = vim.tbl_deep_extend("keep", {}, user_conf, default_options)
+	return highlights
+end
 
 return M
