@@ -408,6 +408,30 @@ You can use the function `get_colors()` if you want to import the colors into a 
 local colors = require("neopywal").get_colors()
 ```
 
+This will import the following colors dictionary:
+
+```lua
+background -- Main background color.
+foreground -- Main foreground color.
+color0     -- Black.
+color1     -- Red.
+color2     -- Green.
+color3     -- Yellow.
+color4     -- Blue.
+color5     -- Magenta.
+color6     -- Cyan.
+color7     -- Bright white.
+color8     -- Bright black.
+color9     -- Bright red.
+color10    -- Bright green.
+color11    -- Bright yellow.
+color12    -- Bright blue.
+color13    -- Bright magenta.
+color14    -- Bright cyan.
+color15    -- Bright white.
+none/transparent -- Use one of these keywords for transparency.
+```
+
 Then you can apply the colors in a way similar to the one found in `custom_highlights = {}`
 
 ### Example
@@ -497,26 +521,6 @@ let color12 = "#89B4FA"
 let color13 = "#F5C2E7"
 let color14 = "#94E2D5"
 let color15 = "#A6ADC8"
-```
-Here's a list with the variable names and their meaning:
-
-```lua
-color0 = Black.
-color1 = Red.
-color2 = Green.
-color3 = Yellow.
-color4 = Blue.
-color5 = Magenta.
-color6 = Cyan.
-color7 = Bright white.
-color8 = Bright black.
-color9 = Bright red.
-color10 = Bright green.
-color11 = Bright yellow.
-color12 = Bright blue.
-color13 = Bright magenta.
-color14 = Bright cyan.
-color15 = Bright white.
 ```
 
 > [!Note]
