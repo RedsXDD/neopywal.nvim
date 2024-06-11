@@ -183,8 +183,15 @@ function M.load()
 		M.setup()
 	end
 
+	-- Only needed to clear when not the default colorscheme.
+	if vim.g.colors_name ~= "neopywal" then
+		vim.cmd.hi("clear")
+	end
+
+	vim.o.termguicolors = true
+	vim.g.colors_name = "neopywal"
+
 	local colors = M.get_colors()
-	vim.opt.termguicolors = true
 
 	local user_highlights = M.options.custom_highlights
 	if type(user_highlights) == "function" then
