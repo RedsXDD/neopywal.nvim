@@ -237,6 +237,29 @@ require("neopywal").setup({
     -- Shows the '~' characters after the end of buffers.
     show_end_of_buffer = false,
 
+	no_italic = false, -- Force no italic.
+	no_bold = false, -- Force no bold.
+	no_underline = false, -- Force no underline.
+	no_undercurl = false, -- Force no undercurl.
+	no_strikethrough = false, -- Force no strikethrough.
+
+	-- Handles the styles of general hi groups (see `:h highlight-args`).
+	styles = {
+		comments = { "italic" },
+		conditionals = { "italic" },
+		loops = {},
+		functions = {},
+		keywords = {},
+		includes = { "italic" },
+		strings = {},
+		variables = { "italic" },
+		numbers = {},
+		booleans = {},
+		-- properties = {},
+		types = { "italic" },
+		operators = {},
+	},
+
     -- Setting this to false disables all default file format highlights.
     -- Useful if you want to enable specific file format options.
     default_fileformats = true,

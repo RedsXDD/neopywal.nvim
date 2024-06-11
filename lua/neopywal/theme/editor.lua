@@ -22,7 +22,7 @@ M.get = function(colors)
 			bold = true,
 			italic = true,
 		}, -- Title text in floating windows.
-		Comment = { fg = colors.color8, italic = true }, -- any comment
+		Comment = { fg = colors.color8, styles = O.styles.comments or {} }, -- any comment
 		NonText = { fg = colors.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 		EndOfBuffer = { fg = O.show_end_of_buffer and colors.color8 or colors.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
 		Title = { fg = colors.color4, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
@@ -140,35 +140,35 @@ M.get = function(colors)
 			Uncomment and edit if you want more specific syntax highlighting.
 		]]
 		--: Variable types {{{
-		Variable = { fg = colors.color4 }, -- (preferred) any variable.
+		Variable = { fg = colors.color4, styles = O.styles.variables or {} }, -- (preferred) any variable.
 		Constant = { fg = colors.color3, italic = true }, -- (preferred) any constant
-		String = { fg = colors.color3 }, -- a string constant: "this is a string"
+		String = { fg = colors.color3, styles = O.styles.strings or {} }, -- a string constant: "this is a string"
 		Character = { fg = colors.color3 }, -- a character constant: 'c', '\n'
-		Number = { fg = colors.color5 }, -- a number constant: 234, 0xff
-		Boolean = { fg = colors.color5 }, -- a boolean constant: TRUE, FALSE
+		Number = { fg = colors.color5, styles = O.styles.numbers or {} }, -- a number constant: 234, 0xff
+		Boolean = { fg = colors.color5, styles = O.styles.booleans or {} }, -- a boolean constant: TRUE, FALSE
 		Float = { fg = colors.color5 }, -- a floating point constant: 2.3e10
-		Identifier = { fg = U.blend(colors.color1, colors.color3, 0.5), italic = true }, -- (preferred) any variable name
-		Function = { fg = colors.color2 }, -- function name (also: methods for classes)
+		Identifier = { fg = U.blend(colors.color1, colors.color3, 0.5), styles = O.styles.variables or {} }, -- (preferred) any variable name
+		Function = { fg = colors.color2, styles = O.styles.functions or {} }, -- function name (also: methods for classes)
 		--: }}}
 		--: Statements {{{
 		Statement = { fg = colors.color1 }, -- (preferred) any statement
-		Conditional = { link = "Statement" }, -- if, then, else, endif, switch, etc.
-		Repeat = { link = "Statement" }, -- for, do, while, etc.
+		Conditional = { fg = colors.color1, styles = O.styles.conditionals or {} }, -- if, then, else, endif, switch, etc.
+		Repeat = { fg = colors.color1, styles = O.styles.loops or {} }, -- for, do, while, etc.
 		Label = { link = "Statement" }, -- case, default, etc.
-		Exception = { link = "Statement" }, -- try, catch, throw
-		Operator = { link = "Statement" }, -- "sizeof", "+", "*", etc.
-		Keyword = { link = "Statement" }, -- any other keyword
+		Exception = { fg = colors.color1, styles = O.styles.keywords or {} }, -- try, catch, throw
+		Operator = { fg = colors.color1, styles = O.styles.operators or {} }, -- "sizeof", "+", "*", etc.
+		Keyword = { fg = colors.color1, styles = O.styles.keywords or {} }, -- any other keyword
 		Debug = { fg = colors.color3 }, -- Debugging statements.
 		--: }}}
 		--: Preprocessors {{{
-		PreProc = { fg = colors.color5, italic = true }, -- (preferred) generic Preprocessor
-		Include = { link = "PreProc" }, -- preprocessor #include
+		PreProc = { fg = colors.color5 }, -- (preferred) generic Preprocessor
+		Include = { fg = colors.color5, styles = O.styles.includes or {} }, -- preprocessor #include
 		Define = { link = "PreProc" }, -- preprocessor #define
 		Macro = { link = "PreProc" }, -- same as Define
 		PreCondit = { link = "PreProc" }, -- preprocessor #if, #else, #endif, etc.
 		--: }}}
 		--: Type definitions {{{
-		Type = { fg = colors.color6, italic = true }, -- (preferred) int, long, char, etc.
+		Type = { fg = colors.color6, styles = O.styles.types or {} }, -- (preferred) int, long, char, etc.
 		Structure = { link = "Type" }, -- struct, union, enum, etc.
 		StorageClass = { link = "Type" }, -- static, register, volatile, etc.
 		Typedef = { link = "Type" }, -- A typedef

@@ -24,6 +24,29 @@ local default_options = {
 	-- Shows the '~' characters after the end of buffers.
 	show_end_of_buffer = false,
 
+	no_italic = false, -- Force no italic.
+	no_bold = false, -- Force no bold.
+	no_underline = false, -- Force no underline.
+	no_undercurl = false, -- Force no undercurl.
+	no_strikethrough = false, -- Force no strikethrough.
+
+	-- Handles the styles of general hi groups (see `:h highlight-args`).
+	styles = {
+		comments = { "italic" },
+		conditionals = { "italic" },
+		loops = {},
+		functions = {},
+		keywords = {},
+		includes = { "italic" },
+		strings = {},
+		variables = { "italic" },
+		numbers = {},
+		booleans = {},
+		-- properties = {},
+		types = { "italic" },
+		operators = {},
+	},
+
 	-- Setting this to false disables all default file format highlights.
 	-- Useful if you want to enable specific file format options.
 	default_fileformats = true,
@@ -217,6 +240,31 @@ function M.load()
 	)
 
 	for highlight_group, properties in pairs(theme) do
+		if properties.styles then
+			for _, style in pairs(properties.styles) do
+				properties[style] = true
+				if M.options.no_italic and style == "italic" then
+					properties[style] = false
+				end
+
+				if M.options.no_bold and style == "bold" then
+					properties[style] = false
+				end
+
+				if M.options.no_underline and style == "underline" then
+					properties[style] = false
+				end
+
+				if M.options.no_undercurl and style == "undercurl" then
+					properties[style] = false
+				end
+				if M.options.no_strikethrough and style == "strikethrough" then
+					properties[style] = false
+				end
+			end
+		end
+		properties.styles = nil
+
 		vim.api.nvim_set_hl(0, highlight_group, properties)
 	end
 end
