@@ -18,7 +18,7 @@ local default_options = {
 	-- Dims the background when another window is focused.
 	dim_inactive = true,
 
-	-- Apply colorscheme for Neovim's terminal.
+	-- Apply colorscheme for Neovim's terminal (e.g. `g:terminal_color_0`).
 	terminal_colors = true,
 
 	-- Shows the '~' characters after the end of buffers.
