@@ -12,7 +12,7 @@ local fill_bg = O.transparent and colors.background or U.blend(colors.background
 local unselected_bg = O.transparent and colors.none or U.blend(colors.background, colors.foreground, 0.85)
 local selected_bg = O.transparent and colors.none or colors.background
 
-local default_options = {
+local default_highlights = {
 	-- Filler background color of tabline.
 	fill = { bg = fill_bg },
 
@@ -109,7 +109,7 @@ local default_options = {
 
 function M.setup(user_conf)
 	user_conf = user_conf or {}
-	local highlights = vim.tbl_deep_extend("keep", {}, user_conf, default_options)
+	local highlights = vim.tbl_deep_extend("keep", {}, user_conf, default_highlights)
 	return highlights
 end
 
