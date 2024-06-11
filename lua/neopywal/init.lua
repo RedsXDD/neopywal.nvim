@@ -5,6 +5,7 @@ local default_options = {
 	transparent = true,
 	use_wallust = false,
 	terminal = true,
+	show_end_of_buffer = false,
 	default_fileformats = true,
 	default_plugins = true,
 	custom_colors = {},

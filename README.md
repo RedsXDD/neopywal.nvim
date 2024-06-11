@@ -234,6 +234,9 @@ require("neopywal").setup({
     -- Apply colorscheme for Neovim's terminal.
     terminal = true,
 
+    -- Shows the '~' characters after the end of buffers.
+    show_end_of_buffer = false,
+
     -- Setting this to false disables all default file format highlights.
     -- Useful if you want to enable specific file format options.
     default_fileformats = true,

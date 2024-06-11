@@ -19,14 +19,14 @@ M.get = function(colors)
 		FloatTitle = { fg = colors.color2, bold = true, italic = true }, -- Title text in floating windows.
 		Comment = { fg = colors.color8, italic = true }, -- any comment
 		NonText = { fg = colors.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-		EndOfBuffer = { fg = colors.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
+		EndOfBuffer = { fg = O.show_end_of_buffer and colors.color8 or colors.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
 		Title = { fg = colors.color4, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
 		VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
 		WinSeparator = {
 			bg = O.transparent and colors.none
 				or O.dim_inactive and U.darken(colors.background, 5)
 				or colors.background,
-			fg = colors.color8
+			fg = colors.color8,
 		}, -- the column separating vertically split windows
 		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true }, -- Visual mode selection.
 		VisualNOS = {
