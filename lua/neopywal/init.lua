@@ -1,15 +1,37 @@
 local M = {}
 
 local default_options = {
-	dim_inactive = true,
-	transparent = true,
+	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
+	-- pywal template at `~/.cache/wal/colors-wal.vim`
 	use_wallust = false,
-	terminal = true,
-	show_end_of_buffer = false,
-	default_fileformats = true,
-	default_plugins = true,
+
+	-- Sets the background color of certain highlight groups to be transparent.
+	-- Use this when your terminal opacity is < 1.
+	transparent = false,
+
+	-- With this option you can overwrite all the base colors the colorscheme uses.
 	custom_colors = {},
+
+	-- With this option you can overwrite any highlight groups set by the colorscheme.
 	custom_highlights = {},
+
+	-- Dims the background when another window is focused.
+	dim_inactive = true,
+
+	-- Apply colorscheme for Neovim's terminal.
+	terminal = true,
+
+	-- Shows the '~' characters after the end of buffers.
+	show_end_of_buffer = false,
+
+	-- Setting this to false disables all default file format highlights.
+	-- Useful if you want to enable specific file format options.
+	default_fileformats = true,
+
+	-- Setting this to false disables all default plugin highlights.
+	-- Useful if you want to enable specific plugin options.
+	default_plugins = true,
+
 	fileformats = {
 		c_cpp = true,
 		clojure = true,
