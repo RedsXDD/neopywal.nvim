@@ -8,9 +8,9 @@ local O = require("neopywal").options
 local U = require("neopywal.util")
 local colors = require("neopywal").get_colors()
 
-local fill_bg = O.transparent and colors.background or U.blend(colors.background, colors.foreground, 0.9)
-local unselected_bg = O.transparent and colors.none or U.blend(colors.background, colors.foreground, 0.85)
-local selected_bg = O.transparent and colors.none or colors.background
+local fill_bg = O.transparent_background and colors.background or U.blend(colors.background, colors.foreground, 0.9)
+local unselected_bg = O.transparent_background and colors.none or U.blend(colors.background, colors.foreground, 0.85)
+local selected_bg = O.transparent_background and colors.none or colors.background
 
 local default_highlights = {
 	-- Filler background color of tabline.

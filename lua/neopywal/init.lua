@@ -7,7 +7,7 @@ local default_options = {
 
 	-- Sets the background color of certain highlight groups to be transparent.
 	-- Use this when your terminal opacity is < 1.
-	transparent = false,
+	transparent_background = false,
 
 	-- With this option you can overwrite all the base colors the colorscheme uses.
 	custom_colors = {},

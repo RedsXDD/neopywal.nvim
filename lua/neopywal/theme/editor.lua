@@ -7,17 +7,17 @@ local O = require("neopywal").options
 M.get = function(colors)
 	return {
 		--: Neovim {{{
-		Normal = { bg = O.transparent and colors.none or colors.background, fg = colors.foreground }, -- normal text
+		Normal = { bg = O.transparent_background and colors.none or colors.background, fg = colors.foreground }, -- normal text
 		NormalNC = {
-			bg = O.transparent and colors.none
+			bg = O.transparent_background and colors.none
 				or O.dim_inactive and U.darken(colors.background, 5)
 				or colors.background,
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
-		NormalFloat = { bg = O.transparent and vim.o.winblend == 0 and colors.none or colors.background }, -- Normal text in floating windows.
+		NormalFloat = { bg = O.transparent_background and vim.o.winblend == 0 and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { link = "NormalFloat" }, -- Border used in floating windows.
 		FloatTitle = {
-			bg = O.transparent and vim.o.winblend == 0 and colors.none or colors.background,
+			bg = O.transparent_background and vim.o.winblend == 0 and colors.none or colors.background,
 			fg = colors.color2,
 			bold = true,
 			italic = true,
@@ -28,7 +28,7 @@ M.get = function(colors)
 		Title = { fg = colors.color4, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
 		VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
 		WinSeparator = {
-			bg = O.transparent and colors.none
+			bg = O.transparent_background and colors.none
 				or O.dim_inactive and U.darken(colors.background, 5)
 				or colors.background,
 			fg = colors.color8,
@@ -95,7 +95,7 @@ M.get = function(colors)
 		--: }}}
 		--: Pmenu {{{
 		Pmenu = {
-			bg = O.transparent and vim.o.pumblend == 0 and colors.none
+			bg = O.transparent_background and vim.o.pumblend == 0 and colors.none
 				or U.blend(colors.background, colors.foreground, 0.85),
 		}, -- Popup menu: normal item.
 		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), bold = true, italic = true }, -- Popup menu: selected item.
@@ -110,7 +110,7 @@ M.get = function(colors)
 		--: }}}
 		--: Statusline {{{
 		StatusLine = {
-			bg = O.transparent and colors.none or U.blend(colors.color8, colors.background, 0.3),
+			bg = O.transparent_background and colors.none or U.blend(colors.color8, colors.background, 0.3),
 			fg = colors.foreground,
 		}, -- status line of current window.
 		StatusLineNC = { link = "StatusLine" }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
@@ -120,10 +120,12 @@ M.get = function(colors)
 		--: Tabline {{{
 		WinBar = { link = "TabLineFill" }, -- Per-buffer tabline.
 		WinBarNC = { link = "NormalNC" }, -- Per-buffer tabline on inactive buffers.
-		TabLine = { bg = O.transparent and colors.none or U.blend(colors.background, colors.foreground, 0.9) }, -- tab pages line, not active tab page label.
+		TabLine = {
+			bg = O.transparent_background and colors.none or U.blend(colors.background, colors.foreground, 0.9),
+		}, -- tab pages line, not active tab page label.
 		TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
 		TabLineSel = {
-			bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
+			bg = O.transparent_background and U.lighten(colors.background, 20) or colors.background,
 			fg = colors.foreground,
 			bold = true,
 			italic = true,

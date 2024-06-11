@@ -441,7 +441,7 @@ M.get = function(colors)
 			MiniTablineVisible = { link = "TabLine" },
 			MiniTablineHidden = { link = "MiniTablineVisible" },
 			MiniTablineModifiedCurrent = {
-				bg = O.transparent and U.lighten(colors.background, 20) or colors.background,
+				bg = O.transparent_background and U.lighten(colors.background, 20) or colors.background,
 				fg = U.blend(colors.color1, colors.color3, 0.5),
 				bold = true,
 				italic = true,
