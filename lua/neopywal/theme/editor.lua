@@ -14,9 +14,14 @@ M.get = function(colors)
 				or colors.background,
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
-		NormalFloat = { bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background }, -- Normal text in floating windows.
+		NormalFloat = { bg = O.transparent and vim.o.winblend == 0 and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { link = "NormalFloat" }, -- Border used in floating windows.
-		FloatTitle = { fg = colors.color2, bold = true, italic = true }, -- Title text in floating windows.
+		FloatTitle = {
+			bg = O.transparent and vim.o.winblend == 0 and colors.none or colors.background,
+			fg = colors.color2,
+			bold = true,
+			italic = true,
+		}, -- Title text in floating windows.
 		Comment = { fg = colors.color8, italic = true }, -- any comment
 		NonText = { fg = colors.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 		EndOfBuffer = { fg = O.show_end_of_buffer and colors.color8 or colors.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
@@ -90,7 +95,7 @@ M.get = function(colors)
 		--: }}}
 		--: Pmenu {{{
 		Pmenu = {
-			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none
+			bg = O.transparent and vim.o.pumblend == 0 and colors.none
 				or U.blend(colors.background, colors.foreground, 0.85),
 		}, -- Popup menu: normal item.
 		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), bold = true, italic = true }, -- Popup menu: selected item.
