@@ -232,7 +232,7 @@ require("neopywal").setup({
     dim_inactive = true,
 
     -- Apply colorscheme for Neovim's terminal.
-    terminal = true,
+    terminal_colors = true,
 
     -- Shows the '~' characters after the end of buffers.
     show_end_of_buffer = false,

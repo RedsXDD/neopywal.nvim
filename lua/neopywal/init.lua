@@ -19,7 +19,7 @@ local default_options = {
 	dim_inactive = true,
 
 	-- Apply colorscheme for Neovim's terminal.
-	terminal = true,
+	terminal_colors = true,
 
 	-- Shows the '~' characters after the end of buffers.
 	show_end_of_buffer = false,
@@ -191,7 +191,7 @@ function M.load()
 		user_highlights = user_highlights(colors)
 	end
 
-	if M.options.terminal == true then
+	if M.options.terminal_colors == true then
 		local terminal_theme = require("neopywal.theme.terminal").get(colors)
 		for color_option, color in pairs(terminal_theme) do
 			vim.g[color_option] = color
