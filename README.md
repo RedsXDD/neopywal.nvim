@@ -214,7 +214,7 @@ There is no need to call `setup` if you don't want to change the default options
 
 ```lua
 require("neopywal").setup({
-    -- Used a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
+    -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
     -- pywal template at `~/.cache/wal/colors-wal.vim`
     use_wallust = false,
 
@@ -225,7 +225,7 @@ require("neopywal").setup({
     -- With this option you can overwrite all the base colors the colorscheme uses.
     custom_colors = {},
 
-    -- With this option you can overwrite any and all highlight groups set by the colorscheme.
+    -- With this option you can overwrite any highlight groups set by the colorscheme.
     custom_highlights = {},
 
     -- Dims the background when another window is focused.
@@ -330,7 +330,7 @@ Color definitions can be overwritten using the `custom_colors` option, for examp
 
 ```lua
 require("neopywal").setup({
-    -- Here's a color template for the catppuccin colorscheme:
+    -- Here's an example color template for the catppuccin colorscheme:
     custom_colors = {
         background = "#1E1E2E",
         foreground = "#CDD6F4",
@@ -367,7 +367,7 @@ require("neopywal").setup({
 })
 ```
 
-Custom color variables are gonna be automatically exported with the `get_colors()` function and can used normally when using the `get_colors()` function or when defining custom highlight groups.
+Custom color variables are gonna be automatically exported with the `get_colors()` function and can used normally when using it to import a colors dictionary.
 
 ## Customizing highlight groups.
 
@@ -397,8 +397,6 @@ require("neopywal").setup({
     end
 })
 ```
-
-This would assign the background property for the `Normal` highlight group the `none` color variable, essentially making the Neovim background transparent.
 
 ## Importing colors
 
