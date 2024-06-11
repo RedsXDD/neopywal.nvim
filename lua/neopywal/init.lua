@@ -105,27 +105,27 @@ function M.get_colors()
 			vim.log.levels.WARN
 		)
 
-		-- Reference: https://github.com/joshdick/onedark.vim
+		-- Reference: https://github.com/catppuccin/catppuccin
 		vim.cmd([[
-			let background = "#282C34"
-			let foreground = "#C8CCD4"
-			let cursor = "#C8CCD4"
-			let color0 = "#282C34"
-			let color1 = "#E06C75"
-			let color2 = "#98C379"
-			let color3 = "#E5C07B"
-			let color4 = "#61AFEF"
-			let color5 = "#C678DD"
-			let color6 = "#56B6C2"
-			let color7 = "#ABB2BF"
-			let color8 = "#545862"
-			let color9 = "#E06C75"
-			let color10 = "#98C379"
-			let color11 = "#E5C07B"
-			let color12 = "#61AFEF"
-			let color13 = "#C678DD"
-			let color14 = "#56B6C2"
-			let color15 = "#C8CCD4"
+			let background = "#1E1E2E",
+			let foreground = "#CDD6F4",
+			let cursor = "#F5E0DC",
+			let color0 = "#45475A",
+			let color1 = "#F38BA8",
+			let color2 = "#A6E3A1",
+			let color3 = "#F9E2AF",
+			let color4 = "#89B4FA",
+			let color5 = "#F5C2E7",
+			let color6 = "#94E2D5",
+			let color7 = "#BAC2DE",
+			let color8 = "#585B70",
+			let color9 = "#F38BA8",
+			let color10 = "#A6E3A1",
+			let color11 = "#F9E2AF",
+			let color12 = "#89B4FA",
+			let color13 = "#F5C2E7",
+			let color14 = "#94E2D5",
+			let color15 = "#A6ADC8",
 		]])
 	end
 
