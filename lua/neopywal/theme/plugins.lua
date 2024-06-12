@@ -206,7 +206,13 @@ M.get = function(colors)
 				fg = colors.color6,
 				styles = { "bold" },
 			}, -- Used for "Hint" diagnostic virtual text
+			DiagnosticVirtualTextOk = {
+				bg = U.blend(colors.color2, colors.background, 0.2),
+				fg = colors.color2,
+				styles = { "bold" },
+			}, -- Used for "Ok" diagnostic virtual text
 
+			DiagnosticUnderlineOk = { sp = colors.color2, styles = { "undercurl" } }, -- Used to underline "Ok" diagnostics
 			DiagnosticUnderlineError = { sp = colors.color1, styles = { "undercurl" } }, -- Used to underline "Error" diagnostics
 			DiagnosticUnderlineWarn = { sp = U.blend(colors.color1, colors.color3, 0.5), styles = { "undercurl" } }, -- Used to underline "Warning" diagnostics
 			DiagnosticUnderlineInfo = { sp = colors.foreground, styles = { "undercurl" } }, -- Used to underline "Information" diagnostics

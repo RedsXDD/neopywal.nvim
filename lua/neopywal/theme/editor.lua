@@ -213,6 +213,7 @@ M.get = function(colors)
 		rainbow6 = { fg = colors.color5 },
 		--: }}}
 		--: Diagnostics {{{
+		DiagnosticOk = { fg = colors.color2, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		DiagnosticError = { fg = colors.color1, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		DiagnosticWarn = { fg = U.blend(colors.color1, colors.color3, 0.5), styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		DiagnosticInfo = { fg = colors.foreground, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
