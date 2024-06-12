@@ -41,7 +41,7 @@ M.get = function(colors)
 		--: }}}
 		--: Types {{{
 		["@type"] = { link = "Type" }, -- For types.
-		["@type.builtin"] = { fg = colors.color4, italic = true }, -- For builtin types.
+		["@type.builtin"] = { fg = colors.color4, styles = { "italic" } }, -- For builtin types.
 		["@type.definition"] = { link = "Typedef" },
 		["@type.qualifier"] = { link = "@keyword.modifier" },
 		["@attribute"] = { link = "Constant" }, -- attribute annotations (e.g. Python decorators)
@@ -121,7 +121,7 @@ M.get = function(colors)
 		--: }}}
 		--: Language specific {{{
 		--: Bash {{{
-		["@function.builtin.bash"] = { italic = true },
+		["@function.builtin.bash"] = { styles = { "italic" } },
 		--: }}}
 		--: JS & derivative {{{
 		["@keyword.export"] = { fg = colors.color6 },
@@ -208,7 +208,7 @@ M.get = function(colors)
 		["@lsp.type.selfTypeKeyword"] = { link = "@variable.builtin" },
 		["@lsp.type.string"] = { link = "@string" },
 		["@lsp.type.typeAlias"] = { link = "@type.definition" },
-		["@lsp.type.unresolvedReference"] = { link = "Error", undercurl = true },
+		["@lsp.type.unresolvedReference"] = { link = "Error", styles = { "undercurl" } },
 		["@lsp.type.variable"] = {}, -- use treesitter styles for regular variables
 		["@lsp.typemod.class.defaultLibrary"] = { link = "@type.builtin" },
 		["@lsp.typemod.enum.defaultLibrary"] = { link = "@type.builtin" },

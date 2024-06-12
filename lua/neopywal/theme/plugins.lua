@@ -41,9 +41,9 @@ M.get = function(colors)
 		{},
 		--: neoclide/coc.nvim {{{
 		apply_plugin("coc", {
-			CocHighlightText = { bold = true },
-			CocHoverRange = { bold = true, underline = true },
-			CocHintHighlight = { fg = colors.color2, undercurl = true },
+			CocHighlightText = { styles = { "bold" } },
+			CocHoverRange = { styles = { "bold", "underline" } },
+			CocHintHighlight = { fg = colors.color2, styles = { "undercurl" } },
 			CocErrorFloat = { bg = colors.color8, fg = colors.color1 },
 			CocWarningFloat = { bg = colors.color8, fg = colors.color3 },
 			CocInfoFloat = { bg = colors.color8, fg = colors.color4 },
@@ -53,9 +53,9 @@ M.get = function(colors)
 			CocWarningSign = { fg = colors.color3 },
 			CocInfoSign = { fg = colors.color4 },
 			CocHintSign = { link = "Label" },
-			CocErrorHighlight = { fg = colors.color1, undercurl = true },
-			CocWarningHighlight = { fg = colors.color3, undercurl = true },
-			CocInfoHighlight = { fg = colors.color4, undercurl = true },
+			CocErrorHighlight = { fg = colors.color1, styles = { "undercurl" } },
+			CocWarningHighlight = { fg = colors.color3, styles = { "undercurl" } },
+			CocInfoHighlight = { fg = colors.color4, styles = { "undercurl" } },
 			CocWarningVirtualText = { fg = colors.color8 },
 			CocErrorVirtualText = { fg = colors.color8 },
 			CocInfoVirtualText = { fg = colors.color8 },
@@ -87,9 +87,9 @@ M.get = function(colors)
 		--: }}}
 		--: dense-analysis/ale {{{
 		apply_plugin("ale", {
-			ALEError = { fg = colors.color1, undercurl = true },
-			ALEWarning = { fg = colors.color3, undercurl = true },
-			ALEInfo = { fg = colors.color4, undercurl = true },
+			ALEError = { fg = colors.color1, styles = { "undercurl" } },
+			ALEWarning = { fg = colors.color3, styles = { "undercurl" } },
+			ALEInfo = { fg = colors.color4, styles = { "undercurl" } },
 			ALEErrorSign = { fg = colors.color1 },
 			ALEWarningSign = { fg = colors.color3 },
 			ALEInfoSign = { fg = colors.color4 },
@@ -169,9 +169,9 @@ M.get = function(colors)
 			-- These groups are for the native LSP client. Some other LSP clients may
 			-- use these groups, or use their own. Consult your LSP client's documentation.
 
-			LspReferenceText = { bold = true }, -- used for highlighting "text" references
-			LspReferenceRead = { bold = true }, -- used for highlighting "read" references
-			LspReferenceWrite = { bold = true }, -- used for highlighting "write" references
+			LspReferenceText = { styles = { "bold" } }, -- used for highlighting "text" references
+			LspReferenceRead = { styles = { "bold" } }, -- used for highlighting "read" references
+			LspReferenceWrite = { styles = { "bold" } }, -- used for highlighting "write" references
 			LspInlayHint = { link = "NonText" },
 			LspInfoTitle = { link = "Title" },
 			LspInfoTip = { link = "Comment" },
@@ -189,28 +189,28 @@ M.get = function(colors)
 			DiagnosticVirtualTextError = {
 				bg = U.blend(colors.color1, colors.background, 0.2),
 				fg = colors.color1,
-				bold = true,
+				styles = { "bold" },
 			}, -- Used for "Error" diagnostic virtual text
 			DiagnosticVirtualTextWarn = {
 				bg = U.blend(U.blend(colors.color1, colors.color3, 0.5), colors.background, 0.2),
 				fg = U.blend(colors.color1, colors.color3, 0.5),
-				bold = true,
+				styles = { "bold" },
 			}, -- Used for "Warning" diagnostic virtual text
 			DiagnosticVirtualTextInfo = {
 				bg = U.blend(colors.foreground, colors.background, 0.2),
 				fg = colors.foreground,
-				bold = true,
+				styles = { "bold" },
 			}, -- Used for "Information" diagnostic virtual text
 			DiagnosticVirtualTextHint = {
 				bg = U.blend(colors.color6, colors.background, 0.2),
 				fg = colors.color6,
-				bold = true,
+				styles = { "bold" },
 			}, -- Used for "Hint" diagnostic virtual text
 
-			DiagnosticUnderlineError = { sp = colors.color1, undercurl = true }, -- Used to underline "Error" diagnostics
-			DiagnosticUnderlineWarn = { sp = U.blend(colors.color1, colors.color3, 0.5), undercurl = true }, -- Used to underline "Warning" diagnostics
-			DiagnosticUnderlineInfo = { sp = colors.foreground, undercurl = true }, -- Used to underline "Information" diagnostics
-			DiagnosticUnderlineHint = { sp = colors.color6, undercurl = true }, -- Used to underline "Hint" diagnostics
+			DiagnosticUnderlineError = { sp = colors.color1, styles = { "undercurl" } }, -- Used to underline "Error" diagnostics
+			DiagnosticUnderlineWarn = { sp = U.blend(colors.color1, colors.color3, 0.5), styles = { "undercurl" } }, -- Used to underline "Warning" diagnostics
+			DiagnosticUnderlineInfo = { sp = colors.foreground, styles = { "undercurl" } }, -- Used to underline "Information" diagnostics
+			DiagnosticUnderlineHint = { sp = colors.color6, styles = { "undercurl" } }, -- Used to underline "Hint" diagnostics
 		}),
 		--: }}}
 		--: Lazy.nvim {{{
@@ -228,11 +228,11 @@ M.get = function(colors)
 			LazyDimmed = { link = (O.dim_inactive and "NormalNC" or "Conceal") },
 			LazyCommitType = { link = "Title" },
 			LazyCommitIssue = { link = "Number" },
-			LazyCommitScope = { italic = true },
+			LazyCommitScope = { styles = { "italic" } },
 			LazyCommit = { link = "Identifier" },
-			LazyH1 = { bg = U.blend(colors.background, colors.foreground, 0.7), bold = true }, -- Non-selected buttons.
-			LazyH2 = { bold = true },
-			LazyButton = { bg = U.blend(colors.background, colors.foreground, 0.9), bold = true }, -- Selected buttons.
+			LazyH1 = { bg = U.blend(colors.background, colors.foreground, 0.7), styles = { "bold" } }, -- Non-selected buttons.
+			LazyH2 = { styles = { "bold" } },
+			LazyButton = { bg = U.blend(colors.background, colors.foreground, 0.9), styles = { "bold" } }, -- Selected buttons.
 			LazyReasonRuntime = { link = "Macro" },
 			LazyComment = { link = "Comment" },
 			LazyReasonRequire = { link = "Include" },
@@ -276,8 +276,8 @@ M.get = function(colors)
 			NeoTreeTitleBar = { bg = colors.color4, fg = colors.background },
 			NeoTreeFileNameOpened = { fg = colors.color5 },
 			NeoTreeDimText = { link = "Comment" },
-			NeoTreeFilterTerm = { fg = colors.color2, bold = true },
-			NeoTreeTabActive = { fg = colors.color13, bold = true },
+			NeoTreeFilterTerm = { fg = colors.color2, styles = { "bold" } },
+			NeoTreeTabActive = { fg = colors.color13, styles = { "bold" } },
 			NeoTreeTabInactive = { bg = colors.color8, fg = colors.color7 },
 			NeoTreeTabSeparatorActive = { fg = colors.background },
 			NeoTreeTabSeparatorInactive = { bg = colors.color8, fg = colors.color8 },
@@ -291,14 +291,14 @@ M.get = function(colors)
 			NeoTreePreview = { link = "Search" },
 			NeoTreeGitRenamed = { link = "NeoTreeGitModified" },
 			NeoTreeFileStats = { link = "Comment" },
-			NeoTreeFileStatsHeader = { link = "Comment", bold = true },
+			NeoTreeFileStatsHeader = { link = "Comment", styles = { "bold" } },
 			NeoTreeSignColumn = { link = "SignColumn" },
 			NeoTreeStatusLine = { link = "StatusLine" },
 			NeoTreeWinSeparator = { link = "WinSeparator" },
 			NeoTreeEndOfBuffer = { link = "EndOfBuffer" },
 			NeoTreeFloatNormal = { link = "NormalFloat" },
 			NeoTreeBufferNumber = { link = "SpecialChar" },
-			NeoTreeMessage = { link = "Comment", italic = true },
+			NeoTreeMessage = { link = "Comment", styles = { "italic" } },
 			NeoTreeFadeText1 = { link = "Comment" },
 			NeoTreeFadeText2 = { link = "Comment" },
 		}),
@@ -323,7 +323,7 @@ M.get = function(colors)
 			DashboardFooter = { fg = colors.color4 },
 			DashboardKey = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			DashboardDesc = { fg = colors.color6 },
-			DashboardIcon = { fg = colors.color6, bold = true },
+			DashboardIcon = { fg = colors.color6, styles = { "bold" } },
 		}),
 		--: }}}
 		--: goolord/alpha-nvim {{{
@@ -357,7 +357,7 @@ M.get = function(colors)
 		--: }}}
 		--: mbbill/undotree {{{
 		apply_plugin("undotree", {
-			UndotreeSavedBig = { fg = colors.color1, bold = true },
+			UndotreeSavedBig = { fg = colors.color1, styles = { "bold" } },
 			UndotreeNode = { fg = colors.color4 },
 			UndotreeNodeCurrent = { fg = colors.color5 },
 			UndotreeSeq = { fg = colors.color2 },
@@ -374,10 +374,10 @@ M.get = function(colors)
 			TelescopeNormal = { link = "Normal" },
 			TelescopeBorder = { link = "FloatBorder" },
 			TelescopeSelection = { link = "CursorLine" },
-			TelescopeMatching = { fg = colors.color4, bold = true },
+			TelescopeMatching = { fg = colors.color4, styles = { "bold" } },
 			TelescopePromptBorder = { link = "TelescopeBorder" },
 			TelescopePromptNormal = { fg = colors.foreground },
-			TelescopePromptPrefix = { fg = colors.color4, bold = true },
+			TelescopePromptPrefix = { fg = colors.color4, styles = { "bold" } },
 			TelescopePreviewTitle = { fg = colors.color3 },
 			TelescopePromptTitle = { fg = colors.color4 },
 			TelescopeResultsTitle = { fg = colors.color6 },
@@ -437,12 +437,12 @@ M.get = function(colors)
 		--: }}}
 		--: mini.statusline {{{
 		apply_plugin("mini.statusline", {
-			MiniStatuslineModeNormal = { bg = colors.color4, fg = colors.background, bold = true },
-			MiniStatuslineModeVisual = { bg = colors.color5, fg = colors.background, bold = true },
-			MiniStatuslineModeInsert = { bg = colors.color6, fg = colors.background, bold = true },
-			MiniStatuslineModeCommand = { bg = colors.color1, fg = colors.background, bold = true },
-			MiniStatuslineModeReplace = { bg = colors.color2, fg = colors.background, bold = true },
-			MiniStatuslineModeOther = { bg = colors.color3, fg = colors.background, bold = true },
+			MiniStatuslineModeNormal = { bg = colors.color4, fg = colors.background, styles = { "bold" } },
+			MiniStatuslineModeVisual = { bg = colors.color5, fg = colors.background, styles = { "bold" } },
+			MiniStatuslineModeInsert = { bg = colors.color6, fg = colors.background, styles = { "bold" } },
+			MiniStatuslineModeCommand = { bg = colors.color1, fg = colors.background, styles = { "bold" } },
+			MiniStatuslineModeReplace = { bg = colors.color2, fg = colors.background, styles = { "bold" } },
+			MiniStatuslineModeOther = { bg = colors.color3, fg = colors.background, styles = { "bold" } },
 			MiniStatuslineModeDevInfo = { link = "StatusLine" },
 			MiniStatuslineModeFilename = { link = "StatusLineNC" },
 			MiniStatuslineModeFileInfo = { link = "StatusLineNC" },
@@ -458,8 +458,7 @@ M.get = function(colors)
 			MiniTablineModifiedCurrent = {
 				bg = O.transparent_background and U.lighten(colors.background, 20) or colors.background,
 				fg = U.blend(colors.color1, colors.color3, 0.5),
-				bold = true,
-				italic = true,
+				styles = { "bold", "italic" },
 			},
 			MiniTablineModifiedVisible = { link = "MiniTablineVisible" },
 			MiniTablineModifiedHidden = { link = "MiniTablineModifiedVisible" },
@@ -468,7 +467,7 @@ M.get = function(colors)
 		--: }}}
 		--: mini.cursorword {{{
 		apply_plugin("mini.cursorword", {
-			MiniCursorword = { underline = true },
+			MiniCursorword = { styles = { "underline" } },
 			MiniCursorwordCurrent = { link = "MiniCursorword" },
 		}),
 		--: }}}
@@ -486,12 +485,11 @@ M.get = function(colors)
 		--: }}}
 		--: mini.hipatterns {{{
 		apply_plugin("mini.hipatterns", {
-			MiniHipatternsFixme = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
+			MiniHipatternsFixme = { bg = colors.color1, fg = colors.background, styles = { "bold", "italic" } },
 			MiniHipatternsHack = {
 				bg = U.blend(colors.color1, colors.color3, 0.5),
 				fg = colors.background,
-				bold = true,
-				italic = true,
+				styles = { "bold", "italic" },
 			},
 			MiniHipatternsTodo = { link = "Todo" },
 			MiniHipatternsNote = { link = "Note" },
@@ -517,13 +515,13 @@ M.get = function(colors)
 		--: mini.starter: {{{
 		apply_plugin("mini.starter", {
 			MiniStarterCurrent = { link = "CursorLine" },
-			MiniStarterHeader = { fg = colors.color4, bold = true, italic = true },
-			MiniStarterFooter = { fg = colors.color5, bold = true, italic = true },
+			MiniStarterHeader = { fg = colors.color4, styles = { "bold", "italic" } },
+			MiniStarterFooter = { fg = colors.color5, styles = { "bold", "italic" } },
 			MiniStarterInactive = { link = "Comment" },
 			MiniStarterItem = { link = "Normal" },
 			MiniStarterItemBullet = { link = "Delimiter" },
-			MiniStarterItemPrefix = { fg = colors.foreground, bold = true, italic = true },
-			MiniStarterSection = { fg = colors.color6, bold = true, italic = true },
+			MiniStarterItemPrefix = { fg = colors.foreground, styles = { "bold", "italic" } },
+			MiniStarterSection = { fg = colors.color6, styles = { "bold", "italic" } },
 			MiniStarterQuery = { fg = colors.color1 },
 		}),
 		--: }}}

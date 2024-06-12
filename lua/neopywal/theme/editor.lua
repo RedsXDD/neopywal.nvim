@@ -25,13 +25,12 @@ M.get = function(colors)
 				or O.transparent_background and colors.none
 				or colors.background,
 			fg = colors.color2,
-			bold = true,
-			italic = true,
+			styles = { "bold", "italic" },
 		}, -- Title text in floating windows.
 		Comment = { fg = colors.color8, styles = O.styles.comments or {} }, -- any comment
 		NonText = { fg = colors.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 		EndOfBuffer = { fg = O.show_end_of_buffer and colors.color8 or colors.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
-		Title = { fg = colors.color4, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
+		Title = { fg = colors.color4, styles = { "bold" } }, -- titles for output from ":set all", ":autocmd" etc.
 		VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
 		WinSeparator = {
 			bg = O.transparent_background and colors.none
@@ -39,12 +38,11 @@ M.get = function(colors)
 				or colors.background,
 			fg = colors.color8,
 		}, -- the column separating vertically split windows
-		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, bold = true }, -- Visual mode selection.
+		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, styles = { "bold" } }, -- Visual mode selection.
 		VisualNOS = {
 			bg = U.blend(colors.color5, colors.background, 0.2),
 			fg = colors.color5,
-			bold = true,
-			strikethrough = true,
+			styles = { "bold", "strikethrough" },
 		}, -- Visual mode selection when vim is "Not Owning the Selection".
 		healthError = { fg = colors.color1 },
 		healthSuccess = { fg = colors.color2 },
@@ -84,20 +82,20 @@ M.get = function(colors)
 		MatchParen = { bg = colors.color8 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
 		--: }}}
 		--: Prompt {{{
-		ErrorMsg = { fg = colors.color1, bold = true, underline = true }, -- error messages on the command line.
-		WarningMsg = { fg = colors.color3, bold = true }, -- warning messages.
-		ModeMsg = { fg = colors.foreground, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ").
-		MoreMsg = { fg = colors.color4, bold = true }, -- |more-prompt|
-		WildMenu = { bg = colors.color4, fg = colors.background, bold = true }, -- Current match in 'wildmenu' completion.
+		ErrorMsg = { fg = colors.color1, styles = { "bold", "underline" } }, -- error messages on the command line.
+		WarningMsg = { fg = colors.color3, styles = { "bold" } }, -- warning messages.
+		ModeMsg = { fg = colors.foreground, styles = { "bold" } }, -- 'showmode' message (e.g., "-- INSERT -- ").
+		MoreMsg = { fg = colors.color4, styles = { "bold" } }, -- |more-prompt|
+		WildMenu = { bg = colors.color4, fg = colors.background, styles = { "bold" } }, -- Current match in 'wildmenu' completion.
 		Question = { fg = colors.color3 }, -- |hit-enter| prompt and yes/no questions
-		QuickFixLine = { fg = colors.color4, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+		QuickFixLine = { fg = colors.color4, styles = { "bold" } }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
 		MsgArea = { fg = U.darken(colors.foreground, 20) }, -- Area for messages and cmdline
 		MsgSeparator = { link = "Normal" }, -- Separator for scrolled messages, `msgsep` flag of 'display'
 		--: }}}
 		--: Search {{{
-		Search = { bg = colors.color2, fg = colors.background, bold = true }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
-		IncSearch = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-		Substitute = { bg = colors.color4, fg = colors.background, bold = true }, -- |:substitute| replacement text highlighting
+		Search = { bg = colors.color2, fg = colors.background, styles = { "bold" } }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+		IncSearch = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, styles = { "bold" } }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+		Substitute = { bg = colors.color4, fg = colors.background, styles = { "bold" } }, -- |:substitute| replacement text highlighting
 		--: }}}
 		--: Pmenu {{{
 		Pmenu = {
@@ -105,15 +103,15 @@ M.get = function(colors)
 				or O.transparent_background and colors.none
 				or U.blend(colors.background, colors.foreground, 0.85),
 		}, -- Popup menu: normal item.
-		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), bold = true, italic = true }, -- Popup menu: selected item.
+		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), styles = { "bold", "italic" } }, -- Popup menu: selected item.
 		PmenuSbar = { bg = U.blend(colors.background, colors.foreground, 0.95) }, -- Popup menu: scrollbar.
 		PmenuThumb = { link = "PmenuSel" }, -- Popup menu: Thumb of the scrollbar.
 		--: }}}
 		--: Spell {{{
-		SpellBad = { fg = colors.color1, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-		SpellCap = { fg = colors.color3, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-		SpellLocal = { fg = colors.foreground, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-		SpellRare = { fg = colors.color6, undercurl = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+		SpellBad = { fg = colors.color1, styles = { "undercurl" } }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+		SpellCap = { fg = colors.color3, styles = { "undercurl" } }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+		SpellLocal = { fg = colors.foreground, styles = { "undercurl" } }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+		SpellRare = { fg = colors.color6, styles = { "undercurl" } }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
 		--: }}}
 		--: Statusline {{{
 		StatusLine = {
@@ -134,8 +132,7 @@ M.get = function(colors)
 		TabLineSel = {
 			bg = O.transparent_background and U.lighten(colors.background, 20) or colors.background,
 			fg = colors.foreground,
-			bold = true,
-			italic = true,
+			styles = { "bold", "italic" },
 		}, -- tab pages line, active tab page label.
 		--: }}}
 		--: Syntax {{{
@@ -148,7 +145,7 @@ M.get = function(colors)
 		]]
 		--: Variable types {{{
 		Variable = { fg = colors.color4, styles = O.styles.variables or {} }, -- (preferred) any variable.
-		Constant = { fg = colors.color3, italic = true }, -- (preferred) any constant
+		Constant = { fg = colors.color3, styles = { "italic" } }, -- (preferred) any constant
 		String = { fg = colors.color3, styles = O.styles.strings or {} }, -- a string constant: "this is a string"
 		Character = { fg = colors.color3 }, -- a character constant: 'c', '\n'
 		Number = { fg = colors.color5, styles = O.styles.numbers or {} }, -- a number constant: 234, 0xff
@@ -185,23 +182,27 @@ M.get = function(colors)
 		SecialChar = { fg = colors.color5 }, -- special character in a constant
 		Tag = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- you can use CTRL-] on this
 		Delimiter = { fg = colors.foreground }, -- character that needs attention
-		SpecialComment = { fg = colors.color8, italic = true }, -- special things inside a comment
+		SpecialComment = { fg = colors.color8, styles = { "italic" } }, -- special things inside a comment
 		--: }}}
 		--: Text styles {{{
-		Underlined = { underline = true }, -- (preferred) text that stands out, HTML links
-		Bold = { bold = true }, -- (preferred) any bold text
-		Italic = { italic = true }, -- (preferred) any italic text
-		Strikethrough = { strikethrough = true }, -- (preferred) any strikethrough text
+		Underlined = { styles = { "underline" } }, -- (preferred) text that stands out, HTML links
+		Bold = { styles = { "bold" } }, -- (preferred) any bold text
+		Italic = { styles = { "italic" } }, -- (preferred) any italic text
+		Strikethrough = { styles = { "strikethrough" } }, -- (preferred) any strikethrough text
 		--: }}}
 		--: Misc {{{
 		Ignore = { fg = colors.color8 }, -- (preferred) left blank, hidden |hl-Ignore|
 		Error = { fg = colors.color1 }, -- (preferred) any erroneous construct
-		Todo = { bg = colors.color4, fg = colors.background, bold = true, italic = true }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-		Note = { bg = colors.foreground, fg = colors.background, bold = true, italic = true },
-		Hint = { bg = colors.color6, fg = colors.background, bold = true, italic = true },
-		Warn = { bg = U.blend(colors.color1, colors.color3, 0.5), fg = colors.background, bold = true, italic = true },
-		Err = { bg = colors.color1, fg = colors.background, bold = true, italic = true },
-		URLlink = { fg = colors.color4, italic = true, underline = true },
+		Todo = { bg = colors.color4, fg = colors.background, styles = { "bold", "italic" } }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+		Note = { bg = colors.foreground, fg = colors.background, styles = { "bold", "italic" } },
+		Hint = { bg = colors.color6, fg = colors.background, styles = { "bold", "italic" } },
+		Warn = {
+			bg = U.blend(colors.color1, colors.color3, 0.5),
+			fg = colors.background,
+			styles = { "bold", "italic" },
+		},
+		Err = { bg = colors.color1, fg = colors.background, styles = { "bold", "italic" } },
+		URLlink = { fg = colors.color4, styles = { "italic", "underline" } },
 
 		-- Rainbow
 		rainbow1 = { fg = colors.color1 },
@@ -212,11 +213,11 @@ M.get = function(colors)
 		rainbow6 = { fg = colors.color5 },
 		--: }}}
 		--: Diagnostics {{{
-		DiagnosticError = { fg = colors.color1, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticWarn = { fg = U.blend(colors.color1, colors.color3, 0.5), bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticInfo = { fg = colors.foreground, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticHint = { fg = colors.color6, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticUnnecessary = { fg = colors.color8, bold = true }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticError = { fg = colors.color1, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticWarn = { fg = U.blend(colors.color1, colors.color3, 0.5), styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticInfo = { fg = colors.foreground, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticHint = { fg = colors.color6, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticUnnecessary = { fg = colors.color8, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		--: }}}
 		--: }}}
 	}
