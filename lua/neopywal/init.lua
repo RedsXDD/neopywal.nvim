@@ -241,7 +241,7 @@ function M.load()
 	end
 
 	-- Clear existing highlights if not using the default colorscheme.
-	if vim.g.colors_name ~= "neopywal" then
+	if vim.g.colors_name then
 		vim.cmd.hi("clear")
 	end
 	vim.g.colors_name = "neopywal"
