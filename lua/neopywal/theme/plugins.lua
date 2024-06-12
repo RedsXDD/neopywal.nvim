@@ -100,6 +100,12 @@ M.get = function(colors)
 			ALEVirtualTextStyleWarning = { link = "ALEVirtualTextWarning" },
 		}),
 		--: }}}
+		--: kdheepak/lazygit.nvim {{{
+		apply_plugin("lazygit", {
+			LazyGitBorder = { link = "FloatBorder" },
+			LazyGitFloat = { link = "NormalFloat" },
+		}),
+		--: }}}
 		--: rcarriga/nvim-notify {{{
 		{ NotifyBackground = { bg = colors.background } },
 		--: }}}

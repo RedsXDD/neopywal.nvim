@@ -107,6 +107,7 @@ local default_options = {
 		ale = true,
 		alpha = true,
 		nvim_cmp = true,
+		lazygit = true,
 		coc = true,
 		dashboard = true,
 		git_gutter = true,
