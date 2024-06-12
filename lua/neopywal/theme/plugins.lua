@@ -4,6 +4,15 @@ local M = {}
 local U = require("neopywal.util")
 local O = require("neopywal").options
 
+--: apply_plugin() explanation {{{
+--[[
+	The apply_plugin function takes an option string and a highlights table as input, and returns a boolean value
+	indicating whether the plugin highlights should be applied or not. It does this by parsing the option string to navigate
+	through the O.plugins table, and returns the value of the final key. If the value is not a boolean, or
+	if any part of the option string is not a valid key in the plugins table, an empty table is returned.
+	Otherwise it returns the highlights table specified by the second argument.
+--]]
+--: }}}
 local function apply_plugin(option, highlights)
 	local keys = {}
 	for key in option:gmatch("[^.]+") do

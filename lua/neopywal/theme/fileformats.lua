@@ -4,6 +4,13 @@ local M = {}
 local U = require("neopywal.util")
 local O = require("neopywal").options.fileformats
 
+--: apply_fileformat() explanation {{{
+--[[
+	The apply_fileformat function takes an option string and a highlights table as input, and returns a boolean value
+	indicating whether the file format highlights should be applied or not. It does this by checking if the option exists in the
+	O table and is a boolean value. If the option is true, it returns the highlights table, otherwise an empty table.
+--]]
+--: }}}
 local function apply_fileformat(option, highlights)
 	if type(O[option]) ~= "boolean" then
 		return {}

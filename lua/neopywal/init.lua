@@ -133,6 +133,30 @@ local default_options = {
 }
 M.options = default_options
 
+--: M.get_colors() explanation {{{
+--[[
+	Returns a table of colors to be used by the plugin.
+
+	The get_colors function determines the colors to use by Neopywal based on the user's configuration and
+	the default colors set by the Pywal/Wallust colorscheme file.
+
+	It first checks if the user has opted to use the Wallust colorscheme, and
+	sources the corresponding colorscheme file. If the file cannot be loaded,
+	it notifies the user and then falls back to a built-in catppuccin colorscheme.
+
+	The function then merges the user's custom colors (if any) with the determined
+	colors and returns a colors dictionary table.
+
+	The returned table contains the following colors:
+	- none
+	- transparent
+	- background
+	- foreground
+	- cursor
+	- color0 to color15
+	- any additional color variable set by the user.
+--]]
+--: }}}
 function M.get_colors()
 	---@diagnostic disable: param-type-mismatch
 	local colorscheme_file = ""
@@ -200,13 +224,23 @@ function M.get_colors()
 	})
 end
 
+--: M.load() explanation {{{
+--[[
+	The M.load function is responsible for loading the Neopywal colorscheme.
+	It sets up the colorscheme, clears any existing highlights, and applies
+	the theme to the editor.
+	It requires the M.setup function to have been called previously.
+	This is the function that gets called when running `:colorscheme neopywal`.
+--]]
+--: }}}
 local did_setup = false
 function M.load()
+	-- Ensure setup() has been called.
 	if not did_setup then
 		M.setup()
 	end
 
-	-- Only needed to clear when not the default colorscheme.
+	-- Clear existing highlights if not using the default colorscheme.
 	if vim.g.colors_name ~= "neopywal" then
 		vim.cmd.hi("clear")
 	end
@@ -215,11 +249,13 @@ function M.load()
 	vim.o.termguicolors = true
 	local colors = M.get_colors()
 
+	-- Get user-defined highlights.
 	local user_highlights = M.options.custom_highlights
 	if type(user_highlights) == "function" then
 		user_highlights = user_highlights(colors)
 	end
 
+	-- Apply terminal colors if enabled.
 	if M.options.terminal_colors == true then
 		local terminal_theme = require("neopywal.theme.terminal").get(colors)
 		for color_option, color in pairs(terminal_theme) do
@@ -227,6 +263,7 @@ function M.load()
 		end
 	end
 
+	-- Create the theme table by merging user highlights, editor, file formats, plugins, and treesitter theme tables.
 	local theme = vim.tbl_deep_extend(
 		"keep",
 		user_highlights,
@@ -237,49 +274,78 @@ function M.load()
 		{}
 	)
 
+	-- Apply the theme to Neovim by iterating over each highlight group and its corresponding properties.
 	for highlight_group, properties in pairs(theme) do
+		-- This if statement applies styles to a highlight group, taking into account user options to disable certain styles.
+		-- It iterates over each style in the styles table in the highlight group, sets them to true by default,
+		-- and overrides them to false if the corresponding option is set to disable the style.
 		if properties.styles then
 			for _, style in pairs(properties.styles) do
 				properties[style] = true
+
+				-- Override the italic style if the no_italic option is set to false.
 				if M.options.no_italic and style == "italic" then
 					properties[style] = false
 				end
 
+				-- Override the bold style if the no_bold option is set to false.
 				if M.options.no_bold and style == "bold" then
 					properties[style] = false
 				end
 
+				-- Override the underline style if the no_underline option is set to false.
 				if M.options.no_underline and style == "underline" then
 					properties[style] = false
 				end
 
+				-- Override the undercurl style if the no_undercurl option is set to false.
 				if M.options.no_undercurl and style == "undercurl" then
 					properties[style] = false
 				end
+
+				-- Override the strikethrough style if the no_strikethrough option is set to false.
 				if M.options.no_strikethrough and style == "strikethrough" then
 					properties[style] = false
 				end
 			end
 		end
+
+		-- Remove the styles table to avoid passing unnecessary data to vim.api.nvim_set_hl.
 		properties.styles = nil
 
 		vim.api.nvim_set_hl(0, highlight_group, properties)
 	end
 end
 
+--: M.setup() explanation {{{
+--[[
+	The setup function initializes the plugin configuration by merging user-provided settings with default options,
+	overwritting any default options with the user configuration.
+
+	If the user configuration specifies default_fileformats or default_plugins as false, all of the
+	corresponding default options for the fileformats/plugins tables will be reset.
+
+	The function also disabled the transparent option by default if the plugin is being ran inside Neovide.
+	Since Neovide doesn't handle transparancy properly, having such option enable would make all the transparent colors black by default.
+--]]
+--: }}}
 function M.setup(user_conf)
 	did_setup = true
 
-	-- Load user configuration:
+	-- Load user configuration.
 	user_conf = user_conf or {}
+
+	-- Disabled all fileformats options if default_fileformats != true.
 	if user_conf.default_fileformats == false then
 		default_options.fileformats = {}
 	end
 
+	-- Disabled all plugins options if default_plugins != true.
 	if user_conf.default_plugins == false then
 		default_options.plugins = {}
 	end
 
+	-- Create the final configuration table by combining user settings, default options, and Neovide settings
 	M.options = vim.tbl_deep_extend("keep", vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
 end
 
