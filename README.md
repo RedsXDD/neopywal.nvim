@@ -318,6 +318,7 @@ require("neopywal").setup({
     },
 
     plugins = {
+		noice = true,
         ale = true,
         alpha = true,
         nvim_cmp = true,

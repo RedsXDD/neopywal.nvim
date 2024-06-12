@@ -104,6 +104,7 @@ local default_options = {
 		zsh = true,
 	},
 	plugins = {
+		noice = true,
 		ale = true,
 		alpha = true,
 		nvim_cmp = true,
