@@ -346,7 +346,7 @@ function M.setup(user_conf)
 	end
 
 	-- Create the final configuration table by combining user settings, default options, and Neovide settings
-	M.options = vim.tbl_deep_extend("keep", vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
+	M.options = vim.tbl_deep_extend("keep", vim.g.neovide and { transparent_background = false } or {}, user_conf, default_options)
 end
 
 return M
