@@ -210,10 +210,9 @@ function M.load()
 	if vim.g.colors_name ~= "neopywal" then
 		vim.cmd.hi("clear")
 	end
-
-	vim.o.termguicolors = true
 	vim.g.colors_name = "neopywal"
 
+	vim.o.termguicolors = true
 	local colors = M.get_colors()
 
 	local user_highlights = M.options.custom_highlights
@@ -230,7 +229,6 @@ function M.load()
 
 	local theme = vim.tbl_deep_extend(
 		"keep",
-		{},
 		user_highlights,
 		require("neopywal.theme.editor").get(colors),
 		require("neopywal.theme.fileformats").get(colors),
@@ -282,8 +280,7 @@ function M.setup(user_conf)
 		default_options.plugins = {}
 	end
 
-	M.options =
-		vim.tbl_deep_extend("keep", {}, vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
+	M.options = vim.tbl_deep_extend("keep", vim.g.neovide and { transparent = false } or {}, user_conf, default_options)
 end
 
 return M

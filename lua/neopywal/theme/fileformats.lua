@@ -16,7 +16,6 @@ M.get = function(colors)
 	return vim.tbl_deep_extend(
 		"force",
 		{},
-
 		--: Markdown: {{{
 		apply_fileformat("markdown", {
 			--: builtin: {{{
