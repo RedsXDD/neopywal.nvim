@@ -22,7 +22,6 @@ end
 M.get = function(colors)
 	return vim.tbl_deep_extend(
 		"force",
-		{},
 		--: neoclide/coc.nvim {{{
 		apply_plugin("coc", {
 			CocHighlightText = { styles = { "bold" } },
