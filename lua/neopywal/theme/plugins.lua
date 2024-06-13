@@ -124,11 +124,50 @@ M.get = function(colors)
 		--: }}}
 		--: rcarriga/nvim-notify {{{
 		{
-			NotifyBackground = {
-				bg = (O.transparent_background and vim.o.winblend == 0) and "#000000"
-					or U.blend(colors.background, colors.foreground, 0.85),
-			},
+			NotifyBackground = { bg = "#000000" },
 		},
+		apply_plugin("notify", {
+			NotifyERRORBody = {
+				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
+				fg = colors.color1,
+			},
+			NotifyWARNBody = {
+				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
+				fg = U.blend(colors.color1, colors.color3, 0.5),
+			},
+			NotifyINFOBody = {
+				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
+				fg = colors.foreground,
+			},
+			NotifyDEBUGBody = {
+				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
+				fg = colors.color8,
+			},
+			NotifyTRACEBody = {
+				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
+				fg = colors.color6,
+			},
+
+			NotifyERRORBorder = { link = "NotifyERRORBody" },
+			NotifyERRORIcon = { fg = colors.color1 },
+			NotifyERRORTitle = { fg = colors.color1, styles = { "italic" } },
+
+			NotifyWARNBorder = { link = "NotifyWARNBody" },
+			NotifyWARNIcon = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			NotifyWARNTitle = { fg = U.blend(colors.color1, colors.color3, 0.5), styles = { "italic" } },
+
+			NotifyINFOBorder = { link = "NotifyINFOBody" },
+			NotifyINFOIcon = { fg = colors.foreground },
+			NotifyINFOTitle = { fg = colors.foreground, styles = { "italic" } },
+
+			NotifyDEBUGBorder = { link = "NotifyDEBUGBody" },
+			NotifyDEBUGIcon = { fg = colors.color8 },
+			NotifyDEBUGTitle = { fg = colors.color8, styles = { "italic" } },
+
+			NotifyTRACEBorder = { link = "NotifyTRACEBody" },
+			NotifyTRACEIcon = { fg = colors.color6 },
+			NotifyTRACETitle = { fg = colors.color6, styles = { "italic" } },
+		}),
 		--: }}}
 		--: airblade/vim-gitgutter {{{
 		apply_plugin("git_gutter", {

@@ -318,6 +318,7 @@ require("neopywal").setup({
     },
 
     plugins = {
+        notify = true,
         noice = true,
         ale = true,
         alpha = true,
