@@ -101,24 +101,20 @@ M.get = function(colors)
 			NoiceConfirm = { link = "NormalFloat" },
 			NoiceMini = { link = "NoiceLspProgressTitle" },
 			NoiceLspProgressTitle = {
-				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none
-					or U.blend(colors.background, colors.foreground, 0.85),
+				bg = colors.background,
 				fg = colors.foreground,
 			},
 			NoiceLspProgressClient = {
-				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none
-					or U.blend(colors.background, colors.foreground, 0.85),
+				bg = colors.background,
 				fg = colors.color4,
 				styles = { "bold" },
 			},
 			NoiceLspProgressSpinner = { link = "NoiceLspProgressClient" },
 			NoiceFormatProgressDone = {
-				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none
-					or U.blend(colors.background, colors.foreground, 0.85),
+				bg = colors.background,
 			},
 			NoiceFormatProgressTodo = {
-				bg = (O.transparent_background and vim.o.winblend == 0) and colors.none
-					or U.blend(colors.background, colors.foreground, 0.85),
+				bg = colors.background,
 			},
 		}),
 		--: }}}
