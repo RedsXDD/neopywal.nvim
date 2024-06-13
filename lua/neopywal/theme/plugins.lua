@@ -123,7 +123,12 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: rcarriga/nvim-notify {{{
-		{ NotifyBackground = { link = "NormalFloat" } },
+		{
+			NotifyBackground = {
+				bg = (O.transparent_background and vim.o.winblend == 0) and "#000000"
+					or U.blend(colors.background, colors.foreground, 0.85),
+			},
+		},
 		--: }}}
 		--: airblade/vim-gitgutter {{{
 		apply_plugin("git_gutter", {
