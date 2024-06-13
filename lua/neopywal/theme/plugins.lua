@@ -7,32 +7,16 @@ local O = require("neopywal").options
 --: apply_plugin() explanation {{{
 --[[
 	The apply_plugin function takes an option string and a highlights table as input, and returns a boolean value
-	indicating whether the plugin highlights should be applied or not. It does this by parsing the option string to navigate
-	through the O.plugins table, and returns the value of the final key. If the value is not a boolean, or
-	if any part of the option string is not a valid key in the plugins table, an empty table is returned.
-	Otherwise it returns the highlights table specified by the second argument.
+	indicating whether the plugin highlights should be applied or not. It does this by checking if the option exists in the
+	O table and is a boolean value. If the option is true, it returns the highlights table, otherwise an empty table.
 --]]
 --: }}}
 local function apply_plugin(option, highlights)
-	local keys = {}
-	for key in option:gmatch("[^.]+") do
-		table.insert(keys, key)
-	end
-
-	local value = O.plugins
-	for _, key in ipairs(keys) do
-		if type(value) == "table" and value[key] ~= nil then
-			value = value[key]
-		else
-			return {}
-		end
-	end
-
-	if type(value) ~= "boolean" then
+	if type(O.plugins[option]) ~= "boolean" then
 		return {}
 	end
 
-	return value and highlights or {}
+	return O.plugins[option] and highlights or {}
 end
 
 M.get = function(colors)
@@ -515,104 +499,6 @@ M.get = function(colors)
 			TelescopeResultsIdentifier = { link = "Identifier" },
 			TelescopeResultsLineNr = { link = "LineNr" },
 		}),
-		--: }}}
-		--: mini.nvim {{{
-		--: mini.indentscope {{{
-		apply_plugin("mini.indentscope", {
-			MiniIndentscopeSymbol = { link = "Comment" },
-			MiniIndentscopeSymbolOff = { link = "MiniIndentscopeSymbol" },
-		}),
-		--: }}}
-		--: mini.statusline {{{
-		apply_plugin("mini.statusline", {
-			MiniStatuslineModeNormal = { bg = colors.color4, fg = colors.background, styles = { "bold" } },
-			MiniStatuslineModeVisual = { bg = colors.color5, fg = colors.background, styles = { "bold" } },
-			MiniStatuslineModeInsert = { bg = colors.color6, fg = colors.background, styles = { "bold" } },
-			MiniStatuslineModeCommand = { bg = colors.color1, fg = colors.background, styles = { "bold" } },
-			MiniStatuslineModeReplace = { bg = colors.color2, fg = colors.background, styles = { "bold" } },
-			MiniStatuslineModeOther = { bg = colors.color3, fg = colors.background, styles = { "bold" } },
-			MiniStatuslineModeDevInfo = { link = "StatusLine" },
-			MiniStatuslineModeFilename = { link = "StatusLineNC" },
-			MiniStatuslineModeFileInfo = { link = "StatusLineNC" },
-			MiniStatuslineModeInactive = { link = "StatusLineNC" },
-		}),
-		--: }}}
-		--: mini.tabline {{{
-		apply_plugin("mini.tabline", {
-			MiniTablineCurrent = { link = "TabLineSel" },
-			MiniTablineFill = { link = "TabLineFill" },
-			MiniTablineVisible = { link = "TabLine" },
-			MiniTablineHidden = { link = "MiniTablineVisible" },
-			MiniTablineModifiedCurrent = {
-				bg = O.transparent_background and U.lighten(colors.background, 20) or colors.background,
-				fg = U.blend(colors.color1, colors.color3, 0.5),
-				styles = { "bold", "italic" },
-			},
-			MiniTablineModifiedVisible = { link = "MiniTablineVisible" },
-			MiniTablineModifiedHidden = { link = "MiniTablineModifiedVisible" },
-			MiniTablineTabpagesection = { link = "MiniTablineCurrent" },
-		}),
-		--: }}}
-		--: mini.cursorword {{{
-		apply_plugin("mini.cursorword", {
-			MiniCursorword = { styles = { "underline" } },
-			MiniCursorwordCurrent = { link = "MiniCursorword" },
-		}),
-		--: }}}
-		--: mini.files {{{
-		apply_plugin("mini.files", {
-			MiniFilesBorder = { link = "FloatBorder" },
-			MiniFilesBorderModified = { link = "DiagnosticWarn" },
-			MiniFilesCursorLine = { link = "CursorLine" },
-			MiniFilesDirectory = { link = "Directory" },
-			MiniFilesFile = {},
-			MiniFilesNormal = { link = "NormalFloat" },
-			MiniFilesTitle = { link = "Comment" },
-			MiniFilesTitleFocused = { link = "FloatTitle" },
-		}),
-		--: }}}
-		--: mini.hipatterns {{{
-		apply_plugin("mini.hipatterns", {
-			MiniHipatternsFixme = { bg = colors.color1, fg = colors.background, styles = { "bold", "italic" } },
-			MiniHipatternsHack = {
-				bg = U.blend(colors.color1, colors.color3, 0.5),
-				fg = colors.background,
-				styles = { "bold", "italic" },
-			},
-			MiniHipatternsTodo = { link = "Todo" },
-			MiniHipatternsNote = { link = "Note" },
-		}),
-		--: }}}
-		--: mini.pick {{{
-		apply_plugin("mini.pick", {
-			MiniPickBorder = { link = "FloatBorder" },
-			MiniPickBorderBusy = { link = "DiagnosticWarn" },
-			MiniPickBorderText = { link = "FloatTitle" },
-			MiniPickIconDirectory = { link = "Directory" },
-			MiniPickNormal = { link = "NormalFloat" },
-			MiniPickIconFile = { link = "MiniPickNormal" },
-			MiniPickHeader = { link = "DiagnosticHint" },
-			MiniPickMatchCurrent = { link = "CursorLine" },
-			MiniPickMatchMarked = { link = "Visual" },
-			MiniPickMatchRanges = { fg = colors.color4 },
-			MiniPickPreviewLine = { link = "CursorLine" },
-			MiniPickPreviewRegion = { link = "IncSearch" },
-			MiniPickPrompt = { link = "FloatTitle" },
-		}),
-		--: }}}
-		--: mini.starter: {{{
-		apply_plugin("mini.starter", {
-			MiniStarterCurrent = { link = "CursorLine" },
-			MiniStarterHeader = { fg = colors.color4, styles = { "bold", "italic" } },
-			MiniStarterFooter = { fg = colors.color5, styles = { "bold", "italic" } },
-			MiniStarterInactive = { link = "Comment" },
-			MiniStarterItem = { link = "Normal" },
-			MiniStarterItemBullet = { link = "Delimiter" },
-			MiniStarterItemPrefix = { fg = colors.foreground, styles = { "bold", "italic" } },
-			MiniStarterSection = { fg = colors.color6, styles = { "bold", "italic" } },
-			MiniStarterQuery = { fg = colors.color1 },
-		}),
-		--: }}}
 		--: }}}
 		{}
 	)
