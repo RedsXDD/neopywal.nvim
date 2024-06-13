@@ -173,7 +173,7 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: rcarriga/nvim-notify {{{
-		{ NotifyBackground = { bg = colors.background } },
+		{ NotifyBackground = { link = "NormalFloat" } },
 		--: }}}
 		--: airblade/vim-gitgutter {{{
 		apply_plugin("git_gutter", {
