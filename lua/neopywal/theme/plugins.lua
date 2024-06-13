@@ -99,11 +99,30 @@ M.get = function(colors)
 			NoiceCmdlineIconLua = { fg = colors.color4 },
 			NoiceCmdlinePopup = { link = "NormalFloat" },
 			NoiceConfirm = { link = "NormalFloat" },
+			NoiceMini = { link = "NoiceLspProgressTitle" },
+			NoiceLspProgressTitle = {
+				bg = vim.o.winblend ~= 0 and U.blend(colors.background, colors.foreground, 0.85)
+					or O.transparent_background and colors.none
+					or U.blend(colors.background, colors.foreground, 0.85),
+				fg = colors.foreground,
+			},
+			NoiceLspProgressClient = {
+				bg = vim.o.winblend ~= 0 and U.blend(colors.background, colors.foreground, 0.85)
+					or O.transparent_background and colors.none
+					or U.blend(colors.background, colors.foreground, 0.85),
+				fg = colors.color4,
+				styles = { "bold" },
+			},
+			NoiceLspProgressSpinner = { link = "NoiceLspProgressClient" },
 			NoiceFormatProgressDone = {
-				bg = O.transparent_background and colors.none or U.blend(colors.background, colors.foreground, 0.85),
+				bg = vim.o.winblend ~= 0 and U.blend(colors.background, colors.foreground, 0.85)
+					or O.transparent_background and colors.none
+					or U.blend(colors.background, colors.foreground, 0.85),
 			},
 			NoiceFormatProgressTodo = {
-				bg = O.transparent_background and colors.none or U.blend(colors.background, colors.foreground, 0.85),
+				bg = vim.o.winblend ~= 0 and U.blend(colors.background, colors.foreground, 0.85)
+					or O.transparent_background and colors.none
+					or U.blend(colors.background, colors.foreground, 0.85),
 			},
 		}),
 		--: }}}
