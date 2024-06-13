@@ -95,7 +95,7 @@ M.get = function(colors)
 		--: }}}
 		--: Pmenu {{{
 		Pmenu = {
-			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none
+			bg = (O.transparent_background and vim.o.winblend == 0 and vim.o.pumblend == 0) and colors.none
 				or U.blend(colors.background, colors.foreground, 0.85),
 		}, -- Popup menu: normal item.
 		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), styles = { "bold", "italic" } }, -- Popup menu: selected item.
