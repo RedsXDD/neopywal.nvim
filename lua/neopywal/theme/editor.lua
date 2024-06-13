@@ -15,15 +15,11 @@ M.get = function(colors)
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
 		NormalFloat = {
-			bg = vim.o.winblend ~= 0 and colors.background
-				or O.transparent_background and colors.none
-				or colors.background,
+			bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
 		}, -- Normal text in floating windows.
 		FloatBorder = { link = "NormalFloat" }, -- Border used in floating windows.
 		FloatTitle = {
-			bg = vim.o.winblend ~= 0 and colors.background
-				or O.transparent_background and colors.none
-				or colors.background,
+			bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
 			fg = colors.color2,
 			styles = { "bold", "italic" },
 		}, -- Title text in floating windows.
@@ -99,8 +95,7 @@ M.get = function(colors)
 		--: }}}
 		--: Pmenu {{{
 		Pmenu = {
-			bg = vim.o.pumblend ~= 0 and colors.background
-				or O.transparent_background and colors.none
+			bg = (O.transparent_background and vim.o.pumblend == 0) and colors.none
 				or U.blend(colors.background, colors.foreground, 0.85),
 		}, -- Popup menu: normal item.
 		PmenuSel = { bg = U.blend(colors.background, colors.foreground, 0.75), styles = { "bold", "italic" } }, -- Popup menu: selected item.
