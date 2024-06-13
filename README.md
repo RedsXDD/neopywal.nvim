@@ -231,34 +231,34 @@ require("neopywal").setup({
     -- Dims the background when another window is focused.
     dim_inactive = true,
 
-	-- Apply colorscheme for Neovim's terminal (e.g. `g:terminal_color_0`).
+    -- Apply colorscheme for Neovim's terminal (e.g. `g:terminal_color_0`).
     terminal_colors = true,
 
     -- Shows the '~' characters after the end of buffers.
     show_end_of_buffer = false,
 
-	no_italic = false, -- Force no italic.
-	no_bold = false, -- Force no bold.
-	no_underline = false, -- Force no underline.
-	no_undercurl = false, -- Force no undercurl.
-	no_strikethrough = false, -- Force no strikethrough.
+    no_italic = false, -- Force no italic.
+    no_bold = false, -- Force no bold.
+    no_underline = false, -- Force no underline.
+    no_undercurl = false, -- Force no undercurl.
+    no_strikethrough = false, -- Force no strikethrough.
 
-	-- Handles the styles of general hi groups (see `:h highlight-args`).
-	styles = {
-		comments = { "italic" },
-		conditionals = { "italic" },
-		loops = {},
-		functions = {},
-		keywords = {},
-		includes = { "italic" },
-		strings = {},
-		variables = { "italic" },
-		numbers = {},
-		booleans = {},
-		-- properties = {},
-		types = { "italic" },
-		operators = {},
-	},
+    -- Handles the styles of general hi groups (see `:h highlight-args`).
+    styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        includes = { "italic" },
+        strings = {},
+        variables = { "italic" },
+        numbers = {},
+        booleans = {},
+        -- properties = {},
+        types = { "italic" },
+        operators = {},
+    },
 
     -- Setting this to false disables all default file format highlights.
     -- Useful if you want to enable specific file format options.
@@ -318,7 +318,7 @@ require("neopywal").setup({
     },
 
     plugins = {
-		noice = true,
+        noice = true,
         ale = true,
         alpha = true,
         nvim_cmp = true,
