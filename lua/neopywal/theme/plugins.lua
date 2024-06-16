@@ -443,7 +443,7 @@ M.get = function(colors)
 			TelescopePreviewTitle = { fg = colors.color3 },
 			TelescopePromptTitle = { fg = colors.color4 },
 			TelescopeResultsTitle = { fg = colors.color6 },
-			TelescopeSelectionCaret = { fg = colors.color6 },
+			TelescopeSelectionCaret = { bg = U.blend(colors.background, colors.foreground, 0.9), fg = colors.color6 },
 			TelescopeResultsVariable = { link = "SpecialChar" },
 			TelescopeResultsStruct = { link = "Struct" },
 			TelescopeResultsOperator = { link = "Operator" },
