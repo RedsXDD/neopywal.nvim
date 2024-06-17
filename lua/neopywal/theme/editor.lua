@@ -14,9 +14,7 @@ M.get = function(colors)
 				or colors.background,
 		}, -- normal text in non-current windows.
 		-- Terminal = { },
-		NormalFloat = {
-			bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
-		}, -- Normal text in floating windows.
+		NormalFloat = { bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background }, -- Normal text in floating windows.
 		FloatBorder = { link = "NormalFloat" }, -- Border used in floating windows.
 		FloatTitle = {
 			bg = (O.transparent_background and vim.o.winblend == 0) and colors.none or colors.background,
