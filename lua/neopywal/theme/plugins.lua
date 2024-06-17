@@ -92,30 +92,45 @@ M.get = function(colors)
 		--: folke/noice.nvim {{{
 		-- Honestly the default integration is already pretty good.
 		apply_plugin("noice", {
-			NoiceCmdline = { fg = colors.foreground },
-			NoiceCmdlineIcon = { fg = colors.color2 },
-			NoiceCmdlineIconSearch = { fg = U.blend(colors.color1, colors.color3, 0.5) },
-			NoiceCmdlineIconHelp = { link = "NoiceCmdlineIconSearch" },
-			NoiceCmdlineIconLua = { fg = colors.color4 },
 			NoiceCmdlinePopup = { link = "NormalFloat" },
-			NoiceConfirm = { link = "NormalFloat" },
+
 			NoiceMini = { link = "NoiceLspProgressTitle" },
-			NoiceLspProgressTitle = {
-				bg = colors.background,
-				fg = colors.foreground,
-			},
+			NoiceLspProgressTitle = { bg = colors.background, fg = colors.foreground },
 			NoiceLspProgressClient = {
 				bg = colors.background,
 				fg = colors.color4,
 				styles = { "bold" },
 			},
 			NoiceLspProgressSpinner = { link = "NoiceLspProgressClient" },
-			NoiceFormatProgressDone = {
-				bg = colors.background,
-			},
-			NoiceFormatProgressTodo = {
-				bg = colors.background,
-			},
+			NoiceFormatProgressDone = { bg = colors.background },
+			NoiceFormatProgressTodo = { bg = colors.background },
+
+			NoiceConfirm = { link = "NormalFloat" },
+			NoiceConfirmBorder = { link = "FloatTitle" },
+
+			NoiceCmdlineIcon = { fg = colors.color2 },
+			NoiceCmdlinePopupBorderCmdline = { link = "NoiceCmdlineIcon" },
+
+			NoiceCmdlineIconSearch = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+			NoiceCmdlinePopupBorderSearch = { link = "NoiceCmdlineIconSearch" },
+
+			NoiceCmdlineIconHelp = { fg = colors.color3 },
+			NoiceCmdlinePopupBorderHelp = { link = "NoiceCmdlineIconHelp" },
+
+			NoiceCmdlineIconLua = { fg = colors.color4 },
+			NoiceCmdlinePopupBorderLua = { link = "NoiceCmdlineIconLua" },
+
+			NoiceCmdlineIconCalculator = { fg = colors.color6 },
+			NoiceCmdlinePopupBorderCalculator = { link = "NoiceCmdlineIconCalculator" },
+
+			NoiceCmdlineIconIncRename = { fg = colors.color5 },
+			NoiceCmdlinePopupBorderIncRename = { link = "NoiceCmdlinePopupBorder" },
+
+			NoiceCmdlineIconInput = { fg = colors.foreground },
+			NoiceCmdlinePopupBorderInput = { link = "NoiceCmdlineIconInput" },
+
+			NoiceCmdlineIconFilter = { fg = colors.color1 },
+			NoiceCmdlinePopupBorderFilter = { link = "NoiceCmdlineIconFilter" },
 		}),
 		--: }}}
 		--: rcarriga/nvim-notify {{{
