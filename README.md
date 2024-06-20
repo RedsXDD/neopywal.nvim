@@ -237,6 +237,9 @@ require("neopywal").setup({
     -- Shows the '~' characters after the end of buffers.
     show_end_of_buffer = false,
 
+    -- Shows the '|' split separator characters.
+    show_split_lines = true,
+
     no_italic = false, -- Force no italic.
     no_bold = false, -- Force no bold.
     no_underline = false, -- Force no underline.

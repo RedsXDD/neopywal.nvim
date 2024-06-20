@@ -30,7 +30,9 @@ M.get = function(colors)
 			bg = O.transparent_background and colors.none
 				or O.dim_inactive and U.darken(colors.background, 5)
 				or colors.background,
-			fg = colors.color8,
+			fg = O.show_split_lines and colors.color8
+				or O.dim_inactive and U.darken(colors.background, 5)
+				or colors.background,
 		}, -- the column separating vertically split windows
 		Visual = { bg = U.blend(colors.color5, colors.background, 0.2), fg = colors.color5, styles = { "bold" } }, -- Visual mode selection.
 		VisualNOS = {
