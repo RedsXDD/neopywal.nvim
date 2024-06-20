@@ -194,7 +194,7 @@ M.get = function(colors)
 			CmpItemAbbrDeprecated = { fg = colors.color8, styles = { "strikethrough" } },
 			CmpItemKind = { fg = colors.foreground },
 			CmpItemMenu = { fg = colors.color2 },
-			CmpItemAbbrMatch = { fg = colors.color5, styles = { "bold" } },
+			CmpItemAbbrMatch = { link = "Special" },
 			CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 
 			-- Kind support:
