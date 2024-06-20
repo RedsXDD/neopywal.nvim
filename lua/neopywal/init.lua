@@ -5,6 +5,9 @@ local default_options = {
 	-- pywal template at `~/.cache/wal/colors-wal.vim`
 	use_wallust = false,
 
+	-- This option allows to specify where Neopywal should look for a ".vim" template file.
+	colorscheme_file = "", -- e.g.: "~/.cache/wal/custom_neopywal_template.vim".
+
 	-- Sets the background color of certain highlight groups to be transparent.
 	-- Use this when your terminal opacity is < 1.
 	transparent_background = false,
@@ -165,9 +168,16 @@ M.options = default_options
 --]]
 --: }}}
 function M.get_colors()
+	if type(M.options.colorscheme_file) ~= "string" then
+		error("NEOPYWAL: `colorscheme_file` option must be of type string.")
+	end
+
 	---@diagnostic disable: param-type-mismatch
 	local colorscheme_file = ""
-	if M.options.use_wallust then
+
+	if M.options.colorscheme_file ~= "" then
+		colorscheme_file = M.options.colorscheme_file
+	elseif M.options.use_wallust then
 		colorscheme_file = "$HOME/.cache/wallust/colors_neopywal.vim"
 	else
 		colorscheme_file = "$HOME/.cache/wal/colors-wal.vim"
