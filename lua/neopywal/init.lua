@@ -25,6 +25,7 @@ local default_options = {
 	show_end_of_buffer = false,
 
 	-- Shows the '|' split separator characters.
+	-- It's worth noting that this options works better in conjunction with `dim_inactive`.
 	show_split_lines = true,
 
 	no_italic = false, -- Force no italic.

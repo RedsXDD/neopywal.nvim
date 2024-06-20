@@ -238,6 +238,7 @@ require("neopywal").setup({
     show_end_of_buffer = false,
 
     -- Shows the '|' split separator characters.
+	-- It's worth noting that this options works better in conjunction with `dim_inactive`.
     show_split_lines = true,
 
     no_italic = false, -- Force no italic.
@@ -497,16 +498,16 @@ color_var2 = { U.darken(colors.color2, 30) }
 
 The `blend()` function combines two colors to create a new color that is a mixture of the two input colors. The function takes three parameters:
 
-* The first two parameters define the colors to be blended.
-* The third `factor` parameter is a number between 0 and 1 that determines the proportion of each color in the final output.
+- The first two parameters define the colors to be blended.
+- The third `factor` parameter is a number between 0 and 1 that determines the proportion of each color in the final output.
 
 ### Example
 
 In this example:
 
-* `color_var1` will be identical to `colors.color1`.
-* `color_var2` will be identical to `colors.color3`.
-* `color_var3` will be a 50/50 mix of `colors.color1` and `colors.color3`.
+- `color_var1` will be identical to `colors.color1`.
+- `color_var2` will be identical to `colors.color3`.
+- `color_var3` will be a 50/50 mix of `colors.color1` and `colors.color3`.
 
 ```lua
 local colors = require("neopywal").get_colors()
@@ -568,6 +569,7 @@ After installing wallust, you will need to create two files. The first is a temp
 Here are the contents that should be copied of to them:
 
 `colors_neopywal.vim`
+
 ```vim
 let background = "{{background}}"
 let foreground = "{{foreground}}"
@@ -592,6 +594,7 @@ let color15 = "{{color15}}"
 ```
 
 `wallust.toml`
+
 ```toml
 neopywal.template = "templates/colors_neopywal.vim"
 neopywal.target = "~/.cache/wallust/colors_neopywal.vim"
