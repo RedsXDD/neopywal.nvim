@@ -186,7 +186,7 @@ M.get = function(colors)
 		--: Misc {{{
 		Ignore = { fg = colors.color8 }, -- (preferred) left blank, hidden |hl-Ignore|
 		Error = { fg = colors.color1 }, -- (preferred) any erroneous construct
-		Todo = { bg = colors.color4, fg = colors.background, styles = { "bold", "italic" } }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+		Todo = { fg = colors.color4, styles = { "bold", "italic" } }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 		Note = { bg = colors.foreground, fg = colors.background, styles = { "bold", "italic" } },
 		Hint = { bg = colors.color6, fg = colors.background, styles = { "bold", "italic" } },
 		Warn = {
