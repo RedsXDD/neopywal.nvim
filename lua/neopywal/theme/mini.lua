@@ -84,8 +84,8 @@ M.get = function(colors)
 				fg = colors.background,
 				styles = { "bold", "italic" },
 			},
-			MiniHipatternsTodo = { link = "Todo" },
-			MiniHipatternsNote = { link = "Note" },
+			MiniHipatternsTodo = { bg = colors.color4, fg = colors.background, styles = { "bold", "italic" } },
+			MiniHipatternsNote = { bg = colors.foreground, fg = colors.background, styles = { "bold", "italic" } },
 		}),
 		--: }}}
 		--: mini.pick {{{
