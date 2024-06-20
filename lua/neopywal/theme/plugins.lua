@@ -71,11 +71,11 @@ M.get = function(colors)
 		--: dense-analysis/ale {{{
 		apply_plugin("ale", {
 			ALEError = { fg = colors.color1, styles = { "undercurl" } },
-			ALEWarning = { fg = colors.color3, styles = { "undercurl" } },
-			ALEInfo = { fg = colors.color4, styles = { "undercurl" } },
-			ALEErrorSign = { fg = colors.color1 },
-			ALEWarningSign = { fg = colors.color3 },
-			ALEInfoSign = { fg = colors.color4 },
+			ALEWarning = { fg = U.blend(colors.color1, colors.color3, 0.5), styles = { "undercurl" } },
+			ALEInfo = { fg = colors.foreground, styles = { "undercurl" } },
+			ALEErrorSign = { link = "DiagnosticError" },
+			ALEWarningSign = { link = "DiagnosticWarn" },
+			ALEInfoSign = { link = "DiagnosticInfo" },
 			ALEVirtualTextError = { link = "DiagnosticError" },
 			ALEVirtualTextWarning = { link = "DiagnosticWarn" },
 			ALEVirtualTextInfo = { link = "DiagnosticInfo" },
