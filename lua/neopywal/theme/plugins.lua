@@ -190,47 +190,39 @@ M.get = function(colors)
 		--: }}}
 		--: hrsh7th/nvim-cmp {{{
 		apply_plugin("nvim_cmp", {
-			CmpDocumentation = { link = "FloatBorder" },
-			CmpDocumentationBorder = { link = "FloatBorder" },
-			CmpItemAbbr = { bg = colors.none, fg = colors.foreground },
-			CmpItemAbbrDeprecated = { bg = colors.none, fg = colors.color2, strikethrough = true },
-			CmpItemAbbrMatch = { bg = colors.none, fg = colors.color4 },
-			CmpItemAbbrMatchFuzzy = { bg = colors.none, fg = colors.color5 },
-			CmpItemKind = { bg = colors.none, fg = colors.foreground },
-			CmpItemMenu = { bg = colors.none, fg = colors.color2 },
-			CmpItemKindDefault = { bg = colors.none, fg = colors.foreground },
-			CmpItemAbbrDefault = { bg = colors.none, fg = colors.foreground },
-			CmpItemAbbrDeprecatedDefault = { bg = colors.none, fg = colors.color8, strikethrough = true },
-			CmpItemAbbrMatchDefault = { bg = colors.none, fg = colors.foreground },
-			CmpItemAbbrMatchFuzzyDefault = { bg = colors.none, fg = colors.foreground },
-			CmpItemMenuDefault = { bg = colors.none, fg = colors.foreground },
+			CmpItemAbbr = { fg = colors.foreground },
+			CmpItemAbbrDeprecated = { fg = colors.color8, styles = { "strikethrough" } },
+			CmpItemKind = { fg = colors.foreground },
+			CmpItemMenu = { fg = colors.color2 },
+			CmpItemAbbrMatch = { fg = colors.color5, styles = { "bold" } },
+			CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 
 			-- Kind support:
-			CmpItemKindKeyword = { bg = colors.none, fg = colors.color1 }, -- Link Keyword
-			CmpItemKindOperator = { bg = colors.none, fg = colors.color1 }, -- Link Operator
+			CmpItemKindKeyword = { fg = colors.color1 }, -- Link Keyword
+			CmpItemKindOperator = { fg = colors.color1 }, -- Link Operator
 			CmpItemKindEnum = { link = "CmpItemKindKeyword" },
-			CmpItemKindFunction = { bg = colors.none, fg = colors.color2 }, -- Link Function
-			CmpItemKindField = { bg = colors.none, fg = colors.color2 }, -- Link @variable.member
-			CmpItemKindProperty = { bg = colors.none, fg = colors.color2 }, -- Link @property
+			CmpItemKindFunction = { fg = colors.color2 }, -- Link Function
+			CmpItemKindField = { fg = colors.color2 }, -- Link @variable.member
+			CmpItemKindProperty = { fg = colors.color2 }, -- Link @property
 			CmpItemKindMethod = { link = "CmpItemKindFunction" },
-			CmpItemKindColor = { bg = colors.none, fg = colors.color3 },
-			CmpItemKindInterface = { bg = colors.none, fg = colors.color4 },
-			CmpItemKindFolder = { bg = colors.none, fg = colors.color4 }, -- Link Directory
-			CmpItemKindVariable = { bg = colors.none, fg = colors.color4 }, -- Link Variable
+			CmpItemKindColor = { fg = colors.color3 },
+			CmpItemKindInterface = { fg = colors.color4 },
+			CmpItemKindFolder = { fg = colors.color4 }, -- Link Directory
+			CmpItemKindVariable = { fg = colors.color4 }, -- Link Variable
 			CmpItemKindEvent = { link = "CmpItemKindVariable" },
-			CmpItemKindConstructor = { bg = colors.none, fg = colors.color5 }, -- Link Special
-			CmpItemKindModule = { bg = colors.none, fg = colors.color5 }, -- Link Include
-			CmpItemKindUnit = { bg = colors.none, fg = colors.color5 }, -- Link Number
+			CmpItemKindConstructor = { fg = colors.color5 }, -- Link Special
+			CmpItemKindModule = { fg = colors.color5 }, -- Link Include
+			CmpItemKindUnit = { fg = colors.color5 }, -- Link Number
 			CmpItemKindSnippet = { link = "CmpItemKindModule" },
-			CmpItemKindClass = { bg = colors.none, fg = colors.color6 }, -- Link StorageClass
-			CmpItemKindStruct = { bg = colors.none, fg = colors.color6 }, -- Link Structure
-			CmpItemKindCopilot = { bg = colors.none, fg = colors.color6 },
-			CmpItemKindTabNine = { bg = colors.none, fg = colors.color6 },
-			CmpItemKindTypeParameter = { bg = colors.none, fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Link Identifier
-			CmpItemKindConstant = { bg = colors.none, fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Link Constant
+			CmpItemKindClass = { fg = colors.color6 }, -- Link StorageClass
+			CmpItemKindStruct = { fg = colors.color6 }, -- Link Structure
+			CmpItemKindCopilot = { fg = colors.color6 },
+			CmpItemKindTabNine = { fg = colors.color6 },
+			CmpItemKindTypeParameter = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Link Identifier
+			CmpItemKindConstant = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- Link Constant
 			CmpItemKindValue = { link = "CmpItemKindConstant" },
 			CmpItemKindEnumMember = { link = "CmpItemKindConstant" },
-			CmpItemKindText = { bg = colors.none, fg = U.lighten(colors.background, 30) },
+			CmpItemKindText = { fg = U.lighten(colors.background, 30) },
 			CmpItemKindFile = { link = "CmpItemKindText" },
 			CmpItemKindReference = { link = "CmpItemKindText" },
 		}),
