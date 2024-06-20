@@ -66,8 +66,8 @@ local default_highlights = {
 	tab_selected = { bg = selected_bg, fg = colors.foreground, styles = { "bold", "italic" } }, -- Text on selected tab.
 
 	-- Indicator.
-	-- indicator_visible = {},
-	-- indicator_selected = {},
+	indicator_visible = { bg = unselected_bg, fg = colors.color8 },
+	indicator_selected = { fg = colors.color4 },
 
 	-- Diagnostics.
 	diagnostic = { bg = unselected_bg, fg = colors.color8 },
