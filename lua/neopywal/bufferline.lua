@@ -43,7 +43,7 @@ local default_highlights = {
 	pick_selected = { bg = colors.background, fg = colors.color6, styles = { "bold", "italic" } }, -- Pick selector for selected buffer.
 
 	-- Truncation marker.
-	trunc_marker = { bg = unselected_bg, fg = colors.color8 },
+	trunc_marker = { bg = fill_bg, fg = colors.color8 },
 
 	-- Close button.
 	close_button = { bg = unselected_bg, fg = colors.color8 }, -- Close button non-selected buffers.
