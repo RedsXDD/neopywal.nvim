@@ -182,9 +182,9 @@ M.get = function(colors)
 		--: }}}
 		--: airblade/vim-gitgutter {{{
 		apply_plugin("git_gutter", {
-			GitGutterAdd = { fg = colors.color2 },
-			GitGutterChange = { fg = colors.color4 },
-			GitGutterDelete = { fg = colors.color1 },
+			GitGutterAdd = { link = "DiffAdd" },
+			GitGutterChange = { link = "DiffChange" },
+			GitGutterDelete = { link = "DiffDelete" },
 			GitGutterChangeDelete = { fg = colors.color5 },
 		}),
 		--: }}}
