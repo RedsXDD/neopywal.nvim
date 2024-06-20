@@ -292,39 +292,20 @@ M.get = function(colors)
 		--: }}}
 		--: Lazy.nvim {{{
 		apply_plugin("lazy", {
-			LazyProgressTodo = { link = "LineNr" },
 			LazyProgressDone = { link = "Variable" },
 			LazySpecial = { link = "SpecialChar" },
 			LazyDir = { link = "Directory" },
-			LazyNoCond = { link = "DiagnosticWarn" },
-			LazyNormal = { link = "NormalFloat" },
 			LazyValue = { link = "String" },
 			LazyUrl = { link = "LazyDir" },
-			LazyLocal = { link = "Constant" },
-			LazyProp = { link = "Conceal" },
 			LazyDimmed = { link = (O.dim_inactive and "NormalNC" or "Conceal") },
-			LazyCommitType = { link = "Title" },
-			LazyCommitIssue = { link = "Number" },
-			LazyCommitScope = { styles = { "italic" } },
 			LazyCommit = { link = "Identifier" },
 			LazyH1 = { bg = U.blend(colors.background, colors.foreground, 0.7), styles = { "bold" } }, -- Non-selected buttons.
 			LazyH2 = { styles = { "bold" } },
 			LazyButton = { bg = U.blend(colors.background, colors.foreground, 0.9), styles = { "bold" } }, -- Selected buttons.
 			LazyReasonRuntime = { link = "Macro" },
-			LazyComment = { link = "Comment" },
 			LazyReasonRequire = { link = "Include" },
-			LazyReasonImport = { link = "Identifier" },
-			LazyReasonCmd = { link = "Operator" },
-			LazyReasonFt = { link = "Character" },
-			LazyReasonSource = { link = "Character" },
 			LazyButtonActive = { link = "LazyH1" },
 			LazyReasonStart = { fg = colors.color2 },
-			LazyTaskOutput = { link = "MsgArea" },
-			LazyReasonKeys = { link = "Statement" },
-			LazyReasonEvent = { link = "Constant" },
-			LazyReasonPlugin = { link = "Special" },
-			LazyTaskError = { link = "ErrorMsg" },
-			LazyBackdrop = { bg = "#000000" },
 		}),
 		--: }}}
 		--: nvim-neo-tree/neo-tree.nvim {{{
