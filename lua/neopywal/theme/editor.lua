@@ -63,9 +63,9 @@ M.get = function(colors)
 		ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
 		--: }}}
 		--: Diff {{{
-		DiffAdd = { fg = colors.color10 }, -- diff mode: Added line |diff.txt|.
-		DiffChange = { fg = colors.color12 }, -- diff mode: Changed line |diff.txt|.
-		DiffDelete = { fg = colors.color9 }, -- diff mode: Deleted line |diff.txt|.
+		DiffAdd = { link = "DiagnosticOk" }, -- diff mode: Added line |diff.txt|.
+		DiffChange = { link = "DiagnosticWarn" }, -- diff mode: Changed line |diff.txt|.
+		DiffDelete = { link = "DiagnosticError" }, -- diff mode: Deleted line |diff.txt|.
 		DiffText = { reverse = true }, -- diff mode: Changed text within a changed line |diff.txt|.
 		--: }}}
 		--: Misc {{{
