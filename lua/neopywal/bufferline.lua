@@ -22,7 +22,7 @@ local default_highlights = {
 	separator_selected = { bg = selected_bg, fg = fill_bg }, -- Separator for selected buffer.
 	tab_separator = { bg = unselected_bg, fg = fill_bg }, -- Separator for non-selected tabs.
 	tab_separator_selected = { bg = selected_bg, fg = fill_bg }, -- Separator for selected tab.
-	offset_separator = { bg = colors.color1, fg = colors.color1 }, -- Offset separator for buffers.
+	-- offset_separator = {}, -- Offset separator for buffers.
 
 	-- Modified icon.
 	modified = { bg = unselected_bg, fg = colors.color8 }, -- Icon color for non-selected modified buffers.
