@@ -401,18 +401,19 @@ M.get = function(colors)
 		}),
 		--: }}}
 		--: vim.org/netrw {{{
-		--: https://www.vim.org/scripts/script.php?script_id=1075
+		-- https://www.vim.org/scripts/script.php?script_id=1075
+		-- prichrd/netrw.nvim
 		apply_plugin("netrw", {
-			netrwDir = { link = "Directory" },
-			netrwClassify = { fg = colors.color2 },
-			netrwLink = { fg = colors.color8 },
-			netrwSymLink = { fg = colors.foreground },
-			netrwExe = { fg = colors.color1 },
-			netrwComment = { link = "Comment" },
-			netrwList = { fg = colors.color3 },
-			netrwHelpCmd = { fg = colors.color4 },
-			netrwCmdSep = { fg = colors.color8 },
-			netrwVersion = { fg = colors.color5 },
+			netrwGray = { fg = colors.color8 },
+			netrwClassify = { link = "Directory" },
+			netrwLink = { link = "netrwGray" },
+			netrwSymLink = { fg = colors.color6 },
+			netrwList = { fg = colors.color5 },
+			netrwHidePat = { link = "netrwList" },
+			netrwTreeBar = { link = "netrwGray" },
+			netrwExe = { link = "Keyword" },
+			netrwHelpCmd = { link = "Identifier" },
+			netrwMarkFile = { link = "Identifier" },
 		}),
 		--: }}}
 		--: mbbill/undotree {{{
