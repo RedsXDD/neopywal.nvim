@@ -248,11 +248,33 @@ function M.get_colors()
 end
 
 local function sum_colors()
-	local colors = M.get_colors()
 	local U = require("neopywal.util")
+	local colors = M.get_colors()
+
+	local tbl = {
+		colors.background,
+		colors.foreground,
+		-- colors.cursor,
+		-- colors.color0,
+		colors.color1,
+		colors.color2,
+		colors.color3,
+		colors.color4,
+		colors.color5,
+		colors.color6,
+		colors.color7,
+		colors.color8,
+		-- colors.color9,
+		-- colors.color10,
+		-- colors.color11,
+		-- colors.color12,
+		-- colors.color13,
+		-- colors.color14,
+		-- colors.color15,
+	}
 
 	local sum = 0
-	for _, color in pairs(colors) do
+	for _, color in pairs(tbl) do
 		if type(color) == "string" and color:match("#(%x%x)(%x%x)(%x%x)") then
 			local rgb = U.hexToRgb(color)
 			sum = sum + rgb[1] + rgb[2] + rgb[3]
