@@ -43,12 +43,8 @@ local function map_highlights()
 	return theme
 end
 
-function M.compile()
-	local filename = require("neopywal").compiled_filename
+function M.compile(compile_path, path_sep, filename)
 	local theme = map_highlights()
-
-	local path_sep = require("neopywal").path_sep
-	local compile_path = require("neopywal").compile_path
 
 	if path_sep == "\\" then
 		compile_path = compile_path:gsub("/", "\\")
