@@ -5,21 +5,6 @@
 local M = {}
 local O = require("neopywal").options
 
-function M.gen_filename()
-	local colors = require("neopywal").get_colors()
-	local U = require("neopywal.util")
-
-	local filename = 0
-	for _, color in pairs(colors) do
-		if type(color) == "string" and color:match("#(%x%x)(%x%x)(%x%x)") then
-			local rgb = U.hexToRgb(color)
-			filename = filename + rgb[1] + rgb[2] + rgb[3]
-		end
-	end
-
-	return filename
-end
-
 local function inspect(t)
 	local list = {}
 
@@ -59,7 +44,7 @@ local function map_highlights()
 end
 
 function M.compile()
-	local filename = M.gen_filename()
+	local filename = require("neopywal").compiled_filename
 	local theme = map_highlights()
 
 	local path_sep = require("neopywal").path_sep
@@ -141,12 +126,7 @@ local h = vim.api.nvim_set_hl]],
 	end
 
 	if vim.g.neopywal_debug then -- Debugging purpose
-		local debug_path = compile_path .. path_sep .. "debug" .. path_sep
-		if vim.fn.isdirectory(debug_path) == 0 then
-			vim.fn.mkdir(debug_path, "p")
-		end
-
-		local deb = io.open(debug_path .. filename .. ".lua", "wb")
+		local deb = io.open(compile_path .. path_sep .. filename .. ".lua", "wb")
 		if deb then
 			deb:write(table.concat(lines, "\n"))
 			deb:close()
