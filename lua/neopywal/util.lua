@@ -32,7 +32,7 @@ end
 	containing the decimal values of each component.
 --]]
 --: }}}
-local function hexToRgb(hex_color)
+function M.hexToRgb(hex_color)
 	-- Convert the hex color code to lowercase.
 	hex_color = string.lower(hex_color)
 
@@ -67,8 +67,8 @@ function M.blend(color1, color2, factor)
 	factor = type(factor) == "string" and (tonumber(factor, 16) / 0xff) or factor
 
 	-- Convert hex colors to RGB.
-	local rgb_color1 = hexToRgb(color1)
-	local rgb_color2 = hexToRgb(color2)
+	local rgb_color1 = M.hexToRgb(color1)
+	local rgb_color2 = M.hexToRgb(color2)
 
 	-- Function to blend a single color channel.
 	local blendChannel = function(i)
@@ -91,7 +91,7 @@ end
 --]]
 --: }}}
 function M.darken(color, factor)
-	local rgb_color = hexToRgb(color)
+	local rgb_color = M.hexToRgb(color)
 
 	-- Function to subtract the factor from each component of the RGB color.
 	local blendChannel = function(index)
@@ -114,7 +114,7 @@ end
 --]]
 --: }}}
 function M.lighten(color, factor)
-	local rgb_color = hexToRgb(color)
+	local rgb_color = M.hexToRgb(color)
 
 	-- Function to add the factor from each component of the RGB color.
 	local blendChannel = function(index)
