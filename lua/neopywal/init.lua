@@ -1,5 +1,9 @@
 local M = {}
 
+---@diagnostic disable-next-line: undefined-global
+M.path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
+M.compile_path = vim.fn.stdpath("cache") .. "/neopywal"
+
 local default_options = {
 	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
 	-- pywal template at `~/.cache/wal/colors-wal.vim`
@@ -141,6 +145,7 @@ local default_options = {
 		},
 	},
 }
+
 M.options = default_options
 
 --: M.get_colors() explanation {{{
@@ -241,15 +246,6 @@ function M.get_colors()
 	})
 end
 
---: M.load() explanation {{{
---[[
-	The M.load function is responsible for loading the Neopywal colorscheme.
-	It sets up the colorscheme, clears any existing highlights, and applies
-	the theme to the editor.
-	It requires the M.setup function to have been called previously.
-	This is the function that gets called when running `:colorscheme neopywal`.
---]]
---: }}}
 local did_setup = false
 function M.load()
 	-- Ensure setup() has been called.
@@ -257,82 +253,14 @@ function M.load()
 		M.setup()
 	end
 
-	-- Clear existing highlights if not using the default colorscheme.
-	if vim.g.colors_name then
-		vim.cmd.hi("clear")
+	local filename = require("neopywal.compiler").gen_filename()
+	local compiled_path = M.compile_path .. M.path_sep .. filename
+	local f = loadfile(compiled_path)
+	if not f then
+		require("neopywal.compiler").compile()
+		f = assert(loadfile(compiled_path), "could not load cache")
 	end
-	vim.g.colors_name = "neopywal"
-
-	vim.o.termguicolors = true
-	local colors = M.get_colors()
-
-	-- Get user-defined highlights.
-	local user_highlights = M.options.custom_highlights
-	if type(user_highlights) == "function" then
-		user_highlights = user_highlights(colors)
-	end
-
-	-- Apply terminal colors if enabled.
-	if M.options.terminal_colors == true then
-		local terminal_theme = require("neopywal.theme.terminal").get(colors)
-		for color_option, color in pairs(terminal_theme) do
-			vim.g[color_option] = color
-		end
-	end
-
-	-- Create the theme table by merging user highlights, editor, file formats, plugins, and treesitter theme tables.
-	local theme = vim.tbl_deep_extend(
-		"keep",
-		user_highlights,
-		require("neopywal.theme.editor").get(colors),
-		require("neopywal.theme.fileformats").get(colors),
-		require("neopywal.theme.plugins").get(colors),
-		M.options.plugins.mini and require("neopywal.theme.mini").get(colors) or {},
-		M.options.plugins.treesitter and require("neopywal.theme.treesitter").get(colors) or {},
-		{}
-	)
-
-	-- Apply the theme to Neovim by iterating over each highlight group and its corresponding properties.
-	for highlight_group, properties in pairs(theme) do
-		-- This if statement applies styles to a highlight group, taking into account user options to disable certain styles.
-		-- It iterates over each style in the styles table in the highlight group, sets them to true by default,
-		-- and overrides them to false if the corresponding option is set to disable the style.
-		if properties.styles then
-			for _, style in pairs(properties.styles) do
-				properties[style] = true
-
-				-- Override the italic style if the no_italic option is set to false.
-				if M.options.no_italic and style == "italic" then
-					properties[style] = false
-				end
-
-				-- Override the bold style if the no_bold option is set to false.
-				if M.options.no_bold and style == "bold" then
-					properties[style] = false
-				end
-
-				-- Override the underline style if the no_underline option is set to false.
-				if M.options.no_underline and style == "underline" then
-					properties[style] = false
-				end
-
-				-- Override the undercurl style if the no_undercurl option is set to false.
-				if M.options.no_undercurl and style == "undercurl" then
-					properties[style] = false
-				end
-
-				-- Override the strikethrough style if the no_strikethrough option is set to false.
-				if M.options.no_strikethrough and style == "strikethrough" then
-					properties[style] = false
-				end
-			end
-		end
-
-		-- Remove the styles table to avoid passing unnecessary data to vim.api.nvim_set_hl.
-		properties.styles = nil
-
-		vim.api.nvim_set_hl(0, highlight_group, properties)
-	end
+	f(filename)
 end
 
 --: M.setup() explanation {{{
@@ -370,6 +298,55 @@ function M.setup(user_conf)
 		user_conf,
 		default_options
 	)
+
+	-- Get cached hash
+	local cached_path = M.compile_path .. M.path_sep .. "cached"
+	local file = io.open(cached_path)
+	local cached = nil
+	if file then
+		cached = file:read()
+		file:close()
+	end
+
+	-- Get current hash
+	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
+	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
+	local hash = require("neopywal.hashing").hash(user_conf)
+		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
+		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
+		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
+
+	-- Recompile if hash changed
+	if cached ~= hash then
+		require("neopywal.compiler").compile()
+		file = io.open(cached_path, "wb")
+		if file then
+			file:write(hash)
+			file:close()
+		end
+	end
+end
+
+vim.api.nvim_create_user_command("NeopywalCompile", function()
+	for name, _ in pairs(package.loaded) do
+		if name:match("^neopywal.") then
+			package.loaded[name] = nil
+		end
+	end
+	require("neopywal.compiler").compile()
+	vim.notify("Neopywal (INFO): Successfully compiled cache.", vim.log.levels.INFO)
+	vim.cmd.colorscheme("neopywal")
+end, {})
+
+if vim.g.neopywal_debug then
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		pattern = "*/neopywal/*",
+		callback = function()
+			vim.schedule(function()
+				vim.cmd("NeopywalCompile")
+			end)
+		end,
+	})
 end
 
 return M
