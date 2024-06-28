@@ -61,6 +61,9 @@ local default_options = {
 
 	-- Setting this to false disables all default file format highlights.
 	-- Useful if you want to enable specific file format options.
+	-- NOTE: if the treesitter plugin integration is enabled, this option
+	-- will be automatically set to false unless the user manually sets it back on
+	-- using the setup() function.
 	default_fileformats = true,
 
 	-- Setting this to false disables all default plugin highlights.
@@ -326,14 +329,19 @@ function M.setup(user_conf)
 		default_options
 	)
 
-	-- Disable default fileformats options if default_fileformats != true.
-	if M.options.default_fileformats == false then
-		M.options.fileformats = user_conf.fileformats or {}
-	end
-
 	-- Disable default plugins options if default_plugins != true.
 	if M.options.default_plugins == false then
 		M.options.plugins = user_conf.plugins or {}
+	end
+
+	-- Disable default fileformats options if treesitter is enabled (unless the user manually specifies otherwise).
+	if M.options.plugins.treesitter and not user_conf.default_fileformats then
+		M.options.default_fileformats = false
+	end
+
+	-- Disable default fileformats options if default_fileformats != true.
+	if M.options.default_fileformats == false then
+		M.options.fileformats = user_conf.fileformats or {}
 	end
 
 	-- Get cached hash
