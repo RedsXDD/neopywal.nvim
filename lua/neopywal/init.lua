@@ -318,16 +318,6 @@ function M.setup(user_conf)
 	-- Load user configuration.
 	user_conf = user_conf or {}
 
-	-- Disabled all fileformats options if default_fileformats != true.
-	if user_conf.default_fileformats == false then
-		default_options.fileformats = {}
-	end
-
-	-- Disabled all plugins options if default_plugins != true.
-	if user_conf.default_plugins == false then
-		default_options.plugins = {}
-	end
-
 	-- Create the final configuration table by combining user settings, default options, and Neovide settings
 	M.options = vim.tbl_deep_extend(
 		"keep",
@@ -335,6 +325,16 @@ function M.setup(user_conf)
 		user_conf,
 		default_options
 	)
+
+	-- Disable default fileformats options if default_fileformats != true.
+	if M.options.default_fileformats == false then
+		M.options.fileformats = user_conf.fileformats or {}
+	end
+
+	-- Disable default plugins options if default_plugins != true.
+	if M.options.default_plugins == false then
+		M.options.plugins = user_conf.plugins or {}
+	end
 
 	-- Get cached hash
 	local cached_path = compile_path .. path_sep .. "cached"
