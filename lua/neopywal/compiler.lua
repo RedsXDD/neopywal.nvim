@@ -127,7 +127,7 @@ function M.compile(compile_path, path_sep, filename)
 
 	local f = loadstring(table.concat(lines, "\n"))
 	if not f then
-		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. "/neopywal_error.lua"
+		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
 		print(
 			string.format(
 				[[Neopywal (error): Most likely some mistake made in your neopywal config]],
