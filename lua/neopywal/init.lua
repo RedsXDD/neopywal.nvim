@@ -204,7 +204,6 @@ function M.get_colors()
 	-- Fallback colors reference: https://github.com/catppuccin/catppuccin
 	local pywal_colors = {
 		none = "NONE",
-		transparent = "NONE",
 		background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
 		foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
 		cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC",
