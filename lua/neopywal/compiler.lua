@@ -61,12 +61,11 @@ function M.compile(compile_path, path_sep, filename)
 	)
 
 	local lines = {
-		[[
-return string.dump(function()
-vim.o.termguicolors = true
-if vim.g.colors_name then vim.cmd("hi clear") end
-vim.g.colors_name = "neopywal"
-local h = vim.api.nvim_set_hl]],
+		[[return string.dump(function()]],
+		[[vim.o.termguicolors = true]],
+		[[if vim.g.colors_name then vim.cmd("hi clear") end]],
+		[[vim.g.colors_name = "neopywal"]],
+		[[local h = vim.api.nvim_set_hl]],
 	}
 
 	if O.terminal_colors == true then
@@ -129,16 +128,18 @@ local h = vim.api.nvim_set_hl]],
 	local f = loadstring(table.concat(lines, "\n"))
 	if not f then
 		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. "/neopywal_error.lua"
-		print(string.format(
-			[[Neopywal (error): Most likely some mistake made in your neopywal config
-You can open %s for debugging
-
-If you think this is a bug, kindly open an issue and attach %s file
-Below is the error message that we captured:
-]],
-			err_path,
-			err_path
-		))
+		print(
+			string.format(
+				[[Neopywal (error): Most likely some mistake made in your neopywal config]],
+				[[You can open %s for debugging]],
+				"",
+				[[If you think this is a bug, kindly open an issue and attach %s file]],
+				[[Below is the error message that we captured:]],
+				"",
+				err_path,
+				err_path
+			)
+		)
 
 		local err = io.open(err_path, "wb")
 		if err then
