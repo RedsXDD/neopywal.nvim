@@ -33,7 +33,6 @@ local function map_highlights()
 	end
 
 	theme.custom_highlights = user_highlights
-	theme.terminal = require("neopywal.theme.terminal").get(colors)
 	theme.editor = require("neopywal.theme.editor").get(colors)
 	theme.fileformats = require("neopywal.theme.fileformats").get(colors)
 	theme.plugins = require("neopywal.theme.plugins").get(colors)
@@ -74,8 +73,9 @@ local h = vim.api.nvim_set_hl]],
 	}
 
 	if O.terminal_colors == true then
-		for k, v in pairs(theme.terminal) do
-			table.insert(lines, string.format('vim.g.%s = "%s"', k, v))
+		local terminal_theme = require("neopywal.theme.terminal").get()
+		for group, color in pairs(terminal_theme) do
+			table.insert(lines, string.format('vim.g.%s = "%s"', group, color))
 		end
 	end
 
