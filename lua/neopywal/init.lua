@@ -202,8 +202,7 @@ function M.get_colors()
 	end
 
 	-- Fallback colors reference: https://github.com/catppuccin/catppuccin
-	local user_colors = M.options.custom_colors
-	return vim.tbl_deep_extend("keep", {}, user_colors, {
+	local pywal_colors = {
 		none = "NONE",
 		transparent = "NONE",
 		background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
@@ -225,7 +224,10 @@ function M.get_colors()
 		color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
 		color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
 		color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
-	})
+	}
+
+	local user_colors = M.options.custom_colors
+	return vim.tbl_deep_extend("keep", user_colors, pywal_colors)
 end
 
 local function sum_colors()
