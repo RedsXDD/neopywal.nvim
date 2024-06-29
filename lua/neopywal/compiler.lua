@@ -61,15 +61,12 @@ function M.compile(compile_path, path_sep, filename)
 	)
 
 	local lines = {
-		string.format(
-			[[
+		[[
 return string.dump(function()
 vim.o.termguicolors = true
 if vim.g.colors_name then vim.cmd("hi clear") end
-vim.g.colors_name = "neopywal-%s"
+vim.g.colors_name = "neopywal"
 local h = vim.api.nvim_set_hl]],
-			filename
-		),
 	}
 
 	if O.terminal_colors == true then
