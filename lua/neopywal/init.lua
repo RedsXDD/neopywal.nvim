@@ -181,9 +181,7 @@ function M.get_colors()
 		error("NEOPYWAL: `colorscheme_file` option must be of type string.")
 	end
 
-	---@diagnostic disable: param-type-mismatch
 	local colorscheme_file = ""
-
 	if M.options.colorscheme_file ~= "" then
 		colorscheme_file = M.options.colorscheme_file
 	elseif M.options.use_wallust then
@@ -192,61 +190,41 @@ function M.get_colors()
 		colorscheme_file = "$HOME/.cache/wal/colors-wal.vim"
 	end
 
-	if not pcall(vim.cmd, "source " .. colorscheme_file) then
+	---@diagnostic disable-next-line: param-type-mismatch
+	local has_colorscheme_file, _ = pcall(vim.cmd, "source " .. colorscheme_file)
+	if not has_colorscheme_file then
 		vim.notify(
-			"Neopywal: Colorscheme file "
+			"Neopywal (ERROR): Colorscheme file "
 				.. colorscheme_file
-				.. " could not be loaded, falling back to builtin colorscheme.",
+				.. " could not be loaded, falling back to builtin catppuccin colorscheme.",
 			vim.log.levels.WARN
 		)
-
-		-- Reference: https://github.com/catppuccin/catppuccin
-		vim.cmd([[
-			let background = "#1E1E2E",
-			let foreground = "#CDD6F4",
-			let cursor = "#F5E0DC",
-			let color0 = "#45475A",
-			let color1 = "#F38BA8",
-			let color2 = "#A6E3A1",
-			let color3 = "#F9E2AF",
-			let color4 = "#89B4FA",
-			let color5 = "#F5C2E7",
-			let color6 = "#94E2D5",
-			let color7 = "#BAC2DE",
-			let color8 = "#585B70",
-			let color9 = "#F38BA8",
-			let color10 = "#A6E3A1",
-			let color11 = "#F9E2AF",
-			let color12 = "#89B4FA",
-			let color13 = "#F5C2E7",
-			let color14 = "#94E2D5",
-			let color15 = "#A6ADC8",
-		]])
 	end
 
+	-- Fallback colors reference: https://github.com/catppuccin/catppuccin
 	local user_colors = M.options.custom_colors
 	return vim.tbl_deep_extend("keep", {}, user_colors, {
 		none = "NONE",
 		transparent = "NONE",
-		background = vim.g.background,
-		foreground = vim.g.foreground,
-		cursor = vim.g.cursor,
-		color0 = vim.g.color0,
-		color1 = vim.g.color1,
-		color2 = vim.g.color2,
-		color3 = vim.g.color3,
-		color4 = vim.g.color4,
-		color5 = vim.g.color5,
-		color6 = vim.g.color6,
-		color7 = vim.g.color7,
-		color8 = vim.g.color8,
-		color9 = vim.g.color9,
-		color10 = vim.g.color10,
-		color11 = vim.g.color11,
-		color12 = vim.g.color12,
-		color13 = vim.g.color13,
-		color14 = vim.g.color14,
-		color15 = vim.g.color15,
+		background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
+		foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
+		cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC",
+		color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
+		color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
+		color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
+		color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF",
+		color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA",
+		color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7",
+		color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5",
+		color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE",
+		color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70",
+		color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8",
+		color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1",
+		color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF",
+		color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA",
+		color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
+		color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
+		color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
 	})
 end
 
