@@ -436,7 +436,7 @@ use "akinsho/bufferline.nvim" {
   after = "neopywal",
   config = function()
     require("bufferline").setup {
-      highlights = require("neopywal.bufferline").setup()
+      highlights = require("neopywal.theme.plugins.bufferline").setup()
     }
   end
 }
@@ -455,7 +455,7 @@ Configuration for [lazy.nvim](https://github.com/folke/lazy.nvim) users:
     "akinsho/bufferline.nvim",
     config = function()
         require("bufferline").setup({
-            highlights = require("neopywal.bufferline").setup()
+            highlights = require("neopywal.theme.plugins.bufferline").setup()
         })
     end
 }
@@ -466,7 +466,7 @@ Overriding configurations can be done inside the setup() function, see `:h buffe
 ```lua
 local colors = require("neopywal").get_colors()
 bufferline.setup({
-    highlights = require("neopywal.bufferline").setup({
+    highlights = require("neopywal.theme.plugins.bufferline").setup({
         fill = { bg = colors.color1 },
         background = { fg = "#00ff00" },
     })
@@ -524,7 +524,7 @@ if not has_feline then
     return
 end
 
-local has_neopywal, neopywal = pcall(require, "neopywal.feline")
+local has_neopywal, neopywal = pcall(require, "neopywal.theme.plugins.feline")
 if not has_neopywal then
     return
 end
@@ -909,12 +909,12 @@ return {
 
 ## Utilities
 
-There's a neat set of utility functions inside the `util.lua` file. They allow the user to improve the builtin Neopywal color palette without having to create new color definitions.
+Neopywal offers a neat set of utility functions that allows the user to improve the builtin Neopywal color palette without having to create new color definitions.
 
 ```lua
-require("neopywal.util").darken(color, factor)
-require("neopywal.util").lighten(color, factor)
-require("neopywal.util").blend(color1, color2, factor)
+require("neopywal.utils.color").darken(color, factor)
+require("neopywal.utils.color").lighten(color, factor)
+require("neopywal.utils.color").blend(color1, color2, factor)
 ```
 
 > [!Note]
@@ -926,7 +926,7 @@ The `darken()` and `lighten()` functions are able to create new colors by darken
 
 ```lua
 local colors = require("neopywal").get_colors()
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 
 color_var1 = { U.lighten(colors.color1, 30) }
 color_var2 = { U.darken(colors.color2, 30) }
@@ -943,7 +943,7 @@ The `blend()` function combines two colors to create a new color that is a mixtu
 
 ```lua
 local colors = require("neopywal").get_colors()
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 
 color_var1 = { U.darken(colors.color1, colors.color3, 0) }
 color_var2 = { U.darken(colors.color1, colors.color3, 1) }

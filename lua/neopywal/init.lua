@@ -250,7 +250,7 @@ function M.get_colors()
 end
 
 local function sum_colors()
-	local U = require("neopywal.util")
+	local U = require("neopywal.utils.color")
 	local colors = M.get_colors()
 
 	local tbl = {
@@ -296,7 +296,7 @@ function M.load()
 	local compiled_path = compile_path .. path_sep .. compiled_filename
 	local f = loadfile(compiled_path)
 	if not f then
-		require("neopywal.compiler").compile(compile_path, path_sep, compiled_filename)
+		require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
 		f = assert(loadfile(compiled_path), "could not load cache")
 	end
 	f(compiled_filename)
@@ -355,7 +355,7 @@ function M.setup(user_conf)
 	-- Get current hash
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
-	local hash = require("neopywal.hashing").hash(user_conf)
+	local hash = require("neopywal.lib.hashing").hash(user_conf)
 		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
 		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
 		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
@@ -363,7 +363,7 @@ function M.setup(user_conf)
 
 	-- Recompile if hash changed
 	if cached ~= hash then
-		require("neopywal.compiler").compile(compile_path, path_sep, compiled_filename)
+		require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
 		file = io.open(cached_path, "wb")
 		if file then
 			file:write(hash)
@@ -378,7 +378,7 @@ vim.api.nvim_create_user_command("NeopywalCompile", function()
 			package.loaded[name] = nil
 		end
 	end
-	require("neopywal.compiler").compile(compile_path, path_sep, compiled_filename)
+	require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
 	vim.notify("Neopywal (INFO): Successfully compiled cache.", vim.log.levels.INFO)
 	vim.cmd.colorscheme("neopywal")
 end, {})

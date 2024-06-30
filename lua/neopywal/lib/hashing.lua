@@ -1,5 +1,5 @@
 local M = {}
-local B = bit or bit32 or require("neopywal.bit")
+local B = bit or bit32 or require("neopywal.lib.bit")
 
 local hash_str = function(str) -- djb2, https://theartincode.stanis.me/008-djb2/
 	local hash = 5381

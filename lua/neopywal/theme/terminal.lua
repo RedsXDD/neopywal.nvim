@@ -1,5 +1,5 @@
 local M = {}
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 local colors = require("neopywal").get_colors()
 
 function M.get()

@@ -5,7 +5,7 @@
 
 local M = {}
 local O = require("neopywal").options
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 local colors = require("neopywal").get_colors()
 
 local fill_bg = O.transparent_background and colors.background or U.blend(colors.background, colors.foreground, 0.9)

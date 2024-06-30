@@ -3,7 +3,7 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 local colors = require("neopywal").get_colors()
 
 -- Fix background colors for separators on the edge of statusline.

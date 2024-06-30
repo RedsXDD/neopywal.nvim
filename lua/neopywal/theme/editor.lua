@@ -1,7 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
 local M = {}
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 local O = require("neopywal").options
 
 M.get = function(colors)

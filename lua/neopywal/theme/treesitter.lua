@@ -1,7 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local U = require("neopywal.util")
+local U = require("neopywal.utils.color")
 
 M.get = function(colors)
 	-- Reference: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
