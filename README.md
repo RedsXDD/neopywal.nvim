@@ -1067,3 +1067,5 @@ All Neopywal does is reading the contents of the file and exportting them into a
 ## Enjoy
 
 If you like this work you can give it a star ⭐
+
+[//]: # "vim:fileencoding=utf-8:foldmethod=marker:foldenable"
