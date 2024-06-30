@@ -68,21 +68,6 @@ M.get = function(colors)
 			CocExplorerBufferNameVisible = { link = "Directory" },
 		}),
 		--: }}}
-		--: dense-analysis/ale {{{
-		apply_plugin("ale", {
-			ALEError = { fg = colors.color1, styles = { "undercurl" } },
-			ALEWarning = { fg = U.blend(colors.color1, colors.color3, 0.5), styles = { "undercurl" } },
-			ALEInfo = { fg = colors.foreground, styles = { "undercurl" } },
-			ALEErrorSign = { link = "DiagnosticError" },
-			ALEWarningSign = { link = "DiagnosticWarn" },
-			ALEInfoSign = { link = "DiagnosticInfo" },
-			ALEVirtualTextError = { link = "DiagnosticError" },
-			ALEVirtualTextWarning = { link = "DiagnosticWarn" },
-			ALEVirtualTextInfo = { link = "DiagnosticInfo" },
-			ALEVirtualTextStyleError = { link = "ALEVirtualTextError" },
-			ALEVirtualTextStyleWarning = { link = "ALEVirtualTextWarning" },
-		}),
-		--: }}}
 		--: kdheepak/lazygit.nvim {{{
 		apply_plugin("lazygit", {
 			LazyGitBorder = { link = "FloatBorder" },

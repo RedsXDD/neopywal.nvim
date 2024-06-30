@@ -185,8 +185,8 @@ require("neopywal").setup({
         -- For more fileformats options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Fileformats)
     },
     plugins = {
-        ale = true,
         alpha = true,
+        coc = true,
         mini = {
             cursorword = true,
             files = true,
@@ -371,7 +371,6 @@ Neopywal also provides theme support for other plugins in the Neovim ecosystem. 
 ```lua
 require("neopywal").setup({
     plugins = {
-        ale = false,
         alpha = true,
         dashboard = false,
         git_gutter = true,
@@ -406,18 +405,6 @@ Below is a list of supported plugins and their corresponding configuration modul
 <td> <b>Plugin</b> </td> <td> <b>Default</b> </td>
 </tr>
 
-<!-- ALE {{{ -->
-<tr>
-<td> <a href="https://github.com/dense-analysis/ale">ALE</a> </td>
-<td>
-
-```lua
-ale = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
 <!-- alpha-nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/goolord/alpha-nvim">alpha-nvim</a> </td>

@@ -119,7 +119,6 @@ local default_options = {
 		zsh = true,
 	},
 	plugins = {
-		ale = true,
 		alpha = true,
 		coc = true,
 		dashboard = true,
