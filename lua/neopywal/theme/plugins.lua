@@ -375,7 +375,6 @@ M.get = function(colors)
 		apply_plugin("alpha", {
 			AlphaShortcut = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			AlphaHeader = { fg = colors.color4 },
-			AlphaHeaderLabel = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			AlphaFooter = { fg = colors.color5 },
 			AlphaButtons = { fg = colors.color6 },
 		}),
