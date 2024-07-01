@@ -376,7 +376,7 @@ M.get = function(colors)
 			AlphaShortcut = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			AlphaHeader = { fg = colors.color4 },
 			AlphaHeaderLabel = { fg = U.blend(colors.color1, colors.color3, 0.5) },
-			AlphaFooter = { fg = colors.color4 },
+			AlphaFooter = { fg = colors.color5 },
 			AlphaButtons = { fg = colors.color6 },
 		}),
 		--: }}}
