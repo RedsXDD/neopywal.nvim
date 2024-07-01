@@ -362,13 +362,13 @@ M.get = function(colors)
 		--: }}}
 		--: nvimdev/dashboard-nvim {{{
 		apply_plugin("dashboard", {
-			DashboardShortCut = { fg = colors.color6 },
+			DashboardShortCut = { fg = U.blend(colors.color1, colors.color3, 0.5) },
 			DashboardHeader = { fg = colors.color4 },
-			DashboardCenter = { fg = colors.color5 },
-			DashboardFooter = { fg = colors.color4 },
-			DashboardKey = { fg = U.blend(colors.color1, colors.color3, 0.5) },
-			DashboardDesc = { fg = colors.color6 },
-			DashboardIcon = { fg = colors.color6, styles = { "bold" } },
+			DashboardCenter = { fg = colors.color6 },
+			DashboardFooter = { fg = colors.color5 },
+			DashboardKey = { fg = colors.color1 },
+			DashboardDesc = { fg = colors.foreground },
+			DashboardIcon = { link = "DashboardDesc" },
 		}),
 		--: }}}
 		--: goolord/alpha-nvim {{{
