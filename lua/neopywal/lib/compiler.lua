@@ -30,7 +30,6 @@ local function map_highlights()
 	U = require("neopywal.utils.color")
 
 	theme.editor = require("neopywal.theme.editor").get()
-	theme.fileformats = require("neopywal.theme.fileformats").get()
 
 	-- Get user-defined highlights.
 	local user_highlights = O.custom_highlights
@@ -39,6 +38,16 @@ local function map_highlights()
 	end
 	theme.custom_highlights = user_highlights
 
+	-- Get highlights for enabled fileformats.
+	local fileformats = {}
+	for fileformat in pairs(O.fileformats) do
+		if O.fileformats[fileformat] == true then
+			fileformats = vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats")[fileformat]())
+		end
+	end
+	theme.fileformats = fileformats
+
+	-- Get highlights for enabled plugins.
 	local plugins = {}
 	local function load_plugin(plugin, plugin_option)
 		if type(plugin_option) == "table" and plugin_option.enabled then
