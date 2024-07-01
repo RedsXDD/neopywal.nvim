@@ -71,7 +71,8 @@ function M.compile(compile_path, path_sep, filename)
 	local O = require("neopywal").options
 
 	local theme = map_highlights()
-	local tbl = vim.tbl_deep_extend("keep", theme.custom_highlights, theme.editor, theme.fileformats, theme.plugins, {})
+	local highlights =
+		vim.tbl_deep_extend("keep", theme.custom_highlights, theme.editor, theme.fileformats, theme.plugins, {})
 
 	if path_sep == "\\" then
 		compile_path = compile_path:gsub("/", "\\")
@@ -92,7 +93,7 @@ function M.compile(compile_path, path_sep, filename)
 		end
 	end
 
-	for group, properties in pairs(tbl) do
+	for group, properties in pairs(highlights) do
 		if properties.styles then
 			for _, style in pairs(properties.styles) do
 				properties[style] = true
