@@ -1,8 +1,6 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local U = require("neopywal.utils.color")
-local O = require("neopywal").options.fileformats
 
 --: apply_fileformat() explanation {{{
 --[[
@@ -12,14 +10,14 @@ local O = require("neopywal").options.fileformats
 --]]
 --: }}}
 local function apply_fileformat(option, highlights)
-	if type(O[option]) ~= "boolean" then
+	if type(O.fileformats[option]) ~= "boolean" then
 		return {}
 	end
 
-	return O[option] and highlights or {}
+	return O.fileformats[option] and highlights or {}
 end
 
-M.get = function(colors)
+function M.get()
 	return vim.tbl_deep_extend(
 		"force",
 		--: Markdown: {{{
@@ -965,7 +963,7 @@ M.get = function(colors)
 		--: Shell: {{{
 		apply_fileformat("shell", {
 			--: builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_SH{{{
-			shRange = { fg = colors.foreground },
+			shRange = { fg = C.foreground },
 			shOption = { link = "Special" },
 			shQuote = { link = "String" },
 			shVariable = { link = "Variable" },
@@ -1177,14 +1175,14 @@ M.get = function(colors)
 		--: }}}
 		--: Git Commit: {{{
 		apply_fileformat("git_commit", {
-			gitcommitSummary = { fg = colors.color1 },
-			gitcommitUntracked = { fg = colors.color8 },
-			gitcommitDiscarded = { fg = colors.color8 },
-			gitcommitSelected = { fg = colors.color8 },
-			gitcommitUnmerged = { fg = colors.color8 },
-			gitcommitOnBranch = { fg = colors.color8 },
-			gitcommitArrow = { fg = colors.color8 },
-			gitcommitFile = { fg = colors.color2 },
+			gitcommitSummary = { fg = C.color1 },
+			gitcommitUntracked = { fg = C.color8 },
+			gitcommitDiscarded = { fg = C.color8 },
+			gitcommitSelected = { fg = C.color8 },
+			gitcommitUnmerged = { fg = C.color8 },
+			gitcommitOnBranch = { fg = C.color8 },
+			gitcommitArrow = { fg = C.color8 },
+			gitcommitFile = { fg = C.color2 },
 		}),
 		--: }}}
 		--: INI: {{{

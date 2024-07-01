@@ -3,7 +3,6 @@
 -- https://github.com/EdenEast/nightfox.nvim -- The plugin catppuccin credits.
 
 local M = {}
-local O = require("neopywal").options
 
 local function inspect(t)
 	local list = {}
@@ -24,41 +23,59 @@ end
 
 local function map_highlights()
 	local theme = {}
-	local colors = require("neopywal").get_colors()
+
+	local _O, _C, _U = O, C, U -- Borrowing global variables (setfenv doesn't work with require)
+	O = require("neopywal").options
+	C = require("neopywal").get_colors()
+	U = require("neopywal.utils.color")
+
+	theme.editor = require("neopywal.theme.editor").get()
+	theme.fileformats = require("neopywal.theme.fileformats").get()
 
 	-- Get user-defined highlights.
 	local user_highlights = O.custom_highlights
 	if type(user_highlights) == "function" then
-		user_highlights = user_highlights(colors)
+		user_highlights = user_highlights(C)
+	end
+	theme.custom_highlights = user_highlights
+
+	local plugins = {}
+	local function load_plugin(plugin, plugin_option)
+		if type(plugin_option) == "table" and plugin_option.enabled then
+			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin).get())
+		elseif plugin_option == true then
+			local default_config = require("neopywal").default_options.plugins[plugin]
+			plugin_option = type(default_config) == "table" and default_config or {}
+			plugin_option.enabled = true
+			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin).get())
+		end
 	end
 
-	theme.custom_highlights = user_highlights
-	theme.editor = require("neopywal.theme.editor").get(colors)
-	theme.fileformats = require("neopywal.theme.fileformats").get(colors)
-	theme.plugins = require("neopywal.theme.plugins").get(colors)
-	theme.mini = O.plugins.mini and require("neopywal.theme.mini").get(colors) or {}
-	theme.treesitter = O.plugins.treesitter and require("neopywal.theme.treesitter").get(colors) or {}
+	for plugin, option in pairs(O.plugins) do
+		if plugin == "mini" then
+			for mini_plugin, mini_option in pairs(option) do
+				load_plugin("mini." .. mini_plugin, mini_option)
+			end
+		else
+			load_plugin(plugin, option)
+		end
+	end
+	theme.plugins = plugins
+
+	O, C, U = _O, _C, _U -- Returning global variables
 
 	return theme
 end
 
 function M.compile(compile_path, path_sep, filename)
+	local O = require("neopywal").options
+
 	local theme = map_highlights()
+	local tbl = vim.tbl_deep_extend("keep", theme.custom_highlights, theme.editor, theme.fileformats, theme.plugins, {})
 
 	if path_sep == "\\" then
 		compile_path = compile_path:gsub("/", "\\")
 	end
-
-	local tbl = vim.tbl_deep_extend(
-		"keep",
-		theme.custom_highlights,
-		theme.editor,
-		theme.fileformats,
-		theme.plugins,
-		theme.treesitter,
-		theme.mini,
-		{}
-	)
 
 	local lines = {
 		[[return string.dump(function()]],

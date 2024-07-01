@@ -1,9 +1,8 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local U = require("neopywal.utils.color")
 
-M.get = function(colors)
+function M.get()
 	-- Reference: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
 	return {
 		--: Misc {{{
@@ -14,24 +13,24 @@ M.get = function(colors)
 		--: Identifiers {{{
 		["@variable"] = { link = "Variable" }, -- Any variable name that does not have another highlight.
 		["@variable.builtin"] = { link = "Statement" }, -- Variable names that are defined by the languages, like this or self.
-		["@variable.member"] = { fg = colors.color2 }, -- For fields.
+		["@variable.member"] = { fg = C.color2 }, -- For fields.
 		["@variable.parameter"] = { link = "Identifier" }, -- For parameters of a function.
 		["@variable.parameter.builtin"] = { link = "@variable.parameter" }, -- For builtin parameters of a function, e.g. "..." or Smali's p[1-99]
 		["@constant"] = { link = "Constant" }, -- For constants
 		["@constant.builtin"] = { link = "Special" }, -- For constant that are built in the language: nil in Lua.
 		["@constant.macro"] = { link = "Macro" }, -- For constants that are defined by macros: NULL in C.
 		["@module"] = { link = "Include" }, -- For identifiers referring to modules and namespaces.
-		["@module.builtin"] = { fg = colors.color1 }, -- Variable names that are defined by the languages, like `this` or `self`.
+		["@module.builtin"] = { fg = C.color1 }, -- Variable names that are defined by the languages, like `this` or `self`.
 		["@label"] = { link = "Label" }, -- For labels: label: in C and :label: in Lua.
 		--: }}}
 		--: Literals {{{
 		["@string"] = { link = "String" }, -- For strings.
-		["@string.documentation"] = { fg = U.blend(colors.color1, colors.color3, 0.5) }, -- For strings documenting code (e.g. Python docstrings).
+		["@string.documentation"] = { fg = U.blend(C.color1, C.color3, 0.5) }, -- For strings documenting code (e.g. Python docstrings).
 		["@string.regexp"] = { link = "Type" }, -- For regexes.
-		["@string.escape"] = { fg = colors.color5 }, -- For escape characters within a string.
+		["@string.escape"] = { fg = C.color5 }, -- For escape characters within a string.
 		["@string.special"] = { link = "Special" }, -- other special strings (e.g. dates)
 		["@string.special.path"] = { link = "Special" }, -- filenames
-		["@string.special.symbol"] = { fg = colors.color4 }, -- symbols or atoms
+		["@string.special.symbol"] = { fg = C.color4 }, -- symbols or atoms
 		["@string.special.url"] = { link = "URLlink" }, -- urls, links and emails
 		["@character"] = { link = "Character" }, -- character literals
 		["@character.special"] = { link = "SpecialChar" }, -- special characters (e.g. wildcards)
@@ -41,7 +40,7 @@ M.get = function(colors)
 		--: }}}
 		--: Types {{{
 		["@type"] = { link = "Type" }, -- For types.
-		["@type.builtin"] = { fg = colors.color4, styles = { "italic" } }, -- For builtin types.
+		["@type.builtin"] = { fg = C.color4, styles = { "italic" } }, -- For builtin types.
 		["@type.definition"] = { link = "Typedef" },
 		["@type.qualifier"] = { link = "@keyword.modifier" },
 		["@attribute"] = { link = "Constant" }, -- attribute annotations (e.g. Python decorators)
@@ -90,7 +89,7 @@ M.get = function(colors)
 		["@comment.note"] = { link = "Note" },
 		--: }}}
 		--: Markup {{{
-		["@markup"] = { fg = colors.foreground }, -- For strings considerated text in a markup language.
+		["@markup"] = { fg = C.foreground }, -- For strings considerated text in a markup language.
 		["@markup.strong"] = { link = "Bold" }, -- bold text
 		["@markup.italic"] = { link = "Italic" }, -- italic text
 		["@markup.strikethrough"] = { link = "Strikethrough" }, -- strikethrough text
@@ -106,8 +105,8 @@ M.get = function(colors)
 		["@markup.link.label.symbol"] = { link = "Identifier" },
 		["@markup.raw"] = { link = "String" }, -- used for inline code in markdown and for doc in python (""")
 		["@markup.list"] = { link = "Special" },
-		["@markup.list.checked"] = { fg = colors.color2 }, -- todo notes
-		["@markup.list.unchecked"] = { fg = colors.color4 }, -- todo notes
+		["@markup.list.checked"] = { fg = C.color2 }, -- todo notes
+		["@markup.list.unchecked"] = { fg = C.color4 }, -- todo notes
 		--: }}}
 		--: Diff {{{
 		["@diff.plus"] = { link = "DiffAdd" }, -- added text (for diff files)
@@ -124,7 +123,7 @@ M.get = function(colors)
 		["@function.builtin.bash"] = { styles = { "italic" } },
 		--: }}}
 		--: JS & derivative {{{
-		["@keyword.export"] = { fg = colors.color6 },
+		["@keyword.export"] = { fg = C.color6 },
 		--: }}}
 		--: Markdown {{{
 		["@markup.heading.1.markdown"] = { link = "rainbow1" },
@@ -135,30 +134,30 @@ M.get = function(colors)
 		["@markup.heading.6.markdown"] = { link = "rainbow6" },
 		--: }}}
 		--: Java {{{
-		["@constant.java"] = { fg = colors.color6 },
+		["@constant.java"] = { fg = C.color6 },
 		--: }}}
 		--: CSS {{{
-		["@property.css"] = { fg = colors.color5 },
-		["@property.id.css"] = { fg = colors.color4 },
-		["@property.class.css"] = { fg = colors.color3 },
-		["@type.css"] = { fg = colors.color5 },
-		["@type.tag.css"] = { fg = colors.color5 },
-		["@string.plain.css"] = { fg = U.blend(colors.color1, colors.color3, 0.5) },
-		["@number.css"] = { fg = U.blend(colors.color1, colors.color3, 0.5) },
+		["@property.css"] = { fg = C.color5 },
+		["@property.id.css"] = { fg = C.color4 },
+		["@property.class.css"] = { fg = C.color3 },
+		["@type.css"] = { fg = C.color5 },
+		["@type.tag.css"] = { fg = C.color5 },
+		["@string.plain.css"] = { fg = U.blend(C.color1, C.color3, 0.5) },
+		["@number.css"] = { fg = U.blend(C.color1, C.color3, 0.5) },
 		--: }}}
 		--: Toml {{{
-		["@property.toml"] = { fg = colors.color4 }, -- Differentiates between string and properties
+		["@property.toml"] = { fg = C.color4 }, -- Differentiates between string and properties
 		--: }}}
 		--: Json {{{
-		["@label.json"] = { fg = colors.color4 }, -- For labels: label: in C and :label: in Lua.
+		["@label.json"] = { fg = C.color4 }, -- For labels: label: in C and :label: in Lua.
 		--: }}}
 		--: Lua {{{
 		["@constructor.lua"] = { link = "Special" }, -- For constructor calls and definitions: = { } in Lua.
 		["@keyword.function.lua"] = { link = "Function" }, -- For function definitions in Lua.
 		--: }}}
 		--: Typescript {{{
-		["@property.typescript"] = { fg = colors.color5 },
-		["@constructor.typescript"] = { fg = colors.color5 },
+		["@property.typescript"] = { fg = C.color5 },
+		["@constructor.typescript"] = { fg = C.color5 },
 		--: }}}
 		--: TSX (Typescript React) {{{
 		["@constructor.tsx"] = { link = "@constructor" },
@@ -179,10 +178,10 @@ M.get = function(colors)
 		--: C/CPP {{{
 		["@type.builtin.c"] = { link = "Identifier" }, -- int, float, char, etc.
 		["@type.builtin.cpp"] = { link = "Identifier" }, -- int, float, char, etc.
-		["@property.cpp"] = { fg = colors.foreground },
+		["@property.cpp"] = { fg = C.foreground },
 		--: }}}
 		--: Gitcommit {{{
-		["@comment.warning.gitcommit"] = { fg = colors.color3 },
+		["@comment.warning.gitcommit"] = { fg = C.color3 },
 		--: }}}
 		--: }}}
 		--: LSP Semantic Token Groups {{{
@@ -196,7 +195,7 @@ M.get = function(colors)
 		["@lsp.type.escapeSequence"] = { link = "@string.escape" },
 		["@lsp.type.formatSpecifier"] = { link = "@markup.list" },
 		["@lsp.type.generic"] = { link = "@variable" },
-		["@lsp.type.interface"] = { fg = colors.color4 },
+		["@lsp.type.interface"] = { fg = C.color4 },
 		["@lsp.type.keyword"] = { link = "@keyword" },
 		["@lsp.type.lifetime"] = { link = "@keyword.storage" },
 		["@lsp.type.namespace"] = { link = "@module" },
@@ -221,8 +220,8 @@ M.get = function(colors)
 		["@lsp.typemod.operator.injected"] = { link = "@operator" },
 		["@lsp.typemod.string.injected"] = { link = "@string" },
 		["@lsp.typemod.struct.defaultLibrary"] = { link = "@type.builtin" },
-		["@lsp.typemod.type.defaultLibrary"] = { fg = colors.color4 },
-		["@lsp.typemod.typeAlias.defaultLibrary"] = { fg = colors.color4 },
+		["@lsp.typemod.type.defaultLibrary"] = { fg = C.color4 },
+		["@lsp.typemod.typeAlias.defaultLibrary"] = { fg = C.color4 },
 		["@lsp.typemod.variable.callable"] = { link = "@function" },
 		["@lsp.typemod.variable.defaultLibrary"] = { link = "@variable.builtin" },
 		["@lsp.typemod.variable.injected"] = { link = "@variable" },
