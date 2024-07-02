@@ -845,8 +845,7 @@ which_key = true
 
 ## Compilation
 
-Neopywal can pre-compute the results of your configuration and store the results in a compiled lua file stored into the system's cache directory, which then gets loaded when the colorscheme is applied.
-This approach greatly improves performance and reduces the total execution time.
+Neopywal can pre-compute your configuration and store the results in a compiled lua file stored into the system's cache directory, which then gets loaded when the colorscheme is applied. This approach greatly improves performance and reduces the total execution time.
 
 Note that you can always manually recompile Neopywal with the `:NeopywalCompile` command. But that isn't necessary since Neopywal is capable of automatically recompiling the colorscheme when it detects any changes in the user configuration.
 
