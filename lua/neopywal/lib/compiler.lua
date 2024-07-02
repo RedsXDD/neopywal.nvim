@@ -157,7 +157,7 @@ function M.compile(compile_path, path_sep, filename)
 		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
 		print(
 			string.format(
-				[[Neopywal (error): Most likely some mistake made in your neopywal config]],
+				[[Neopywal (ERROR): Most likely some mistake made in your neopywal config]],
 				[[You can open %s for debugging]],
 				"",
 				[[If you think this is a bug, kindly open an issue and attach %s file]],
