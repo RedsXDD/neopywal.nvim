@@ -877,7 +877,7 @@ colors = {
     color4     -- Blue.
     color5     -- Magenta.
     color6     -- Cyan.
-    color7     -- Bright white.
+    color7     -- White.
     color8     -- Bright black.
     color9     -- Bright red.
     color10    -- Bright green.
@@ -889,7 +889,7 @@ colors = {
 }
 ```
 
-Then you can apply the colors in a way similar to the one found in [custom Highlights](#Customizing-Highlights).
+Then you can apply the colors in a way similar to the one found in [custom highlights](#Customizing-Highlights).
 
 ### Example
 
@@ -917,7 +917,7 @@ require("neopywal.utils.color").blend(color1, color2, factor)
 ```
 
 > [!Note]
-> All color parameters for the functions on util.lua have to be in hexadecimal format.
+> All color parameters for the functions have to be in hexadecimal format.
 
 ### The Darken and Lighten Functions
 
