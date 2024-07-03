@@ -133,7 +133,7 @@ function M.get()
 		--: Variable types {{{
 		Variable = { fg = C.color4, styles = O.styles.variables or {} }, -- (preferred) any variable.
 		Constant = { fg = C.color3, styles = { "italic" } }, -- (preferred) any constant
-		String = { fg = C.color3, styles = O.styles.strings or {} }, -- a string constant: "this is a string"
+		String = { fg = C.foreground, styles = O.styles.strings or {} }, -- a string constant: "this is a string"
 		Character = { fg = C.color3 }, -- a character constant: 'c', '\n'
 		Number = { fg = C.color5, styles = O.styles.numbers or {} }, -- a number constant: 234, 0xff
 		Boolean = { fg = C.color5, styles = O.styles.booleans or {} }, -- a boolean constant: TRUE, FALSE
