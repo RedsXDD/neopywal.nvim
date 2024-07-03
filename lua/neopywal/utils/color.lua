@@ -33,13 +33,13 @@ end
 --]]
 --: }}}
 function M.hexToRgb(hex_color)
-	-- Convert the hex color code to lowercase.
+	local hex_chars = "[abcdef0-9][abcdef0-9]"
+	local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
 	hex_color = string.lower(hex_color)
 
-	-- Use pattern matching to extract the red, green, and blue components from the hex color code.
-	local r, g, b = hex_color:match("#(%x%x)(%x%x)(%x%x)")
+	assert(string.find(hex_color, pattern) ~= nil, "hex_to_rgb: invalid hex_str: " .. tostring(hex_color))
 
-	-- Convert the extracted hexadecimal values to decimal and return them as a table.
+	local r, g, b = string.match(hex_color, pattern)
 	return {
 		tonumber(r, 16),
 		tonumber(g, 16),
