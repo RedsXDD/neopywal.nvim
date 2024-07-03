@@ -49,13 +49,13 @@ local function map_highlights()
 
 	-- Get highlights for enabled plugins.
 	local plugins = {}
-	local function load_plugin(plugin, plugin_option)
-		if type(plugin_option) == "table" and plugin_option.enabled then
+	local function load_plugin(plugin, option)
+		if type(option) == "table" and option.enabled then
 			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin).get())
-		elseif plugin_option == true then
+		elseif option == true then
 			local default_config = require("neopywal").default_options.plugins[plugin]
-			plugin_option = type(default_config) == "table" and default_config or {}
-			plugin_option.enabled = true
+			option = type(default_config) == "table" and default_config or {}
+			option.enabled = true
 			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin).get())
 		end
 	end
