@@ -1,4 +1,8 @@
 local M = {}
+
+-- Use the bxor/lshift functions inside Neovim's builtin bit/bit32 library tables.
+-- If neither exist use the functions on lib/bit.lua.
+---@diagnostic disable-next-line: undefined-global
 local B = bit or bit32 or require("neopywal.lib.bit")
 
 local hash_str = function(str) -- djb2, https://theartincode.stanis.me/008-djb2/
