@@ -44,8 +44,7 @@ local function make_bitop(t)
 	return make_bitop_uncached(op2, 2 ^ (t.n or 1))
 end
 
-M.bxor = make_bitop({ [0] = { [0] = 0, [1] = 1 }, [1] = { [0] = 1, [1] = 0 }, n = 4 })
-local bxor = M.bxor
+local bxor = make_bitop({ [0] = { [0] = 0, [1] = 1 }, [1] = { [0] = 1, [1] = 0 }, n = 4 })
 
 local lshift, rshift
 
@@ -81,9 +80,9 @@ local function bit_bxor(a, b, c, ...)
 	end
 end
 
-return {
-	bxor = bit_bxor,
-	lshift = function(x, n)
-		return bit_tobit(lshift(x % MOD, n % 32))
-	end,
-}
+M.bxor = bit_bxor
+M.lshift = function(x, n)
+	return bit_tobit(lshift(x % MOD, n % 32))
+end
+
+return M
