@@ -10,7 +10,7 @@ function M.get()
 		CmpItemAbbrMatch = { link = "Special" },
 		CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 
-		-- Kind support:
+		-- Kind support.
 		CmpItemKindKeyword = { fg = C.color1 }, -- Link Keyword
 		CmpItemKindOperator = { fg = C.color1 }, -- Link Operator
 		CmpItemKindEnum = { link = "CmpItemKindKeyword" },

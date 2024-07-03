@@ -151,30 +151,6 @@ local default_options = {
 
 M.options = default_options
 
---: M.get_colors() explanation {{{
---[[
-	Returns a table of colors to be used by the plugin.
-
-	The get_colors function determines the colors to use by Neopywal based on the user's configuration and
-	the default colors set by the Pywal/Wallust colorscheme file.
-
-	It first checks if the user has opted to use the Wallust colorscheme, and
-	sources the corresponding colorscheme file. If the file cannot be loaded,
-	it notifies the user and then falls back to a built-in catppuccin colorscheme.
-
-	The function then merges the user's custom colors (if any) with the determined
-	colors and returns a colors dictionary table.
-
-	The returned table contains the following colors:
-	- none
-	- transparent
-	- background
-	- foreground
-	- cursor
-	- color0 to color15
-	- any additional color variable set by the user.
---]]
---: }}}
 function M.get_colors()
 	if type(M.options.colorscheme_file) ~= "string" then
 		error("NEOPYWAL: `colorscheme_file` option must be of type string.")
@@ -224,7 +200,7 @@ function M.get_colors()
 		color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
 	}
 
-	-- Reset global variables:
+	-- Reset global variables.
 	vim.g.background = nil
 	vim.g.foreground = nil
 	vim.g.cursor = nil
@@ -302,28 +278,16 @@ function M.load()
 	f(compiled_filename)
 end
 
---: M.setup() explanation {{{
---[[
-	The setup function initializes the plugin configuration by merging user-provided settings with default options,
-	overwritting any default options with the user configuration.
-
-	If the user configuration specifies default_fileformats or default_plugins as false, all of the
-	corresponding default options for the fileformats/plugins tables will be reset.
-
-	The function also disabled the transparent option by default if the plugin is being ran inside Neovide.
-	Since Neovide doesn't handle transparancy properly, having such option enable would make all the transparent colors black by default.
---]]
---: }}}
 function M.setup(user_conf)
 	did_setup = true
 
 	-- Load user configuration.
 	user_conf = user_conf or {}
 
-	-- Create the final configuration table by combining user settings, default options, and Neovide settings
+	-- Create the final configuration table by overwritting the default table with the user config table.
 	M.options = vim.tbl_deep_extend(
 		"keep",
-		vim.g.neovide and { transparent_background = false } or {},
+		vim.g.neovide and { transparent_background = false } or {}, -- Neovide doesn't play well with transparent background colors.
 		user_conf,
 		default_options
 	)
@@ -343,7 +307,7 @@ function M.setup(user_conf)
 		M.options.fileformats = user_conf.fileformats or {}
 	end
 
-	-- Get cached hash
+	-- Get cached hash.
 	local cached_path = compile_path .. path_sep .. "cached"
 	local file = io.open(cached_path)
 	local cached = nil
@@ -352,7 +316,7 @@ function M.setup(user_conf)
 		file:close()
 	end
 
-	-- Get current hash
+	-- Get current hash.
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
 	local hash = require("neopywal.lib.hashing").hash(user_conf)
@@ -361,7 +325,7 @@ function M.setup(user_conf)
 		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
 		.. sum_colors()
 
-	-- Recompile if hash changed
+	-- Recompile if hash changed.
 	if cached ~= hash then
 		require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
 		file = io.open(cached_path, "wb")
