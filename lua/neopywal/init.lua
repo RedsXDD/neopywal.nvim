@@ -285,12 +285,12 @@ function M.setup(user_conf)
 	user_conf = user_conf or {}
 
 	-- Create the final configuration table by overwritting the default table with the user config table.
-	M.options = vim.tbl_deep_extend(
-		"keep",
-		vim.g.neovide and { transparent_background = false } or {}, -- Neovide doesn't play well with transparent background colors.
-		user_conf,
-		default_options
-	)
+	M.options = vim.tbl_deep_extend("keep", user_conf, default_options)
+
+	-- Neovide doesn't play well with transparent background colors.
+	if vim.g.neovide then
+		M.options.transparent_background = false
+	end
 
 	-- Disable default plugins options if default_plugins != true.
 	if M.options.default_plugins == false then
