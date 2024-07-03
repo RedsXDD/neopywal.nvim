@@ -53,9 +53,6 @@ local function map_highlights()
 		if type(option) == "table" and option.enabled then
 			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin).get())
 		elseif option == true then
-			local default_config = require("neopywal").default_options.plugins[plugin]
-			option = type(default_config) == "table" and default_config or {}
-			option.enabled = true
 			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin).get())
 		end
 	end
