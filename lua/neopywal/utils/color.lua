@@ -64,7 +64,7 @@ end
 --: }}}
 function M.blend(color1, color2, factor)
 	-- Convert factor to a number if it's a hex string. Making sure it's betwheen 0 and 1.
-	factor = type(factor) == "string" and (tonumber(factor, 16) / 0xff) or factor
+	factor = type(factor) == "string" and math.abs((tonumber(factor, 16) / 0xff)) or math.abs(factor)
 
 	-- Convert hex colors to RGB.
 	local rgb_color1 = M.hexToRgb(color1)
@@ -91,6 +91,7 @@ end
 --]]
 --: }}}
 function M.darken(color, factor)
+	factor = math.abs(factor)
 	local rgb_color = M.hexToRgb(color)
 
 	-- Function to subtract the factor from each component of the RGB color.
@@ -114,6 +115,7 @@ end
 --]]
 --: }}}
 function M.lighten(color, factor)
+	factor = math.abs(factor)
 	local rgb_color = M.hexToRgb(color)
 
 	-- Function to add the factor from each component of the RGB color.
