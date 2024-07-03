@@ -5,7 +5,7 @@ local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config
 local compile_path = vim.fn.stdpath("cache") .. "/neopywal"
 local compiled_filename = "neopywal"
 
-M.default_options = {
+local default_options = {
 	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
 	-- pywal template at `~/.cache/wal/colors-wal.vim`
 	use_wallust = false,
@@ -149,7 +149,7 @@ M.default_options = {
 	},
 }
 
-M.options = M.default_options
+M.options = default_options
 
 --: M.get_colors() explanation {{{
 --[[
@@ -325,7 +325,7 @@ function M.setup(user_conf)
 		"keep",
 		vim.g.neovide and { transparent_background = false } or {},
 		user_conf,
-		M.default_options
+		default_options
 	)
 
 	-- Disable default plugins options if default_plugins != true.
