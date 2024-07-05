@@ -7,8 +7,52 @@ on:
   workflow_dispatch:
 
 jobs:
+  stylua:
+    name: Stylua
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Stylua
+        uses: JohnnyMorganz/stylua-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --color always --check lua
+
+  tests:
+    name: Tests
+    needs:
+      - stylua
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        nvim-versions: ["stable", "nightly"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.nvim-versions }}
+      - name: Neovim Version
+        run: nvim --version
+      - name: colors-wal.vim
+        run: |
+          mkdir -p "$HOME/.cache/wal/"
+          cp ./tests/colors-wal.vim "$HOME/.cache/wal/"
+      - name: Lazy.nvim Tests
+        run: |
+          nvim --headless -V -u tests/lazy.lua +q
+      - name: Plenary Tests
+        run: nvim --headless --noplugin -V -u tests/plenary.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/plenary.lua', sequential = true }"
+
   release:
-    name: release
+    name: Gen Release
+    needs:
+      - stylua
+      - tests
     permissions:
       contents: write
       issues: write
@@ -16,13 +60,17 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' && github.repository_owner == 'RedsXDD' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - name: release-please-action
+        uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: simple
-          package-name: neopywal
-      - uses: actions/checkout@v4
-      - name: tag stable versions
+          package-name: test
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Tag Stable Versions
         if: ${{ steps.release.outputs.release_created }}
         run: |
           git config user.name github-actions[bot]
