@@ -1,4 +1,4 @@
-*neopywal.txt*                                                        Neopywal
+*neopywal.txt*                                         (Neo)pywal for (Neo)vim
 
 ==============================================================================
 Table of Contents                                 *neopywal-table-of-contents*
