@@ -1,6 +1,5 @@
----@diagnostic disable-next-line: undefined-field
+---@diagnostic disable: undefined-field, undefined-global
 local cwd = vim.uv.cwd()
----@diagnostic disable-next-line: undefined-global
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
 
 if path_sep == "\\" then
