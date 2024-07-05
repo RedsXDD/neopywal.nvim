@@ -1,4 +1,4 @@
-name: release
+name: Continuous Integration
 
 on:
   push:
