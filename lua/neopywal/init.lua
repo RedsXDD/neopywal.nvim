@@ -5,7 +5,7 @@ local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config
 local compile_path = vim.fn.stdpath("cache") .. "/neopywal"
 local compiled_filename = "neopywal"
 
-local default_options = {
+M.default_options = {
 	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
 	-- pywal template at `~/.cache/wal/colors-wal.vim`
 	use_wallust = false,
@@ -149,7 +149,7 @@ local default_options = {
 	},
 }
 
-M.options = default_options
+M.options = M.default_options
 
 function M.get_colors()
 	if type(M.options.colorscheme_file) ~= "string" then
