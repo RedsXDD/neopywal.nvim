@@ -1,3 +1,5 @@
+<!-- panvimdoc-ignore-start -->
+
 <h1 align="center">
     🎨 (Neo)pywal for <a href="https://github.com/neovim/neovim">(Neo)</a><a href="https://github.com/vim/vim">vim</a>
 </h1>
@@ -18,7 +20,11 @@
 \
 ![04](./assets/screenshots/04.png)
 
+<!-- panvimdoc-ignore-end -->
+
 <!-- Table of Contents {{{ -->
+
+<!-- panvimdoc-ignore-start -->
 
 ## Table of Contents
 
@@ -39,6 +45,8 @@
    1. [Setting up Wallust](#Setting-up-Wallust)
 9. [How it Works](#How-it-Works)
 10. [Enjoy](#Enjoy)
+
+<!-- panvimdoc-ignore-end -->
 
 <!-- }}} -->
 <!-- Features {{{ -->
@@ -65,7 +73,6 @@
 {
     "RedsXDD/neopywal.nvim",
     name = "neopywal",
-    version = false,
     lazy = false,
     priority = 1000,
     opts = {},
@@ -1065,6 +1072,6 @@ All Neopywal does is reading the contents of the file and exportting them into a
 
 ## Enjoy
 
-If you like this work you can give it a star ⭐
+If you like this work you can give this project a star ⭐
 
 [//]: # "vim:fileencoding=utf-8:foldmethod=marker:foldenable"

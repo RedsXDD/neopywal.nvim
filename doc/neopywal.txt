@@ -1,0 +1,817 @@
+*neopywal.txt*                                                        Neopywal
+
+==============================================================================
+Table of Contents                                 *neopywal-table-of-contents*
+
+  - Features                                               |neopywal-features|
+  - Installation                                       |neopywal-installation|
+  - Usage                                                     |neopywal-usage|
+  - Configuration                                     |neopywal-configuration|
+  - Compilation                                         |neopywal-compilation|
+  - Importing colors                               |neopywal-importing-colors|
+  - Utilities                                             |neopywal-utilities|
+  - Pywal Alternatives                           |neopywal-pywal-alternatives|
+  - How it Works                                       |neopywal-how-it-works|
+  - Enjoy                                                     |neopywal-enjoy|
+
+FEATURES                                                   *neopywal-features*
+
+- Highly configurable with ability to change color definitions and highlight groups.
+- True color support.
+- Export table with color palette.
+- Fail safe color fallbacks if required palette files could not be loaded.
+- Supports Pywal <https://github.com/dylanaraps/pywal> and Wallust <https://codeberg.org/explosion-mental/wallust>.
+- Support for LSP, treesitter and |neopywal-a-bunch-of-plugins|.
+- Enhanced syntax highlighting for |neopywal-fileformats| (without using treesitter).
+- |neopywal-compiled| user’s configuration for fast startup times.
+
+
+INSTALLATION                                           *neopywal-installation*
+
+lazy.nvim <https://github.com/folke/lazy.nvim>
+
+>lua
+    {
+        "RedsXDD/neopywal.nvim",
+        name = "neopywal",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    }
+<
+
+packer.nvim <https://github.com/wbthomason/packer.nvim>
+
+>lua
+    use { "RedsXDD/neopywal.nvim", as = 'neopywal' }
+<
+
+vim-plug <https://github.com/junegunn/vim-plug>
+
+>vim
+    Plug 'RedsXDD/neopywal.nvim', { 'as': 'neopywal' }
+<
+
+
+USAGE                                                         *neopywal-usage*
+
+To activate the theme, add the following to your Neovim config:
+
+>lua
+    local neopywal = require("neopywal")
+    neopywal.setup()
+    vim.cmd.colorscheme("neopywal")
+<
+
+Or call the colorscheme with vim script:
+
+>vim
+    colorscheme neopywal
+<
+
+
+  [!Note] Make sure to run `:colorscheme neopywal` or
+  `vim.cmd.colorscheme("neopywal")`, otherwise the colorscheme won’t be loaded.
+
+CONFIGURATION                                         *neopywal-configuration*
+
+There is no need to call `setup` if you don’t want to change the default
+options and settings.
+
+>lua
+    require("neopywal").setup({
+        -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
+        -- Pywal template at `~/.cache/wal/colors-wal.vim`
+        use_wallust = false,
+    
+        -- This option allows to specify where Neopywal should look for a ".vim" template file.
+        colorscheme_file = "", -- e.g.: "~/.cache/wal/custom_neopywal_template.vim".
+    
+        -- Sets the background color of certain highlight groups to be transparent.
+        -- Use this when your terminal opacity is < 1.
+        transparent_background = false,
+    
+        -- With this option you can overwrite all the base colors the colorscheme uses.
+        custom_colors = {},
+    
+        -- With this option you can overwrite any highlight groups set by the colorscheme.
+        -- For more information scroll down (https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights)
+        custom_highlights = {},
+    
+        -- Dims the background when another window is focused.
+        dim_inactive = true,
+    
+        -- Apply colorscheme for Neovim's terminal (e.g. `g:terminal_color_0`).
+        terminal_colors = true,
+    
+        -- Shows the '~' characters after the end of buffers.
+        show_end_of_buffer = false,
+    
+        -- Shows the '|' split separator characters.
+        -- It's worth noting that this options works better in conjunction with `dim_inactive`.
+        show_split_lines = true,
+    
+        no_italic = false, -- Force no italic.
+        no_bold = false, -- Force no bold.
+        no_underline = false, -- Force no underline.
+        no_undercurl = false, -- Force no undercurl.
+        no_strikethrough = false, -- Force no strikethrough.
+    
+        -- Handles the styles of general hi groups (see `:h highlight-args`).
+        styles = {
+            comments = { "italic" },
+            conditionals = { "italic" },
+            loops = {},
+            functions = {},
+            keywords = {},
+            includes = { "italic" },
+            strings = {},
+            variables = { "italic" },
+            numbers = {},
+            booleans = {},
+            types = { "italic" },
+            operators = {},
+        },
+    
+        -- Setting this to false disables all default file format highlights.
+        -- Useful if you want to enable specific file format options.
+        -- NOTE: if the treesitter plugin integration is enabled, this option
+        -- will be automatically set to false unless the user manually sets it back on
+        -- using the setup() function.
+        default_fileformats = true,
+    
+        -- Setting this to false disables all default plugin highlights.
+        -- Useful if you want to enable specific plugin options.
+        default_plugins = true,
+    
+        fileformats = {
+            c_cpp = true,
+            c_sharp = true,
+            -- For more fileformats options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Fileformats)
+        },
+        plugins = {
+            alpha = true,
+            coc = true,
+            mini = {
+                cursorword = true,
+                files = true,
+            },
+            -- For more plugin options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Plugins)
+        },
+    })
+<
+
+
+CUSTOMIZING COLORS ~
+
+Color definitions can be overwritten using the `custom_colors` option:
+
+>lua
+    require("neopywal").setup({
+        -- Here's an example color template for the catppuccin colorscheme:
+        custom_colors = {
+            background = "#1E1E2E",
+            foreground = "#CDD6F4",
+            cursor = "#F5E0DC",
+            color0 = "#45475A",
+            color1 = "#F38BA8",
+            color2 = "#A6E3A1",
+            color3 = "#F9E2AF",
+            color4 = "#89B4FA",
+            color5 = "#F5C2E7",
+            color6 = "#94E2D5",
+            color7 = "#BAC2DE",
+            color8 = "#585B70",
+            color9 = "#F38BA8",
+            color10 = "#A6E3A1",
+            color11 = "#F9E2AF",
+            color12 = "#89B4FA",
+            color13 = "#F5C2E7",
+            color14 = "#94E2D5",
+            color15 = "#A6ADC8",
+        },
+    })
+<
+
+You can also define your own color variables:
+
+>lua
+    require("neopywal").setup({
+        custom_colors = {
+            red = "#ff0000"
+            green = "#00ff00"
+            blue = "#0000ff"
+        },
+    })
+<
+
+Custom color variables will be automatically exported with the `get_colors()`
+function and can used normally when using the imported color palette.
+
+
+CUSTOMIZING HIGHLIGHTS ~
+
+Highlight groups can be overwritten using `custom_highlights` option.
+
+With an internal function:
+
+>lua
+    require("neopywal").setup({
+        custom_highlights = function(colors)
+            return {
+                Comment = { fg = colors.color3 }
+                TabLineSel = { bg = colors.color5 },
+                FloatBorder = { bg = colors.color1 },
+                Pmenu = { bg = colors.color6 },
+            }
+        end
+    })
+<
+
+Using an externally exported color palette.
+
+>lua
+    local colors = require("neopywal").get_colors()
+    
+    require("neopywal").setup({
+        custom_highlights = {
+            Comment = { fg = colors.color3 }
+            TabLineSel = { bg = colors.color5 },
+            FloatBorder = { bg = colors.color1 },
+            Pmenu = { bg = colors.color6 },
+        }
+    })
+<
+
+Neopywal also allows to set a transparent color for highlight groups using the
+`none` color variable.
+
+>lua
+    require("neopywal").setup({
+        custom_highlights = function (colors)
+            return {
+                Normal = { bg = colors.none },
+            }
+        end
+    })
+<
+
+
+FILEFORMATS ~
+
+Neopywal provides theme support for extra syntax highlighting groups that do
+not use treesitter. This is useful for users that don’t have treesitter
+installed but still want a somewhat decent syntax highlighting.
+
+Some fileformats are enabled by default, you can control this behaviour with
+the `default_fileformats` option.
+
+>lua
+    require("neopywal").setup({
+        default_fileformats = false,
+    })
+<
+
+To enable/disable a supported fileformat you just need to set it to true/false.
+
+>lua
+    fileformats = {
+        c_cpp = true,
+        c_sharp = true,
+        clojure = true,
+        cmake = true,
+        common_lisp = true,
+        css = true,
+        dart = true,
+        diff = true,
+        elixir = true,
+        erlang = true,
+        git_commit = true,
+        go = true,
+        haskell = true,
+        help = true,
+        html = true,
+        ini = true,
+        java = true,
+        javascript = true,
+        javascript_react = true,
+        json = true,
+        kotlin = true,
+        latex = true,
+        less = true,
+        lua = true,
+        makefile = true,
+        markdown = true,
+        matlab = true,
+        objectivec = true,
+        ocaml = true,
+        perl = true,
+        php = true,
+        powershell = true,
+        python = true,
+        restructuredtext = true,
+        ruby = true,
+        rust = true,
+        sass = true,
+        scala = true,
+        shell = true,
+        swift = true,
+        toml = true,
+        typescript = true,
+        viml = true,
+        xml = true,
+        yaml = true,
+        zsh = true,
+    }
+<
+
+
+PLUGINS ~
+
+Neopywal also provides theme support for other plugins in the Neovim ecosystem.
+To enable/disable a plugin you just need to set it to true/false.
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            alpha = true,
+            dashboard = false,
+            git_gutter = true,
+            indent_blankline = true,
+            lazy = true,
+            lazygit = true,
+            noice = false,
+            notify = true,
+            nvim_cmp = true,
+            mini = {
+                hipatterns = true,
+                indentscope = false,
+                pick = true,
+                starter = true,
+            },
+        },
+    })
+<
+
+Some plugins are enabled by default, you can control this behaviour with the
+`default_plugins` option.
+
+>lua
+    require("neopywal").setup({
+        default_plugins = false,
+    })
+<
+
+Below is a list of supported plugins and their corresponding configuration
+module.
+
+PluginDefaultalpha-nvim>lua
+    alpha = true
+<
+
+bufferline.nvimSpecial ~
+
+Update your bufferline config to use the Neopywal components:
+
+
+  [!Note] Bufferline needs to be loaded after setting up Neopywal or it will
+  highlight incorrectly.
+Configuration for packer.nvim <https://github.com/wbthomason/packer.nvim>
+users:
+
+>lua
+    use "akinsho/bufferline.nvim" {
+      after = "neopywal",
+      config = function()
+        require("bufferline").setup {
+          highlights = require("neopywal.theme.plugins.bufferline").setup()
+        }
+      end
+    }
+<
+
+Configuration for lazy.nvim <https://github.com/folke/lazy.nvim> users:
+
+>lua
+    {
+        "RedsXDD/neopywal.nvim",
+        name = "neopywal",
+        lazy = false,
+        priority = 1000, -- Neopywal loads first because it has higher priority.
+    },
+    {
+        "akinsho/bufferline.nvim",
+        config = function()
+            require("bufferline").setup({
+                highlights = require("neopywal.theme.plugins.bufferline").setup()
+            })
+        end
+    }
+<
+
+Overriding configurations can be done inside the setup() function, see
+|bufferline-highlights| for detailed explanations:
+
+>lua
+    local colors = require("neopywal").get_colors()
+    bufferline.setup({
+        highlights = require("neopywal.theme.plugins.bufferline").setup({
+            fill = { bg = colors.color1 },
+            background = { fg = "#00ff00" },
+        })
+    })
+<
+
+coc.nvim>lua
+    coc = true
+<
+
+dashboard-nvim>lua
+    dashboard = true
+<
+
+feline.nvimSpecial ~
+
+
+  [!Note] In it’s current state, feline haven’t been tested with Neopywal
+  since the required module still needs to be updated and refactored. The
+  configuration below WILL change in the future once that update happens.
+Update your Feline config to use the Neopywal components:
+
+>lua
+    local has_feline, feline = pcall(require, "feline")
+    if not has_feline then
+        return
+    end
+    
+    local has_neopywal, neopywal = pcall(require, "neopywal.theme.plugins.feline")
+    if not has_neopywal then
+        return
+    end
+    
+    feline.setup({
+        components = neopywal,
+    })
+<
+
+indent-blankline.nvim>lua
+    indent_blankline = true
+<
+
+lazy.nvim>lua
+    lazy = true
+<
+
+lazygit.nvim>lua
+    lazygit = true
+<
+
+lualine.nvimSpecial ~
+
+>lua
+    require('lualine').setup {
+        options = {
+            theme = "neopywal"
+            -- The rest of your lualine config ...
+        }
+    }
+<
+
+mini.cursorword>lua
+    mini = {
+        cursorword = true
+    }
+<
+
+mini.files>lua
+    mini = {
+        files = true
+    }
+<
+
+mini.hipatterns>lua
+    mini = {
+        hipatterns = true
+    }
+<
+
+mini.indentscope>lua
+    mini = {
+        indentscope = true
+    }
+<
+
+mini.pick>lua
+    mini = {
+        pick = true
+    }
+<
+
+mini.starter>lua
+    mini = {
+        starter = true
+    }
+<
+
+mini.statusline>lua
+    mini = {
+        statusline = true
+    }
+<
+
+mini.tabline>lua
+    mini = {
+        tabline = true
+    }
+<
+
+nvim-lspconfig>lua
+    lspconfig = true
+<
+
+neo-tree.nvim>lua
+    neotree = true
+<
+
+netrw>lua
+    netrw = true
+<
+
+noice.nvim>lua
+    noice = true
+<
+
+nvim-cmp>lua
+    nvim_cmp = true
+<
+
+nvim-notify>lua
+    notify = true
+<
+
+nvim-treesitter>lua
+    treesitter = true
+<
+
+telescope.nvim>lua
+    telescope = true
+<
+
+undotree>lua
+    undotree = true
+<
+
+vim-gitgutter>lua
+    git_gutter = true
+<
+
+which-key.nvim>lua
+    which_key = true
+<
+
+
+COMPILATION                                             *neopywal-compilation*
+
+Neopywal can pre-compute your configuration and store the results in a compiled
+lua file stored into the system’s cache directory, which then gets loaded
+when the colorscheme is applied. This approach greatly improves performance and
+reduces the total execution time.
+
+Note that you can always manually recompile Neopywal with the
+`:NeopywalCompile` command. But that isn’t necessary since Neopywal is
+capable of automatically recompiling the colorscheme when it detects any
+changes in the user configuration.
+
+
+IMPORTING COLORS                                   *neopywal-importing-colors*
+
+You can use the internal function `get_colors()` if you want to import the
+colors into a lua table:
+
+>lua
+    local colors = require("neopywal").get_colors()
+<
+
+This will import a lua table containing all the colors auto generated by Pywal
+as well as any custom colors defined the |neopywal-custom-colors-table|.
+
+Note that the naming of some of them are not exactly clear if you’re not used
+to the way Pywal exports them.
+
+>lua
+    colors = {
+        none       -- Use this keyword if you want a transparent color.
+        background -- Main background color.
+        foreground -- Main foreground color.
+        cursor     -- Cursor color.
+        color0     -- Black.
+        color1     -- Red.
+        color2     -- Green.
+        color3     -- Yellow.
+        color4     -- Blue.
+        color5     -- Magenta.
+        color6     -- Cyan.
+        color7     -- White.
+        color8     -- Bright black.
+        color9     -- Bright red.
+        color10    -- Bright green.
+        color11    -- Bright yellow.
+        color12    -- Bright blue.
+        color13    -- Bright magenta.
+        color14    -- Bright cyan.
+        color15    -- Bright white.
+    }
+<
+
+Then you can apply the colors in a way similar to the one found in
+|neopywal-custom-highlights|.
+
+
+EXAMPLE ~
+
+>lua
+    local colors = require("neopywal").get_colors()
+    
+    return {
+        color_var1 = { colors.color1 }
+        color_var2 = { colors.color2 }
+        color_var3 = { colors.color3 }
+    }
+<
+
+
+UTILITIES                                                 *neopywal-utilities*
+
+Neopywal offers a neat set of utility functions that allows the user to improve
+the builtin Neopywal color palette without having to create new color
+definitions.
+
+>lua
+    require("neopywal.utils.color").darken(color, factor)
+    require("neopywal.utils.color").lighten(color, factor)
+    require("neopywal.utils.color").blend(color1, color2, factor)
+<
+
+
+  [!Note] All color parameters for the functions have to be in hexadecimal
+  format.
+
+THE DARKEN AND LIGHTEN FUNCTIONS ~
+
+The `darken()` and `lighten()` functions are able to create new colors by
+darkening/lightening existing colors. Both functions take two parameters, the
+first one is the color you want to modify, the second is an integer that
+defines how much each color will be darken/lighten.
+
+>lua
+    local colors = require("neopywal").get_colors()
+    local U = require("neopywal.utils.color")
+    
+    color_var1 = { U.lighten(colors.color1, 30) }
+    color_var2 = { U.darken(colors.color2, 30) }
+<
+
+
+THE BLEND FUNCTION ~
+
+The `blend()` function combines two colors to create a new color that is a
+mixture of the two input colors. The function takes three parameters:
+
+- The first two parameters define the colors to be blended.
+- The third `factor` parameter is a number between 0 and 1 that determines the proportion of each color in the final output.
+    Where 0 means "use the exact same color as the first parameter" and 1 means
+    "use the exact same color as the second parameter".
+
+>lua
+    local colors = require("neopywal").get_colors()
+    local U = require("neopywal.utils.color")
+    
+    color_var1 = { U.darken(colors.color1, colors.color3, 0) }
+    color_var2 = { U.darken(colors.color1, colors.color3, 1) }
+    color_var3 = { U.blend(colors.color1, colors.color3, 0.5) }
+<
+
+In that example:
+
+- `color_var1` will be identical to `colors.color1`.
+- `color_var2` will be identical to `colors.color3`.
+- `color_var3` will be a 50/50 mix of `colors.color1` and `colors.color3`.
+
+
+PYWAL ALTERNATIVES                               *neopywal-pywal-alternatives*
+
+As stated before, Pywal has been officially deprecated on April 26, 2024. So
+it’s not recommend to use it.
+
+One idea to mitigate that problem would be to use a fork that’s feature
+compatible with Pywal, or that at very least exports the same color variables
+that are necessary for this plugin to work. There are two projects that i
+personally recommend as a Pywal replacement:
+
+1. Pywal16 <https://github.com/eylles/pywal16> by ellyes <https://github.com/eylles>, which is a drop-in replacement for Pywal, so no extra work has to be done.
+2. Wallust <https://codeberg.org/explosion-mental/wallust> by explosion-mental <https://codeberg.org/explosion-mental>, which requires some additional configuration to work with Neopywal.
+
+If you plan on using Wallust, here’s a guide on how to set it up with
+Neopywal:
+
+
+SETTING UP WALLUST ~
+
+After installing Wallust, you will need to create two files. The first is a
+template file that should be located on
+`~/.config/wallust/templates/colors_neopywal.vim`, the second is the default
+configuration file for Wallust, which should be created at
+`~/.config/wallust/wallust.toml`.
+
+Here are the contents that should be copied of to them:
+
+`colors_neopywal.vim`
+
+>vim
+    let background = "{{background}}"
+    let foreground = "{{foreground}}"
+    let cursor = "{{cursor}}"
+    let color0 = "{{color0}}"
+    let color1 = "{{color1}}"
+    let color2 = "{{color2}}"
+    let color3 = "{{color3}}"
+    let color4 = "{{color4}}"
+    let color5 = "{{color5}}"
+    let color6 = "{{color6}}"
+    let color7 = "{{color7}}"
+    let color8 = "{{color8}}"
+    let color9 = "{{color9}}"
+    let color10 = "{{color10}}"
+    let color11 = "{{color11}}"
+    let color12 = "{{color12}}"
+    let color13 = "{{color13}}"
+    let color14 = "{{color14}}"
+    let color15 = "{{color15}}"
+<
+
+`wallust.toml`
+
+>toml
+    neopywal.template = "templates/colors_neopywal.vim"
+    neopywal.target = "~/.cache/wallust/colors_neopywal.vim"
+<
+
+After that you need to enable the `use_wallust` option on you Neopywal
+configuration.
+
+>lua
+    require("neopywal").setup({
+        use_wallust = true,
+    })
+<
+
+Enabling this option makes Neopywal automatically read the template file that
+will be generated by Wallust on `~/.cache/wallust/colors_neopywal.vim`, and
+with that Neopywal should work exactly the same as if you were using Pywal.
+
+
+HOW IT WORKS                                           *neopywal-how-it-works*
+
+Pywal automatically generates a file called `colors-wal.vim` in
+`~/.cache/wal/colors-wal.vim`, the file contains all the colors variables that
+are necessary to create a color dictionary that can be used to generate a
+Neovim colorscheme. The file looks like this:
+
+>vim
+    " Special
+    let wallpaper  = "/home/user/Pictures/wallpaper.png"
+    let background = "#1E1E2E"
+    let foreground = "#CDD6F4"
+    let cursor     = "#F5E0DC"
+    
+    " Colors
+    let color0  = "#45475A"
+    let color1  = "#F38BA8"
+    let color2  = "#A6E3A1"
+    let color3  = "#F9E2AF"
+    let color4  = "#89B4FA"
+    let color5  = "#F5C2E7"
+    let color6  = "#94E2D5"
+    let color7  = "#BAC2DE"
+    let color8  = "#585B70"
+    let color9  = "#F38BA8"
+    let color10 = "#A6E3A1"
+    let color11 = "#F9E2AF"
+    let color12 = "#89B4FA"
+    let color13 = "#F5C2E7"
+    let color14 = "#94E2D5"
+    let color15 = "#A6ADC8"
+<
+
+All Neopywal does is reading the contents of the file and exportting them into
+a lua table that then is used to apply the highlight groups that build the
+colorscheme.
+
+
+ENJOY                                                         *neopywal-enjoy*
+
+If you like this work you can give this project a star ⭐
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:

@@ -48,11 +48,38 @@ jobs:
       - name: Plenary Tests
         run: nvim --headless --noplugin -V -u tests/plenary.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/plenary.lua', sequential = true }"
 
+  docs:
+    name: Gen Vimdoc
+    needs:
+      - stylua
+      - tests
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Gen Vimdoc
+        uses: kdheepak/panvimdoc@main
+        with:
+          vimdoc: neopywal
+          description: "(Neo)pywal for (Neo)vim"
+          pandoc: "README.md"
+          toc: true
+          version: "nvim >= 0.8.0"
+          treesitter: true
+      - name: Commit Docs
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "docs: auto generate vimdoc"
+          branch: ${{ github.head_ref }}
+
   release:
     name: Gen Release
     needs:
       - stylua
       - tests
+      - docs
     permissions:
       contents: write
       issues: write
