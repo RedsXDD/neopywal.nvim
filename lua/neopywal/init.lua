@@ -176,28 +176,49 @@ function M.get_colors()
 		)
 	end
 
+	-- Use fallback colors if template file couldn't be loaded.
 	-- Fallback colors reference: https://github.com/catppuccin/catppuccin
+	vim.g.background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E"
+	vim.g.foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4"
+	vim.g.cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC"
+	vim.g.color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A"
+	vim.g.color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8"
+	vim.g.color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1"
+	vim.g.color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF"
+	vim.g.color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA"
+	vim.g.color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7"
+	vim.g.color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5"
+	vim.g.color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE"
+	vim.g.color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70"
+	vim.g.color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8"
+	vim.g.color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1"
+	vim.g.color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF"
+	vim.g.color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA"
+	vim.g.color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7"
+	vim.g.color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5"
+	vim.g.color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8"
+
 	local pywal_colors = {
 		none = "NONE",
-		background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
-		foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
-		cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC",
-		color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
-		color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
-		color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
-		color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF",
-		color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA",
-		color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7",
-		color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5",
-		color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE",
-		color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70",
-		color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8",
-		color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1",
-		color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF",
-		color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA",
-		color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
-		color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
-		color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
+		background = vim.g.background,
+		foreground = vim.g.foreground,
+		cursor = vim.g.cursor,
+		color0 = vim.g.color0,
+		color1 = vim.g.color1,
+		color2 = vim.g.color2,
+		color3 = vim.g.color3,
+		color4 = vim.g.color4,
+		color5 = vim.g.color5,
+		color6 = vim.g.color6,
+		color7 = vim.g.color7,
+		color8 = vim.g.color8,
+		color9 = vim.g.color9,
+		color10 = vim.g.color10,
+		color11 = vim.g.color11,
+		color12 = vim.g.color12,
+		color13 = vim.g.color13,
+		color14 = vim.g.color14,
+		color15 = vim.g.color15,
 	}
 
 	-- Reset global variables.
@@ -285,7 +306,7 @@ function M.setup(user_conf)
 	user_conf = user_conf or {}
 
 	-- Create the final configuration table by overwritting the default table with the user config table.
-	M.options = vim.tbl_deep_extend("keep", user_conf, default_options)
+	M.options = vim.tbl_deep_extend("keep", user_conf, M.default_options)
 
 	-- Neovide doesn't play well with transparent background colors.
 	if vim.g.neovide then
