@@ -157,18 +157,16 @@ function M.compile()
 	local f = loadstring(table.concat(lines, "\n"))
 	if not f then
 		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
-		print(
-			string.format(
-				[[Neopywal (ERROR): Most likely some mistake made in your neopywal config]],
-				[[You can open %s for debugging]],
-				"",
-				[[If you think this is a bug, kindly open an issue and attach %s file]],
-				[[Below is the error message that we captured:]],
-				"",
-				err_path,
-				err_path
-			)
-		)
+		print(string.format(
+			[[Neopywal (ERROR): Most likely some mistake made in your neopywal config
+You can open %s for debugging
+
+If you think this is a bug, kindly open an issue and attach %s file
+Below is the error message that we captured:
+]],
+			err_path,
+			err_path
+		))
 
 		local err = io.open(err_path, "wb")
 		if err then
