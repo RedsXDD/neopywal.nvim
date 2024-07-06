@@ -21,12 +21,13 @@ local function inspect(t)
 	return string.format([[{ %s }]], table.concat(list, ", "))
 end
 
-local function map_highlights()
+---@param theme_style string
+local function map_highlights(theme_style)
 	local theme = {}
 
 	local _O, _C, _U = O, C, U -- Borrowing global variables (setfenv doesn't work with require)
 	O = require("neopywal").options
-	C = require("neopywal").get_colors()
+	C = require("neopywal").get_colors(theme_style)
 	U = require("neopywal.utils.color")
 
 	theme.editor = require("neopywal.theme.editor").get()
@@ -73,15 +74,20 @@ local function map_highlights()
 	return theme
 end
 
-function M.compile()
+---@param theme_style? string
+local function compile(theme_style)
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+		theme_style = vim.o.background
+	end
+
 	local G = require("neopywal").compiler
 	local compile_path = G.compile_path
 	local path_sep = G.path_sep
-	local filename = G.filename
+	local filename = G.filename .. "-" .. theme_style
 
 	local O = require("neopywal").options
 
-	local theme = map_highlights()
+	local theme = map_highlights(theme_style)
 	local highlights =
 		vim.tbl_deep_extend("keep", theme.custom_highlights, theme.editor, theme.fileformats, theme.plugins, {})
 
@@ -90,11 +96,15 @@ function M.compile()
 	end
 
 	local lines = {
-		[[return string.dump(function()]],
-		[[vim.o.termguicolors = true]],
-		[[if vim.g.colors_name then vim.cmd("hi clear") end]],
-		[[vim.g.colors_name = "neopywal"]],
-		[[local h = vim.api.nvim_set_hl]],
+		string.format(
+			[[
+return string.dump(function()
+vim.o.termguicolors = true
+if vim.g.colors_name then vim.cmd("hi clear") end
+vim.g.colors_name = "neopywal-%s"
+local h = vim.api.nvim_set_hl]],
+			theme_style
+		),
 	}
 
 	if O.terminal_colors == true then
@@ -185,6 +195,11 @@ Below is the error message that we captured:
 
 	file:write(f())
 	file:close()
+end
+
+function M.compile()
+	compile("dark")
+	compile("light")
 end
 
 return M

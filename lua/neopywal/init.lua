@@ -154,7 +154,8 @@ M.default_options = {
 
 M.options = M.default_options
 
-function M.get_colors()
+---@param theme_style? string
+function M.get_colors(theme_style)
 	if type(M.options.colorscheme_file) ~= "string" then
 		error("NEOPYWAL: `colorscheme_file` option must be of type string.")
 	end
@@ -223,32 +224,45 @@ function M.get_colors()
 		vim.g.color15 = nil
 	end
 
-	local pywal_colors = {
-		none = "NONE",
-		background = vim.g.background,
-		foreground = vim.g.foreground,
-		cursor = vim.g.cursor,
-		color0 = vim.g.color0,
-		color1 = vim.g.color1,
-		color2 = vim.g.color2,
-		color3 = vim.g.color3,
-		color4 = vim.g.color4,
-		color5 = vim.g.color5,
-		color6 = vim.g.color6,
-		color7 = vim.g.color7,
-		color8 = vim.g.color8,
-		color9 = vim.g.color9,
-		color10 = vim.g.color10,
-		color11 = vim.g.color11,
-		color12 = vim.g.color12,
-		color13 = vim.g.color13,
-		color14 = vim.g.color14,
-		color15 = vim.g.color15,
+	local palette = {
+		dark = {
+			background = vim.g.background,
+			foreground = vim.g.foreground,
+		},
+		light = {
+			-- background = vim.g.foreground,
+			background = vim.g.foreground,
+			foreground = vim.g.background,
+		},
+		colors = {
+			none = "NONE",
+			cursor = vim.g.cursor,
+			color0 = vim.g.color0,
+			color1 = vim.g.color1,
+			color2 = vim.g.color2,
+			color3 = vim.g.color3,
+			color4 = vim.g.color4,
+			color5 = vim.g.color5,
+			color6 = vim.g.color6,
+			color7 = vim.g.color7,
+			color8 = vim.g.color8,
+			color9 = vim.g.color9,
+			color10 = vim.g.color10,
+			color11 = vim.g.color11,
+			color12 = vim.g.color12,
+			color13 = vim.g.color13,
+			color14 = vim.g.color14,
+			color15 = vim.g.color15,
+		},
 	}
+
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+		theme_style = vim.o.background
+	end
 
 	reset_global_color_variables()
 	local user_colors = M.options.custom_colors
-	local colors = vim.tbl_deep_extend("keep", user_colors, pywal_colors)
+	local colors = vim.tbl_deep_extend("keep", user_colors, palette[theme_style], palette.colors)
 	return colors
 end
 
@@ -289,20 +303,46 @@ local function sum_colors()
 	return sum
 end
 
+-- Avoid g:colors_name reloading
 local did_setup = false
-function M.load()
-	-- Ensure setup() has been called.
+---@param style? string
+function M.load(style)
 	if not did_setup then
 		M.setup()
 	end
 
-	local compiled_path = G.compile_path .. G.path_sep .. G.filename
+	-- Ensure "style" is either "dark", "light" or if `style` == nil set it to be the same as `vim.o.background`.
+	if not style or style ~= "dark" and style ~= "light" then
+		style = vim.o.background
+	end
+
+	--[[
+		This is the main logic needed to auto update the colorscheme using
+		either `:colorscheme neopywal-'style'` or the `:set background='style'` commands.
+
+		It first checks if the current colorscheme (`M.current_style`) is set.
+		If it is, it compares it to the new `style` parameter used by this function (remember
+		that if `style` isn't explicitly set it will default to whatever `vim.o.background` is at the time).
+
+		If they're different, it means the user has changed the colorscheme using the `:colorscheme neopywal-'style'`
+		command. And thus we need to update `vim.o.background` accordingly.
+	]]
+	if M.current_style ~= nil and not M.current_style:match(style) then
+		vim.o.background = style
+	end
+
+	-- Update `M.current_style` to be what is in use by `vim.o.background`.
+	M.current_style = vim.o.background
+
+	local filename = G.filename .. "-" .. M.current_style
+	local compiled_path = G.compile_path .. G.path_sep .. filename
+
 	local f = loadfile(compiled_path)
 	if not f then
 		require("neopywal.lib.compiler").compile()
 		f = assert(loadfile(compiled_path), "could not load cache")
 	end
-	f(G.filename)
+	f()
 end
 
 function M.setup(user_conf)
