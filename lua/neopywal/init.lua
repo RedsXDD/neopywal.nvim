@@ -231,7 +231,6 @@ function M.get_colors(theme_style)
 			foreground = vim.g.foreground,
 		},
 		light = {
-			-- background = vim.g.foreground,
 			background = vim.g.foreground,
 			foreground = vim.g.background,
 		},
