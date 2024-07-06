@@ -268,28 +268,28 @@ end
 
 local function sum_colors()
 	local U = require("neopywal.utils.color")
-	local colors = M.get_colors()
+	local C = M.get_colors()
 
 	local tbl = {
-		colors.background,
-		colors.foreground,
-		-- colors.cursor,
-		-- colors.color0,
-		colors.color1,
-		colors.color2,
-		colors.color3,
-		colors.color4,
-		colors.color5,
-		colors.color6,
-		colors.color7,
-		colors.color8,
-		-- colors.color9,
-		-- colors.color10,
-		-- colors.color11,
-		-- colors.color12,
-		-- colors.color13,
-		-- colors.color14,
-		-- colors.color15,
+		C.background,
+		C.foreground,
+		-- C.cursor,
+		-- C.color0,
+		C.color1,
+		C.color2,
+		C.color3,
+		C.color4,
+		C.color5,
+		C.color6,
+		C.color7,
+		C.color8,
+		-- C.color9,
+		-- C.color10,
+		-- C.color11,
+		-- C.color12,
+		-- C.color13,
+		-- C.color14,
+		-- C.color15,
 	}
 
 	local sum = 0

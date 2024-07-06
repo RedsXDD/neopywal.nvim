@@ -26,38 +26,38 @@ local assets = {
 	slim_dot = "•",
 }
 
-local colors = require("neopywal").get_colors()
+local C = require("neopywal").get_colors()
 
 -- settings
 local sett = {
-	bkg = colors.background,
-	diffs = colors.color1,
-	extras = colors.color5,
-	curr_file = colors.color4,
-	curr_dir = colors.color4,
+	bkg = C.background,
+	diffs = C.color1,
+	extras = C.color5,
+	curr_file = C.color4,
+	curr_dir = C.color4,
 }
 
 local mode_colors = {
-	["n"] = { "NORMAL", colors.color1 },
-	["no"] = { "N-PENDING", colors.color1 },
-	["i"] = { "INSERT", colors.color1 },
-	["ic"] = { "INSERT", colors.color1 },
-	["t"] = { "TERMINAL", colors.color1 },
-	["v"] = { "VISUAL", colors.color3 },
-	["V"] = { "V-LINE", colors.color3 },
-	[""] = { "V-BLOCK", colors.color3 },
-	["R"] = { "REPLACE", colors.color4 },
-	["Rv"] = { "V-REPLACE", colors.color4 },
-	["s"] = { "SELECT", colors.color4 },
-	["S"] = { "S-LINE", colors.color4 },
-	[""] = { "S-BLOCK", colors.color4 },
-	["c"] = { "COMMAND", colors.color6 },
-	["cv"] = { "COMMAND", colors.color6 },
-	["ce"] = { "COMMAND", colors.color6 },
-	["r"] = { "PROMPT", colors.color7 },
-	["rm"] = { "MORE", colors.color7 },
-	["r?"] = { "CONFIRM", colors.color2 },
-	["!"] = { "SHELL", colors.color1 },
+	["n"] = { "NORMAL", C.color1 },
+	["no"] = { "N-PENDING", C.color1 },
+	["i"] = { "INSERT", C.color1 },
+	["ic"] = { "INSERT", C.color1 },
+	["t"] = { "TERMINAL", C.color1 },
+	["v"] = { "VISUAL", C.color3 },
+	["V"] = { "V-LINE", C.color3 },
+	[""] = { "V-BLOCK", C.color3 },
+	["R"] = { "REPLACE", C.color4 },
+	["Rv"] = { "V-REPLACE", C.color4 },
+	["s"] = { "SELECT", C.color4 },
+	["S"] = { "S-LINE", C.color4 },
+	[""] = { "S-BLOCK", C.color4 },
+	["c"] = { "COMMAND", C.color6 },
+	["cv"] = { "COMMAND", C.color6 },
+	["ce"] = { "COMMAND", C.color6 },
+	["r"] = { "PROMPT", C.color7 },
+	["rm"] = { "MORE", C.color7 },
+	["r?"] = { "CONFIRM", C.color2 },
+	["!"] = { "SHELL", C.color1 },
 }
 
 local shortline = false
@@ -291,7 +291,7 @@ components.active[2][1] = {
 		return vim.api.nvim_win_get_width(winid) > 80
 	end,
 	hl = {
-		fg = colors.rosewater,
+		fg = C.rosewater,
 		bg = sett.bkg,
 	},
 }
@@ -304,7 +304,7 @@ components.active[2][2] = {
 	end,
 
 	hl = {
-		fg = colors.red,
+		fg = C.red,
 		bg = sett.bkg,
 	},
 	icon = "  ",
@@ -316,7 +316,7 @@ components.active[2][3] = {
 		return lsp.diagnostics_exist(lsp_severity.WARN)
 	end,
 	hl = {
-		fg = colors.yellow,
+		fg = C.yellow,
 		bg = sett.bkg,
 	},
 	icon = "  ",
@@ -328,7 +328,7 @@ components.active[2][4] = {
 		return lsp.diagnostics_exist(lsp_severity.INFO)
 	end,
 	hl = {
-		fg = colors.sky,
+		fg = C.sky,
 		bg = sett.bkg,
 	},
 	icon = "  ",
@@ -340,7 +340,7 @@ components.active[2][5] = {
 		return lsp.diagnostics_exist(lsp_severity.HINT)
 	end,
 	hl = {
-		fg = colors.rosewater,
+		fg = C.rosewater,
 		bg = sett.bkg,
 	},
 	icon = "  ",
