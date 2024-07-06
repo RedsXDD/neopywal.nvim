@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.0.0...v1.1.0) (2024-07-06)
+
+
+### Features
+
+* "vim.o.background" support ([2b7b296](https://github.com/RedsXDD/neopywal.nvim/commit/2b7b296d01544c9cecf2b497172c1a6d04b8d831))
+* improve notifications ([e31ca4a](https://github.com/RedsXDD/neopywal.nvim/commit/e31ca4a2c0c70412a4738fc9df2963f907eef3eb))
+
+
+### Bug Fixes
+
+* **compiler:** malformed string formatting ([f8d3bbb](https://github.com/RedsXDD/neopywal.nvim/commit/f8d3bbb4416be079cc31a1210b483d3eb72bf8eb))
+* running concurrent M.load() calls ([e78a4f3](https://github.com/RedsXDD/neopywal.nvim/commit/e78a4f30ba2675934d6fcff4e66ba602b1d8b9e7))
+
+
+### Reverts
+
+* "refactor: local default_options table" ([f6ab6b0](https://github.com/RedsXDD/neopywal.nvim/commit/f6ab6b0353da241f0dc1d6d02138b003f88e0d63))
+
 ## 1.0.0 (2024-07-04)
 
 
