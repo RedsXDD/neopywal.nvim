@@ -1,4 +1,5 @@
 local M = {}
+local notify = require("neopywal.lib.notify")
 
 M.compiler = {
 	---@diagnostic disable-next-line: undefined-global
@@ -172,11 +173,11 @@ function M.get_colors(theme_style)
 	---@diagnostic disable-next-line: param-type-mismatch
 	local has_colorscheme_file, _ = pcall(vim.cmd, "source " .. colorscheme_file)
 	if not has_colorscheme_file then
-		vim.notify(
-			"Neopywal (ERROR): Colorscheme file "
-				.. colorscheme_file
-				.. " could not be loaded, falling back to builtin catppuccin colorscheme.",
-			vim.log.levels.WARN
+		notify.error(
+			string.format(
+				"Colorscheme file '%s' could not be loaded, falling back to builtin colorscheme.",
+				colorscheme_file
+			)
 		)
 	end
 
@@ -346,7 +347,7 @@ function M.load(style)
 	local f = loadfile(compiled_path)
 	if not f then
 		require("neopywal.lib.compiler").compile()
-		f = assert(loadfile(compiled_path), "could not load cache")
+		f = assert(loadfile(compiled_path), "could not load neopywal cache.")
 	end
 	f()
 	lock = false
@@ -417,7 +418,7 @@ vim.api.nvim_create_user_command("NeopywalCompile", function()
 		end
 	end
 	require("neopywal.lib.compiler").compile()
-	vim.notify("Neopywal (INFO): Successfully compiled cache.", vim.log.levels.INFO)
+	notify.info("Successfully compiled cache.")
 	vim.cmd.colorscheme("neopywal")
 end, {})
 

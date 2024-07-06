@@ -3,6 +3,7 @@
 -- https://github.com/EdenEast/nightfox.nvim -- The plugin catppuccin credits.
 
 local M = {}
+local notify = require("neopywal.lib.notify")
 
 local function inspect(t)
 	local list = {}
@@ -167,8 +168,8 @@ local h = vim.api.nvim_set_hl]],
 	local f = loadstring(table.concat(lines, "\n"))
 	if not f then
 		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
-		print(string.format(
-			[[Neopywal (ERROR): Most likely some mistake made in your neopywal config
+		notify.error(string.format(
+			[[Most likely some mistake made in your neopywal config
 You can open %s for debugging
 
 If you think this is a bug, kindly open an issue and attach %s file
@@ -198,6 +199,7 @@ Below is the error message that we captured:
 end
 
 function M.compile()
+	notify.clear()
 	compile("dark")
 	compile("light")
 end
