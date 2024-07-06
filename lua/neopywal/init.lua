@@ -1,9 +1,12 @@
 local M = {}
 
----@diagnostic disable-next-line: undefined-global
-local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
-local compile_path = vim.fn.stdpath("cache") .. "/neopywal"
-local compiled_filename = "neopywal"
+M.compiler = {
+	---@diagnostic disable-next-line: undefined-global
+	path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
+	filename = "neopywal",
+	compile_path = vim.fn.stdpath("cache") .. "/neopywal",
+}
+local G = M.compiler
 
 M.default_options = {
 	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
@@ -290,13 +293,13 @@ function M.load()
 		M.setup()
 	end
 
-	local compiled_path = compile_path .. path_sep .. compiled_filename
+	local compiled_path = G.compile_path .. G.path_sep .. G.filename
 	local f = loadfile(compiled_path)
 	if not f then
-		require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
+		require("neopywal.lib.compiler").compile()
 		f = assert(loadfile(compiled_path), "could not load cache")
 	end
-	f(compiled_filename)
+	f(G.filename)
 end
 
 function M.setup(user_conf)
@@ -329,7 +332,7 @@ function M.setup(user_conf)
 	end
 
 	-- Get cached hash.
-	local cached_path = compile_path .. path_sep .. "cached"
+	local cached_path = G.compile_path .. G.path_sep .. "cached"
 	local file = io.open(cached_path)
 	local cached = nil
 	if file then
@@ -348,7 +351,7 @@ function M.setup(user_conf)
 
 	-- Recompile if hash changed.
 	if cached ~= hash then
-		require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
+		require("neopywal.lib.compiler").compile()
 		file = io.open(cached_path, "wb")
 		if file then
 			file:write(hash)
@@ -363,7 +366,7 @@ vim.api.nvim_create_user_command("NeopywalCompile", function()
 			package.loaded[name] = nil
 		end
 	end
-	require("neopywal.lib.compiler").compile(compile_path, path_sep, compiled_filename)
+	require("neopywal.lib.compiler").compile()
 	vim.notify("Neopywal (INFO): Successfully compiled cache.", vim.log.levels.INFO)
 	vim.cmd.colorscheme("neopywal")
 end, {})

@@ -73,7 +73,12 @@ local function map_highlights()
 	return theme
 end
 
-function M.compile(compile_path, path_sep, filename)
+function M.compile()
+	local G = require("neopywal").compiler
+	local compile_path = G.compile_path
+	local path_sep = G.path_sep
+	local filename = G.filename
+
 	local O = require("neopywal").options
 
 	local theme = map_highlights()
