@@ -304,9 +304,14 @@ local function sum_colors()
 end
 
 -- Avoid g:colors_name reloading
+local lock = false
 local did_setup = false
 ---@param style? string
 function M.load(style)
+	if lock then
+		return
+	end
+
 	if not did_setup then
 		M.setup()
 	end
@@ -337,12 +342,14 @@ function M.load(style)
 	local filename = G.filename .. "-" .. M.current_style
 	local compiled_path = G.compile_path .. G.path_sep .. filename
 
+	lock = true
 	local f = loadfile(compiled_path)
 	if not f then
 		require("neopywal.lib.compiler").compile()
 		f = assert(loadfile(compiled_path), "could not load cache")
 	end
 	f()
+	lock = false
 end
 
 function M.setup(user_conf)
