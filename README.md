@@ -31,6 +31,8 @@
 1. [Features](#Features)
 2. [Installation](#Installation)
 3. [Usage](#Usage)
+   1. [Alternative Variants](#Alternative-Variants)
+   2. [Note on Light Theme](#Note-on-Light-Theme)
 4. [Configuration](#Configuration)
    1. [Customizing Colors](#Customizing-Colors)
    2. [Customizing Highlights](#Customizing-Highlights)
@@ -108,6 +110,28 @@ Or call the colorscheme with vim script:
 
 ```vim
 colorscheme neopywal
+```
+
+### Alternative Variants
+
+Neopywal can also take advantage of Neovim's `vim.o.background` option (see `:h background`) to dynamically adjust the color palette on the fly. This allows you to switch between a light and dark colorscheme, even when Pywal generates a dark palette.
+
+```vim
+colorscheme neopywal-dark
+" or
+colorscheme neopywal-light
+```
+
+Note that, by default, when loading the colorscheme with the standard `:colorscheme neopywal` command, Neopywal will automatically detect and load the corresponding colorscheme variant based on the current value of `vim.o.background`.
+
+### Note on Light Theme
+
+When loading the "light" theme variant, Neopywal **won't** generate any new colorscheme palette. Instead, it loads the existing palette (used by the `neopywal-dark` variant) and inverts the `background` and `foreground` color variables (see [Importing Colors](#Importing-Colors) for more information). This may not produce the best results when comparing to an actual auto generated light theme variant, but it's generally good enough.
+
+To use a genuine light theme with Neopywal, generate a new colorscheme with Pywal while using the `-l` flag.
+
+```sh
+$ wal -l -i /path/to/your/image
 ```
 
 > [!Note]
