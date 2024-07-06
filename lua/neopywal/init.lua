@@ -201,6 +201,28 @@ function M.get_colors()
 	vim.g.color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5"
 	vim.g.color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8"
 
+	local function reset_global_color_variables()
+		vim.g.background = nil
+		vim.g.foreground = nil
+		vim.g.cursor = nil
+		vim.g.color0 = nil
+		vim.g.color1 = nil
+		vim.g.color2 = nil
+		vim.g.color3 = nil
+		vim.g.color4 = nil
+		vim.g.color5 = nil
+		vim.g.color6 = nil
+		vim.g.color7 = nil
+		vim.g.color8 = nil
+		vim.g.color9 = nil
+		vim.g.color10 = nil
+		vim.g.color11 = nil
+		vim.g.color12 = nil
+		vim.g.color13 = nil
+		vim.g.color14 = nil
+		vim.g.color15 = nil
+	end
+
 	local pywal_colors = {
 		none = "NONE",
 		background = vim.g.background,
@@ -224,29 +246,10 @@ function M.get_colors()
 		color15 = vim.g.color15,
 	}
 
-	-- Reset global variables.
-	vim.g.background = nil
-	vim.g.foreground = nil
-	vim.g.cursor = nil
-	vim.g.color0 = nil
-	vim.g.color1 = nil
-	vim.g.color2 = nil
-	vim.g.color3 = nil
-	vim.g.color4 = nil
-	vim.g.color5 = nil
-	vim.g.color6 = nil
-	vim.g.color7 = nil
-	vim.g.color8 = nil
-	vim.g.color9 = nil
-	vim.g.color10 = nil
-	vim.g.color11 = nil
-	vim.g.color12 = nil
-	vim.g.color13 = nil
-	vim.g.color14 = nil
-	vim.g.color15 = nil
-
+	reset_global_color_variables()
 	local user_colors = M.options.custom_colors
-	return vim.tbl_deep_extend("keep", user_colors, pywal_colors)
+	local colors = vim.tbl_deep_extend("keep", user_colors, pywal_colors)
+	return colors
 end
 
 local function sum_colors()
