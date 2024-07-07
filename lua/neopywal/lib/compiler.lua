@@ -169,7 +169,7 @@ local h = vim.api.nvim_set_hl]],
 	if not f then
 		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
 		notify.error(string.format(
-			[[Most likely some mistake made in your neopywal config
+			[[Most likely some mistake made in your Neopywal config
 You can open %s for debugging
 
 If you think this is a bug, kindly open an issue and attach %s file
