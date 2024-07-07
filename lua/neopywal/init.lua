@@ -15,7 +15,7 @@ M.default_options = {
 	use_wallust = false,
 
 	-- This option allows to specify where Neopywal should look for a ".vim" template file.
-	colorscheme_file = "", -- e.g.: "~/.cache/wal/custom_neopywal_template.vim".
+	colorscheme_file = "", -- e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim".
 
 	-- Sets the background color of certain highlight groups to be transparent.
 	-- Use this when your terminal opacity is < 1.
@@ -155,30 +155,46 @@ M.default_options = {
 
 M.options = M.default_options
 
+local already_notified = false
 ---@param theme_style? string
 function M.get_colors(theme_style)
 	if type(M.options.colorscheme_file) ~= "string" then
-		error("NEOPYWAL: `colorscheme_file` option must be of type string.")
+		notify.error("`colorscheme_file` option must be of type string.")
 	end
 
-	local colorscheme_file = ""
-	if M.options.colorscheme_file ~= "" then
-		colorscheme_file = M.options.colorscheme_file
-	elseif M.options.use_wallust then
-		colorscheme_file = "$HOME/.cache/wallust/colors_neopywal.vim"
-	else
-		colorscheme_file = "$HOME/.cache/wal/colors-wal.vim"
-	end
+	-- stylua: ignore
+	local colorscheme_file = (type(M.options.colorscheme_file) == "string" and M.options.colorscheme_file ~= "")
+		and M.options.colorscheme_file
+		or M.options.use_wallust == true and os.getenv("HOME") .. "/.cache/wallust/colors_neopywal.vim"
+		or os.getenv("HOME") .. "/.cache/wal/colors-wal.vim"
 
-	---@diagnostic disable-next-line: param-type-mismatch
-	local has_colorscheme_file, _ = pcall(vim.cmd, "source " .. colorscheme_file)
-	if not has_colorscheme_file then
+	if vim.fn.filereadable(colorscheme_file) == 0 and already_notified == false then
 		notify.error(
 			string.format(
-				"Colorscheme file '%s' could not be loaded, falling back to builtin colorscheme.",
+				"Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
 				colorscheme_file
 			)
 		)
+		already_notified = true
+	else
+		---@diagnostic disable-next-line: param-type-mismatch
+		local could_load_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
+		if not could_load_file and already_notified == false then
+			notify.error(string.format(
+				[[
+Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
+Below is the error message that we captured:
+%s]],
+				colorscheme_file,
+				error_msg
+			))
+		end
+		already_notified = true
+	end
+
+	-- If no notification was set, that means the colorscheme file can be successfully reused if needed.
+	if already_notified == false then
+		M.options.colorscheme_file = colorscheme_file
 	end
 
 	-- Use fallback colors if template file couldn't be loaded.
