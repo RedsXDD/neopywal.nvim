@@ -151,7 +151,7 @@ require("neopywal").setup({
     use_wallust = false,
 
     -- This option allows to specify where Neopywal should look for a ".vim" template file.
-    colorscheme_file = "", -- e.g.: "~/.cache/wal/custom_neopywal_template.vim".
+    colorscheme_file = "", -- e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim".
 
     -- Sets the background color of certain highlight groups to be transparent.
     -- Use this when your terminal opacity is < 1.
