@@ -175,6 +175,10 @@ function M.get_colors(theme_style)
 		or M.options.use_wallust == true and cache_dir .. "/wallust/colors_neopywal.vim"
 		or cache_dir .. "/wal/colors-wal.vim"
 
+	if M.compiler.path_sep == "\\" then
+		colorscheme_file = colorscheme_file:gsub("/", "\\")
+	end
+
 	if vim.fn.filereadable(colorscheme_file) == 0 and already_notified == false then
 		notify.error(
 			string.format(
