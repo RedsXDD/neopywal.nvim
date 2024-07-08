@@ -162,11 +162,18 @@ function M.get_colors(theme_style)
 		notify.error("`colorscheme_file` option must be of type string.")
 	end
 
+	local cache_dir
+	if M.compiler.path_sep == "\\" then
+		cache_dir = os.getenv("APPDATA") -- Windows
+	else
+		cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
+	end
+
 	-- stylua: ignore
 	local colorscheme_file = (type(M.options.colorscheme_file) == "string" and M.options.colorscheme_file ~= "")
 		and M.options.colorscheme_file
-		or M.options.use_wallust == true and os.getenv("HOME") .. "/.cache/wallust/colors_neopywal.vim"
-		or os.getenv("HOME") .. "/.cache/wal/colors-wal.vim"
+		or M.options.use_wallust == true and cache_dir .. "/wallust/colors_neopywal.vim"
+		or cache_dir .. "/wal/colors-wal.vim"
 
 	if vim.fn.filereadable(colorscheme_file) == 0 and already_notified == false then
 		notify.error(
