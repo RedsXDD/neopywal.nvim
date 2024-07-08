@@ -7,8 +7,19 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Prevent from running twice on certain commit messages.
+  skip_on_release:
+    name: Skip on release
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore') && !startsWith(github.event.head_commit.message, 'docs') && !startsWith(github.event.head_commit.message, 'ci') }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          exit 0
+
   stylua:
     name: Stylua
+    needs:
+      - skip_on_release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
