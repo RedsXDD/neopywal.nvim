@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/RedsXDD/neopywal.nvim/compare/v1.1.0...v1.1.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* "M.load()" not respecting "vim.o.background" ([0754ff3](https://github.com/RedsXDD/neopywal.nvim/commit/0754ff354046b10b8d7a93c8951215b8b840f621))
+* get_colors cache_dir on windows ([2f76022](https://github.com/RedsXDD/neopywal.nvim/commit/2f76022b5256a53f700225384ed1b2c1e5ae1e18))
+
 ## [1.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.0.0...v1.1.0) (2024-07-06)
 
 
