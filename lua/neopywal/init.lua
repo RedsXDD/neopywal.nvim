@@ -343,30 +343,20 @@ function M.load(style)
 		M.setup()
 	end
 
-	-- Ensure "style" is either "dark", "light" or if `style` == nil set it to be the same as `vim.o.background`.
-	if not style or style ~= "dark" and style ~= "light" then
-		style = vim.o.background
+	local theme_style
+	local bg = vim.o.background
+	local style_bg = (style ~= "dark" and style ~= "light") and bg or style
+
+	if style_bg ~= bg then
+		if vim.g.colors_name == "neopywal-" .. style_bg then
+			theme_style = (bg == "light" and style_bg == "dark") and "light" or "dark"
+		else
+			vim.o.background = style_bg
+		end
 	end
 
-	--[[
-		This is the main logic needed to auto update the colorscheme using
-		either `:colorscheme neopywal-'style'` or the `:set background='style'` commands.
-
-		It first checks if the current colorscheme (`M.current_style`) is set.
-		If it is, it compares it to the new `style` parameter used by this function (remember
-		that if `style` isn't explicitly set it will default to whatever `vim.o.background` is at the time).
-
-		If they're different, it means the user has changed the colorscheme using the `:colorscheme neopywal-'style'`
-		command. And thus we need to update `vim.o.background` accordingly.
-	]]
-	if M.current_style ~= nil and not M.current_style:match(style) then
-		vim.o.background = style
-	end
-
-	-- Update `M.current_style` to be what is in use by `vim.o.background`.
-	M.current_style = vim.o.background
-
-	local filename = G.filename .. "-" .. M.current_style
+	theme_style = theme_style or style_bg
+	local filename = G.filename .. "-" .. theme_style
 	local compiled_path = G.compile_path .. G.path_sep .. filename
 
 	lock = true
