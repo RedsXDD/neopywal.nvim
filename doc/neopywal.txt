@@ -70,6 +70,42 @@ Or call the colorscheme with vim script:
 <
 
 
+ALTERNATIVE VARIANTS ~
+
+Neopywal can also take advantage of Neovim’s `vim.o.background` option (see
+|background|) to dynamically adjust the color palette on the fly. This allows
+you to switch between a light and dark colorscheme, even when Pywal generates a
+dark palette.
+
+>vim
+    colorscheme neopywal-dark
+    " or
+    colorscheme neopywal-light
+<
+
+Note that, by default, when loading the colorscheme with the standard
+`:colorscheme neopywal` command, Neopywal will automatically detect and load
+the corresponding colorscheme variant based on the current value of
+`vim.o.background`.
+
+
+NOTE ON LIGHT THEME ~
+
+When loading the "light" theme variant, Neopywal **won’t** generate any new
+colorscheme palette. Instead, it loads the existing palette (used by the
+`neopywal-dark` variant) and inverts the `background` and `foreground` color
+variables (see |neopywal-importing-colors| for more information). This may not
+produce the best results when comparing to an actual auto generated light theme
+variant, but it’s generally good enough.
+
+To use a genuine light theme with Neopywal, generate a new colorscheme with
+Pywal while using the `-l` flag.
+
+>sh
+    $ wal -l -i /path/to/your/image
+<
+
+
   [!Note] Make sure to run `:colorscheme neopywal` or
   `vim.cmd.colorscheme("neopywal")`, otherwise the colorscheme won’t be loaded.
 
@@ -85,7 +121,7 @@ options and settings.
         use_wallust = false,
     
         -- This option allows to specify where Neopywal should look for a ".vim" template file.
-        colorscheme_file = "", -- e.g.: "~/.cache/wal/custom_neopywal_template.vim".
+        colorscheme_file = "", -- e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim".
     
         -- Sets the background color of certain highlight groups to be transparent.
         -- Use this when your terminal opacity is < 1.
@@ -275,54 +311,56 @@ the `default_fileformats` option.
 To enable/disable a supported fileformat you just need to set it to true/false.
 
 >lua
-    fileformats = {
-        c_cpp = true,
-        c_sharp = true,
-        clojure = true,
-        cmake = true,
-        common_lisp = true,
-        css = true,
-        dart = true,
-        diff = true,
-        elixir = true,
-        erlang = true,
-        git_commit = true,
-        go = true,
-        haskell = true,
-        help = true,
-        html = true,
-        ini = true,
-        java = true,
-        javascript = true,
-        javascript_react = true,
-        json = true,
-        kotlin = true,
-        latex = true,
-        less = true,
-        lua = true,
-        makefile = true,
-        markdown = true,
-        matlab = true,
-        objectivec = true,
-        ocaml = true,
-        perl = true,
-        php = true,
-        powershell = true,
-        python = true,
-        restructuredtext = true,
-        ruby = true,
-        rust = true,
-        sass = true,
-        scala = true,
-        shell = true,
-        swift = true,
-        toml = true,
-        typescript = true,
-        viml = true,
-        xml = true,
-        yaml = true,
-        zsh = true,
-    }
+    require("neopywal").setup({
+        fileformats = {
+            c_cpp = true,
+            c_sharp = true,
+            clojure = true,
+            cmake = true,
+            common_lisp = true,
+            css = true,
+            dart = true,
+            diff = true,
+            elixir = true,
+            erlang = true,
+            git_commit = true,
+            go = true,
+            haskell = true,
+            help = true,
+            html = true,
+            ini = true,
+            java = true,
+            javascript = true,
+            javascript_react = true,
+            json = true,
+            kotlin = true,
+            latex = true,
+            less = true,
+            lua = true,
+            makefile = true,
+            markdown = true,
+            matlab = true,
+            objectivec = true,
+            ocaml = true,
+            perl = true,
+            php = true,
+            powershell = true,
+            python = true,
+            restructuredtext = true,
+            ruby = true,
+            rust = true,
+            sass = true,
+            scala = true,
+            shell = true,
+            swift = true,
+            toml = true,
+            typescript = true,
+            viml = true,
+            xml = true,
+            yaml = true,
+            zsh = true,
+        }
+    })
 <
 
 
