@@ -164,7 +164,7 @@ function M.get_colors(theme_style)
 
 	local cache_dir
 	if M.compiler.path_sep == "\\" then
-		cache_dir = os.getenv("APPDATA") -- Windows
+		cache_dir = os.getenv("LOCALAPPDATA") -- Windows
 	else
 		cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
 	end
