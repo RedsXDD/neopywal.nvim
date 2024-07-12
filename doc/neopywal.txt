@@ -470,10 +470,6 @@ dashboard-nvim>lua
 
 feline.nvimSpecial ~
 
-
-  [!Note] In it’s current state, feline haven’t been tested with Neopywal
-  since the required module still needs to be updated and refactored. The
-  configuration below WILL change in the future once that update happens.
 Update your Feline config to use the Neopywal components:
 
 >lua
@@ -482,13 +478,110 @@ Update your Feline config to use the Neopywal components:
         return
     end
     
-    local has_neopywal, neopywal = pcall(require, "neopywal.theme.plugins.feline")
+    local has_neopywal, neopywal_feline = pcall(require, "neopywal.theme.plugins.feline")
     if not has_neopywal then
         return
     end
     
+    neopywal_feline.setup()
+    
     feline.setup({
-        components = neopywal,
+        components = neopywal_feline.get(),
+    })
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change assets, settings and the colors per vim mode.
+
+Here are the defaults:
+
+>lua
+    local C = require("neopywal").get_colors()
+    local U = require("neopywal.utils.color")
+    
+    local neopywal_feline = require("neopywal.theme.plugins.feline")
+    
+    neopywal_feline.setup({
+        assets = {
+            left_separator = "",
+            right_separator = "",
+            mode_icon = "",
+            dir = "󰉋",
+            file = "󰈙",
+            lsp = {
+                server = "󰅡",
+                error = "",
+                warning = "",
+                info = "",
+                hint = "",
+            },
+            git = {
+                branch = "",
+                added = "",
+                changed = "",
+                removed = "",
+            },
+        }
+        sett = {
+            text = C.foreground,
+            bkg = U.blend(C.color8, C.background, 0.3),
+            diffs = U.blend(C.color8, C.background, 0.5),
+            extras = C.foreground,
+            curr_file = U.blend(C.color8, C.background, 0.5),
+            curr_dir = C.color4,
+            show_modified = false -- show if the file has been modified
+            show_lazy_updates = false -- show the count of updatable plugins from lazy.nvim
+                                      -- need to set checker.enabled = true in lazy.nvim first
+                                      -- the icon is set in ui.icons.plugin in lazy.nvim
+        },
+        mode_colors = {
+            ["n"] = { "NORMAL", C.color4 },
+            ["no"] = { "N-PENDING", C.color4 },
+            ["i"] = { "INSERT", C.color6 },
+            ["ic"] = { "INSERT", C.color6 },
+            ["t"] = { "TERMINAL", C.color3 },
+            ["v"] = { "VISUAL", C.color5 },
+            ["V"] = { "V-LINE", C.color5 },
+            [""] = { "V-BLOCK", C.color5 },
+            ["R"] = { "REPLACE", C.color2 },
+            ["Rv"] = { "V-REPLACE", C.color2 },
+            ["s"] = { "SELECT", U.blend(C.color1, C.color3, 0.5) },
+            ["S"] = { "S-LINE", U.blend(C.color1, C.color3, 0.5) },
+            [""] = { "S-BLOCK", U.blend(C.color1, C.color3, 0.5) },
+            ["c"] = { "COMMAND", C.color1 },
+            ["cv"] = { "COMMAND", C.color1 },
+            ["ce"] = { "COMMAND", C.color1 },
+            ["r"] = { "PROMPT", C.foreground },
+            ["rm"] = { "MORE", C.foreground },
+            ["r?"] = { "CONFIRM", C.color2 },
+            ["!"] = { "SHELL", C.color1 },
+        },
+        view = {
+            lsp = {
+                progress = true, -- if true the status bar will display an lsp progress indicator
+                name = false, -- if true the status bar will display the lsp servers name, otherwise it will display the text "Lsp"
+                exclude_lsp_names = {}, -- lsp server names that should not be displayed when name is set to true
+                separator = "|", -- the separator used when there are multiple lsp servers
+            },
+        },
+    })
+<
+
+
+  [!Warning] Currently feline doesn’t officially support custom themes
+  <https://github.com/feline-nvim/feline.nvim/issues/302>. In order for
+  `:colorscheme catppuccin-<flavour>` to work you could add this autocmd as a
+  workaround:
+>lua
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+            package.loaded["feline"] = nil
+            package.loaded["neopywal.theme.plugins.feline"] = nil
+            require("feline").setup {
+                components = require("neopywal.theme.plugins.feline").get(),
+            }
+        end,
     })
 <
 
