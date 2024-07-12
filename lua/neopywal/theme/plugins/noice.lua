@@ -7,15 +7,15 @@ function M.get()
 		NoiceCmdlinePopup = { link = "NormalFloat" },
 
 		NoiceMini = { link = "NoiceLspProgressTitle" },
-		NoiceLspProgressTitle = { bg = C.background, fg = C.foreground },
+		NoiceLspProgressTitle = { bg = U.darken(C.background, 8), fg = C.foreground },
 		NoiceLspProgressClient = {
-			bg = C.background,
+			bg = U.darken(C.background, 8),
 			fg = C.color4,
 			styles = { "bold" },
 		},
 		NoiceLspProgressSpinner = { link = "NoiceLspProgressClient" },
-		NoiceFormatProgressDone = { bg = C.background },
-		NoiceFormatProgressTodo = { bg = C.background },
+		NoiceFormatProgressDone = { bg = U.darken(C.background, 8) },
+		NoiceFormatProgressTodo = { bg = U.darken(C.background, 8) },
 
 		NoiceConfirm = { link = "NormalFloat" },
 		NoiceConfirmBorder = { link = "FloatTitle" },
