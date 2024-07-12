@@ -355,8 +355,8 @@ function M.load(style)
 		end
 	end
 
-	theme_style = theme_style or style_bg
-	local filename = G.filename .. "-" .. theme_style
+	M.current_style = theme_style or style_bg
+	local filename = G.filename .. "-" .. M.current_style
 	local compiled_path = G.compile_path .. G.path_sep .. filename
 
 	lock = true
