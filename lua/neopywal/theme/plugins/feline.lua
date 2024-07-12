@@ -243,18 +243,7 @@ function M.get()
 	}
 
 	components.active[1][8] = {
-		provider = " ",
-		hl = {
-			fg = sett.bkg,
-			bg = sett.diffs,
-		},
-		enabled = function()
-			return any_git_changes()
-		end,
-	}
-
-	components.active[1][9] = {
-		provider = assets.right_separator .. " ",
+		provider = assets.right_separator,
 		hl = {
 			fg = sett.diffs,
 			bg = sett.bkg,
@@ -265,7 +254,7 @@ function M.get()
 	}
 	--: }}}
 	--: Git Branch {{{
-	components.active[1][10] = {
+	components.active[1][9] = {
 		provider = "git_branch",
 		enabled = is_enabled(70),
 		hl = {
@@ -284,7 +273,7 @@ function M.get()
 	--: }}}
 	--: Extras {{{
 	--: Progress {{{
-	components.active[1][11] = {
+	components.active[1][10] = {
 		provider = function()
 			local current_line = vim.fn.line(".")
 			local total_line = vim.fn.line("$")
@@ -308,7 +297,7 @@ function M.get()
 	}
 	--: }}}
 	--: Position {{{
-	components.active[1][12] = {
+	components.active[1][11] = {
 		provider = "position",
 		-- enabled = shortline or function(winid)
 		-- 	return vim.api.nvim_win_get_width(winid) > 90
@@ -321,7 +310,7 @@ function M.get()
 	}
 	--: }}}
 	--: Macro {{{
-	components.active[1][13] = {
+	components.active[1][12] = {
 		provider = "macro",
 		enabled = function()
 			return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0
@@ -334,7 +323,7 @@ function M.get()
 	}
 	--: }}}
 	--: Search Count {{{
-	components.active[1][14] = {
+	components.active[1][13] = {
 		provider = "search_count",
 		enabled = function()
 			return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0
@@ -347,7 +336,7 @@ function M.get()
 	}
 	--: }}}
 	--: Lazy.nvim Updates {{{
-	components.active[1][15] = {
+	components.active[1][14] = {
 		provider = function()
 			return require("lazy.status").updates()
 		end,
