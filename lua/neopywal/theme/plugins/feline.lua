@@ -138,14 +138,14 @@ function M.get()
 			if gitsigns then
 				return {
 					added = gitsigns.added,
-					modified = gitsigns.changed,
 					removed = gitsigns.removed,
+					changed = gitsigns.changed,
 				}
 			elseif summary then
 				return {
 					added = summary.add,
-					modified = summary.change,
 					removed = summary.delete,
+					changed = summary.change,
 				}
 			end
 		end)()
