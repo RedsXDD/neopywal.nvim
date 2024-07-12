@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.1.1...v1.2.0) (2024-07-12)
+
+
+### Features
+
+* **plugins/feline:** proper feline.nvim support ([8b60526](https://github.com/RedsXDD/neopywal.nvim/commit/8b605260297a100e7f611538fc614a178846b67f))
+
+
+### Bug Fixes
+
+* **feline:** improper gitsigns handling ([0b0b7e4](https://github.com/RedsXDD/neopywal.nvim/commit/0b0b7e48e21716b3aebaa4bc46cef2b6195aa8f2))
+* **feline:** proper git branch spacing ([bc44124](https://github.com/RedsXDD/neopywal.nvim/commit/bc4412455710adce831d937a7562b6cfbf1460fc))
+
 ## [1.1.1](https://github.com/RedsXDD/neopywal.nvim/compare/v1.1.0...v1.1.1) (2024-07-08)
 
 
