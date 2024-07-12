@@ -243,7 +243,7 @@ function M.get()
 	}
 
 	components.active[1][8] = {
-		provider = "",
+		provider = " ",
 		hl = {
 			fg = sett.bkg,
 			bg = sett.diffs,
@@ -272,7 +272,7 @@ function M.get()
 			fg = sett.text,
 			bg = sett.bkg,
 		},
-		icon = assets.git.branch .. " ",
+		icon = " " .. assets.git.branch .. " ",
 		right_sep = {
 			str = " |",
 			hl = {
