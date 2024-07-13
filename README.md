@@ -296,6 +296,25 @@ require("neopywal").setup({
 
 Custom color variables will be automatically exported with the `get_colors()` function and can used normally when using the imported color palette.
 
+There's also an additional set of color variables that are used for diagnostics and lsp related stuff.
+
+```lua
+local colors = require("neopywal").get_colors()
+local utils = require("neopywal.utils.color")
+
+require("neopywal").setup({
+    custom_colors = {
+        error = colors.color1,
+        hint = colors.color6,
+        info = colors.foreground,
+        unnecessary = colors.color8,
+        warn = utils.blend(colors.color1, colors.color3, 0.5),
+        ok = colors.color2,
+        inlay_hints = colors.color8,
+    },
+})
+```
+
 <!-- }}} -->
 <!-- Customizing Highlights {{{ -->
 
