@@ -18,6 +18,7 @@ function M.get()
 			bg = (O.transparent_background or not inlay_hints.background) and C.none
 				or U.blend(C.color8, C.background, darkening_percentage),
 			fg = U.blend(C.color8, C.foreground, 0.7),
+			styles = inlay_hints.style or {},
 		}, -- Virtual text of the inlay hints.
 
 		LspReferenceText = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "text" references

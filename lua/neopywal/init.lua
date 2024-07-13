@@ -78,6 +78,7 @@ M.default_options = {
 			},
 			inlay_hints = {
 				background = true,
+				style = { "bold", "italic" },
 			},
 		},
 	},
