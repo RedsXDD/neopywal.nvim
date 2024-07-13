@@ -918,7 +918,10 @@ treesitter = true
 <td>
 
 ```lua
-telescope = true
+telescope = {
+    enabled = true,
+    -- style = "nvchad"
+}
 ```
 
 </td>
