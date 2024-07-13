@@ -60,6 +60,23 @@ M.default_options = {
 		booleans = {},
 		types = { "italic" },
 		operators = {},
+		lsp = {
+			virtual_text = {
+				errors = { "bold", "italic" },
+				hints = { "bold", "italic" },
+				information = { "bold", "italic" },
+				ok = { "bold", "italic" },
+				warnings = { "bold", "italic" },
+				unnecessary = { "bold", "italic" },
+			},
+			underlines = {
+				errors = { "undercurl" },
+				hints = { "undercurl" },
+				information = { "undercurl" },
+				ok = { "undercurl" },
+				warnings = { "undercurl" },
+			},
+		},
 	},
 
 	-- Setting this to false disables all default file format highlights.

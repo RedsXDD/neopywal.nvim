@@ -200,12 +200,12 @@ function M.get()
 		rainbow6 = { fg = C.color5 },
 		--: }}}
 		--: Diagnostics {{{
-		DiagnosticOk = { fg = C.color2, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticError = { fg = C.color1, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticWarn = { fg = U.blend(C.color1, C.color3, 0.5), styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticInfo = { fg = C.foreground, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticHint = { fg = C.color6, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticUnnecessary = { fg = C.color8, styles = { "bold" } }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticOk = { fg = C.color2, styles = O.styles.lsp.virtual_text.ok or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticError = { fg = C.color1, styles = O.styles.lsp.virtual_text.errors or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticWarn = { fg = U.blend(C.color1, C.color3, 0.5), styles = O.styles.lsp.virtual_text.warnings or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticInfo = { fg = C.foreground, styles = O.styles.lsp.virtual_text.information or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticHint = { fg = C.color6, styles = O.styles.lsp.virtual_text.hints or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticUnnecessary = { fg = C.color8, styles = O.styles.lsp.virtual_text.unnecessary or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		--: }}}
 		--: }}}
 	}

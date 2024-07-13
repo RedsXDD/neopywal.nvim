@@ -2,6 +2,11 @@ local M = {}
 
 function M.get()
 	-- neovim/nvim-lspconfig
+	local virtual_text = O.styles.lsp.virtual_text
+	local underlines = O.styles.lsp.underlines
+	local inlay_hints = O.styles.lsp.inlay_hints
+	local darkening_percentage = 0.2
+
 	return {
 		-- These groups are for the native LSP client. Some other LSP clients may
 		-- use these groups, or use their own. Consult your LSP client's documentation.
@@ -10,9 +15,9 @@ function M.get()
 		LspCodeLens = { link = "Comment" }, -- virtual text of the codelens
 		LspCodeLensSeparator = { link = "LspCodeLens" }, -- virtual text of the codelens separators
 
-		LspReferenceText = { bg = U.blend(C.background, C.foreground, 0.2), styles = { "bold" } }, -- used for highlighting "text" references
-		LspReferenceRead = { bg = U.blend(C.background, C.foreground, 0.2), styles = { "bold" } }, -- used for highlighting "read" references
-		LspReferenceWrite = { bg = U.blend(C.background, C.foreground, 0.2), styles = { "bold" } }, -- used for highlighting "write" references
+		LspReferenceText = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "text" references
+		LspReferenceRead = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "read" references
+		LspReferenceWrite = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "write" references
 
 		LspDiagnosticsDefaultError = { link = "DiagnosticError" }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 		LspDiagnosticsDefaultWarning = { link = "DiagnosticWarn" }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
@@ -29,24 +34,24 @@ function M.get()
 		-- LspDiagnosticsFloatingInformation   = { }, -- Used to color "Information" diagnostic messages in diagnostics float
 		-- LspDiagnosticsFloatingHint          = { }, -- Used to color "Hint" diagnostic messages in diagnostics float
 
-		LspDiagnosticsVirtualTextError = { fg = C.color1, styles = { "italic" } }, -- Used for "Error" diagnostic virtual text
+		LspDiagnosticsVirtualTextError = { fg = C.color1, styles = virtual_text.errors or {} }, -- Used for "Error" diagnostic virtual text
 		LspDiagnosticsVirtualTextWarning = {
 			fg = U.blend(C.color1, C.color3, 0.5),
-			styles = { "italic" },
+			styles = virtual_text.warnings or {},
 		}, -- Used for "Warning" diagnostic virtual text
-		LspDiagnosticsVirtualTextInformation = { fg = C.foreground, styles = { "italic" } }, -- Used for "Information" diagnostic virtual text
-		LspDiagnosticsVirtualTextHint = { fg = C.color6, styles = { "italic" } }, -- Used for "Hint" diagnostic virtual text
+		LspDiagnosticsVirtualTextInformation = { fg = C.foreground, styles = virtual_text.information or {} }, -- Used for "Information" diagnostic virtual text
+		LspDiagnosticsVirtualTextHint = { fg = C.color6, styles = virtual_text.hints or {} }, -- Used for "Hint" diagnostic virtual text
 
-		LspDiagnosticsUnderlineError = { link = "DiagnosticUnderlineError" }, -- Used to underline "Error" diagnostics
-		LspDiagnosticsUnderlineWarning = { link = "DiagnosticUnderlineWarn" }, -- Used to underline "Warning" diagnostics
-		LspDiagnosticsUnderlineInformation = { link = "DiagnosticUnderlineInfo" }, -- Used to underline "Information" diagnostics
-		LspDiagnosticsUnderlineHint = { link = "DiagnosticUnderlineHint" }, -- Used to underline "Hint" diagnostics
+		LspDiagnosticsUnderlineError = { sp = C.color1, styles = underlines.errors or {} }, -- Used to underline "Error" diagnostics
+		LspDiagnosticsUnderlineWarning = { sp = U.blend(C.color1, C.color3, 0.5), styles = underlines.warnings or {} }, -- Used to underline "Warning" diagnostics
+		LspDiagnosticsUnderlineInformation = { sp = C.foreground, styles = underlines.information or {} }, -- Used to underline "Information" diagnostics
+		LspDiagnosticsUnderlineHint = { sp = C.color6, styles = underlines.hints or {} }, -- Used to underline "Hint" diagnostics
 
-		DiagnosticUnderlineOk = { sp = C.color2, styles = { "undercurl" } }, -- Used to underline "Ok" diagnostics
-		DiagnosticUnderlineError = { sp = C.color1, styles = { "undercurl" } }, -- Used to underline "Error" diagnostics
-		DiagnosticUnderlineWarn = { sp = U.blend(C.color1, C.color3, 0.5), styles = { "undercurl" } }, -- Used to underline "Warning" diagnostics
-		DiagnosticUnderlineInfo = { sp = C.foreground, styles = { "undercurl" } }, -- Used to underline "Information" diagnostics
-		DiagnosticUnderlineHint = { sp = C.color6, styles = { "undercurl" } }, -- Used to underline "Hint" diagnostics
+		DiagnosticUnderlineOk = { sp = C.color2, styles = underlines.ok or {} }, -- Used to underline "Ok" diagnostics
+		DiagnosticUnderlineError = { sp = C.color1, styles = underlines.errors or {} }, -- Used to underline "Error" diagnostics
+		DiagnosticUnderlineWarn = { sp = U.blend(C.color1, C.color3, 0.5), styles = underlines.warnings or {} }, -- Used to underline "Warning" diagnostics
+		DiagnosticUnderlineInfo = { sp = C.foreground, styles = underlines.information or {} }, -- Used to underline "Information" diagnostics
+		DiagnosticUnderlineHint = { sp = C.color6, styles = underlines.hints or {} }, -- Used to underline "Hint" diagnostics
 
 		DiagnosticFloatingOk = { link = "DiagnosticOk" }, -- Used to color "Ok" diagnostic messages in diagnostics float
 		DiagnosticFloatingError = { link = "DiagnosticError" }, -- Used to color "Error" diagnostic messages in diagnostics float
@@ -61,29 +66,29 @@ function M.get()
 		DiagnosticSignHint = { link = "DiagnosticHint" }, -- Used for "Hint" signs in sign column
 
 		DiagnosticVirtualTextOk = {
-			bg = U.blend(C.color2, C.background, 0.2),
+			bg = U.blend(C.color2, C.background, darkening_percentage),
 			fg = C.color2,
-			styles = { "bold" },
+			styles = virtual_text.ok or {},
 		}, -- Used for "Ok" diagnostic virtual text
 		DiagnosticVirtualTextError = {
-			bg = U.blend(C.color1, C.background, 0.2),
+			bg = U.blend(C.color1, C.background, darkening_percentage),
 			fg = C.color1,
-			styles = { "bold" },
+			styles = virtual_text.errors or {},
 		}, -- Used for "Error" diagnostic virtual text
 		DiagnosticVirtualTextWarn = {
-			bg = U.blend(U.blend(C.color1, C.color3, 0.5), C.background, 0.2),
+			bg = U.blend(U.blend(C.color1, C.color3, 0.5), C.background, darkening_percentage),
 			fg = U.blend(C.color1, C.color3, 0.5),
-			styles = { "bold" },
+			styles = virtual_text.warnings or {},
 		}, -- Used for "Warning" diagnostic virtual text
 		DiagnosticVirtualTextInfo = {
-			bg = U.blend(C.foreground, C.background, 0.2),
+			bg = U.blend(C.foreground, C.background, darkening_percentage),
 			fg = C.foreground,
-			styles = { "bold" },
+			styles = virtual_text.information or {},
 		}, -- Used for "Information" diagnostic virtual text
 		DiagnosticVirtualTextHint = {
-			bg = U.blend(C.color6, C.background, 0.2),
+			bg = U.blend(C.color6, C.background, darkening_percentage),
 			fg = C.color6,
-			styles = { "bold" },
+			styles = virtual_text.hints or {},
 		}, -- Used for "Hint" diagnostic virtual text
 	}
 end
