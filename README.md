@@ -848,7 +848,7 @@ mini = {
 <td>
 
 ```lua
-lspconfig = true
+lsp = true
 ```
 
 </td>
