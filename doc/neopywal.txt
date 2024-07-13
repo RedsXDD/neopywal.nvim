@@ -685,7 +685,10 @@ nvim-treesitter>lua
 <
 
 telescope.nvim>lua
-    telescope = true
+    telescope = {
+        enabled = true,
+        -- style = "nvchad"
+    }
 <
 
 undotree>lua
