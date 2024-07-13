@@ -147,6 +147,7 @@ M.default_options = {
 			cursorword = true,
 			files = true,
 			hipatterns = true,
+			icons = true,
 			indentscope = true,
 			pick = true,
 			starter = true,

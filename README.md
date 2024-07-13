@@ -758,6 +758,20 @@ mini = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- mini.icons {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.icons">mini.icons</a> </td>
+<td>
+
+```lua
+mini = {
+    icons = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- mini.indentscope {{{ -->
 <tr>
 <td> <a href="https://github.com/echasnovski/mini.indentscope">mini.indentscope</a> </td>
