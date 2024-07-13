@@ -197,27 +197,27 @@ require("neopywal").setup({
         booleans = {},
         types = { "italic" },
         operators = {},
-		lsp = {
-			virtual_text = {
-				errors = { "bold", "italic" },
-				hints = { "bold", "italic" },
-				information = { "bold", "italic" },
-				ok = { "bold", "italic" },
-				warnings = { "bold", "italic" },
-				unnecessary = { "bold", "italic" },
-			},
-			underlines = {
-				errors = { "undercurl" },
-				hints = { "undercurl" },
-				information = { "undercurl" },
-				ok = { "undercurl" },
-				warnings = { "undercurl" },
-			},
-			inlay_hints = {
-				background = true,
-				style = { "bold", "italic" },
-			},
-		},
+        lsp = {
+            virtual_text = {
+                errors = { "bold", "italic" },
+                hints = { "bold", "italic" },
+                information = { "bold", "italic" },
+                ok = { "bold", "italic" },
+                warnings = { "bold", "italic" },
+                unnecessary = { "bold", "italic" },
+            },
+            underlines = {
+                errors = { "undercurl" },
+                hints = { "undercurl" },
+                information = { "undercurl" },
+                ok = { "undercurl" },
+                warnings = { "undercurl" },
+            },
+            inlay_hints = {
+                background = true,
+                style = { "bold", "italic" },
+            },
+        },
     },
 
     -- Setting this to false disables all default file format highlights.
@@ -598,32 +598,32 @@ local neopywal_feline = require("neopywal.theme.plugins.feline")
 
 neopywal_feline.setup({
     assets = {
-	    left_separator = "",
-	    right_separator = "",
-	    mode_icon = "",
-	    dir = "󰉋",
-	    file = "󰈙",
-	    lsp = {
-	    	server = "󰅡",
-	    	error = "",
-	    	warning = "",
-	    	info = "",
-	    	hint = "",
-	    },
-	    git = {
-	    	branch = "",
-	    	added = "",
-	    	changed = "",
-	    	removed = "",
-	    },
+        left_separator = "",
+        right_separator = "",
+        mode_icon = "",
+        dir = "󰉋",
+        file = "󰈙",
+        lsp = {
+            server = "󰅡",
+            error = "",
+            warning = "",
+            info = "",
+            hint = "",
+        },
+        git = {
+            branch = "",
+            added = "",
+            changed = "",
+            removed = "",
+        },
     }
     sett = {
-	    text = C.foreground,
-	    bkg = U.blend(C.color8, C.background, 0.3),
-	    diffs = U.blend(C.color8, C.background, 0.5),
-	    extras = C.foreground,
-	    curr_file = U.blend(C.color8, C.background, 0.5),
-	    curr_dir = C.color4,
+        text = C.foreground,
+        bkg = U.blend(C.color8, C.background, 0.3),
+        diffs = U.blend(C.color8, C.background, 0.5),
+        extras = C.foreground,
+        curr_file = U.blend(C.color8, C.background, 0.5),
+        curr_dir = C.color4,
         show_modified = false -- show if the file has been modified
         show_lazy_updates = false -- show the count of updatable plugins from lazy.nvim
                                   -- need to set checker.enabled = true in lazy.nvim first
