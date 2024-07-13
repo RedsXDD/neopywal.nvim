@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.1.1...v1.2.0) (2024-07-13)
+
+
+### Features
+
+* **mapper:** accept boolean and table config ([de52bfd](https://github.com/RedsXDD/neopywal.nvim/commit/de52bfd01455c91bfc2bd043fe20bed245784339))
+* **mapper:** add "mapper.lua" module ([ac51c77](https://github.com/RedsXDD/neopywal.nvim/commit/ac51c7762cfde7905d4208987312fc5c4bb99559))
+* **noice:** improve background for LSP status ([dcb4098](https://github.com/RedsXDD/neopywal.nvim/commit/dcb409821aa828358e4c963b566659bfd374682e))
+* **plugins/feline:** proper feline.nvim support ([8b60526](https://github.com/RedsXDD/neopywal.nvim/commit/8b605260297a100e7f611538fc614a178846b67f))
+* **telescope:** add nvchad style ([2c52ac5](https://github.com/RedsXDD/neopywal.nvim/commit/2c52ac51f5ca04c3c46ac0ab2ca87332469c8aeb))
+
+
+### Bug Fixes
+
+* **feline:** improper gitsigns handling ([0b0b7e4](https://github.com/RedsXDD/neopywal.nvim/commit/0b0b7e48e21716b3aebaa4bc46cef2b6195aa8f2))
+* **feline:** proper git branch spacing ([bc44124](https://github.com/RedsXDD/neopywal.nvim/commit/bc4412455710adce831d937a7562b6cfbf1460fc))
+
 ## [1.1.1](https://github.com/RedsXDD/neopywal.nvim/compare/v1.1.0...v1.1.1) (2024-07-08)
 
 
