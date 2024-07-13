@@ -411,7 +411,7 @@ function M.get()
 		end,
 
 		hl = {
-			fg = C.color1,
+			fg = C.error,
 			bg = sett.bkg,
 		},
 		icon = " " .. assets.lsp.error .. " ",
@@ -423,7 +423,7 @@ function M.get()
 			return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
 		end,
 		hl = {
-			fg = U.blend(C.color1, C.color3, 0.5),
+			fg = C.warn,
 			bg = sett.bkg,
 		},
 		icon = " " .. assets.lsp.warning .. " ",
@@ -435,7 +435,7 @@ function M.get()
 			return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
 		end,
 		hl = {
-			fg = C.foreground,
+			fg = C.info,
 			bg = sett.bkg,
 		},
 		icon = " " .. assets.lsp.info .. " ",
@@ -447,7 +447,7 @@ function M.get()
 			return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
 		end,
 		hl = {
-			fg = C.color6,
+			fg = C.hint,
 			bg = sett.bkg,
 		},
 		icon = " " .. assets.lsp.hint .. " ",

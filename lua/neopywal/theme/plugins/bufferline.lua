@@ -29,7 +29,7 @@ local default_highlights = {
 	modified_visible = { bg = unselected_bg, fg = C.color8 }, -- Icon color for selected modified buffer on non-current windows.
 	modified_selected = {
 		bg = selected_bg,
-		fg = U.blend(C.color1, C.color3, 0.5),
+		fg = C.warn,
 	}, -- Icon color for selected modified buffer.
 
 	-- String that's duplicated from two buffers.

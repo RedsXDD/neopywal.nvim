@@ -182,6 +182,8 @@ M.options = M.default_options
 local already_notified = false
 ---@param theme_style? string
 function M.get_colors(theme_style)
+	local U = require("neopywal.utils.color")
+
 	if type(M.options.colorscheme_file) ~= "string" then
 		notify.error("`colorscheme_file` option must be of type string.")
 	end
@@ -305,6 +307,15 @@ Below is the error message that we captured:
 			color14 = vim.g.color14,
 			color15 = vim.g.color15,
 		},
+		lsp = {
+			error = vim.g.color1,
+			hint = vim.g.color6,
+			info = vim.g.foreground,
+			unnecessary = vim.g.color8,
+			warn = U.blend(vim.g.color1, vim.g.color3, 0.5),
+			ok = vim.g.color2,
+			inlay_hints = vim.g.color8,
+		},
 	}
 
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
@@ -313,7 +324,7 @@ Below is the error message that we captured:
 
 	reset_global_color_variables()
 	local user_colors = M.options.custom_colors
-	local colors = vim.tbl_deep_extend("keep", user_colors, palette[theme_style], palette.colors)
+	local colors = vim.tbl_deep_extend("keep", user_colors, palette[theme_style], palette.colors, palette.lsp)
 	return colors
 end
 

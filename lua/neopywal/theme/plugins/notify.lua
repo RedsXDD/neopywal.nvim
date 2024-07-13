@@ -6,44 +6,44 @@ function M.get()
 		NotifyBackground = { bg = "#000000" },
 		NotifyERRORBody = {
 			bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
-			fg = C.color1,
+			fg = C.error,
 		},
 		NotifyWARNBody = {
 			bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
-			fg = U.blend(C.color1, C.color3, 0.5),
+			fg = C.warn,
 		},
 		NotifyINFOBody = {
 			bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
-			fg = C.foreground,
+			fg = C.info,
 		},
 		NotifyDEBUGBody = {
 			bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
-			fg = C.color8,
+			fg = C.unnecessary,
 		},
 		NotifyTRACEBody = {
 			bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
-			fg = C.color6,
+			fg = C.hint,
 		},
 
 		NotifyERRORBorder = { link = "NotifyERRORBody" },
-		NotifyERRORIcon = { fg = C.color1 },
-		NotifyERRORTitle = { fg = C.color1, styles = { "italic" } },
+		NotifyERRORIcon = { fg = C.error },
+		NotifyERRORTitle = { fg = C.error, styles = { "italic" } },
 
 		NotifyWARNBorder = { link = "NotifyWARNBody" },
-		NotifyWARNIcon = { fg = U.blend(C.color1, C.color3, 0.5) },
-		NotifyWARNTitle = { fg = U.blend(C.color1, C.color3, 0.5), styles = { "italic" } },
+		NotifyWARNIcon = { fg = C.warn },
+		NotifyWARNTitle = { fg = C.warn, styles = { "italic" } },
 
 		NotifyINFOBorder = { link = "NotifyINFOBody" },
-		NotifyINFOIcon = { fg = C.foreground },
-		NotifyINFOTitle = { fg = C.foreground, styles = { "italic" } },
+		NotifyINFOIcon = { fg = C.info },
+		NotifyINFOTitle = { fg = C.info, styles = { "italic" } },
 
 		NotifyDEBUGBorder = { link = "NotifyDEBUGBody" },
-		NotifyDEBUGIcon = { fg = C.color8 },
-		NotifyDEBUGTitle = { fg = C.color8, styles = { "italic" } },
+		NotifyDEBUGIcon = { fg = C.unnecessary },
+		NotifyDEBUGTitle = { fg = C.unnecessary, styles = { "italic" } },
 
 		NotifyTRACEBorder = { link = "NotifyTRACEBody" },
-		NotifyTRACEIcon = { fg = C.color6 },
-		NotifyTRACETitle = { fg = C.color6, styles = { "italic" } },
+		NotifyTRACEIcon = { fg = C.hint },
+		NotifyTRACETitle = { fg = C.hint, styles = { "italic" } },
 	}
 end
 
