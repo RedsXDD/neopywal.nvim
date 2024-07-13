@@ -76,6 +76,9 @@ M.default_options = {
 				ok = { "undercurl" },
 				warnings = { "undercurl" },
 			},
+			inlay_hints = {
+				background = true,
+			},
 		},
 	},
 

@@ -14,6 +14,11 @@ function M.get()
 		LspInfoBorder = { link = "FloatBorder" }, -- LspInfo border
 		LspCodeLens = { link = "Comment" }, -- virtual text of the codelens
 		LspCodeLensSeparator = { link = "LspCodeLens" }, -- virtual text of the codelens separators
+		LspInlayHint = {
+			bg = (O.transparent_background or not inlay_hints.background) and C.none
+				or U.blend(C.color8, C.background, darkening_percentage),
+			fg = U.blend(C.color8, C.foreground, 0.7),
+		}, -- Virtual text of the inlay hints.
 
 		LspReferenceText = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "text" references
 		LspReferenceRead = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "read" references
