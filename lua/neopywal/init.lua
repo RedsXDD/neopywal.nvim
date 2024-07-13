@@ -136,7 +136,10 @@ M.default_options = {
 		noice = true,
 		notify = true,
 		nvim_cmp = true,
-		telescope = true,
+		telescope = {
+			enabled = true,
+			-- style = "nvchad",
+		},
 		treesitter = true,
 		undotree = true,
 		which_key = true,
