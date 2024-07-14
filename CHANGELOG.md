@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.0.0...v2.1.0) (2024-07-14)
+
+
+### Features
+
+* "use_palette" option ([a869aec](https://github.com/RedsXDD/neopywal.nvim/commit/a869aecf4157e0bc8d83e11d27a1155ab22599fc))
+
 ## [2.0.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.2.0...v2.0.0) (2024-07-14)
 
 
