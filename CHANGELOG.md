@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.0.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.2.0...v2.0.0) (2024-07-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename "lspconfig" option to "lsp"
+
+### Features
+
+* add mini.icons support ([76e8a85](https://github.com/RedsXDD/neopywal.nvim/commit/76e8a8508676d21d6f8e5754c947179f3b28cb57))
+* **lsp:** add styling option for inlay hints ([61ed549](https://github.com/RedsXDD/neopywal.nvim/commit/61ed5492c79976a24083822bc88885ed0e809585))
+* **lsp:** add styling options ([32fdb64](https://github.com/RedsXDD/neopywal.nvim/commit/32fdb64c46e7b8c3603b278a3788d7ce18ec3233))
+* **lsp:** background color for inlay hints ([ebd8311](https://github.com/RedsXDD/neopywal.nvim/commit/ebd831127832deb3bf0b80c22b90c3ab64bf78b5))
+* **telescope:** better PromptCounter colors ([05b40a3](https://github.com/RedsXDD/neopywal.nvim/commit/05b40a37f8cea0f24bfcd173a797e0a1461916d7))
+
+
+### Bug Fixes
+
+* **telescope:** inaccurate background colors ([942fc6b](https://github.com/RedsXDD/neopywal.nvim/commit/942fc6b9cfb4b304160738041e950e5a081a0b24))
+* **telescope:** inaccurate title colors ([ea49ab0](https://github.com/RedsXDD/neopywal.nvim/commit/ea49ab043fe607575e989ecc73227f8709ce0714))
+
+
+### Code Refactoring
+
+* rename "lspconfig" option to "lsp" ([6fe86e9](https://github.com/RedsXDD/neopywal.nvim/commit/6fe86e974f0da4716080a29463772e5f257bd28f))
+
 ## [1.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.1.1...v1.2.0) (2024-07-13)
 
 
