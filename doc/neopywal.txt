@@ -242,22 +242,22 @@ on a low-quality wallpaper, you can always opt for a richer palette like
 To achieve this, use the `use_palette` option with one of the following
 available colorscheme palette names:
 
-Click to show all available built-in palettes ~
+- `catppuccin-{frappe,macchiato,mocha}`
+- `doomone`
+- `everforest-{soft,medium,hard}`
+- `gruvbox-{soft,dark,hard}`
+- `material and material-{darker,ocean,palenight}`
+- `monokaipro`
+- `nord`
+- `oceanic-next`
+- `onedark and onedark-{darker,vivid}`
+- `palenight`
+- `solarized`
+- `sonokai`
+- `tokyonight and tokyonight-storm`
+- `tommorow-night`
 
-"catppuccin-{frappe,macchiato,mocha}"
-"doomone"
-"everforest-{soft,medium,hard}"
-"gruvbox-{soft,dark,hard}"
-"material" and "material-{darker,ocean,palenight}"
-"monokaipro"
-"nord"
-"oceanic-next"
-"onedark" and "onedark-{darker,vivid}"
-"palenight"
-"solarized"
-"sonokai"
-"tokyonight" and "tokyonight-storm"
-"tommorow-night"To use any of the available built-in colorscheme palettes, simply specify one
+To use any of the available built-in colorscheme palettes, simply specify one
 of the names from the list in the `use_palette` option. Note that this option
 takes precedence over the `use_wallust` and `colorscheme_file` options.
 
