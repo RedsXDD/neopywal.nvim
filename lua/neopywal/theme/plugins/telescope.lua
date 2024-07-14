@@ -21,6 +21,7 @@ function M.get()
 					bg = U.blend(C.background, C.foreground, 0.9),
 					fg = C.foreground,
 				},
+				TelescopePromptCounter = { fg = C.foreground },
 				TelescopePromptPrefix = {
 					bg = U.blend(C.background, C.foreground, 0.9),
 					fg = C.color4,
