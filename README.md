@@ -746,12 +746,12 @@ lazygit = true
 <details> <summary>Special</summary>
 
 ```lua
-require('lualine').setup {
+require('lualine').setup({
     options = {
         theme = "neopywal"
         -- The rest of your lualine config ...
     }
-}
+})
 ```
 
 </details>
