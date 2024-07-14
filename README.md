@@ -183,7 +183,7 @@ require("neopywal").setup({
     no_undercurl = false, -- Force no undercurl.
     no_strikethrough = false, -- Force no strikethrough.
 
-    -- Handles the styles of general hi groups (see `:h highlight-args`).
+    -- Handles the styling of certain highlight groups (see `:h highlight-args`).
     styles = {
         comments = { "italic" },
         conditionals = { "italic" },
