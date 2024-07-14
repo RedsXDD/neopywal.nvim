@@ -18,6 +18,12 @@ M.default_options = {
 	-- This option allows to specify where Neopywal should look for a ".vim" template file.
 	colorscheme_file = "", -- e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim".
 
+	-- This option allows to use a custom built-in theme palettes like "catppuccin-mocha" or "tokyonight".
+	-- To get the list of available themes take a look at `:h neopywal-alternative-palettes` or at
+	-- `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
+	-- Take note that this option takes precedence over `use_wallust` and `colorscheme_file`.
+	use_palette = "",
+
 	-- Sets the background color of certain highlight groups to be transparent.
 	-- Use this when your terminal opacity is < 1.
 	transparent_background = false,
@@ -192,6 +198,8 @@ function M.get_colors(theme_style)
 	end
 
 	local cache_dir
+	local colorscheme_file = ""
+
 	if M.compiler.path_sep == "\\" then
 		cache_dir = os.getenv("LOCALAPPDATA") -- Windows
 	else
@@ -199,10 +207,16 @@ function M.get_colors(theme_style)
 	end
 
 	-- stylua: ignore
-	local colorscheme_file = (type(M.options.colorscheme_file) == "string" and M.options.colorscheme_file ~= "")
+	colorscheme_file = (type(M.options.colorscheme_file) == "string" and M.options.colorscheme_file ~= "")
 		and M.options.colorscheme_file
 		or M.options.use_wallust == true and cache_dir .. "/wallust/colors_neopywal.vim"
 		or cache_dir .. "/wal/colors-wal.vim"
+
+	if M.options.use_palette ~= "" then
+		local plugin_dir = debug.getinfo(1).source:sub(2, -22)
+		local palette_dir = plugin_dir .. "palettes/"
+		colorscheme_file = "" .. palette_dir .. M.options.use_palette .. ".vim"
+	end
 
 	if M.compiler.path_sep == "\\" then
 		colorscheme_file = colorscheme_file:gsub("/", "\\")
