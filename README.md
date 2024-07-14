@@ -267,25 +267,20 @@ You can easily use any well-known colorscheme palette with Neopywal without much
 
 To achieve this, use the `use_palette` option with one of the following available colorscheme palette names:
 
-<details>
-<summary>Click to show all available built-in palettes</summary>
-<p>
-    "catppuccin-{frappe,macchiato,mocha}"<br>
-    "doomone"<br>
-    "everforest-{soft,medium,hard}"<br>
-    "gruvbox-{soft,dark,hard}"<br>
-    "material" and "material-{darker,ocean,palenight}"<br>
-    "monokaipro"<br>
-    "nord"<br>
-    "oceanic-next"<br>
-    "onedark" and "onedark-{darker,vivid}"<br>
-    "palenight"<br>
-    "solarized"<br>
-    "sonokai"<br>
-    "tokyonight" and "tokyonight-storm"<br>
-    "tommorow-night"<br>
-</p>
-</details>
+- `catppuccin-{frappe,macchiato,mocha}`
+- `doomone`
+- `everforest-{soft,medium,hard}`
+- `gruvbox-{soft,dark,hard}`
+- `material and material-{darker,ocean,palenight}`
+- `monokaipro`
+- `nord`
+- `oceanic-next`
+- `onedark and onedark-{darker,vivid}`
+- `palenight`
+- `solarized`
+- `sonokai`
+- `tokyonight and tokyonight-storm`
+- `tommorow-night`
 
 To use any of the available built-in colorscheme palettes, simply specify one of the names from the list in the `use_palette` option. Note that this option takes precedence over the `use_wallust` and `colorscheme_file` options.
 
