@@ -84,13 +84,13 @@
 [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
-use { "RedsXDD/neopywal.nvim", as = 'neopywal' }
+use { "RedsXDD/neopywal.nvim", as = "neopywal" }
 ```
 
 [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug 'RedsXDD/neopywal.nvim', { 'as': 'neopywal' }
+Plug "RedsXDD/neopywal.nvim", { "as": "neopywal" }
 ```
 
 <!-- }}} -->
@@ -746,7 +746,7 @@ lazygit = true
 <details> <summary>Special</summary>
 
 ```lua
-require('lualine').setup({
+require("lualine").setup({
     options = {
         theme = "neopywal"
         -- The rest of your lualine config ...
