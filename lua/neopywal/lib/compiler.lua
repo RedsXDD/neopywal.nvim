@@ -28,12 +28,11 @@ local function compile(theme_style)
 		theme_style = vim.o.background
 	end
 
+	local O = require("neopywal").options
 	local G = require("neopywal").compiler
 	local compile_path = G.compile_path
 	local path_sep = G.path_sep
 	local filename = G.filename .. "-" .. theme_style
-
-	local O = require("neopywal").options
 
 	local theme = require("neopywal.lib.mapper").get(theme_style)
 	local highlights =
