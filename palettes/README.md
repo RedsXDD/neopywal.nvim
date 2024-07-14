@@ -9,11 +9,11 @@ To generate any of the pre-made palette files found in this directory, follow th
 2. Run the following command in your shell:
 
 ```sh
-$ wal --theme ~/.config/wal/colorschemes/path/to/the/theme.json
+$ wal --theme ~/.config/wal/colorschemes/path/to/theme.json
 
 # Or for Wallust users.
 
-$ wallust cs ~/.config/wallust/colorschemes/path/to/the/theme.json
+$ wallust cs ~/.config/wallust/colorschemes/path/to/theme.json
 ```
 
 This will generate a new `colors.vim` file under `~/.cache/wal/` containing the desired theme palette. Wallust users should also refer to the Neopywal.nvim [Wallust Setup Guide](https://github.com/RedsXDD/neopywal.nvim#Setting-up-Wallust).
