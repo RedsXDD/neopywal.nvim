@@ -184,6 +184,10 @@ local already_notified = false
 function M.get_colors(theme_style)
 	local U = require("neopywal.utils.color")
 
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+		theme_style = vim.o.background
+	end
+
 	if type(M.options.colorscheme_file) ~= "string" then
 		notify.error("`colorscheme_file` option must be of type string.")
 	end
@@ -317,10 +321,6 @@ Below is the error message that we captured:
 			inlay_hints = vim.g.color8,
 		},
 	}
-
-	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
-		theme_style = vim.o.background
-	end
 
 	reset_global_color_variables()
 	local user_colors = M.options.custom_colors
