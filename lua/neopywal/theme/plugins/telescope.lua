@@ -7,22 +7,22 @@ function M.get()
 			and not O.transparent_background
 			and {
 				TelescopeBorder = {
-					bg = O.dim_inactive and C.background or U.darken(C.background, 5),
-					fg = O.dim_inactive and C.background or U.darken(C.background, 5),
+					bg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
+					fg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
 				},
 				TelescopeNormal = {
-					bg = O.dim_inactive and C.background or U.darken(C.background, 5),
+					bg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
 				},
 				TelescopePromptBorder = {
-					bg = O.dim_inactive and U.darken(C.background, 5) or U.blend(C.background, "#000000", 0.8),
-					fg = O.dim_inactive and U.darken(C.background, 5) or U.blend(C.background, "#000000", 0.8),
+					bg = U.blend(C.background, C.foreground, 0.9),
+					fg = U.blend(C.background, C.foreground, 0.9),
 				},
 				TelescopePromptNormal = {
-					bg = O.dim_inactive and U.darken(C.background, 5) or U.blend(C.background, "#000000", 0.8),
+					bg = U.blend(C.background, C.foreground, 0.9),
 					fg = C.foreground,
 				},
 				TelescopePromptPrefix = {
-					bg = O.dim_inactive and U.darken(C.background, 5) or U.blend(C.background, "#000000", 0.8),
+					bg = U.blend(C.background, C.foreground, 0.9),
 					fg = C.color4,
 					styles = { "bold" },
 				},
