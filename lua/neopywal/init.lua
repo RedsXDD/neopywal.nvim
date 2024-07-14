@@ -1,4 +1,5 @@
 local M = {}
+local U = require("neopywal.utils.color")
 local notify = require("neopywal.lib.notify")
 
 M.compiler = {
@@ -182,8 +183,6 @@ M.options = M.default_options
 local already_notified = false
 ---@param theme_style? string
 function M.get_colors(theme_style)
-	local U = require("neopywal.utils.color")
-
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
@@ -329,7 +328,6 @@ Below is the error message that we captured:
 end
 
 local function sum_colors()
-	local U = require("neopywal.utils.color")
 	local C = M.get_colors()
 
 	local tbl = {
