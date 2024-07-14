@@ -28,15 +28,15 @@ function M.get()
 				},
 				TelescopePreviewTitle = {
 					bg = C.color3,
-					fg = U.blend(C.color8, C.background, 0.4),
+					fg = C.background,
 				},
 				TelescopePromptTitle = {
 					bg = C.color4,
-					fg = U.blend(C.color8, C.background, 0.4),
+					fg = C.background,
 				},
 				TelescopeResultsTitle = {
 					bg = C.color6,
-					fg = O.dim_inactive and C.background or U.darken(C.background, 5),
+					fg = C.background,
 				},
 				TelescopeSelection = { link = "CursorLine" },
 				TelescopeSelectionCaret = { bg = U.blend(C.background, C.foreground, 0.9), fg = C.color6 },
