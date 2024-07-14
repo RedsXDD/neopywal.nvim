@@ -231,11 +231,13 @@ require("neopywal").setup({
     -- Useful if you want to enable specific plugin options.
     default_plugins = true,
 
+    -- For more fileformats options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Fileformats)
     fileformats = {
         c_cpp = true,
         c_sharp = true,
-        -- For more fileformats options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Fileformats)
     },
+
+    -- For more plugin options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Plugins)
     plugins = {
         alpha = true,
         coc = true,
@@ -243,7 +245,6 @@ require("neopywal").setup({
             cursorword = true,
             files = true,
         },
-        -- For more plugin options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Plugins)
     },
 })
 ```
