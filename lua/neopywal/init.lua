@@ -343,42 +343,6 @@ function M.get_colors(theme_style)
 	return colors
 end
 
-local function sum_colors()
-	local C = M.get_colors()
-
-	local tbl = {
-		C.background,
-		C.foreground,
-		-- C.cursor,
-		-- C.color0,
-		C.color1,
-		C.color2,
-		C.color3,
-		C.color4,
-		C.color5,
-		C.color6,
-		C.color7,
-		C.color8,
-		-- C.color9,
-		-- C.color10,
-		-- C.color11,
-		-- C.color12,
-		-- C.color13,
-		-- C.color14,
-		-- C.color15,
-	}
-
-	local sum = 0
-	for _, color in pairs(tbl) do
-		if type(color) == "string" and color:match("#(%x%x)(%x%x)(%x%x)") then
-			local rgb = U.hexToRgb(color)
-			sum = sum + rgb[1] + rgb[2] + rgb[3]
-		end
-	end
-
-	return sum
-end
-
 -- Avoid g:colors_name reloading
 local lock = false
 local did_setup = false
@@ -445,6 +409,12 @@ function M.setup(user_conf)
 		M.options.fileformats = user_conf.fileformats or {}
 	end
 
+	-- Get minimal palette table for hashing.
+	if M.options.colorscheme_file == "" then
+		M.options.colorscheme_file = get_colorscheme_file()
+	end
+	local C = source_colorscheme_file(M.options.colorscheme_file)
+
 	-- Get cached hash.
 	local cached_path = G.compile_path .. G.path_sep .. "cached"
 	local file = io.open(cached_path)
@@ -458,10 +428,10 @@ function M.setup(user_conf)
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
 	local hash = require("neopywal.lib.hashing").hash(user_conf)
+		.. require("neopywal.lib.hashing").hash(C)
 		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
 		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
 		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
-		.. sum_colors()
 
 	-- Recompile if hash changed.
 	if cached ~= hash then
