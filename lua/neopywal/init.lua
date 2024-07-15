@@ -183,7 +183,6 @@ M.default_options = {
 		},
 	},
 }
-
 M.options = M.default_options
 
 local function get_colorscheme_file()
