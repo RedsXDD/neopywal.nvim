@@ -211,8 +211,16 @@ local function get_colorscheme_file()
 	return colorscheme_file
 end
 
----@param colorscheme_file string
-local function source_colorscheme_file(colorscheme_file)
+local function source_colorscheme_file()
+	if type(M.options.colorscheme_file) ~= "string" then
+		notify.error("`colorscheme_file` option must be of type string.")
+	end
+
+	if M.options.colorscheme_file == "" then
+		M.options.colorscheme_file = get_colorscheme_file()
+	end
+	local colorscheme_file = M.options.colorscheme_file
+
 	if vim.fn.filereadable(colorscheme_file) == 0 then
 		notify.error(
 			string.format(
@@ -298,14 +306,7 @@ function M.get_colors(theme_style)
 		theme_style = vim.o.background
 	end
 
-	if type(M.options.colorscheme_file) ~= "string" then
-		notify.error("`colorscheme_file` option must be of type string.")
-	end
-
-	if M.options.colorscheme_file == "" then
-		M.options.colorscheme_file = get_colorscheme_file()
-	end
-	local C = source_colorscheme_file(M.options.colorscheme_file)
+	local C = source_colorscheme_file()
 
 	-- LSP colors:
 	C.error = C.color1
@@ -386,12 +387,6 @@ function M.setup(user_conf)
 		M.options.fileformats = user_conf.fileformats or {}
 	end
 
-	-- Get minimal palette table for hashing.
-	if M.options.colorscheme_file == "" then
-		M.options.colorscheme_file = get_colorscheme_file()
-	end
-	local C = source_colorscheme_file(M.options.colorscheme_file)
-
 	-- Get cached hash.
 	local cached_path = G.compile_path .. G.path_sep .. "cached"
 	local file = io.open(cached_path)
@@ -402,6 +397,7 @@ function M.setup(user_conf)
 	end
 
 	-- Get current hash.
+	local C = source_colorscheme_file() -- Minimal palette table for hashing.
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
 	local hash = require("neopywal.lib.hashing").hash(user_conf)
