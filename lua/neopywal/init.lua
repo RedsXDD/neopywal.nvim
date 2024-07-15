@@ -186,7 +186,103 @@ M.default_options = {
 
 M.options = M.default_options
 
-local already_notified = false
+local function get_colorscheme_file()
+	local cache_dir
+	local colorscheme_file = ""
+	local plugin_dir = debug.getinfo(1).source:sub(2, -22)
+	local palette_dir = plugin_dir .. "palettes/"
+
+	if G.path_sep == "\\" then
+		cache_dir = os.getenv("LOCALAPPDATA") -- Windows
+	else
+		cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
+	end
+
+	-- stylua: ignore
+	colorscheme_file = (type(M.options.use_palette) == "string" and M.options.use_palette ~= "") and "" .. palette_dir .. M.options.use_palette .. ".vim" or
+                (type(M.options.colorscheme_file) == "string" and M.options.colorscheme_file ~= "") and M.options.colorscheme_file
+		or M.options.use_wallust == true and cache_dir .. "/wallust/colors_neopywal.vim"
+		or cache_dir .. "/wal/colors-wal.vim"
+
+	if G.path_sep == "\\" then
+		colorscheme_file = colorscheme_file:gsub("/", "\\")
+	end
+
+	return colorscheme_file
+end
+
+---@param colorscheme_file string
+local function source_colorscheme_file(colorscheme_file)
+	if vim.fn.filereadable(colorscheme_file) == 0 then
+		notify.error(
+			string.format(
+				"Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
+				colorscheme_file
+			)
+		)
+	else
+		---@diagnostic disable-next-line: param-type-mismatch
+		local could_load_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
+		if not could_load_file then
+			notify.error(string.format(
+				[[
+Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
+Below is the error message that we captured:
+%s]],
+				colorscheme_file,
+				error_msg
+			))
+		end
+	end
+
+	-- Use fallback colors if template file couldn't be loaded.
+	-- Fallback colors reference: https://github.com/catppuccin/catppuccin
+	local palette = {
+		background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
+		foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
+		cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC",
+		color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
+		color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
+		color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
+		color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF",
+		color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA",
+		color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7",
+		color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5",
+		color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE",
+		color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70",
+		color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8",
+		color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1",
+		color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF",
+		color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA",
+		color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
+		color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
+		color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
+	}
+
+	-- Reset all global variables that have been used.
+	vim.g.background = nil
+	vim.g.foreground = nil
+	vim.g.cursor = nil
+	vim.g.color0 = nil
+	vim.g.color1 = nil
+	vim.g.color2 = nil
+	vim.g.color3 = nil
+	vim.g.color4 = nil
+	vim.g.color5 = nil
+	vim.g.color6 = nil
+	vim.g.color7 = nil
+	vim.g.color8 = nil
+	vim.g.color9 = nil
+	vim.g.color10 = nil
+	vim.g.color11 = nil
+	vim.g.color12 = nil
+	vim.g.color13 = nil
+	vim.g.color14 = nil
+	vim.g.color15 = nil
+
+	return palette
+end
+
 ---@param theme_style? string
 function M.get_colors(theme_style)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
@@ -197,145 +293,51 @@ function M.get_colors(theme_style)
 		notify.error("`colorscheme_file` option must be of type string.")
 	end
 
-	local cache_dir
-	local colorscheme_file = ""
-
-	if M.compiler.path_sep == "\\" then
-		cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-	else
-		cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
+	if M.options.colorscheme_file == "" then
+		M.options.colorscheme_file = get_colorscheme_file()
 	end
-
-	-- stylua: ignore
-	colorscheme_file = (type(M.options.colorscheme_file) == "string" and M.options.colorscheme_file ~= "")
-		and M.options.colorscheme_file
-		or M.options.use_wallust == true and cache_dir .. "/wallust/colors_neopywal.vim"
-		or cache_dir .. "/wal/colors-wal.vim"
-
-	if M.options.use_palette ~= "" then
-		local plugin_dir = debug.getinfo(1).source:sub(2, -22)
-		local palette_dir = plugin_dir .. "palettes/"
-		colorscheme_file = "" .. palette_dir .. M.options.use_palette .. ".vim"
-	end
-
-	if M.compiler.path_sep == "\\" then
-		colorscheme_file = colorscheme_file:gsub("/", "\\")
-	end
-
-	if vim.fn.filereadable(colorscheme_file) == 0 and already_notified == false then
-		notify.error(
-			string.format(
-				"Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
-				colorscheme_file
-			)
-		)
-		already_notified = true
-	else
-		---@diagnostic disable-next-line: param-type-mismatch
-		local could_load_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
-		if not could_load_file and already_notified == false then
-			notify.error(string.format(
-				[[
-Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
-Below is the error message that we captured:
-%s]],
-				colorscheme_file,
-				error_msg
-			))
-		end
-		already_notified = true
-	end
-
-	-- If no notification was set, that means the colorscheme file can be successfully reused if needed.
-	if already_notified == false then
-		M.options.colorscheme_file = colorscheme_file
-	end
-
-	-- Use fallback colors if template file couldn't be loaded.
-	-- Fallback colors reference: https://github.com/catppuccin/catppuccin
-	vim.g.background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E"
-	vim.g.foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4"
-	vim.g.cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC"
-	vim.g.color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A"
-	vim.g.color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8"
-	vim.g.color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1"
-	vim.g.color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF"
-	vim.g.color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA"
-	vim.g.color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7"
-	vim.g.color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5"
-	vim.g.color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE"
-	vim.g.color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70"
-	vim.g.color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8"
-	vim.g.color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1"
-	vim.g.color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF"
-	vim.g.color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA"
-	vim.g.color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7"
-	vim.g.color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5"
-	vim.g.color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8"
-
-	local function reset_global_color_variables()
-		vim.g.background = nil
-		vim.g.foreground = nil
-		vim.g.cursor = nil
-		vim.g.color0 = nil
-		vim.g.color1 = nil
-		vim.g.color2 = nil
-		vim.g.color3 = nil
-		vim.g.color4 = nil
-		vim.g.color5 = nil
-		vim.g.color6 = nil
-		vim.g.color7 = nil
-		vim.g.color8 = nil
-		vim.g.color9 = nil
-		vim.g.color10 = nil
-		vim.g.color11 = nil
-		vim.g.color12 = nil
-		vim.g.color13 = nil
-		vim.g.color14 = nil
-		vim.g.color15 = nil
-	end
+	local C = source_colorscheme_file(M.options.colorscheme_file)
 
 	local palette = {
 		dark = {
-			background = vim.g.background,
-			foreground = vim.g.foreground,
+			background = C.background,
+			foreground = C.foreground,
 		},
 		light = {
-			background = vim.g.foreground,
-			foreground = vim.g.background,
+			background = C.foreground,
+			foreground = C.background,
 		},
 		colors = {
 			none = "NONE",
-			cursor = vim.g.cursor,
-			color0 = vim.g.color0,
-			color1 = vim.g.color1,
-			color2 = vim.g.color2,
-			color3 = vim.g.color3,
-			color4 = vim.g.color4,
-			color5 = vim.g.color5,
-			color6 = vim.g.color6,
-			color7 = vim.g.color7,
-			color8 = vim.g.color8,
-			color9 = vim.g.color9,
-			color10 = vim.g.color10,
-			color11 = vim.g.color11,
-			color12 = vim.g.color12,
-			color13 = vim.g.color13,
-			color14 = vim.g.color14,
-			color15 = vim.g.color15,
+			cursor = C.cursor,
+			color0 = C.color0,
+			color1 = C.color1,
+			color2 = C.color2,
+			color3 = C.color3,
+			color4 = C.color4,
+			color5 = C.color5,
+			color6 = C.color6,
+			color7 = C.color7,
+			color8 = C.color8,
+			color9 = C.color9,
+			color10 = C.color10,
+			color11 = C.color11,
+			color12 = C.color12,
+			color13 = C.color13,
+			color14 = C.color14,
+			color15 = C.color15,
 		},
 		lsp = {
-			error = vim.g.color1,
-			hint = vim.g.color6,
-			info = vim.g.foreground,
-			unnecessary = vim.g.color8,
-			warn = U.blend(vim.g.color1, vim.g.color3, 0.5),
-			ok = vim.g.color2,
-			inlay_hints = vim.g.color8,
+			error = C.color1,
+			hint = C.color6,
+			info = C.foreground,
+			unnecessary = C.color8,
+			warn = U.blend(C.color1, C.color3, 0.5),
+			ok = C.color2,
+			inlay_hints = C.color8,
 		},
 	}
 
-	reset_global_color_variables()
 	local user_colors = M.options.custom_colors
 	local colors = vim.tbl_deep_extend("keep", user_colors, palette[theme_style], palette.colors, palette.lsp)
 	return colors
