@@ -1,6 +1,7 @@
 local M = {}
 local U = require("neopywal.utils.color")
 local notify = require("neopywal.lib.notify")
+local compiler = require("neopywal.lib.compiler")
 
 M.compiler = {
 	---@diagnostic disable-next-line: undefined-global
@@ -374,7 +375,7 @@ function M.load(style)
 	lock = true
 	local f = loadfile(compiled_path)
 	if not f then
-		require("neopywal.lib.compiler").compile()
+		compiler.compile()
 		f = assert(loadfile(compiled_path), "could not load neopywal cache.")
 	end
 	f()
@@ -434,7 +435,7 @@ function M.setup(user_conf)
 
 	-- Recompile if hash changed.
 	if cached ~= hash then
-		require("neopywal.lib.compiler").compile()
+		compiler.compile()
 		file = io.open(cached_path, "wb")
 		if file then
 			file:write(hash)
@@ -451,7 +452,7 @@ vim.api.nvim_create_user_command("NeopywalCompile", function()
 			package.loaded[name] = nil
 		end
 	end
-	require("neopywal.lib.compiler").compile()
+	compiler.compile()
 	notify.info("Successfully compiled cache.")
 	vim.cmd.colorscheme("neopywal")
 end, {})
