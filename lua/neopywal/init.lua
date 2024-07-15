@@ -302,11 +302,11 @@ end
 
 ---@param theme_style? string
 function M.get_colors(theme_style)
+	local C = source_colorscheme_file()
+
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
-
-	local C = source_colorscheme_file()
 
 	-- LSP colors:
 	C.error = C.color1
