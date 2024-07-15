@@ -417,8 +417,6 @@ function M.load(style)
 end
 
 function M.setup(user_conf)
-	did_setup = true
-
 	-- Load user configuration.
 	user_conf = user_conf or {}
 
@@ -472,6 +470,8 @@ function M.setup(user_conf)
 			file:close()
 		end
 	end
+
+	did_setup = true
 end
 
 vim.api.nvim_create_user_command("NeopywalCompile", function()
