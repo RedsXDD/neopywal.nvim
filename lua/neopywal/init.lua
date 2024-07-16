@@ -308,7 +308,18 @@ function M.get_colors(theme_style)
 		theme_style = vim.o.background
 	end
 
-	-- LSP colors:
+	-- Extras:
+	C.dim_bg = U.darken(C.background, 5)
+	C.comment = C.color8
+	C.cursorline = U.blend(C.background, C.foreground, 0.9)
+	C.directory = C.color4
+
+	-- Diffs:
+	C.diff_added = C.color2
+	C.diff_changed = C.color6
+	C.diff_removed = C.color1
+
+	-- LSP/Diagnostics:
 	C.error = C.color1
 	C.hint = C.color6
 	C.info = C.foreground
@@ -316,6 +327,47 @@ function M.get_colors(theme_style)
 	C.warn = U.blend(C.color1, C.color3, 0.5)
 	C.ok = C.color2
 	C.inlay_hints = C.color8
+
+	-- Variable types:
+	C.variable = C.color4 -- (preferred) any variable.
+	C.constant = C.color3 -- (preferred) any constant
+	C.string = C.foreground -- a string constant: "this is a string"
+	C.character = C.color3 -- a character constant: 'c', '\n'
+	C.number = C.color5 -- a number constant: 234, 0xff
+	C.boolean = C.color5 -- a boolean constant: TRUE, FALSE
+	C.float = C.color5 -- a floating point constant: 2.3e10
+	C.identifier = U.blend(C.color1, C.color3, 0.5) -- (preferred) any variable name
+	C.func = C.color2 -- function name (also: methods for classes)
+
+	-- Statements:
+	C.statement = C.color1 -- (preferred) any statement
+	C.conditional = C.color1 -- if, then, else, endif, switch, etc.
+	C.loop = C.color1 -- for, do, while, etc.
+	C.label = C.color1 -- case, default, etc.
+	C.exception = C.color1 -- try, catch, throw
+	C.operator = C.color1 -- "sizeof", "+", "*", etc.
+	C.keyword = C.color1 -- any other keyword
+	C.debug = C.color3 -- Debugging statements.
+
+	-- Preprocessors:
+	C.preproc = C.color5 -- (preferred) generic Preprocessor
+	C.include = C.color5 -- preprocessor #include
+	C.define = C.color5 -- preprocessor #define
+	C.macro = C.color5 -- same as Define
+	C.precondit = C.color5 -- preprocessor #if, #else, #endif, etc.
+
+	-- Type definitions:
+	C.type = C.color6 -- (preferred) int, long, char, etc.
+	C.structure = C.color6 -- struct, union, enum, etc.
+	C.storageclass = C.color6 -- static, register, volatile, etc.
+	C.typedef = C.color6 -- A typedef
+
+	-- Special:
+	C.special = C.color5 -- (preferred) any special symbol
+	C.secialchar = C.color5 -- special character in a constant
+	C.tag = U.blend(C.color1, C.color3, 0.5) -- you can use CTRL-] on this
+	C.delimiter = C.foreground -- character that needs attention
+	C.specialcomment = C.color8 -- special things inside a comment
 
 	local user_colors = M.options.custom_colors
 	return vim.tbl_deep_extend("keep", user_colors, C)
