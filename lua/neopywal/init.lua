@@ -174,6 +174,7 @@ M.default_options = {
 		which_key = true,
 		mini = {
 			cursorword = true,
+			diff = true,
 			files = true,
 			hipatterns = true,
 			icons = true,

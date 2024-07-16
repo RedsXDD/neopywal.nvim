@@ -848,6 +848,20 @@ mini = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- mini.diff {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.diff">mini.diff</a> </td>
+<td>
+
+```lua
+mini = {
+    diff = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- mini.files {{{ -->
 <tr>
 <td> <a href="https://github.com/echasnovski/mini.files">mini.files</a> </td>
