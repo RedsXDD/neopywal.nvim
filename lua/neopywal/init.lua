@@ -211,7 +211,12 @@ local function get_colorscheme_file()
 	return colorscheme_file
 end
 
-local function source_colorscheme_file()
+---@param theme_style? string
+local function source_colorscheme_file(theme_style)
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+		theme_style = vim.o.background
+	end
+
 	if type(M.options.colorscheme_file) ~= "string" then
 		notify.error("`colorscheme_file` option must be of type string.")
 	end
@@ -297,16 +302,15 @@ Below is the error message that we captured:
 	vim.g.color14 = nil
 	vim.g.color15 = nil
 
-	return vim.tbl_deep_extend("keep", palette[vim.o.background], palette.colors)
+	return vim.tbl_deep_extend("keep", palette[theme_style], palette.colors)
 end
 
 ---@param theme_style? string
 function M.get_colors(theme_style)
-	local C = source_colorscheme_file()
-
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
+	local C = source_colorscheme_file(theme_style)
 
 	-- Extras:
 	C.dim_bg = U.darken(C.background, 5)
@@ -371,9 +375,9 @@ function M.get_colors(theme_style)
 	C.specialcomment = C.color8 -- special things inside a comment
 
 	local user_colors = M.options.custom_colors
-        if type(user_colors) == "function" then
-                user_colors = user_colors(C)
-        end
+	if type(user_colors) == "function" then
+		user_colors = user_colors(C)
+	end
 
 	return vim.tbl_deep_extend("keep", {}, user_colors, C)
 end
