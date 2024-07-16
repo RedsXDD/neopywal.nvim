@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.0.0...v2.1.0) (2024-07-16)
+
+
+### Features
+
+* "use_palette" option ([a869aec](https://github.com/RedsXDD/neopywal.nvim/commit/a869aecf4157e0bc8d83e11d27a1155ab22599fc))
+* add gitsigns plugin ([f6ee75a](https://github.com/RedsXDD/neopywal.nvim/commit/f6ee75af915c803a60a574b90710ca27870d4deb))
+* add mini.diff support ([a5e0a21](https://github.com/RedsXDD/neopywal.nvim/commit/a5e0a21bccde196860b24e1d7123a3738a92c826))
+* **get_colors:** accept function "custom_colors" ([16dd7b7](https://github.com/RedsXDD/neopywal.nvim/commit/16dd7b7ca6f139ebe80824bcf3f4e3177e509feb))
+* **get_colors:** add C.diff_untracked variable ([f1f9458](https://github.com/RedsXDD/neopywal.nvim/commit/f1f9458ba96716bb83b86d2d47fc2011327f9e9b))
+* **get_colors:** add color variables ([1e93cc8](https://github.com/RedsXDD/neopywal.nvim/commit/1e93cc864e7e411de4a973e760c21c83d1422698))
+
+
+### Bug Fixes
+
+* **get_colors:** not generating light theme ([4419d7f](https://github.com/RedsXDD/neopywal.nvim/commit/4419d7fbcc04099b04240f89cd468b5016a598a6))
+
 ## [2.0.0](https://github.com/RedsXDD/neopywal.nvim/compare/v1.2.0...v2.0.0) (2024-07-14)
 
 
