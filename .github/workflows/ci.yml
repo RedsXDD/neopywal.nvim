@@ -18,6 +18,8 @@ jobs:
 
   stylua:
     name: Stylua
+    needs:
+      - skip_on_release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
