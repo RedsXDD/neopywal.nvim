@@ -701,6 +701,10 @@ Here are the defaults:
     })
 <
 
+gitsigns.nvim>lua
+    gitsigns = true
+<
+
 indent-blankline.nvim>lua
     indent_blankline = true
 <
@@ -727,6 +731,12 @@ lualine.nvimSpecial ~
 mini.cursorword>lua
     mini = {
         cursorword = true
+    }
+<
+
+mini.diff>lua
+    mini = {
+        diff = true
     }
 <
 
