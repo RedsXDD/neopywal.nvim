@@ -768,6 +768,18 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 </td>
 </tr>
 <!-- }}} -->
+<!-- gitsigns.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/lewis6991/gitsigns.nvim">gitsigns.nvim</a> </td>
+<td>
+
+```lua
+gitsigns = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- indent-blankline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/lukas-reineke/indent-blankline.nvim">indent-blankline.nvim</a> </td>

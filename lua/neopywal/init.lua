@@ -155,6 +155,7 @@ M.default_options = {
 		coc = true,
 		dashboard = true,
 		git_gutter = true,
+		gitsigns = true,
 		indent_blankline = true,
 		lazy = true,
 		lazygit = true,
