@@ -3,7 +3,7 @@ local M = {}
 function M.get()
 	-- echasnovski/mini.indentscope
 	return {
-		MiniIndentscopeSymbol = { link = "Comment" },
+		MiniIndentscopeSymbol = { fg = C.comment },
 		MiniIndentscopeSymbolOff = { link = "MiniIndentscopeSymbol" },
 	}
 end

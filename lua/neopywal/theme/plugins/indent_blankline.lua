@@ -3,7 +3,7 @@ local M = {}
 function M.get()
 	-- lukas-reineke/indent-blankline.nvim
 	return {
-		IndentBlanklineChar = { link = "Comment" },
+		IndentBlanklineChar = { fg = C.comment },
 	}
 end
 

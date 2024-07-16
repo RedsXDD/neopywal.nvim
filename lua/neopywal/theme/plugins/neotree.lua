@@ -3,20 +3,20 @@ local M = {}
 function M.get()
 	-- nvim-neo-tree/neo-tree.nvim
 	return {
-		NeoTreeDimText = { link = "Comment" },
+		NeoTreeDimText = { fg = C.comment },
 		NeoTreeIndentMarker = { link = "NeoTreeDimText" },
 		NeoTreeRootName = { link = "Directory" },
 		NeoTreeSymbolicLinkTarget = { fg = C.color6 },
-		NeoTreeModified = { link = "DiffChange" },
+		NeoTreeModified = { fg = C.diff_changed },
 
-		NeoTreeGitAdded = { link = "DiffAdd" },
-		NeoTreeGitConflict = { link = "DiagnosticError" },
-		NeoTreeGitDeleted = { link = "DiffDelete" },
-		NeoTreeGitIgnored = { link = "Comment" },
-		NeoTreeGitModified = { link = "DiffChange" },
-		NeoTreeGitUnstaged = { link = "DiagnosticHint" },
+		NeoTreeGitAdded = { fg = C.diff_added },
+		NeoTreeGitConflict = { fg = C.error },
+		NeoTreeGitDeleted = { fg = C.diff_removed },
+		NeoTreeGitIgnored = { fg = C.comment },
+		NeoTreeGitModified = { fg = C.diff_changed },
+		NeoTreeGitUnstaged = { fg = C.hint },
 		NeoTreeGitUntracked = { fg = C.color5 },
-		NeoTreeGitStaged = { link = "DiffAdd" },
+		NeoTreeGitStaged = { fg = C.diff_added },
 
 		NeoTreeFloatTitle = { link = "FloatTitle" },
 		NeoTreeTitleBar = { link = "FloatTitle" },

@@ -7,8 +7,8 @@ function M.get()
 		WhichKeyGroup = { fg = C.color6 },
 		WhichKeyDesc = { fg = C.foreground },
 		WhichKeySeperator = { fg = U.blend(C.color1, C.color3, 0.5) },
-		WhichKeyValue = { link = "Comment" },
-		WhichKeySeparator = { link = "Comment" },
+		WhichKeyValue = { fg = C.comment },
+		WhichKeySeparator = { fg = C.comment },
 		WhichKeyBorder = { link = "FloatBorder" },
 		WhichKeyFloat = { link = "NormalFloat" },
 	}

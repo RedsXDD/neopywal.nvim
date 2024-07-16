@@ -4,12 +4,12 @@ function M.get()
 	-- echasnovski/mini.files
 	return {
 		MiniFilesBorder = { link = "FloatBorder" },
-		MiniFilesBorderModified = { link = "DiagnosticWarn" },
+		MiniFilesBorderModified = { fg = C.warn },
 		MiniFilesCursorLine = { link = "CursorLine" },
 		MiniFilesDirectory = { link = "Directory" },
 		MiniFilesFile = {},
 		MiniFilesNormal = { link = "NormalFloat" },
-		MiniFilesTitle = { link = "Comment" },
+		MiniFilesTitle = { fg = C.comment },
 		MiniFilesTitleFocused = { link = "FloatTitle" },
 	}
 end

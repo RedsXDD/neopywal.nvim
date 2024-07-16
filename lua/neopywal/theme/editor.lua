@@ -181,15 +181,7 @@ function M.get()
 		Ignore = { fg = C.color8 }, -- (preferred) left blank, hidden |hl-Ignore|
 		Error = { fg = C.error }, -- (preferred) any erroneous construct
 		Todo = { fg = C.color4, styles = { "bold", "italic" } }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-		Note = { bg = C.foreground, fg = C.background, styles = { "bold", "italic" } },
-		Hint = { bg = C.hint, fg = C.background, styles = { "bold", "italic" } },
-		Warn = {
-			bg = C.warn,
-			fg = C.background,
-			styles = { "bold", "italic" },
-		},
-		Err = { bg = C.error, fg = C.background, styles = { "bold", "italic" } },
-		URLlink = { fg = C.color4, styles = { "italic", "underline" } },
+		URLlink = { fg = C.color4, styles = { "italic", "underline" } }, -- (preferred) urls, links and emails
 
 		-- Rainbow
 		rainbow1 = { fg = C.color1 },

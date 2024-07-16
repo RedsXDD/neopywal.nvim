@@ -3,10 +3,10 @@ local M = {}
 function M.get()
 	-- airblade/vim-gitgutter
 	return {
-		GitGutterAdd = { link = "DiffAdd" },
-		GitGutterChange = { link = "DiffChange" },
-		GitGutterDelete = { link = "DiffDelete" },
-		GitGutterChangeDelete = { fg = C.color5 },
+		GitGutterAdd = { fg = C.diff_added },
+		GitGutterChange = { fg = C.diff_changed },
+		GitGutterDelete = { fg = C.diff_removed },
+		GitGutterChangeDelete = { fg = U.blend(C.color1, C.color3, 0.5) },
 	}
 end
 

@@ -7,7 +7,7 @@ function M.get()
 		CmpItemAbbrDeprecated = { fg = C.color8, styles = { "strikethrough" } },
 		CmpItemKind = { fg = C.foreground },
 		CmpItemMenu = { fg = C.color2 },
-		CmpItemAbbrMatch = { link = "Special" },
+		CmpItemAbbrMatch = { fg = C.special },
 		CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 
 		-- Kind support.

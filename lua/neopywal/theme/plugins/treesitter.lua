@@ -82,11 +82,15 @@ function M.get()
 		--: Comment {{{
 		["@comment"] = { link = "Comment" },
 		["@comment.documentation"] = { link = "Comment" }, -- For comments documenting code
-		["@comment.error"] = { link = "Err" },
-		["@comment.warning"] = { link = "Warn" },
-		["@comment.hint"] = { link = "Hint" },
+		["@comment.error"] = { bg = C.error, fg = C.background, styles = { "bold", "italic" } },
+		["@comment.warning"] = {
+			bg = C.warn,
+			fg = C.background,
+			styles = { "bold", "italic" },
+		},
+		["@comment.hint"] = { bg = C.hint, fg = C.background, styles = { "bold", "italic" } },
 		["@comment.todo"] = { link = "Todo" },
-		["@comment.note"] = { link = "Note" },
+		["@comment.note"] = { bg = C.info, fg = C.background, styles = { "bold", "italic" } },
 		--: }}}
 		--: Markup {{{
 		["@markup"] = { fg = C.foreground }, -- For strings considerated text in a markup language.

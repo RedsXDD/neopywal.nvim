@@ -12,9 +12,9 @@ function M.get()
 		netrwList = { fg = C.color5 },
 		netrwHidePat = { link = "netrwList" },
 		netrwTreeBar = { link = "netrwGray" },
-		netrwExe = { link = "Keyword" },
-		netrwHelpCmd = { link = "Identifier" },
-		netrwMarkFile = { link = "Identifier" },
+		netrwExe = { fg = C.keyword },
+		netrwHelpCmd = { fg = C.identifier },
+		netrwMarkFile = { fg = C.identifier },
 	}
 end
 

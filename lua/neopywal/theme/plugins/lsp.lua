@@ -12,7 +12,7 @@ function M.get()
 		-- use these groups, or use their own. Consult your LSP client's documentation.
 
 		LspInfoBorder = { link = "FloatBorder" }, -- LspInfo border
-		LspCodeLens = { link = "Comment" }, -- virtual text of the codelens
+		LspCodeLens = { fg = C.comment }, -- virtual text of the codelens
 		LspCodeLensSeparator = { link = "LspCodeLens" }, -- virtual text of the codelens separators
 		LspInlayHint = {
 			bg = (O.transparent_background or not inlay_hints.background) and C.none

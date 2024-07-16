@@ -4,12 +4,12 @@ function M.get()
 	-- echasnovski/mini.pick
 	return {
 		MiniPickBorder = { link = "FloatBorder" },
-		MiniPickBorderBusy = { link = "DiagnosticWarn" },
+		MiniPickBorderBusy = { fg = C.warn },
 		MiniPickBorderText = { link = "FloatTitle" },
 		MiniPickIconDirectory = { link = "Directory" },
 		MiniPickNormal = { link = "NormalFloat" },
 		MiniPickIconFile = { link = "MiniPickNormal" },
-		MiniPickHeader = { link = "DiagnosticHint" },
+		MiniPickHeader = { fg = C.hint },
 		MiniPickMatchCurrent = { link = "CursorLine" },
 		MiniPickMatchMarked = { link = "Visual" },
 		MiniPickMatchRanges = { fg = C.color4 },
