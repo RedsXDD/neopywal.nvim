@@ -459,7 +459,7 @@ function M.setup(user_conf)
 		M.options.plugins.lsp = { enabled = M.options.plugins.lsp }
 	end
 
-	-- For backwards compatability (check `https://github.com/RedsXDD/neopywal.nvim/commit/f2973005932257b81dbd10bca67ce51490bf7599`)
+	-- For backwards compatability (check `https://github.com/RedsXDD/neopywal.nvim/commit/f2973005932257b81dbd10bca67ce51490bf7599`).
 	M.options.plugins.lsp = vim.tbl_deep_extend(
 		"keep",
 		M.options.plugins.lsp,
