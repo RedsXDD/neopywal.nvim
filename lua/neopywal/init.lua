@@ -212,7 +212,7 @@ local function get_colorscheme_file()
 end
 
 ---@param theme_style? string
-local function source_colorscheme_file(theme_style)
+local function get_palette(theme_style)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
@@ -310,7 +310,7 @@ function M.get_colors(theme_style)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
-	local C = source_colorscheme_file(theme_style)
+	local C = get_palette(theme_style)
 
 	-- Extras:
 	C.dim_bg = U.darken(C.background, 5)
@@ -458,7 +458,7 @@ function M.setup(user_conf)
 	end
 
 	-- Get current hash.
-	local C = source_colorscheme_file() -- Minimal palette table for hashing.
+	local C = get_palette() -- Minimal palette table for hashing.
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
 	local hash = require("neopywal.lib.hashing").hash(C)
