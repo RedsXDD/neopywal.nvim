@@ -204,27 +204,6 @@ require("neopywal").setup({
         booleans = {},
         types = { "italic" },
         operators = {},
-        lsp = {
-            virtual_text = {
-                errors = { "bold", "italic" },
-                hints = { "bold", "italic" },
-                information = { "bold", "italic" },
-                ok = { "bold", "italic" },
-                warnings = { "bold", "italic" },
-                unnecessary = { "bold", "italic" },
-            },
-            underlines = {
-                errors = { "undercurl" },
-                hints = { "undercurl" },
-                information = { "undercurl" },
-                ok = { "undercurl" },
-                warnings = { "undercurl" },
-            },
-            inlay_hints = {
-                background = true,
-                style = { "bold", "italic" },
-            },
-        },
     },
 
     -- Setting this to false disables all default file format highlights.
@@ -995,7 +974,28 @@ mini = {
 <td>
 
 ```lua
-lsp = true
+lsp = {
+    enabled = true,
+    virtual_text = {
+        errors = { "bold", "italic" },
+        hints = { "bold", "italic" },
+        information = { "bold", "italic" },
+        ok = { "bold", "italic" },
+        warnings = { "bold", "italic" },
+        unnecessary = { "bold", "italic" },
+    },
+    underlines = {
+        errors = { "undercurl" },
+        hints = { "undercurl" },
+        information = { "undercurl" },
+        ok = { "undercurl" },
+        warnings = { "undercurl" },
+    },
+    inlay_hints = {
+        background = true,
+        style = { "bold", "italic" },
+    },
+},
 ```
 
 </td>

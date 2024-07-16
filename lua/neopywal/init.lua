@@ -68,27 +68,6 @@ M.default_options = {
 		booleans = {},
 		types = { "italic" },
 		operators = {},
-		lsp = {
-			virtual_text = {
-				errors = { "bold", "italic" },
-				hints = { "bold", "italic" },
-				information = { "bold", "italic" },
-				ok = { "bold", "italic" },
-				warnings = { "bold", "italic" },
-				unnecessary = { "bold", "italic" },
-			},
-			underlines = {
-				errors = { "undercurl" },
-				hints = { "undercurl" },
-				information = { "undercurl" },
-				ok = { "undercurl" },
-				warnings = { "undercurl" },
-			},
-			inlay_hints = {
-				background = true,
-				style = { "bold", "italic" },
-			},
-		},
 	},
 
 	-- Setting this to false disables all default file format highlights.
@@ -163,7 +142,28 @@ M.default_options = {
 		indent_blankline = true,
 		lazy = true,
 		lazygit = true,
-		lsp = true,
+		lsp = {
+			enabled = true,
+			virtual_text = {
+				errors = { "bold", "italic" },
+				hints = { "bold", "italic" },
+				information = { "bold", "italic" },
+				ok = { "bold", "italic" },
+				warnings = { "bold", "italic" },
+				unnecessary = { "bold", "italic" },
+			},
+			underlines = {
+				errors = { "undercurl" },
+				hints = { "undercurl" },
+				information = { "undercurl" },
+				ok = { "undercurl" },
+				warnings = { "undercurl" },
+			},
+			inlay_hints = {
+				background = true,
+				style = { "bold", "italic" },
+			},
+		},
 		neotree = true,
 		netrw = true,
 		noice = true,
@@ -453,6 +453,19 @@ function M.setup(user_conf)
 	if M.options.default_fileformats == false then
 		M.options.fileformats = user_conf.fileformats or {}
 	end
+
+	-- Allow "M.options.plugins.lsp" to be a boolean.
+	if type(M.options.plugins.lsp) == "boolean" then
+		M.options.plugins.lsp = { enabled = M.options.plugins.lsp }
+	end
+
+	-- For backwards compatability
+	M.options.plugins.lsp = vim.tbl_deep_extend(
+		"keep",
+		M.options.plugins.lsp,
+		type(M.options.styles.lsp) == "table" and M.options.styles.lsp or {},
+		M.default_options.plugins.lsp
+	)
 
 	-- Get cached hash.
 	local cached_path = G.compile_path .. G.path_sep .. "cached"

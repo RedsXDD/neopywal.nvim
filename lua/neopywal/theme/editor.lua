@@ -192,12 +192,12 @@ function M.get()
 		rainbow6 = { fg = C.color5 },
 		--: }}}
 		--: Diagnostics {{{
-		DiagnosticOk = { fg = C.ok, styles = O.styles.lsp.virtual_text.ok or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticError = { fg = C.error, styles = O.styles.lsp.virtual_text.errors or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticWarn = { fg = C.warn, styles = O.styles.lsp.virtual_text.warnings or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticInfo = { fg = C.info, styles = O.styles.lsp.virtual_text.information or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticHint = { fg = C.hint, styles = O.styles.lsp.virtual_text.hints or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-		DiagnosticUnnecessary = { fg = C.unnecessary, styles = O.styles.lsp.virtual_text.unnecessary or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticOk = { fg = C.ok, styles = O.plugins.lsp.virtual_text.ok or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticError = { fg = C.error, styles = O.plugins.lsp.virtual_text.errors or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticWarn = { fg = C.warn, styles = O.plugins.lsp.virtual_text.warnings or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticInfo = { fg = C.info, styles = O.plugins.lsp.virtual_text.information or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticHint = { fg = C.hint, styles = O.plugins.lsp.virtual_text.hints or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+		DiagnosticUnnecessary = { fg = C.unnecessary, styles = O.plugins.lsp.virtual_text.unnecessary or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
 		--: }}}
 		--: }}}
 	}

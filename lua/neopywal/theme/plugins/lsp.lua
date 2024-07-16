@@ -2,9 +2,9 @@ local M = {}
 
 function M.get()
 	-- neovim/nvim-lspconfig
-	local virtual_text = O.styles.lsp.virtual_text
-	local underlines = O.styles.lsp.underlines
-	local inlay_hints = O.styles.lsp.inlay_hints
+	local virtual_text = O.plugins.lsp.virtual_text
+	local underlines = O.plugins.lsp.underlines
+	local inlay_hints = O.plugins.lsp.inlay_hints
 	local darkening_percentage = 0.2
 
 	return {
