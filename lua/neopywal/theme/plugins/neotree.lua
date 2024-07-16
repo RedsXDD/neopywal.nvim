@@ -15,7 +15,7 @@ function M.get()
 		NeoTreeGitIgnored = { fg = C.comment },
 		NeoTreeGitModified = { fg = C.diff_changed },
 		NeoTreeGitUnstaged = { fg = C.hint },
-		NeoTreeGitUntracked = { fg = C.color5 },
+		NeoTreeGitUntracked = { fg = C.diff_untracked },
 		NeoTreeGitStaged = { fg = C.diff_added },
 
 		NeoTreeFloatTitle = { link = "FloatTitle" },

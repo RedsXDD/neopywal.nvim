@@ -318,6 +318,7 @@ function M.get_colors(theme_style)
 	C.diff_added = C.color2
 	C.diff_changed = C.color6
 	C.diff_removed = C.color1
+	C.diff_untracked = C.color5
 
 	-- LSP/Diagnostics:
 	C.error = C.color1
