@@ -768,6 +768,21 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 </td>
 </tr>
 <!-- }}} -->
+<!-- flash.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/folke/flash.nvim">flash.nvim</a> </td>
+<td>
+
+```lua
+flash = {
+    enabled = true,
+    style = { "bold", "italic" }
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- gitsigns.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/lewis6991/gitsigns.nvim">gitsigns.nvim</a> </td>

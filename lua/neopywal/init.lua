@@ -154,6 +154,10 @@ M.default_options = {
 		alpha = true,
 		coc = true,
 		dashboard = true,
+		flash = {
+			enabled = true,
+			style = { "bold", "italic" },
+		},
 		git_gutter = true,
 		gitsigns = true,
 		indent_blankline = true,
