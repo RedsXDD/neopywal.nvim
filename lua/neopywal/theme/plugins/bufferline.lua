@@ -8,7 +8,7 @@ local O = require("neopywal").options
 local U = require("neopywal.utils.color")
 local C = require("neopywal").get_colors()
 
-local fill_bg = O.transparent_background and C.background or U.blend(C.background, C.foreground, 0.9)
+local fill_bg = O.transparent_background and C.background or C.cursorline
 local unselected_bg = O.transparent_background and C.none or U.blend(C.background, C.foreground, 0.85)
 local selected_bg = O.transparent_background and C.none or C.background
 

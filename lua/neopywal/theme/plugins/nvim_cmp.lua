@@ -11,28 +11,28 @@ function M.get()
 		CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 
 		-- Kind support.
-		CmpItemKindKeyword = { fg = C.color1 }, -- Link Keyword
-		CmpItemKindOperator = { fg = C.color1 }, -- Link Operator
+		CmpItemKindKeyword = { fg = C.keyword },
+		CmpItemKindOperator = { fg = C.operator },
 		CmpItemKindEnum = { link = "CmpItemKindKeyword" },
-		CmpItemKindFunction = { fg = C.color2 }, -- Link Function
-		CmpItemKindField = { fg = C.color2 }, -- Link @variable.member
-		CmpItemKindProperty = { fg = C.color2 }, -- Link @property
+		CmpItemKindFunction = { fg = C.func },
+		CmpItemKindField = { fg = C.variable },
+		CmpItemKindProperty = { fg = C.func },
 		CmpItemKindMethod = { link = "CmpItemKindFunction" },
 		CmpItemKindColor = { fg = C.color3 },
 		CmpItemKindInterface = { fg = C.color4 },
-		CmpItemKindFolder = { fg = C.color4 }, -- Link Directory
-		CmpItemKindVariable = { fg = C.color4 }, -- Link Variable
+		CmpItemKindFolder = { fg = C.directory },
+		CmpItemKindVariable = { fg = C.variable },
 		CmpItemKindEvent = { link = "CmpItemKindVariable" },
-		CmpItemKindConstructor = { fg = C.color5 }, -- Link Special
-		CmpItemKindModule = { fg = C.color5 }, -- Link Include
-		CmpItemKindUnit = { fg = C.color5 }, -- Link Number
+		CmpItemKindConstructor = { fg = C.special },
+		CmpItemKindModule = { fg = C.include },
+		CmpItemKindUnit = { fg = C.number },
 		CmpItemKindSnippet = { link = "CmpItemKindModule" },
-		CmpItemKindClass = { fg = C.color6 }, -- Link StorageClass
-		CmpItemKindStruct = { fg = C.color6 }, -- Link Structure
+		CmpItemKindClass = { fg = C.storageclass },
+		CmpItemKindStruct = { fg = C.structure },
 		CmpItemKindCopilot = { fg = C.color6 },
 		CmpItemKindTabNine = { fg = C.color6 },
-		CmpItemKindTypeParameter = { fg = U.blend(C.color1, C.color3, 0.5) }, -- Link Identifier
-		CmpItemKindConstant = { fg = U.blend(C.color1, C.color3, 0.5) }, -- Link Constant
+		CmpItemKindTypeParameter = { fg = C.identifier },
+		CmpItemKindConstant = { fg = C.constant },
 		CmpItemKindValue = { link = "CmpItemKindConstant" },
 		CmpItemKindEnumMember = { link = "CmpItemKindConstant" },
 		CmpItemKindText = { fg = U.lighten(C.background, 30) },

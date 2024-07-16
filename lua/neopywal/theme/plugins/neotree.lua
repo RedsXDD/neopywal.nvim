@@ -28,8 +28,8 @@ function M.get()
 			fg = O.transparent_background and C.none or C.background,
 		},
 		NeoTreeTabSeparatorInactive = {
-			bg = O.transparent_background and C.none or U.darken(C.background, 5),
-			fg = O.transparent_background and C.none or U.darken(C.background, 5),
+			bg = O.transparent_background and C.none or C.dim_bg,
+			fg = O.transparent_background and C.none or C.dim_bg,
 		},
 	}
 end

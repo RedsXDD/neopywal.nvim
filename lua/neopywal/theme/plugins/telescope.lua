@@ -14,16 +14,16 @@ function M.get()
 					bg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
 				},
 				TelescopePromptBorder = {
-					bg = U.blend(C.background, C.foreground, 0.9),
-					fg = U.blend(C.background, C.foreground, 0.9),
+					bg = C.cursorline,
+					fg = C.cursorline,
 				},
 				TelescopePromptNormal = {
-					bg = U.blend(C.background, C.foreground, 0.9),
+					bg = C.cursorline,
 					fg = C.foreground,
 				},
 				TelescopePromptCounter = { fg = C.foreground },
 				TelescopePromptPrefix = {
-					bg = U.blend(C.background, C.foreground, 0.9),
+					bg = C.cursorline,
 					fg = C.color4,
 					styles = { "bold" },
 				},
@@ -40,7 +40,7 @@ function M.get()
 					fg = C.background,
 				},
 				TelescopeSelection = { link = "CursorLine" },
-				TelescopeSelectionCaret = { bg = U.blend(C.background, C.foreground, 0.9), fg = C.color6 },
+				TelescopeSelectionCaret = { bg = C.cursorline, fg = C.color6 },
 			}
 		or {
 			TelescopeSelection = { link = "CursorLine" },
@@ -49,7 +49,7 @@ function M.get()
 			TelescopePreviewTitle = { fg = C.color3 },
 			TelescopePromptTitle = { fg = C.color4 },
 			TelescopeResultsTitle = { fg = C.color6 },
-			TelescopeSelectionCaret = { bg = U.blend(C.background, C.foreground, 0.9), fg = C.color6 },
+			TelescopeSelectionCaret = { bg = C.cursorline, fg = C.color6 },
 		}
 end
 

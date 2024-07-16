@@ -3,9 +3,9 @@ local M = {}
 function M.get()
 	-- echasnovski/mini.hipatterns
 	return {
-		MiniHipatternsFixme = { bg = C.color1, fg = C.background, styles = { "bold", "italic" } },
+		MiniHipatternsFixme = { bg = C.error, fg = C.background, styles = { "bold", "italic" } },
 		MiniHipatternsHack = {
-			bg = U.blend(C.color1, C.color3, 0.5),
+			bg = C.warn,
 			fg = C.background,
 			styles = { "bold", "italic" },
 		},
