@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.1.0...v2.2.0) (2024-07-16)
+
+
+### Features
+
+* **plugins:** add flash.nvim ([3007d48](https://github.com/RedsXDD/neopywal.nvim/commit/3007d48d1ece0a7a8290c299ce451aa8fcee918b))
+
 ## [2.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.0.0...v2.1.0) (2024-07-16)
 
 
