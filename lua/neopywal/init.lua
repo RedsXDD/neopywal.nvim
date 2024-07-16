@@ -370,7 +370,11 @@ function M.get_colors(theme_style)
 	C.specialcomment = C.color8 -- special things inside a comment
 
 	local user_colors = M.options.custom_colors
-	return vim.tbl_deep_extend("keep", user_colors, C)
+        if type(user_colors) == "function" then
+                user_colors = user_colors(C)
+        end
+
+	return vim.tbl_deep_extend("keep", {}, user_colors, C)
 end
 
 -- Avoid g:colors_name reloading
