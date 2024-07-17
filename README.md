@@ -300,6 +300,8 @@ require("neopywal").setup({
 
 Color definitions can be overwritten using the `custom_colors` option:
 
+Using a table:
+
 ```lua
 require("neopywal").setup({
     -- Here's an example color template for the catppuccin colorscheme:
@@ -327,6 +329,39 @@ require("neopywal").setup({
 })
 ```
 
+Using a function:
+
+```lua
+require("neopywal").setup({
+    custom_colors = function(C)
+        local C = require("neopywal").get_colors()
+        local U = require("neopywal.utils.color")
+
+        return {
+            background = U.lighten(C.background, 30),
+            foreground = U.lighten(C.foreground, 30),
+            cursor = U.lighten(C.cursor, 30),
+            color0 = U.lighten(C.color0, 30),
+            color1 = U.lighten(C.color1, 30),
+            color2 = U.lighten(C.color2, 30),
+            color3 = U.lighten(C.color3, 30),
+            color4 = U.lighten(C.color4, 30),
+            color5 = U.lighten(C.color5, 30),
+            color6 = U.lighten(C.color6, 30),
+            color7 = U.lighten(C.color7, 30),
+            color8 = U.lighten(C.color8, 30),
+            color9 = U.lighten(C.color9, 30),
+            color10 = U.lighten(C.color10, 30),
+            color11 = U.lighten(C.color11, 30),
+            color12 = U.lighten(C.color12, 30),
+            color13 = U.lighten(C.color13, 30),
+            color14 = U.lighten(C.color14, 30),
+            color15 = U.lighten(C.color15, 30),
+        }
+    end,
+})
+```
+
 You can also define your own color variables:
 
 ```lua
@@ -341,7 +376,7 @@ require("neopywal").setup({
 
 Custom color variables will be automatically exported with the `get_colors()` function and can used normally when using the imported color palette.
 
-There's also an additional set of color variables that are used for diagnostics and lsp related stuff.
+There's also an additional set of color variables that are used for various highlights groups to make the Neopywal colors more consistent.
 
 ```lua
 local C = require("neopywal").get_colors()
@@ -349,6 +384,19 @@ local U = require("neopywal.utils.color")
 
 require("neopywal").setup({
     custom_colors = {
+        -- Extras:
+        dim_bg = U.darken(C.background, 5),
+        comment = C.color8,
+        cursorline = U.blend(C.background, C.foreground, 0.9),
+        directory = C.color4,
+
+        -- Diffs:
+        diff_added = C.color2,
+        diff_changed = C.color6,
+        diff_removed = C.color1,
+        diff_untracked = C.color5,
+
+        -- LSP/Diagnostics:
         error = C.color1,
         hint = C.color6,
         info = C.foreground,
@@ -356,6 +404,47 @@ require("neopywal").setup({
         warn = U.blend(C.color1, C.color3, 0.5),
         ok = C.color2,
         inlay_hints = C.color8,
+
+        -- Variable types:
+        variable = C.color4, -- (preferred) any variable.
+        constant = C.color3, -- (preferred) any constant
+        string = C.foreground, -- a string constant: "this is a string"
+        character = C.color3, -- a character constant: 'c', '\n'
+        number = C.color5, -- a number constant: 234, 0xff
+        boolean = C.color5, -- a boolean constant: TRUE, FALSE
+        float = C.color5, -- a floating point constant: 2.3e10
+        identifier = U.blend(C.color1, C.color3, 0.5), -- (preferred) any variable name
+        func = C.color2, -- function name (also: methods for classes)
+
+        -- Statements:
+        statement = C.color1, -- (preferred) any statement
+        conditional = C.color1, -- if, then, else, endif, switch, etc.
+        loop = C.color1, -- for, do, while, etc.
+        label = C.color1, -- case, default, etc.
+        exception = C.color1, -- try, catch, throw
+        operator = C.color1, -- "sizeof", "+", "*", etc.
+        keyword = C.color1, -- any other keyword
+        debug = C.color3, -- debugging statements.
+
+        -- Preprocessors:
+        preproc = C.color5, -- (preferred) generic Preprocessor
+        include = C.color5, -- preprocessor #include
+        define = C.color5, -- preprocessor #define
+        macro = C.color5, -- same as Define
+        precondit = C.color5, -- preprocessor #if, #else, #endif, etc.
+
+        -- Type definitions:
+        type = C.color6, -- (preferred) int, long, char, etc.
+        structure = C.color6, -- struct, union, enum, etc.
+        storageclass = C.color6, -- static, register, volatile, etc.
+        typedef = C.color6, -- A typedef
+
+        -- Special:
+        special = C.color5, -- (preferred) any special symbol
+        secialchar = C.color5, -- special character in a constant
+        tag = U.blend(C.color1, C.color3, 0.5), -- you can use CTRL-] on this
+        delimiter = C.foreground, -- character that needs attention
+        specialcomment = C.color8, -- special things inside a comment
     },
 })
 ```
