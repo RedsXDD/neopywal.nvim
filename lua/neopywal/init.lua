@@ -232,7 +232,8 @@ local function get_palette(theme_style)
 	end
 	local colorscheme_file = M.options.colorscheme_file
 
-	if vim.fn.filereadable(colorscheme_file) == 0 then
+	local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
+	if not file_exists then
 		notify.error(
 			string.format(
 				"Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
