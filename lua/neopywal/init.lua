@@ -218,7 +218,8 @@ local function get_colorscheme_file()
 end
 
 ---@param theme_style? string
-local function get_palette(theme_style)
+---@param export_user_colors boolean
+local function get_palette(theme_style, export_user_colors)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
@@ -309,7 +310,16 @@ Below is the error message that we captured:
 	vim.g.color14 = nil
 	vim.g.color15 = nil
 
-	return vim.tbl_deep_extend("keep", palette[theme_style], palette.colors)
+	local user_colors = {}
+	local C = vim.tbl_deep_extend("keep", palette[theme_style], palette.colors)
+	if export_user_colors == true then
+		user_colors = M.options.custom_colors
+		if type(user_colors) == "function" then
+			user_colors = user_colors(C)
+		end
+	end
+
+	return vim.tbl_deep_extend("keep", {}, user_colors, C)
 end
 
 ---@param theme_style? string
@@ -317,76 +327,73 @@ function M.get_colors(theme_style)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
 		theme_style = vim.o.background
 	end
-	local C = get_palette(theme_style)
+	local C = get_palette(theme_style, true)
 
-	-- Extras:
-	C.dim_bg = U.darken(C.background, 5)
-	C.comment = C.color8
-	C.cursorline = U.blend(C.background, C.foreground, 0.9)
-	C.directory = C.color4
+	local extra_colors = {
+		-- Extras:
+		dim_bg = U.darken(C.background, 5),
+		comment = C.color8,
+		cursorline = U.blend(C.background, C.foreground, 0.9),
+		directory = C.color4,
 
-	-- Diffs:
-	C.diff_added = C.color2
-	C.diff_changed = C.color6
-	C.diff_removed = C.color1
-	C.diff_untracked = C.color5
+		-- Diffs:
+		diff_added = C.color2,
+		diff_changed = C.color6,
+		diff_removed = C.color1,
+		diff_untracked = C.color5,
 
-	-- LSP/Diagnostics:
-	C.error = C.color1
-	C.hint = C.color6
-	C.info = C.foreground
-	C.unnecessary = C.color8
-	C.warn = U.blend(C.color1, C.color3, 0.5)
-	C.ok = C.color2
-	C.inlay_hints = C.color8
+		-- LSP/Diagnostics:
+		error = C.color1,
+		hint = C.color6,
+		info = C.foreground,
+		unnecessary = C.color8,
+		warn = U.blend(C.color1, C.color3, 0.5),
+		ok = C.color2,
+		inlay_hints = C.color8,
 
-	-- Variable types:
-	C.variable = C.color4 -- (preferred) any variable.
-	C.constant = C.color3 -- (preferred) any constant
-	C.string = C.foreground -- a string constant: "this is a string"
-	C.character = C.color3 -- a character constant: 'c', '\n'
-	C.number = C.color5 -- a number constant: 234, 0xff
-	C.boolean = C.color5 -- a boolean constant: TRUE, FALSE
-	C.float = C.color5 -- a floating point constant: 2.3e10
-	C.identifier = U.blend(C.color1, C.color3, 0.5) -- (preferred) any variable name
-	C.func = C.color2 -- function name (also: methods for classes)
+		-- Variable types:
+		variable = C.color4, -- (preferred) any variable.
+		constant = C.color3, -- (preferred) any constant
+		string = C.foreground, -- a string constant: "this is a string"
+		character = C.color3, -- a character constant: 'c', '\n'
+		number = C.color5, -- a number constant: 234, 0xff
+		boolean = C.color5, -- a boolean constant: TRUE, FALSE
+		float = C.color5, -- a floating point constant: 2.3e10
+		identifier = U.blend(C.color1, C.color3, 0.5), -- (preferred) any variable name
+		func = C.color2, -- function name (also: methods for classes)
 
-	-- Statements:
-	C.statement = C.color1 -- (preferred) any statement
-	C.conditional = C.color1 -- if, then, else, endif, switch, etc.
-	C.loop = C.color1 -- for, do, while, etc.
-	C.label = C.color1 -- case, default, etc.
-	C.exception = C.color1 -- try, catch, throw
-	C.operator = C.color1 -- "sizeof", "+", "*", etc.
-	C.keyword = C.color1 -- any other keyword
-	C.debug = C.color3 -- Debugging statements.
+		-- Statements:
+		statement = C.color1, -- (preferred) any statement
+		conditional = C.color1, -- if, then, else, endif, switch, etc.
+		loop = C.color1, -- for, do, while, etc.
+		label = C.color1, -- case, default, etc.
+		exception = C.color1, -- try, catch, throw
+		operator = C.color1, -- "sizeof", "+", "*", etc.
+		keyword = C.color1, -- any other keyword
+		debug = C.color3, -- Debugging statements.
 
-	-- Preprocessors:
-	C.preproc = C.color5 -- (preferred) generic Preprocessor
-	C.include = C.color5 -- preprocessor #include
-	C.define = C.color5 -- preprocessor #define
-	C.macro = C.color5 -- same as Define
-	C.precondit = C.color5 -- preprocessor #if, #else, #endif, etc.
+		-- Preprocessors:
+		preproc = C.color5, -- (preferred) generic Preprocessor
+		include = C.color5, -- preprocessor #include
+		define = C.color5, -- preprocessor #define
+		macro = C.color5, -- same as Define
+		precondit = C.color5, -- preprocessor #if, #else, #endif, etc.
 
-	-- Type definitions:
-	C.type = C.color6 -- (preferred) int, long, char, etc.
-	C.structure = C.color6 -- struct, union, enum, etc.
-	C.storageclass = C.color6 -- static, register, volatile, etc.
-	C.typedef = C.color6 -- A typedef
+		-- Type definitions:
+		type = C.color6, -- (preferred) int, long, char, etc.
+		structure = C.color6, -- struct, union, enum, etc.
+		storageclass = C.color6, -- static, register, volatile, etc.
+		typedef = C.color6, -- A typedef
 
-	-- Special:
-	C.special = C.color5 -- (preferred) any special symbol
-	C.secialchar = C.color5 -- special character in a constant
-	C.tag = U.blend(C.color1, C.color3, 0.5) -- you can use CTRL-] on this
-	C.delimiter = C.foreground -- character that needs attention
-	C.specialcomment = C.color8 -- special things inside a comment
+		-- Special:
+		special = C.color5, -- (preferred) any special symbol
+		secialchar = C.color5, -- special character in a constant
+		tag = U.blend(C.color1, C.color3, 0.5), -- you can use CTRL-] on this
+		delimiter = C.foreground, -- character that needs attention
+		specialcomment = C.color8, -- special things inside a comment
+	}
 
-	local user_colors = M.options.custom_colors
-	if type(user_colors) == "function" then
-		user_colors = user_colors(C)
-	end
-
-	return vim.tbl_deep_extend("keep", {}, user_colors, C)
+	return vim.tbl_deep_extend("keep", C, extra_colors)
 end
 
 -- Avoid g:colors_name reloading
@@ -478,10 +485,10 @@ function M.setup(user_conf)
 	end
 
 	-- Get current hash.
-	local C = get_palette() -- Minimal palette table for hashing.
+	local minimal_palette = get_palette(nil, true)
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
-	local hash = require("neopywal.lib.hashing").hash(C)
+	local hash = require("neopywal.lib.hashing").hash(minimal_palette)
 		.. require("neopywal.lib.hashing").hash(user_conf)
 		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
 		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
