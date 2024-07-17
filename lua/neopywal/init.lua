@@ -30,6 +30,7 @@ M.default_options = {
 	transparent_background = false,
 
 	-- With this option you can overwrite all the base colors the colorscheme uses.
+	-- For more information scroll down (https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors)
 	custom_colors = {},
 
 	-- With this option you can overwrite any highlight groups set by the colorscheme.
