@@ -335,29 +335,26 @@ Using a function:
 ```lua
 require("neopywal").setup({
     custom_colors = function(C)
-        local C = require("neopywal").get_colors()
-        local U = require("neopywal.utils.color")
-
         return {
-            background = U.lighten(C.background, 30),
-            foreground = U.lighten(C.foreground, 30),
-            cursor = U.lighten(C.cursor, 30),
-            color0 = U.lighten(C.color0, 30),
-            color1 = U.lighten(C.color1, 30),
-            color2 = U.lighten(C.color2, 30),
-            color3 = U.lighten(C.color3, 30),
-            color4 = U.lighten(C.color4, 30),
-            color5 = U.lighten(C.color5, 30),
-            color6 = U.lighten(C.color6, 30),
-            color7 = U.lighten(C.color7, 30),
-            color8 = U.lighten(C.color8, 30),
-            color9 = U.lighten(C.color9, 30),
-            color10 = U.lighten(C.color10, 30),
-            color11 = U.lighten(C.color11, 30),
-            color12 = U.lighten(C.color12, 30),
-            color13 = U.lighten(C.color13, 30),
-            color14 = U.lighten(C.color14, 30),
-            color15 = U.lighten(C.color15, 30),
+            background = C.background,
+            foreground = C.foreground,
+            cursor = C.cursor,
+            color0 = C.color0,
+            color1 = C.color1,
+            color2 = C.color2,
+            color3 = C.color3,
+            color4 = C.color4,
+            color5 = C.color5,
+            color6 = C.color6,
+            color7 = C.color7,
+            color8 = C.color8,
+            color9 = C.color9,
+            color10 = C.color10,
+            color11 = C.color11,
+            color12 = C.color12,
+            color13 = C.color13,
+            color14 = C.color14,
+            color15 = C.color15,
         }
     end,
 })
