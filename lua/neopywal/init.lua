@@ -370,7 +370,7 @@ function M.get_colors(theme_style)
 		exception = C.color1, -- try, catch, throw
 		operator = C.color1, -- "sizeof", "+", "*", etc.
 		keyword = C.color1, -- any other keyword
-		debug = C.color3, -- Debugging statements.
+		debug = C.color3, -- debugging statements.
 
 		-- Preprocessors:
 		preproc = C.color5, -- (preferred) generic Preprocessor

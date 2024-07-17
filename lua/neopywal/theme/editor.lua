@@ -149,7 +149,7 @@ function M.get()
 		Exception = { fg = C.exception, styles = O.styles.keywords or {} }, -- try, catch, throw
 		Operator = { fg = C.operator, styles = O.styles.operators or {} }, -- "sizeof", "+", "*", etc.
 		Keyword = { fg = C.keyword, styles = O.styles.keywords or {} }, -- any other keyword
-		Debug = { fg = C.debug }, -- Debugging statements.
+		Debug = { fg = C.debug }, -- debugging statements.
 		--: }}}
 		--: Preprocessors {{{
 		PreProc = { fg = C.preproc }, -- (preferred) generic Preprocessor
