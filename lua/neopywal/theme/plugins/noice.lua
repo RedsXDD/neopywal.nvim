@@ -2,7 +2,6 @@ local M = {}
 
 function M.get()
 	-- folke/noice.nvim
-	-- Honestly the default integration is already pretty good.
 	return {
 		NoiceCmdlinePopup = { link = "NormalFloat" },
 
