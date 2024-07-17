@@ -816,7 +816,7 @@ neopywal_feline.setup({
 ```
 
 > [!Warning]
-> Currently feline [doesn't officially support custom themes](https://github.com/feline-nvim/feline.nvim/issues/302). In order for `:colorscheme catppuccin-<flavour>` to work you could add this autocmd as a workaround:
+> Currently feline [doesn't officially support custom themes](https://github.com/feline-nvim/feline.nvim/issues/302). In order for `:colorscheme neopywal` to work you could add this autocmd as a workaround:
 
 ```lua
 vim.api.nvim_create_autocmd("ColorScheme", {
