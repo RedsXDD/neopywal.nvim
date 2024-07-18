@@ -110,7 +110,9 @@ local h = vim.api.nvim_set_hl]],
 		end
 	end
 
-	local f = loadstring(table.concat(lines, "\n"))
+	---@diagnostic disable-next-line: deprecated
+	local ls = load or loadstring
+	local f = ls(table.concat(lines, "\n"))
 	if not f then
 		local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
 		notify.error(string.format(
