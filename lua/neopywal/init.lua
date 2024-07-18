@@ -463,15 +463,10 @@ function M.setup(user_conf)
 		M.options.fileformats = user_conf.fileformats or {}
 	end
 
-	-- Make sure "M.options.plugins.lsp" is a table so that the backwards compatability layer works.
-	if type(M.options.plugins.lsp) == "boolean" then
-		M.options.plugins.lsp = { enabled = M.options.plugins.lsp }
-	end
-
 	-- For backwards compatability (check `https://github.com/RedsXDD/neopywal.nvim/commit/f2973005932257b81dbd10bca67ce51490bf7599`).
 	M.options.plugins.lsp = vim.tbl_deep_extend(
 		"keep",
-		M.options.plugins.lsp,
+		type(M.options.plugins.lsp) == "boolean" and { enabled = M.options.plugins.lsp } or M.options.plugins.lsp,
 		type(M.options.styles.lsp) == "table" and M.options.styles.lsp or {},
 		M.default_options.plugins.lsp
 	)
