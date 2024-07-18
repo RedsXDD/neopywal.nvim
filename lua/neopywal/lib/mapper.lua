@@ -30,7 +30,9 @@ function M.get(theme_style)
 			or require("neopywal").default_options.plugins[plugin]
 
 		local apply = false
-		if option == true or type(option) == "table" and option.enabled then
+		if type(option) == "table" and option.enabled then
+			apply = true
+		elseif option == true then
 			if is_mini == false then
 				O.plugins[plugin] = type(default_config) == "table" and default_config or {}
 				O.plugins[plugin].enabled = true
