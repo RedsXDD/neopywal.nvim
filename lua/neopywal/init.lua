@@ -463,7 +463,7 @@ function M.setup(user_conf)
 		M.options.fileformats = user_conf.fileformats or {}
 	end
 
-	-- Allow "M.options.plugins.lsp" to be a boolean.
+	-- Make sure "M.options.plugins.lsp" is a table so that the backwards compatability layer works.
 	if type(M.options.plugins.lsp) == "boolean" then
 		M.options.plugins.lsp = { enabled = M.options.plugins.lsp }
 	end
