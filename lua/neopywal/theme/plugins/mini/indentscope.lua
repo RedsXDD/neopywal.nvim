@@ -5,6 +5,7 @@ function M.get()
 	return {
 		MiniIndentscopeSymbol = { fg = C.comment },
 		MiniIndentscopeSymbolOff = { link = "MiniIndentscopeSymbol" },
+		MiniIndentscopePrefix = { styles = { "nocombine" } }, -- Make it invisible
 	}
 end
 
