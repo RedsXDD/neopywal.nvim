@@ -65,6 +65,7 @@ function M.get(theme_style)
 
 	-- This section MUST happen AFTER all the manipulation on the "O" table has been done.
 	theme.editor = require("neopywal.theme.editor").get()
+	theme.terminal = require("neopywal.theme.terminal").get()
 	theme.fileformats = fileformats
 	theme.plugins = plugins
 	theme.custom_highlights = user_highlights

@@ -55,8 +55,7 @@ local h = vim.api.nvim_set_hl]],
 	}
 
 	if O.terminal_colors == true then
-		local terminal_theme = require("neopywal.theme.terminal").get()
-		for group, color in pairs(terminal_theme) do
+		for group, color in pairs(theme.terminal) do
 			table.insert(lines, string.format('vim.g.%s = "%s"', group, color))
 		end
 	end
