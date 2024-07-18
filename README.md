@@ -587,7 +587,9 @@ require("neopywal").setup({
         nvim_cmp = true,
         mini = {
             hipatterns = true,
-            indentscope = false,
+            indentscope = {
+                enabled = false,
+            },
             pick = true,
             starter = true,
         },
@@ -992,7 +994,13 @@ mini = {
 
 ```lua
 mini = {
-    indentscope = true
+    indentscope = {
+        enabled = true,
+
+        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+        -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+        scope_color = "",
+    }
 }
 ```
 

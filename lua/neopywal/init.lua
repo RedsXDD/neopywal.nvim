@@ -183,7 +183,13 @@ M.default_options = {
 			files = true,
 			hipatterns = true,
 			icons = true,
-			indentscope = true,
+			indentscope = {
+				enabled = true,
+
+				-- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+				-- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+				scope_color = "",
+			},
 			pick = true,
 			starter = true,
 			statusline = true,
