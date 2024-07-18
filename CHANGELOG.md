@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.1.0...v2.2.0) (2024-07-18)
+
+
+### Features
+
+* **plugins:** add flash.nvim ([3007d48](https://github.com/RedsXDD/neopywal.nvim/commit/3007d48d1ece0a7a8290c299ce451aa8fcee918b))
+
+
+### Bug Fixes
+
+* **mapper:** boolean plugin option handling ([7fa0134](https://github.com/RedsXDD/neopywal.nvim/commit/7fa0134a1e84fca9f719d0f942ea968b210165d0))
+* **palette:** do proper "custom_colors" handling ([c5b9b88](https://github.com/RedsXDD/neopywal.nvim/commit/c5b9b882122d43d2a253b8cf341617b7128ab5f5))
+
 ## [2.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.0.0...v2.1.0) (2024-07-16)
 
 
