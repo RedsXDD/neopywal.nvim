@@ -1,19 +1,5 @@
 *neopywal.txt*                                         (Neo)pywal for (Neo)vim
 
-==============================================================================
-Table of Contents                                 *neopywal-table-of-contents*
-
-  - Features                                               |neopywal-features|
-  - Installation                                       |neopywal-installation|
-  - Usage                                                     |neopywal-usage|
-  - Configuration                                     |neopywal-configuration|
-  - Compilation                                         |neopywal-compilation|
-  - Importing colors                               |neopywal-importing-colors|
-  - Utilities                                             |neopywal-utilities|
-  - Pywal Alternatives                           |neopywal-pywal-alternatives|
-  - How it Works                                       |neopywal-how-it-works|
-  - Enjoy                                                     |neopywal-enjoy|
-
 FEATURES                                                   *neopywal-features*
 
 - Highly configurable with ability to change color definitions and highlight groups.
@@ -565,7 +551,9 @@ To enable/disable a plugin you just need to set it to true/false.
             nvim_cmp = true,
             mini = {
                 hipatterns = true,
-                indentscope = false,
+                indentscope = {
+                    enabled = false,
+                },
                 pick = true,
                 starter = true,
             },
@@ -778,8 +766,20 @@ gitsigns.nvim>lua
 <
 
 indent-blankline.nvim>lua
-    indent_blankline = true
+    indent_blankline = {
+        enabled = true,
+    
+        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+        -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+        scope_color = "",
+        colored_indent_levels = false,
+    }
 <
+
+`colored_indent_levels` enables character highlights per indent level. Follow
+the instructions here
+<https://github.com/lukas-reineke/indent-blankline.nvim#multiple-indent-colors>
+to set the latter up.
 
 lazy.nvim>lua
     lazy = true
@@ -832,7 +832,13 @@ mini.icons>lua
 
 mini.indentscope>lua
     mini = {
-        indentscope = true
+        indentscope = {
+            enabled = true,
+    
+            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+            -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+            scope_color = "",
+        }
     }
 <
 
