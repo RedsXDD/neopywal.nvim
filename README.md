@@ -869,7 +869,13 @@ gitsigns = true
 <td>
 
 ```lua
-indent_blankline = true
+indent_blankline = {
+    enabled = true,
+
+    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+    -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+    scope_color = "",
+}
 ```
 
 </td>
