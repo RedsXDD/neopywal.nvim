@@ -146,6 +146,7 @@ M.default_options = {
 			-- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
 			-- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
 			scope_color = "",
+			colored_indent_levels = false,
 		},
 		lazy = true,
 		lazygit = true,

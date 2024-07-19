@@ -875,8 +875,11 @@ indent_blankline = {
     -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
     -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
     scope_color = "",
+    colored_indent_levels = false,
 }
 ```
+
+`colored_indent_levels` enables character highlights per indent level. Follow the instructions [here](https://github.com/lukas-reineke/indent-blankline.nvim#multiple-indent-colors) to set the latter up.
 
 </td>
 </tr>
