@@ -934,12 +934,55 @@ lazygit = true
 
 <details> <summary>Special</summary>
 
+Update your Lualine config to use the Neopywal theme:
+
 ```lua
-require("lualine").setup({
+local has_lualine, lualine = pcall(require, "lualine")
+if not has_lualine then
+    return
+end
+
+local has_neopywal, neopywal_lualine = pcall(require, "neopywal.theme.plugins.lualine")
+if not has_neopywal then
+    return
+end
+
+neopywal_lualine.setup()
+
+lualine.setup({
     options = {
         theme = "neopywal"
         -- The rest of your lualine config ...
     }
+})
+```
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to change style settings and the colors per vim mode.
+
+```lua
+local neopywal_lualine = require("neopywal.theme.plugins.lualine")
+
+neopywal_lualine.setup({
+    mode_colors = {
+        -- Any of the color values must be one of Neopywal's colors
+        -- exported by "get_colors()" (e.g.: `color8`)
+        -- or a hexadecimal color (e.g.: "#ff0000").
+
+        normal = "color4",
+        visual = "color5",
+        insert = "color6",
+        command = "color1",
+        replace = "color2",
+        terminal = "color3",
+    },
+    styles = {
+        a = { "bold" },
+        b = { "bold" },
+        c = { "bold" },
+        x = { "bold" },
+        y = { "bold" },
+        z = { "bold" },
+    },
 })
 ```
 
