@@ -133,6 +133,13 @@ M.default_options = {
 	plugins = {
 		alpha = true,
 		coc = true,
+		colorful_winsep = {
+			enabled = false,
+
+			-- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+			-- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+			color = "",
+		},
 		dashboard = true,
 		flash = {
 			enabled = true,

@@ -697,6 +697,25 @@ coc = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- colorful-winsep.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/nvim-zh/colorful-winsep.nvim">colorful-winsep.nvim</a>
+</td>
+<td>
+
+```lua
+colorful_winsep = {
+    enabled = false,
+
+    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+    -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+    color = "",
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- dashboard-nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/glepnir/dashboard-nvim">dashboard-nvim</a> </td>
