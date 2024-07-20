@@ -7,111 +7,103 @@ local C = require("neopywal").get_colors()
 local U = require("neopywal.utils.color")
 local lsp = require("feline.providers.lsp")
 
-local assets = {
-	left_separator = "",
-	right_separator = "",
-	mode_icon = "",
-	dir = "󰉋",
-	file = "󰈙",
-	lsp = {
-		server = "󰅡",
-		error = "",
-		warning = "",
-		info = "",
-		hint = "",
+local default_options = {
+	assets = {
+		left_separator = "",
+		right_separator = "",
+		mode_icon = "",
+		dir = "󰉋",
+		file = "󰈙",
+		lsp = {
+			server = "󰅡",
+			error = "",
+			warning = "",
+			info = "",
+			hint = "",
+		},
+		git = {
+			branch = "",
+			added = "",
+			changed = "",
+			removed = "",
+		},
 	},
-	git = {
-		branch = "",
-		added = "",
-		changed = "",
-		removed = "",
+	mode_colors = {
+		["n"] = { "NORMAL", C.color4 },
+		["no"] = { "N-PENDING", C.color4 },
+		["i"] = { "INSERT", C.color6 },
+		["ic"] = { "INSERT", C.color6 },
+		["t"] = { "TERMINAL", C.color3 },
+		["v"] = { "VISUAL", C.color5 },
+		["V"] = { "V-LINE", C.color5 },
+		[""] = { "V-BLOCK", C.color5 },
+		["R"] = { "REPLACE", C.color2 },
+		["Rv"] = { "V-REPLACE", C.color2 },
+		["s"] = { "SELECT", U.blend(C.color1, C.color3, 0.5) },
+		["S"] = { "S-LINE", U.blend(C.color1, C.color3, 0.5) },
+		[""] = { "S-BLOCK", U.blend(C.color1, C.color3, 0.5) },
+		["c"] = { "COMMAND", C.color1 },
+		["cv"] = { "COMMAND", C.color1 },
+		["ce"] = { "COMMAND", C.color1 },
+		["r"] = { "PROMPT", C.foreground },
+		["rm"] = { "MORE", C.foreground },
+		["r?"] = { "CONFIRM", C.color2 },
+		["!"] = { "SHELL", C.color1 },
+	},
+	sett = {
+		text = C.foreground,
+		bkg = U.blend(C.color8, C.background, 0.3),
+		diffs = U.blend(C.color8, C.background, 0.5),
+		extras = C.foreground,
+		curr_file = U.blend(C.color8, C.background, 0.5),
+		curr_dir = C.color4,
+		show_modified = false, -- Show if the file has been modified.
+
+		-- Show the count of updatable plugins from lazy.nvim.
+		-- Need to set checker.enabled = true in lazy.nvim first
+		-- the icon is set in ui.icons.plugin in lazy.nvim.
+		show_lazy_updates = false,
+	},
+	view = {
+		lsp = {
+			progress = true, -- If true the status bar will display an lsp progress indicator.
+			name = false, -- If true the status bar will display the lsp servers name, otherwise it will display the text "Lsp".
+			exclude_lsp_names = {}, -- Lsp server names that should not be displayed when name is set to true.
+			separator = "|", -- The separator used when there are multiple lsp servers.
+		},
 	},
 }
+M.options = default_options
 
-local mode_colors = {
-	["n"] = { "NORMAL", C.color4 },
-	["no"] = { "N-PENDING", C.color4 },
-	["i"] = { "INSERT", C.color6 },
-	["ic"] = { "INSERT", C.color6 },
-	["t"] = { "TERMINAL", C.color3 },
-	["v"] = { "VISUAL", C.color5 },
-	["V"] = { "V-LINE", C.color5 },
-	[""] = { "V-BLOCK", C.color5 },
-	["R"] = { "REPLACE", C.color2 },
-	["Rv"] = { "V-REPLACE", C.color2 },
-	["s"] = { "SELECT", U.blend(C.color1, C.color3, 0.5) },
-	["S"] = { "S-LINE", U.blend(C.color1, C.color3, 0.5) },
-	[""] = { "S-BLOCK", U.blend(C.color1, C.color3, 0.5) },
-	["c"] = { "COMMAND", C.color1 },
-	["cv"] = { "COMMAND", C.color1 },
-	["ce"] = { "COMMAND", C.color1 },
-	["r"] = { "PROMPT", C.foreground },
-	["rm"] = { "MORE", C.foreground },
-	["r?"] = { "CONFIRM", C.color2 },
-	["!"] = { "SHELL", C.color1 },
-}
-
-local sett = {
-	text = C.foreground,
-	bkg = U.blend(C.color8, C.background, 0.3),
-	diffs = U.blend(C.color8, C.background, 0.5),
-	extras = C.foreground,
-	curr_file = U.blend(C.color8, C.background, 0.5),
-	curr_dir = C.color4,
-	show_modified = false,
-	show_lazy_updates = false,
-}
-
-if require("neopywal").options.transparent_background then
-	sett.bkg = "NONE"
-end
-
-local view = {
-	lsp = {
-		progress = true,
-		name = false,
-		exclude_lsp_names = {},
-		separator = "|",
-	},
-}
-
-local is_lsp_in_excluded_list = function(lsp_name)
-	for _, excluded_lsp in ipairs(view.lsp.exclude_lsp_names) do
-		if lsp_name == excluded_lsp then
-			return true
-		end
-	end
-	return false
-end
-
-function M.setup(opts)
-	if opts then
-		opts.assets = opts.assets or {}
-		opts.sett = opts.sett or {}
-		opts.mode_colors = opts.mode_colors or {}
-		opts.view = opts.view or {}
-	else
-		opts = {
-			assets = {},
-			sett = {},
-			mode_colors = {},
-			view = {},
-		}
-	end
-
-	assets = vim.tbl_deep_extend("force", assets, opts.assets)
-	sett = vim.tbl_deep_extend("force", sett, opts.sett)
-	mode_colors = vim.tbl_deep_extend("force", mode_colors, opts.mode_colors)
-	view = vim.tbl_deep_extend("force", view, opts.view)
+function M.setup(user_conf)
+	user_conf = user_conf or {}
+	M.options = vim.tbl_deep_extend("keep", user_conf, default_options)
 end
 
 function M.get()
+	if require("neopywal").options.transparent_background then
+		M.options.sett.bkg = "NONE"
+	end
+
+	local assets = M.options.assets
+	local mode_colors = M.options.mode_colors
+	local sett = M.options.sett
+	local view = M.options.view
+
 	local shortline = false
 	local mode_text = require("neopywal").current_style == "light" and C.foreground or C.background
 
 	local components = {
 		active = { {}, {}, {} }, -- left, center, right
 		inactive = { {} },
+	}
+
+	local invi_sep = {
+		str = " ",
+		hl = {
+			fg = sett.bkg,
+			bg = sett.bkg,
+		},
 	}
 
 	local function is_enabled(min_width)
@@ -122,13 +114,14 @@ function M.get()
 		return vim.api.nvim_win_get_width(0) > min_width
 	end
 
-	local invi_sep = {
-		str = " ",
-		hl = {
-			fg = sett.bkg,
-			bg = sett.bkg,
-		},
-	}
+	local is_lsp_in_excluded_list = function(lsp_name)
+		for _, excluded_lsp in ipairs(M.options.view.lsp.exclude_lsp_names) do
+			if lsp_name == excluded_lsp then
+				return true
+			end
+		end
+		return false
+	end
 
 	local function any_git_changes()
 		local gitsigns = vim.b.gitsigns_status_dict

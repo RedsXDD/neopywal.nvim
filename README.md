@@ -788,18 +788,6 @@ neopywal_feline.setup({
             changed = "",
             removed = "",
         },
-    }
-    sett = {
-        text = C.foreground,
-        bkg = U.blend(C.color8, C.background, 0.3),
-        diffs = U.blend(C.color8, C.background, 0.5),
-        extras = C.foreground,
-        curr_file = U.blend(C.color8, C.background, 0.5),
-        curr_dir = C.color4,
-        show_modified = false -- show if the file has been modified
-        show_lazy_updates = false -- show the count of updatable plugins from lazy.nvim
-                                  -- need to set checker.enabled = true in lazy.nvim first
-                                  -- the icon is set in ui.icons.plugin in lazy.nvim
     },
     mode_colors = {
         ["n"] = { "NORMAL", C.color4 },
@@ -823,12 +811,26 @@ neopywal_feline.setup({
         ["r?"] = { "CONFIRM", C.color2 },
         ["!"] = { "SHELL", C.color1 },
     },
+    sett = {
+        text = C.foreground,
+        bkg = U.blend(C.color8, C.background, 0.3),
+        diffs = U.blend(C.color8, C.background, 0.5),
+        extras = C.foreground,
+        curr_file = U.blend(C.color8, C.background, 0.5),
+        curr_dir = C.color4,
+        show_modified = false, -- Show if the file has been modified.
+
+        -- Show the count of updatable plugins from lazy.nvim.
+        -- Need to set checker.enabled = true in lazy.nvim first
+        -- the icon is set in ui.icons.plugin in lazy.nvim.
+        show_lazy_updates = false,
+    },
     view = {
         lsp = {
-            progress = true, -- if true the status bar will display an lsp progress indicator
-            name = false, -- if true the status bar will display the lsp servers name, otherwise it will display the text "Lsp"
-            exclude_lsp_names = {}, -- lsp server names that should not be displayed when name is set to true
-            separator = "|", -- the separator used when there are multiple lsp servers
+            progress = true, -- If true the status bar will display an lsp progress indicator.
+            name = false, -- If true the status bar will display the lsp servers name, otherwise it will display the text "Lsp".
+            exclude_lsp_names = {}, -- Lsp server names that should not be displayed when name is set to true.
+            separator = "|", -- The separator used when there are multiple lsp servers.
         },
     },
 })
