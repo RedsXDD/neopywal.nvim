@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.1.0...v2.2.0) (2024-07-20)
+
+
+### Features
+
+* **indent_blankline:** add "colored_indent_levels" option ([f660096](https://github.com/RedsXDD/neopywal.nvim/commit/f660096a66ab1befe9dbf28db8d1cbbd5aa0f6c0))
+* **indent_blankline:** add "scope_color" option ([84f6dfb](https://github.com/RedsXDD/neopywal.nvim/commit/84f6dfbe139d082eb4c7f3686812958cb3323e10))
+* **mini.indentscope:** "scopePrefix" highlight ([3f0f4ed](https://github.com/RedsXDD/neopywal.nvim/commit/3f0f4ed09bd186a532c3006f8d0bf2e2b06b176a))
+* **mini.indentscope:** add "scope_color" option ([0508aca](https://github.com/RedsXDD/neopywal.nvim/commit/0508aca9388748cd33ad40433291aae9542d09d0))
+* **plugins:** add colorful_winsep.nvim ([9188723](https://github.com/RedsXDD/neopywal.nvim/commit/9188723d85d6b1f8e9d5d5c7dcd49db6c8978501))
+* **plugins:** add flash.nvim ([3007d48](https://github.com/RedsXDD/neopywal.nvim/commit/3007d48d1ece0a7a8290c299ce451aa8fcee918b))
+
+
+### Bug Fixes
+
+* **compiler:** prioritize "load" over "loadstring" ([6471ebb](https://github.com/RedsXDD/neopywal.nvim/commit/6471ebb594f5205d3fa506b4a894e47ac73242c8))
+* **indent_blankline:** invalid highlight groups ([a326a10](https://github.com/RedsXDD/neopywal.nvim/commit/a326a10ccb761415c1e25df8b61a2070b5911e18))
+* **mapper:** boolean plugin option handling ([7fa0134](https://github.com/RedsXDD/neopywal.nvim/commit/7fa0134a1e84fca9f719d0f942ea968b210165d0))
+* **mapper:** improper boolean to table conversion ([79ec105](https://github.com/RedsXDD/neopywal.nvim/commit/79ec10558339ef73ad03516f545adf168dd9fa74))
+* **palette:** do proper "custom_colors" handling ([c5b9b88](https://github.com/RedsXDD/neopywal.nvim/commit/c5b9b882122d43d2a253b8cf341617b7128ab5f5))
+
 ## [2.1.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.0.0...v2.1.0) (2024-07-16)
 
 
