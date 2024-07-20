@@ -340,7 +340,7 @@ Below is the error message that we captured:
 		end
 	end
 
-	return vim.tbl_deep_extend("keep", {}, user_colors, C)
+	return vim.tbl_deep_extend("keep", user_colors, C)
 end
 
 ---@param theme_style? string

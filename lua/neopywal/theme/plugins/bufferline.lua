@@ -109,7 +109,7 @@ local default_highlights = {
 
 function M.setup(user_conf)
 	user_conf = user_conf or {}
-	local highlights = vim.tbl_deep_extend("keep", {}, user_conf, default_highlights)
+	local highlights = vim.tbl_deep_extend("keep", user_conf, default_highlights)
 
 	for _, properties in pairs(highlights) do
 		-- This if statement applies styles to a highlight group, taking into account user options to disable certain styles.
