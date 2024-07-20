@@ -1,6 +1,7 @@
 local M = {}
 
 function M.get()
+	-- echasnovski/mini.cursorword
 	return {
 		MiniDiffSignAdd = { fg = C.diff_added },
 		MiniDiffSignChange = { fg = C.diff_changed },

@@ -1,6 +1,7 @@
 local M = {}
 
 function M.get()
+	-- lewis6991/gitsigns.nvim
 	return {
 		GitSignsAdd = { fg = C.diff_added },
 		GitSignsChange = { fg = C.diff_changed },
