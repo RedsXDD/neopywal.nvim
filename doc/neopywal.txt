@@ -1,5 +1,19 @@
 *neopywal.txt*                                         (Neo)pywal for (Neo)vim
 
+==============================================================================
+Table of Contents                                 *neopywal-table-of-contents*
+
+  - Features                                               |neopywal-features|
+  - Installation                                       |neopywal-installation|
+  - Usage                                                     |neopywal-usage|
+  - Configuration                                     |neopywal-configuration|
+  - Compilation                                         |neopywal-compilation|
+  - Importing colors                               |neopywal-importing-colors|
+  - Utilities                                             |neopywal-utilities|
+  - Pywal Alternatives                           |neopywal-pywal-alternatives|
+  - How it Works                                       |neopywal-how-it-works|
+  - Enjoy                                                     |neopywal-enjoy|
+
 FEATURES                                                   *neopywal-features*
 
 - Highly configurable with ability to change color definitions and highlight groups.
@@ -632,6 +646,16 @@ Overriding configurations can be done inside the setup() function, see
 
 coc.nvim>lua
     coc = true
+<
+
+colorful-winsep.nvim>lua
+    colorful_winsep = {
+        enabled = false,
+    
+        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+        -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+        color = "",
+    }
 <
 
 dashboard-nvim>lua
