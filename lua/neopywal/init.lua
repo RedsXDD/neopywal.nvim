@@ -482,23 +482,20 @@ function M.setup(user_conf)
 		M.options.transparent_background = false
 	end
 
+	local function disable_option(t)
+		for option, value in pairs(t) do
+			if type(value) == "table" then
+				value.enabled = false
+			else
+				t[option] = false
+			end
+		end
+	end
+
 	-- Disable default plugins options if default_plugins != true.
 	if M.options.default_plugins == false then
-		for plugin, option in pairs(M.default_options.plugins.mini) do
-			if type(option) == "table" and option.enabled then
-				M.default_options.plugins.mini[plugin].enabled = false
-			elseif option == true then
-				M.default_options.plugins.mini[plugin] = false
-			end
-		end
-
-		for plugin, option in pairs(M.default_options.plugins) do
-			if type(option) == "table" and option.enabled then
-				M.default_options.plugins[plugin].enabled = false
-			elseif option == true then
-				M.default_options.plugins[plugin] = false
-			end
-		end
+		disable_option(M.default_options.plugins)
+		disable_option(M.default_options.plugins.mini)
 		M.options.plugins = vim.tbl_deep_extend("keep", user_conf.plugins or {}, M.default_options.plugins)
 	end
 
@@ -509,11 +506,7 @@ function M.setup(user_conf)
 
 	-- Disable default fileformats options if default_fileformats != true.
 	if M.options.default_fileformats == false then
-		for fileformat, option in pairs(M.default_options.fileformats) do
-			if option == true or type(option) == "table" and option.enabled then
-				M.default_options.fileformats[fileformat] = false
-			end
-		end
+		disable_option(M.default_options.fileformats)
 		M.options.fileformats = vim.tbl_deep_extend("keep", user_conf.fileformats or {}, M.default_options.fileformats)
 	end
 
