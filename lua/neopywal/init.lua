@@ -500,13 +500,9 @@ function M.setup(user_conf)
 	end
 
 	-- Disable default fileformats options if treesitter is enabled (unless the user manually specifies otherwise).
-	if M.options.plugins.treesitter and not user_conf.default_fileformats then
-		M.options.default_fileformats = false
-	end
-
-	-- Disable default fileformats options if default_fileformats != true.
-	if M.options.default_fileformats == false then
+	if M.options.plugins.treesitter and not user_conf.default_fileformats or M.options.default_fileformats == false then
 		disable_option(M.default_options.fileformats)
+		M.options.default_fileformats = false
 		M.options.fileformats = vim.tbl_deep_extend("keep", user_conf.fileformats or {}, M.default_options.fileformats)
 	end
 
