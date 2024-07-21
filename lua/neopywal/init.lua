@@ -206,7 +206,21 @@ M.default_options = {
 			},
 			pick = true,
 			starter = true,
-			statusline = true,
+			statusline = {
+				enabled = true,
+				mode_colors = {
+					-- Any of the color values must be one of Neopywal's colors
+					-- exported by "get_colors()" (e.g.: `color8`)
+					-- or a hexadecimal color (e.g.: "#ff0000").
+
+					normal = "color4",
+					visual = "color5",
+					insert = "color6",
+					command = "color1",
+					replace = "color2",
+					other = "color3", -- e.g.: terminal.
+				},
+			},
 			tabline = true,
 		},
 	},
