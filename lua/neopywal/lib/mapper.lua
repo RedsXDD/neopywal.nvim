@@ -11,10 +11,8 @@ function M.get(theme_style)
 
 	-- Get highlights for enabled fileformats.
 	local fileformats = {}
-	for fileformat in pairs(O.fileformats) do
-		if type(O.fileformats[fileformat]) == "table" and O.fileformats[fileformat].enabled then
-			fileformats = vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats")[fileformat]())
-		elseif O.fileformats[fileformat] == true then
+	for fileformat, option in pairs(O.fileformats) do
+		if option == true or type(option) == "table" and option.enabled then
 			local default_config = require("neopywal").default_options.fileformats[fileformat]
 			O.fileformats[fileformat] = type(default_config) == "table" and default_config or {}
 			O.fileformats[fileformat].enabled = true
