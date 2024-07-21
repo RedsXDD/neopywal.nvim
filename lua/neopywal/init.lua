@@ -484,6 +484,14 @@ function M.setup(user_conf)
 
 	-- Disable default plugins options if default_plugins != true.
 	if M.options.default_plugins == false then
+		for plugin, option in pairs(M.default_options.plugins.mini) do
+			if type(option) == "table" and option.enabled then
+				M.default_options.plugins.mini[plugin].enabled = false
+			elseif option == true then
+				M.default_options.plugins.mini[plugin] = false
+			end
+		end
+
 		for plugin, option in pairs(M.default_options.plugins) do
 			if type(option) == "table" and option.enabled then
 				M.default_options.plugins[plugin].enabled = false
