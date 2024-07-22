@@ -681,7 +681,6 @@ bufferline.setup({
 ```
 
 </details>
-
 </td>
 </tr>
 <!-- }}} -->
@@ -699,8 +698,7 @@ coc = true
 <!-- }}} -->
 <!-- colorful-winsep.nvim {{{ -->
 <tr>
-<td> <a href="https://github.com/nvim-zh/colorful-winsep.nvim">colorful-winsep.nvim</a>
-</td>
+<td> <a href="https://github.com/nvim-zh/colorful-winsep.nvim">colorful-winsep.nvim</a> </td>
 <td>
 
 ```lua
@@ -729,12 +727,9 @@ dashboard = true
 </tr>
 <!-- }}} -->
 <!-- feline.nvim {{{ -->
-</tr>
 <tr>
 <td> <a href="https://github.com/freddiehaddad/feline.nvim/">feline.nvim</a> </td>
 <td>
-
-</details>
 
 <details> <summary>Special</summary>
 
@@ -853,7 +848,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 ```
 
 </details>
-
 </td>
 </tr>
 <!-- }}} -->
