@@ -477,25 +477,33 @@ local function disable_table(original_table, default_option)
 		or original_table
 end
 
+---@param option boolean
+---@param fallback_result boolean
+local function check_nil_option(option, fallback_result)
+	-- NOTE: `return (option == nil or type(option) ~= "boolean") and fallback_result or option`
+	-- doesn't work because "option" will be returned if "fallback_result" is false.
+	if option == nil or type(option) ~= "boolean" then
+		return fallback_result
+	else
+		return option
+	end
+end
+
 local did_setup = false
 ---@param user_config? table
 function M.setup(user_config)
 	user_config = user_config or {}
 
-        -- stylua: ignore
-	M.default_options.default_plugins = user_config.default_plugins == nil and M.default_options.default_plugins or user_config.default_plugins
+        -- stylua: ignore start
+        -- Handle plugin tables.
+	M.default_options.default_plugins = check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
 	M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
 	M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
 
-	-- Disable "default_fileformats" if treesitter is enabled (unless the user manually specifies otherwise).
-	if user_config.default_fileformats == nil then
-		user_config.default_fileformats = not (
-			user_config.plugins.treesitter == nil and M.default_options.plugins.treesitter
-			or user_config.plugins.treesitter
-		)
-	end
-	M.default_options.default_fileformats = user_config.default_fileformats
+	-- Disable fileformats if treesitter is enabled (unless the user manually specifies otherwise).
+	M.default_options.default_fileformats = check_nil_option(user_config.default_fileformats, not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter))
 	M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
+	-- stylua: ignore end
 
 	-- Create the final configuration table.
 	M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
