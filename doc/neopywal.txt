@@ -46,6 +46,17 @@ packer.nvim <https://github.com/wbthomason/packer.nvim>
     use { "RedsXDD/neopywal.nvim", as = "neopywal" }
 <
 
+mini.deps <https://github.com/echasnovski/mini.deps>
+
+>lua
+    now(function()
+        add({
+            source = "RedsXDD/neopywal.nvim",
+            name = "neopywal",
+        })
+    end)
+<
+
 vim-plug <https://github.com/junegunn/vim-plug>
 
 >vim
@@ -870,9 +881,41 @@ change style settings and the colors per vim mode.
     })
 <
 
+mini.nvimSpecial ~
+
+PluginDefaultmini.animate>lua
+    mini = {
+        animate = true
+    }
+<
+
+mini.clue>lua
+    mini = {
+        clue = true
+    }
+<
+
+mini.completion>lua
+    mini = {
+        completion = {
+            enabled = true,
+            parameter_style = { "underline" },
+        }
+    }
+<
+
 mini.cursorword>lua
     mini = {
-        cursorword = true
+        cursorword = {
+            enabled = true,
+            style = { "underline" },
+        },
+    }
+<
+
+mini.deps>lua
+    mini = {
+        deps = true
     }
 <
 
@@ -890,7 +933,15 @@ mini.files>lua
 
 mini.hipatterns>lua
     mini = {
-        hipatterns = true
+        hipatterns = {
+            enabled = true,
+            style = {
+                fixme = { "bold", "italic" },
+                hack = { "bold", "italic" },
+                note = { "bold", "italic" },
+                todo = { "bold", "italic" },
+            },
+        },
     }
 <
 
@@ -912,6 +963,42 @@ mini.indentscope>lua
     }
 <
 
+mini.jump>lua
+    mini = {
+        jump = {
+            enabled = true,
+            style = { "bold", "italic", "reverse" },
+        },
+    }
+<
+
+mini.jump2d>lua
+    mini = {
+        jump2d = {
+            enabled = true,
+            style = { "bold", "italic" },
+        },
+    }
+<
+
+mini.map>lua
+    mini = {
+        map = true
+    }
+<
+
+mini.notify>lua
+    mini = {
+        notify = true
+    }
+<
+
+mini.operators>lua
+    mini = {
+        operators = true
+    }
+<
+
 mini.pick>lua
     mini = {
         pick = true
@@ -930,9 +1017,33 @@ mini.statusline>lua
     }
 <
 
+mini.surround>lua
+    mini = {
+        surround = true
+    }
+<
+
 mini.tabline>lua
     mini = {
         tabline = true
+    }
+<
+
+mini.test>lua
+    mini = {
+        test = true
+    }
+<
+
+mini.trailspace>lua
+    mini = {
+        trailspace = {
+            enabled = true,
+    
+            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+            -- or a hexadecimal color (e.g.: "#ff0000"), default: `warn`
+            color = "",
+        },
     }
 <
 
