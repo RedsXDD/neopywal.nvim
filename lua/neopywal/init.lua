@@ -477,45 +477,7 @@ local function disable_table(original_table, default_option)
 		or original_table
 end
 
--- Avoid g:colors_name reloading
-local lock = false
 local did_setup = false
----@param style? string
-function M.load(style)
-	if lock then
-		return
-	end
-
-	if not did_setup then
-		gen_cache()
-	end
-
-	local theme_style
-	local bg = vim.o.background
-	local style_bg = (style ~= "dark" and style ~= "light") and bg or style
-
-	if style_bg ~= bg then
-		if vim.g.colors_name == "neopywal-" .. style_bg then
-			theme_style = (bg == "light" and style_bg == "dark") and "light" or "dark"
-		else
-			vim.o.background = style_bg
-		end
-	end
-
-	M.current_style = theme_style or style_bg
-	local filename = G.filename .. "-" .. M.current_style
-	local compiled_path = G.compile_path .. G.path_sep .. filename
-
-	lock = true
-	local f = loadfile(compiled_path)
-	if not f then
-		compiler.compile()
-		f = assert(loadfile(compiled_path), "could not load neopywal cache.")
-	end
-	f()
-	lock = false
-end
-
 ---@param user_config? table
 function M.setup(user_config)
 	user_config = user_config or {}
@@ -551,6 +513,43 @@ function M.setup(user_config)
 
 	gen_cache(user_config)
 	did_setup = true
+end
+
+local lock = false -- Avoid g:colors_name reloading
+---@param style? string
+function M.load(style)
+	if lock then
+		return
+	end
+
+	if not did_setup then
+		gen_cache()
+	end
+
+	local theme_style
+	local bg = vim.o.background
+	local style_bg = (style ~= "dark" and style ~= "light") and bg or style
+
+	if style_bg ~= bg then
+		if vim.g.colors_name == "neopywal-" .. style_bg then
+			theme_style = (bg == "light" and style_bg == "dark") and "light" or "dark"
+		else
+			vim.o.background = style_bg
+		end
+	end
+
+	M.current_style = theme_style or style_bg
+	local filename = G.filename .. "-" .. M.current_style
+	local compiled_path = G.compile_path .. G.path_sep .. filename
+
+	lock = true
+	local f = loadfile(compiled_path)
+	if not f then
+		compiler.compile()
+		f = assert(loadfile(compiled_path), "could not load neopywal cache.")
+	end
+	f()
+	lock = false
 end
 
 vim.api.nvim_create_user_command("NeopywalCompile", function()
