@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.3.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.2.0...v2.3.0) (2024-07-22)
+
+
+### Features
+
+* **flash.nvim:** improve background color ([33ecfb9](https://github.com/RedsXDD/neopywal.nvim/commit/33ecfb996c06bb0449f65421929fc307384b65ce))
+* **lualine:** add configuration options ([d889c1a](https://github.com/RedsXDD/neopywal.nvim/commit/d889c1aaf4da97ec36a1d6bd3ba24bf33df9359a))
+* **mini.cursorword:** add styling option ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **mini.hipatterns:** add styling options ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **mini.nvim:** complete mini.nvim integration ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **mini.statusline:** add "mode_colors" option ([df5f19c](https://github.com/RedsXDD/neopywal.nvim/commit/df5f19cf919860466b3b3164b08f8fc2d47457cd))
+* **plugins:** add mini.animate ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.clue ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.completion ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.deps ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.jump ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.jump2d ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.map ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.notify ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.operators ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.surround ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.test ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **plugins:** add mini.trailspace ([7dea89f](https://github.com/RedsXDD/neopywal.nvim/commit/7dea89f4d719f2daf987d01eb33f865cdda57571))
+* **which_key:** improve main colors ([2fadcbe](https://github.com/RedsXDD/neopywal.nvim/commit/2fadcbe160644d47c9231315feecaa3f87044b5a))
+
+
+### Bug Fixes
+
+* **setup:** "default_" option handling ([83f18e2](https://github.com/RedsXDD/neopywal.nvim/commit/83f18e2d50270ebf07b75017218433a5031eadd0))
+* **setup:** default_plugins not hadling mini.nvim ([ed1c2da](https://github.com/RedsXDD/neopywal.nvim/commit/ed1c2dae041b4b0f05a19359cdcb33cf6d9255da))
+* **setup:** nil "user_config.plugins" table ([125b082](https://github.com/RedsXDD/neopywal.nvim/commit/125b082eff9280a5efe6ba5f6dafbe09305202db))
+
+
+### Performance Improvements
+
+* **load:** split setup and cache generation ([fea42ed](https://github.com/RedsXDD/neopywal.nvim/commit/fea42ed3e5ca5cdd8e7c7f83c492d5c436f34644))
+
 ## [2.2.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.1.0...v2.2.0) (2024-07-20)
 
 
