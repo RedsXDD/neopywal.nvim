@@ -989,6 +989,8 @@ neopywal_lualine.setup({
 ```
 
 </details>
+</td>
+</tr>
 <!-- }}} -->
 <!-- mini.cursorword {{{ -->
 <tr>
