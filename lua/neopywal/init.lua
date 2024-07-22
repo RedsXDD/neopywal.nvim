@@ -529,8 +529,7 @@ function M.setup(user_config)
 	local minimal_palette = get_palette(nil, true)
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
-	local hash = require("neopywal.lib.hashing").hash(minimal_palette)
-		.. require("neopywal.lib.hashing").hash(user_config)
+	local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
 		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
 		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
 		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
