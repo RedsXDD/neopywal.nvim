@@ -88,6 +88,17 @@
 use { "RedsXDD/neopywal.nvim", as = "neopywal" }
 ```
 
+[mini.deps](https://github.com/echasnovski/mini.deps)
+
+```lua
+now(function()
+    add({
+        source = "RedsXDD/neopywal.nvim",
+        name = "neopywal",
+    })
+end)
+```
+
 [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
@@ -986,6 +997,63 @@ neopywal_lualine.setup({
 </td>
 </tr>
 <!-- }}} -->
+<!-- mini.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.nvim">mini.nvim</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+<table>
+<tr>
+<td> <b>Plugin</b> </td> <td> <b>Default</b> </td>
+</tr>
+
+<!-- mini.animate {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.animate">mini.animate</a> </td>
+<td>
+
+```lua
+mini = {
+    animate = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.clue {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.clue">mini.clue</a> </td>
+<td>
+
+```lua
+mini = {
+    clue = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.completion {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.completion">mini.completion</a> </td>
+<td>
+
+```lua
+mini = {
+    completion = {
+        enabled = true,
+        parameter_style = { "underline" },
+    }
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- mini.cursorword {{{ -->
 <tr>
 <td> <a href="https://github.com/echasnovski/mini.cursorword">mini.cursorword</a> </td>
@@ -993,7 +1061,24 @@ neopywal_lualine.setup({
 
 ```lua
 mini = {
-    cursorword = true
+    cursorword = {
+        enabled = true,
+        style = { "underline" },
+    },
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.deps {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.deps">mini.deps</a> </td>
+<td>
+
+```lua
+mini = {
+    deps = true
 }
 ```
 
@@ -1035,7 +1120,15 @@ mini = {
 
 ```lua
 mini = {
-    hipatterns = true
+    hipatterns = {
+        enabled = true,
+        style = {
+            fixme = { "bold", "italic" },
+            hack = { "bold", "italic" },
+            note = { "bold", "italic" },
+            todo = { "bold", "italic" },
+        },
+    },
 }
 ```
 
@@ -1070,6 +1163,82 @@ mini = {
         -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
         scope_color = "",
     }
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.jump {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.jump">mini.jump</a> </td>
+<td>
+
+```lua
+mini = {
+    jump = {
+        enabled = true,
+        style = { "bold", "italic", "reverse" },
+    },
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.jump2d {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.jump2d">mini.jump2d</a> </td>
+<td>
+
+```lua
+mini = {
+    jump2d = {
+        enabled = true,
+        style = { "bold", "italic" },
+    },
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.map {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.map">mini.map</a> </td>
+<td>
+
+```lua
+mini = {
+    map = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.notify {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.notify">mini.notify</a> </td>
+<td>
+
+```lua
+mini = {
+    notify = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.operators {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.operators">mini.operators</a> </td>
+<td>
+
+```lua
+mini = {
+    operators = true
 }
 ```
 
@@ -1118,6 +1287,20 @@ mini = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- mini.surround {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.surround">mini.surround</a> </td>
+<td>
+
+```lua
+mini = {
+    surround = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- mini.tabline {{{ -->
 <tr>
 <td> <a href="https://github.com/echasnovski/mini.tabline">mini.tabline</a> </td>
@@ -1128,6 +1311,48 @@ mini = {
     tabline = true
 }
 ```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.test {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.test">mini.test</a> </td>
+<td>
+
+```lua
+mini = {
+    test = true
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mini.trailspace {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.trailspace">mini.trailspace</a> </td>
+<td>
+
+```lua
+mini = {
+    trailspace = {
+        enabled = true,
+
+        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+        -- or a hexadecimal color (e.g.: "#ff0000"), default: `warn`
+        color = "",
+    },
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+
+</table>
+
+</details>
 
 </td>
 </tr>

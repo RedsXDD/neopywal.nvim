@@ -192,10 +192,28 @@ M.default_options = {
 		undotree = true,
 		which_key = true,
 		mini = {
-			cursorword = true,
+			animate = true,
+			clue = true,
+			completion = {
+				enabled = true,
+				parameter_style = { "underline" },
+			},
+			cursorword = {
+				enabled = true,
+				style = { "underline" },
+			},
+			deps = true,
 			diff = true,
 			files = true,
-			hipatterns = true,
+			hipatterns = {
+				enabled = true,
+				style = {
+					fixme = { "bold", "italic" },
+					hack = { "bold", "italic" },
+					note = { "bold", "italic" },
+					todo = { "bold", "italic" },
+				},
+			},
 			icons = true,
 			indentscope = {
 				enabled = true,
@@ -204,6 +222,17 @@ M.default_options = {
 				-- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
 				scope_color = "",
 			},
+			jump = {
+				enabled = true,
+				style = { "bold", "italic", "reverse" },
+			},
+			jump2d = {
+				enabled = true,
+				style = { "bold", "italic" },
+			},
+			map = true,
+			notify = true,
+			operators = true,
 			pick = true,
 			starter = true,
 			statusline = {
@@ -221,7 +250,16 @@ M.default_options = {
 					other = "color3", -- e.g.: terminal.
 				},
 			},
+			surround = true,
 			tabline = true,
+			test = true,
+			trailspace = {
+				enabled = true,
+
+				-- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+				-- or a hexadecimal color (e.g.: "#ff0000"), default: `warn`
+				color = "",
+			},
 		},
 	},
 }
