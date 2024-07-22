@@ -526,8 +526,8 @@ function M.setup(user_config)
 end
 
 local lock = false -- Avoid g:colors_name reloading
----@param style? string
-function M.load(style)
+---@param theme_style? string
+function M.load(theme_style)
 	if lock then
 		return
 	end
@@ -536,19 +536,17 @@ function M.load(style)
 		gen_cache()
 	end
 
-	local theme_style
 	local bg = vim.o.background
-	local style_bg = (style ~= "dark" and style ~= "light") and bg or style
-
+	local style_bg = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
 	if style_bg ~= bg then
 		if vim.g.colors_name == "neopywal-" .. style_bg then
-			theme_style = (bg == "light" and style_bg == "dark") and "light" or "dark"
+			style_bg = (bg == "light" and style_bg == "dark") and "light" or "dark"
 		else
 			vim.o.background = style_bg
 		end
 	end
 
-	M.current_style = theme_style or style_bg
+	M.current_style = style_bg
 	local filename = G.filename .. "-" .. M.current_style
 	local compiled_path = G.compile_path .. G.path_sep .. filename
 
