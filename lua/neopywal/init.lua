@@ -431,6 +431,52 @@ function M.get_colors(theme_style)
 	return vim.tbl_deep_extend("keep", C, extra_colors)
 end
 
+---@param user_config? table
+local function gen_cache(user_config)
+	user_config = user_config or {}
+
+	-- Get cached hash.
+	local cached_path = G.compile_path .. G.path_sep .. "cached"
+	local file = io.open(cached_path)
+	local cached = nil
+	if file then
+		cached = file:read()
+		file:close()
+	end
+
+	-- Get current hash.
+	local minimal_palette = get_palette(nil, true)
+	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
+	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
+	local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
+		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
+		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
+		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
+
+	-- Recompile if hash changed.
+	if cached ~= hash then
+		compiler.compile()
+		file = io.open(cached_path, "wb")
+		if file then
+			file:write(hash)
+			file:close()
+		end
+	end
+end
+
+local function disable_table(original_table, default_option)
+	return not default_option
+			and vim.tbl_map(function(option)
+				if type(option) == "table" and option.enabled then
+					option.enabled = false
+				elseif option == true then
+					option = false
+				end
+				return option
+			end, original_table)
+		or original_table
+end
+
 -- Avoid g:colors_name reloading
 local lock = false
 local did_setup = false
@@ -441,7 +487,7 @@ function M.load(style)
 	end
 
 	if not did_setup then
-		M.setup()
+		gen_cache()
 	end
 
 	local theme_style
@@ -468,19 +514,6 @@ function M.load(style)
 	end
 	f()
 	lock = false
-end
-
-local function disable_table(original_table, default_option)
-	return not default_option
-			and vim.tbl_map(function(option)
-				if type(option) == "table" and option.enabled then
-					option.enabled = false
-				elseif option == true then
-					option = false
-				end
-				return option
-			end, original_table)
-		or original_table
 end
 
 ---@param user_config? table
@@ -516,34 +549,7 @@ function M.setup(user_config)
 		M.default_options.plugins.lsp
 	)
 
-	-- Get cached hash.
-	local cached_path = G.compile_path .. G.path_sep .. "cached"
-	local file = io.open(cached_path)
-	local cached = nil
-	if file then
-		cached = file:read()
-		file:close()
-	end
-
-	-- Get current hash.
-	local minimal_palette = get_palette(nil, true)
-	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
-	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
-	local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
-		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
-		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
-		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
-
-	-- Recompile if hash changed.
-	if cached ~= hash then
-		compiler.compile()
-		file = io.open(cached_path, "wb")
-		if file then
-			file:write(hash)
-			file:close()
-		end
-	end
-
+	gen_cache(user_config)
 	did_setup = true
 end
 
