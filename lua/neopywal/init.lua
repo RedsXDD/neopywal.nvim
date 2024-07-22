@@ -465,7 +465,7 @@ local function gen_cache(user_config)
 end
 
 ---@param original_table table
----@param default_option boolean
+---@param default_option any
 local function disable_table(original_table, default_option)
 	return not default_option
 			and vim.tbl_map(function(option)
@@ -480,11 +480,10 @@ local function disable_table(original_table, default_option)
 end
 
 ---@param option boolean
----@param fallback_result boolean
 local function check_nil_option(option, fallback_result)
-	-- NOTE: `return (option == nil or type(option) ~= "boolean") and fallback_result or option`
+	-- NOTE: `return option == nil and fallback_result or option`
 	-- doesn't work because "option" will be returned if "fallback_result" is false.
-	if option == nil or type(option) ~= "boolean" then
+	if option == nil then
 		return fallback_result
 	else
 		return option
@@ -495,6 +494,7 @@ local did_setup = false
 ---@param user_config? table
 function M.setup(user_config)
 	user_config = user_config or {}
+	user_config.plugins = check_nil_option(user_config.plugins, {})
 
         -- stylua: ignore start
         -- Handle plugin tables.
@@ -503,6 +503,7 @@ function M.setup(user_config)
 	M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
 
 	-- Disable fileformats if treesitter is enabled (unless the user manually specifies otherwise).
+        ---@diagnostic disable-next-line: undefined-field
 	M.default_options.default_fileformats = check_nil_option(user_config.default_fileformats, not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter))
 	M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
 	-- stylua: ignore end
