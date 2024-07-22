@@ -464,6 +464,8 @@ local function gen_cache(user_config)
 	end
 end
 
+---@param original_table table
+---@param default_option boolean
 local function disable_table(original_table, default_option)
 	return not default_option
 			and vim.tbl_map(function(option)
