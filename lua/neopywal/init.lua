@@ -470,49 +470,43 @@ function M.load(style)
 	lock = false
 end
 
-local function disable_option(option)
-	if type(option) == "table" and option.enabled then
-		option.enabled = false
-	elseif option == true then
-		option = false
-	end
-	return option
+local function disable_table(original_table, default_option)
+	return not default_option
+			and vim.tbl_map(function(option)
+				if type(option) == "table" and option.enabled then
+					option.enabled = false
+				elseif option == true then
+					option = false
+				end
+				return option
+			end, original_table)
+		or original_table
 end
 
 ---@param user_config? table
 function M.setup(user_config)
-	local config = user_config or {}
+	user_config = user_config or {}
 
-	-- Update "M.default_options.default_plugins".
-	M.default_options.default_plugins = (config.default_plugins == nil) and M.default_options.default_plugins
-		or config.default_plugins
+        -- stylua: ignore
+	M.default_options.default_plugins = user_config.default_plugins == nil and M.default_options.default_plugins or user_config.default_plugins
+	M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
+	M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
 
-	-- Disable default fileformats options if treesitter is enabled (unless the user manually specifies otherwise).
-	M.default_options.default_fileformats = config.default_fileformats or not config.plugins.treesitter
+	-- Disable "default_fileformats" if treesitter is enabled (unless the user manually specifies otherwise).
+	if user_config.default_fileformats == nil then
+		user_config.default_fileformats = not (
+			user_config.plugins.treesitter == nil and M.default_options.plugins.treesitter
+			or user_config.plugins.treesitter
+		)
+	end
+	M.default_options.default_fileformats = user_config.default_fileformats
+	M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
 
 	-- Create the final configuration table.
-	M.options = vim.tbl_deep_extend(
-		"keep",
-		{
-			-- Neovide doesn't play well with transparent background colors.
-			transparent_background = (vim.g.neovide ~= true) and config.transparent_background or false,
-		},
-		config,
-		{
-			fileformats = M.default_options.default_fileformats == true and M.default_options.fileformats
-				or vim.tbl_map(disable_option, M.default_options.fileformats),
-			plugins = vim.tbl_extend(
-				"keep",
-				{
-					mini = M.default_options.default_plugins == true and M.default_options.plugins.mini
-						or vim.tbl_map(disable_option, M.default_options.plugins.mini),
-				},
-				M.default_options.default_plugins == true and M.default_options.plugins
-					or vim.tbl_map(disable_option, M.default_options.plugins)
-			),
-		},
-		M.default_options
-	)
+	M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
+
+	-- Neovide doesn't play well with transparent background colors.
+	M.options.transparent_background = not vim.g.neovide and M.options.transparent_background or false
 
 	-- For backwards compatability (check `https://github.com/RedsXDD/neopywal.nvim/commit/f2973005932257b81dbd10bca67ce51490bf7599`).
 	M.options.plugins.lsp = vim.tbl_deep_extend(
@@ -536,7 +530,7 @@ function M.setup(user_config)
 	local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
 	local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
 	local hash = require("neopywal.lib.hashing").hash(minimal_palette)
-		.. require("neopywal.lib.hashing").hash(config)
+		.. require("neopywal.lib.hashing").hash(user_config)
 		.. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
 		.. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
 		.. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
