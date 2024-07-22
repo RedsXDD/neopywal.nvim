@@ -1178,7 +1178,7 @@ mini = {
 mini = {
     jump = {
         enabled = true,
-        style = { "bold", "italic", "reverse" },
+        style = { "bold", "italic" },
     },
 }
 ```

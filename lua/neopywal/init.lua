@@ -224,7 +224,7 @@ M.default_options = {
 			},
 			jump = {
 				enabled = true,
-				style = { "bold", "italic", "reverse" },
+				style = { "bold", "italic" },
 			},
 			jump2d = {
 				enabled = true,
