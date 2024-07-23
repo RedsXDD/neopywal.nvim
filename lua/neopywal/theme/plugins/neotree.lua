@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- nvim-neo-tree/neo-tree.nvim
 	return {
 		NeoTreeDimText = { fg = C.comment },
 		NeoTreeIndentMarker = { link = "NeoTreeDimText" },

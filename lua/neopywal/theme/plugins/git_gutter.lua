@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- airblade/vim-gitgutter
 	return {
 		GitGutterAdd = { fg = C.diff_added },
 		GitGutterChange = { fg = C.diff_changed },

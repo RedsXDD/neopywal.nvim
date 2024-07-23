@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- neovim/nvim-lspconfig
 	local virtual_text = O.plugins.lsp.virtual_text
 	local underlines = O.plugins.lsp.underlines
 	local inlay_hints = O.plugins.lsp.inlay_hints

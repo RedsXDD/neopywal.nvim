@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.jump2d
 	local bg = O.transparent_background and C.none or C.dim_bg
 	return {
 		MiniJump2dDim = { fg = C.comment },

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- goolord/alpha-nvim
 	return {
 		AlphaShortcut = { fg = U.blend(C.color1, C.color3, 0.5) },
 		AlphaHeader = { fg = C.color4 },

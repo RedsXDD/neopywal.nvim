@@ -1,9 +1,6 @@
 local M = {}
 
 function M.get()
-	-- vim.org/netrw
-	-- https://www.vim.org/scripts/script.php?script_id=1075
-	-- prichrd/netrw.nvim
 	return {
 		netrwGray = { fg = C.color8 },
 		netrwClassify = { link = "Directory" },

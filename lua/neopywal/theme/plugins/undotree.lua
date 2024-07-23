@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- mbbill/undotree
 	return {
 		UndotreeSavedBig = { fg = C.color1, styles = { "bold" } },
 		UndotreeNode = { fg = C.color4 },

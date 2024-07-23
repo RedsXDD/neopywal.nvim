@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.statusline
 	local default_options = require("neopywal").default_options.plugins.mini.statusline.mode_colors
 	local mode_colors = O.plugins.mini.statusline.mode_colors
 

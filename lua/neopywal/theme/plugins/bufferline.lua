@@ -1,6 +1,4 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
-
--- Bufferline: akinsho/bufferline.nvim
 -- Reference: see `:h bufferline-highlights`
 
 local M = {}

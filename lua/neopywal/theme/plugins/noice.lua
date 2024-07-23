@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- folke/noice.nvim
 	local kinds = require("neopywal.utils.kinds").get("NoiceCompletionItemKind%s")
 	return vim.tbl_deep_extend("force", kinds, {
 		NoiceCmdlinePopup = { link = "NormalFloat" },

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- hrsh7th/nvim-cmp
 	local kinds = require("neopywal.utils.kinds").get("CmpItemKind%s")
 	return vim.tbl_deep_extend("force", kinds, {
 		CmpItemAbbr = { fg = C.foreground },

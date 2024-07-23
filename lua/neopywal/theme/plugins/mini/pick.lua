@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.pick
 	return {
 		MiniPickBorder = { link = "FloatBorder" },
 		MiniPickBorderBusy = { fg = C.warn },

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- folke/lazy.nvim
 	return {
 		LazyProgressDone = { fg = C.variable },
 		LazySpecial = { fg = C.specialchar },

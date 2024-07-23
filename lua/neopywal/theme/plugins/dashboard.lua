@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- nvimdev/dashboard-nvim
 	return {
 		DashboardShortCut = { fg = U.blend(C.color1, C.color3, 0.5) },
 		DashboardHeader = { fg = C.color4 },

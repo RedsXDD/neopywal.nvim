@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.clue
 	return {
 		MiniClueDescGroup = { fg = C.warn, styles = { "bold", "italic" } },
 		MiniClueNextKey = { fg = C.hint, styles = { "bold", "italic" } },

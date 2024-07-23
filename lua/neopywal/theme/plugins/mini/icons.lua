@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.icons
 	return {
 		MiniIconsAzure = { fg = C.foreground },
 		MiniIconsBlue = { fg = C.color4 },

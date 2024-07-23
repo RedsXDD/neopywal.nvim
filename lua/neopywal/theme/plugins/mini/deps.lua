@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.deps
 	return {
 		MiniDepsChangeAdded = { fg = C.diff_added },
 		MiniDepsChangeRemoved = { fg = C.diff_removed },

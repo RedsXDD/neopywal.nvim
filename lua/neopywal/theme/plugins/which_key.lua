@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- folke/which-key.nvim
 	return {
 		WhichKey = { fg = C.color1 },
 		WhichKeyBorder = { link = "FloatBorder" },

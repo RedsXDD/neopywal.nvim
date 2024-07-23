@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.hipatterns
 	return {
 		MiniHipatternsFixme = {
 			bg = C.error,

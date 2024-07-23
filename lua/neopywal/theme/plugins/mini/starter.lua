@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.starter
 	return {
 		MiniStarterCurrent = { link = "CursorLine" },
 		MiniStarterHeader = { fg = C.color4, styles = { "bold", "italic" } },

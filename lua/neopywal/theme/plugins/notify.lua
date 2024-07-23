@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- rcarriga/nvim-notify
 	return {
 		NotifyBackground = { bg = "#000000" },
 		NotifyERRORBody = {

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- neoclide/coc.nvim
 	return {
 		CocHighlightText = { styles = { "bold" } },
 		CocHoverRange = { styles = { "bold", "underline" } },

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- lukas-reineke/indent-blankline.nvim
 	local hex_chars = "[abcdef0-9][abcdef0-9]"
 	local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
 

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.files
 	return {
 		MiniFilesBorder = { link = "FloatBorder" },
 		MiniFilesBorderModified = { fg = C.warn },

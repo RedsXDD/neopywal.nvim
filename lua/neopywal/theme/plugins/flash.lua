@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- folke/flash.nvim
 	local bg = O.transparent_background and C.none or C.dim_bg
 	return {
 		FlashBackdrop = { fg = C.comment },

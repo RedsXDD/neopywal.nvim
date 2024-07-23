@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- nvim-telescope/telescope.nvim
 	return O.plugins.telescope.style ~= nil
 			and string.lower(O.plugins.telescope.style) == "nvchad"
 			and not O.transparent_background

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.tabline
 	return {
 		MiniTablineCurrent = { link = "TabLineSel" },
 		MiniTablineFill = { link = "TabLineFill" },

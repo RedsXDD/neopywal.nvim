@@ -1,7 +1,6 @@
 local M = {}
 
 function M.get()
-	-- echasnovski/mini.diff
 	return {
 		MiniDiffSignAdd = { fg = C.diff_added },
 		MiniDiffSignChange = { fg = C.diff_changed },
