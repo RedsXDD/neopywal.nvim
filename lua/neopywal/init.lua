@@ -2,7 +2,7 @@
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
 local U = require("neopywal.utils.color")
-local notify = require("neopywal.lib.notify")
+local notify = require("neopywal.utils.notify")
 local compiler = require("neopywal.lib.compiler")
 
 M.compiler = {

@@ -3,7 +3,7 @@
 -- https://github.com/EdenEast/nightfox.nvim -- The plugin catppuccin credits.
 
 local M = {}
-local notify = require("neopywal.lib.notify")
+local notify = require("neopywal.utils.notify")
 
 local function inspect(t)
     local list = {}
