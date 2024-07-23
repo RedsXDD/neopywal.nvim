@@ -622,6 +622,18 @@ Below is a list of supported plugins and their corresponding configuration modul
 <td> <b>Plugin</b> </td> <td> <b>Default</b> </td>
 </tr>
 
+<!-- aerial.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/stevearc/aerial.nvim">aerial.nvim</a> </td>
+<td>
+
+```lua
+aerial = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- alpha-nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/goolord/alpha-nvim">alpha-nvim</a> </td>

@@ -133,6 +133,7 @@ M.default_options = {
 		zsh = true,
 	},
 	plugins = {
+		aerial = true,
 		alpha = true,
 		coc = true,
 		colorful_winsep = {
