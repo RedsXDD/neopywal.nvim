@@ -16,7 +16,11 @@ function M.get(theme_style)
 			local default_config = require("neopywal").default_options.fileformats[fileformat]
 			O.fileformats[fileformat] = type(default_config) == "table" and default_config or {}
 			O.fileformats[fileformat].enabled = true
-			fileformats = vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats")[fileformat]())
+			fileformats = vim.tbl_deep_extend(
+				"force",
+				fileformats,
+				require("neopywal.theme.fileformats")[fileformat]()
+			)
 		end
 	end
 
@@ -43,7 +47,11 @@ function M.get(theme_style)
 
 		if apply then
 			local plugin_name = is_mini and "mini." .. plugin or plugin
-			plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin_name).get())
+			plugins = vim.tbl_deep_extend(
+				"force",
+				plugins,
+				require("neopywal.theme.plugins." .. plugin_name).get()
+			)
 		end
 	end
 
@@ -59,9 +67,7 @@ function M.get(theme_style)
 
 	-- Get user-defined highlights.
 	local user_highlights = O.custom_highlights
-	if type(user_highlights) == "function" then
-		user_highlights = user_highlights(C)
-	end
+	if type(user_highlights) == "function" then user_highlights = user_highlights(C) end
 
 	-- This section MUST happen AFTER all the manipulation on the "O" table has been done.
 	theme.editor = require("neopywal.theme.editor").get()

@@ -37,9 +37,7 @@ end
 local function make_bitop(t)
 	local op1 = make_bitop_uncached(t, 2 ^ 1)
 	local op2 = memoize(function(a)
-		return memoize(function(b)
-			return op1(a, b)
-		end)
+		return memoize(function(b) return op1(a, b) end)
 	end)
 	return make_bitop_uncached(op2, 2 ^ (t.n or 1))
 end
@@ -49,24 +47,18 @@ local bxor = make_bitop({ [0] = { [0] = 0, [1] = 1 }, [1] = { [0] = 1, [1] = 0 }
 local lshift, rshift
 
 lshift = function(a, disp) -- Lua5.2 inspired
-	if disp < 0 then
-		return rshift(a, -disp)
-	end
+	if disp < 0 then return rshift(a, -disp) end
 	return (a * 2 ^ disp) % 2 ^ 32
 end
 
 rshift = function(a, disp) -- Lua5.2 inspired
-	if disp < 0 then
-		return lshift(a, -disp)
-	end
+	if disp < 0 then return lshift(a, -disp) end
 	return floor(a % 2 ^ 32 / 2 ^ disp)
 end
 
 local function bit_tobit(x)
 	x = x % MOD
-	if x >= 0x80000000 then
-		x = x - MOD
-	end
+	if x >= 0x80000000 then x = x - MOD end
 	return x
 end
 
@@ -81,8 +73,6 @@ local function bit_bxor(a, b, c, ...)
 end
 
 M.bxor = bit_bxor
-M.lshift = function(x, n)
-	return bit_tobit(lshift(x % MOD, n % 32))
-end
+M.lshift = function(x, n) return bit_tobit(lshift(x % MOD, n % 32)) end
 
 return M

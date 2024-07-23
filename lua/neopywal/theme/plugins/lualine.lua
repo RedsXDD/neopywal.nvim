@@ -57,25 +57,15 @@ function M.setup(user_conf)
 		local properties = {}
 
 		for _, style in pairs(section_styles) do
-			if not O.no_italic and style == "italic" then
-				table.insert(properties, style)
-			end
+			if not O.no_italic and style == "italic" then table.insert(properties, style) end
 
-			if not O.no_bold and style == "bold" then
-				table.insert(properties, style)
-			end
+			if not O.no_bold and style == "bold" then table.insert(properties, style) end
 
-			if not O.no_underline and style == "underline" then
-				table.insert(properties, style)
-			end
+			if not O.no_underline and style == "underline" then table.insert(properties, style) end
 
-			if not O.no_undercurl and style == "undercurl" then
-				table.insert(properties, style)
-			end
+			if not O.no_undercurl and style == "undercurl" then table.insert(properties, style) end
 
-			if not O.no_strikethrough and style == "strikethrough" then
-				table.insert(properties, style)
-			end
+			if not O.no_strikethrough and style == "strikethrough" then table.insert(properties, style) end
 		end
 
 		final_styles[section] = table.concat(properties, ",")
@@ -88,9 +78,7 @@ end
 function M.get()
 	local neopywal = {}
 
-	if not did_setup then
-		M.setup()
-	end
+	if not did_setup then M.setup() end
 
 	local mode_colors = M.options.mode_colors
 	local styles = M.options.styles

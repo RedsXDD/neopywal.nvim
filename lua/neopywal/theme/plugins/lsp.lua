@@ -21,9 +21,18 @@ function M.get()
 			styles = inlay_hints.style or {},
 		}, -- Virtual text of the inlay hints.
 
-		LspReferenceText = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "text" references
-		LspReferenceRead = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "read" references
-		LspReferenceWrite = { bg = U.blend(C.background, C.foreground, darkening_percentage), styles = { "bold" } }, -- used for highlighting "write" references
+		LspReferenceText = {
+			bg = U.blend(C.background, C.foreground, darkening_percentage),
+			styles = { "bold" },
+		}, -- used for highlighting "text" references
+		LspReferenceRead = {
+			bg = U.blend(C.background, C.foreground, darkening_percentage),
+			styles = { "bold" },
+		}, -- used for highlighting "read" references
+		LspReferenceWrite = {
+			bg = U.blend(C.background, C.foreground, darkening_percentage),
+			styles = { "bold" },
+		}, -- used for highlighting "write" references
 
 		LspDiagnosticsDefaultError = { link = "DiagnosticError" }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 		LspDiagnosticsDefaultWarning = { link = "DiagnosticWarn" }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)

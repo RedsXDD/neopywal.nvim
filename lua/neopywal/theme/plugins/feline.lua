@@ -81,9 +81,7 @@ function M.setup(user_conf)
 end
 
 function M.get()
-	if require("neopywal").options.transparent_background then
-		M.options.sett.bkg = "NONE"
-	end
+	if require("neopywal").options.transparent_background then M.options.sett.bkg = "NONE" end
 
 	local assets = M.options.assets
 	local mode_colors = M.options.mode_colors
@@ -107,18 +105,13 @@ function M.get()
 	}
 
 	local function is_enabled(min_width)
-		if shortline then
-			return true
-		end
-
+		if shortline then return true end
 		return vim.api.nvim_win_get_width(0) > min_width
 	end
 
 	local is_lsp_in_excluded_list = function(lsp_name)
 		for _, excluded_lsp in ipairs(M.options.view.lsp.exclude_lsp_names) do
-			if lsp_name == excluded_lsp then
-				return true
-			end
+			if lsp_name == excluded_lsp then return true end
 		end
 		return false
 	end
@@ -173,9 +166,7 @@ function M.get()
 	}
 
 	components.active[1][2] = {
-		provider = function()
-			return assets.mode_icon .. " " .. mode_colors[vim.fn.mode()][1]
-		end,
+		provider = function() return assets.mode_icon .. " " .. mode_colors[vim.fn.mode()][1] end,
 		hl = vi_mode_hl,
 	}
 
@@ -188,9 +179,7 @@ function M.get()
 				bg = sett.bkg,
 			}
 		end,
-		enabled = function()
-			return not any_git_changes()
-		end,
+		enabled = function() return not any_git_changes() end,
 	}
 
 	-- enable if git diffs are available
@@ -202,9 +191,7 @@ function M.get()
 				bg = sett.diffs,
 			}
 		end,
-		enabled = function()
-			return any_git_changes()
-		end,
+		enabled = function() return any_git_changes() end,
 	}
 	--: }}}
 	--: Diffs {{{
@@ -241,9 +228,7 @@ function M.get()
 			fg = sett.diffs,
 			bg = sett.bkg,
 		},
-		enabled = function()
-			return any_git_changes()
-		end,
+		enabled = function() return any_git_changes() end,
 	}
 	--: }}}
 	--: Git Branch {{{
@@ -305,9 +290,7 @@ function M.get()
 	--: Macro {{{
 	components.active[1][12] = {
 		provider = "macro",
-		enabled = function()
-			return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0
-		end,
+		enabled = function() return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0 end,
 		hl = {
 			fg = sett.extras,
 			bg = sett.bkg,
@@ -318,9 +301,7 @@ function M.get()
 	--: Search Count {{{
 	components.active[1][13] = {
 		provider = "search_count",
-		enabled = function()
-			return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0
-		end,
+		enabled = function() return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0 end,
 		hl = {
 			fg = sett.extras,
 			bg = sett.bkg,
@@ -330,9 +311,7 @@ function M.get()
 	--: }}}
 	--: Lazy.nvim Updates {{{
 	components.active[1][14] = {
-		provider = function()
-			return require("lazy.status").updates()
-		end,
+		provider = function() return require("lazy.status").updates() end,
 		enabled = function()
 			if sett.show_lazy_updates and pcall(require, "lazy") then
 				return require("lazy.status").has_updates()
@@ -354,17 +333,13 @@ function M.get()
 	--: Workspace Loader {{{
 	components.active[2][1] = {
 		provider = function()
-			if vim.lsp.status then
-				return ""
-			end
+			if vim.lsp.status then return "" end
 			local Lsp = vim.lsp.util.get_progress_messages()[1]
 
 			if Lsp then
 				local msg = Lsp.message or ""
 				local percentage = Lsp.percentage
-				if not percentage then
-					return ""
-				end
+				if not percentage then return "" end
 				local title = Lsp.title or ""
 				local spinners = {
 					"",
@@ -381,10 +356,22 @@ function M.get()
 				local frame = math.floor(ms / 120) % #spinners
 
 				if percentage >= 70 then
-					return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
+					return string.format(
+						" %%<%s %s %s (%s%%%%) ",
+						success_icon[frame + 1],
+						title,
+						msg,
+						percentage
+					)
 				end
 
-				return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+				return string.format(
+					" %%<%s %s %s (%s%%%%) ",
+					spinners[frame + 1],
+					title,
+					msg,
+					percentage
+				)
 			end
 
 			return ""
@@ -399,9 +386,7 @@ function M.get()
 	--: General Diagnostics (errors, warnings. info and hints) {{{
 	components.active[2][2] = {
 		provider = "diagnostic_errors",
-		enabled = function()
-			return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
-		end,
+		enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR) end,
 
 		hl = {
 			fg = C.error,
@@ -412,9 +397,7 @@ function M.get()
 
 	components.active[2][3] = {
 		provider = "diagnostic_warnings",
-		enabled = function()
-			return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
-		end,
+		enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.WARN) end,
 		hl = {
 			fg = C.warn,
 			bg = sett.bkg,
@@ -424,9 +407,7 @@ function M.get()
 
 	components.active[2][4] = {
 		provider = "diagnostic_info",
-		enabled = function()
-			return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
-		end,
+		enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.INFO) end,
 		hl = {
 			fg = C.info,
 			bg = sett.bkg,
@@ -436,9 +417,7 @@ function M.get()
 
 	components.active[2][5] = {
 		provider = "diagnostic_hints",
-		enabled = function()
-			return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
-		end,
+		enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.HINT) end,
 		hl = {
 			fg = C.hint,
 			bg = sett.bkg,
@@ -462,9 +441,7 @@ function M.get()
 			local index = 0
 			local lsp_names = ""
 			for _, lsp_config in ipairs(active_clients) do
-				if is_lsp_in_excluded_list(lsp_config.name) then
-					goto continue
-				end
+				if is_lsp_in_excluded_list(lsp_config.name) then goto continue end
 
 				index = index + 1
 				if index == 1 then
@@ -540,9 +517,7 @@ function M.get()
 	--: }}}
 	--: Inactive {{{
 	components.inactive[1][1] = {
-		provider = function()
-			return " " .. string.upper(vim.bo.ft) .. " "
-		end,
+		provider = function() return " " .. string.upper(vim.bo.ft) .. " " end,
 		hl = {
 			fg = C.foreground,
 			bg = C.background,

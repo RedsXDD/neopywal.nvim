@@ -4,20 +4,13 @@ local M = {}
 
 local notified = {}
 
-function M.clear()
-	notified = {}
-end
+function M.clear() notified = {} end
 
 ---@param msg string|string[]
 ---@param level integer
 function M.notify(msg, level)
 	if type(msg) == "table" then
-		msg = table.concat(
-			vim.tbl_filter(function(line)
-				return line or false
-			end, msg),
-			"\n"
-		)
+		msg = table.concat(vim.tbl_filter(function(line) return line or false end, msg), "\n")
 	end
 
 	if not notified[msg] then
@@ -36,16 +29,10 @@ function M.notify(msg, level)
 	end
 end
 
-function M.error(msg)
-	M.notify(msg, vim.log.levels.ERROR)
-end
+function M.error(msg) M.notify(msg, vim.log.levels.ERROR) end
 
-function M.warn(msg)
-	M.notify(msg, vim.log.levels.WARN)
-end
+function M.warn(msg) M.notify(msg, vim.log.levels.WARN) end
 
-function M.info(msg)
-	M.notify(msg, vim.log.levels.INFO)
-end
+function M.info(msg) M.notify(msg, vim.log.levels.INFO) end
 
 return M

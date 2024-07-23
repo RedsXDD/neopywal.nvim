@@ -120,29 +120,19 @@ function M.setup(user_conf)
 				properties[style] = true
 
 				-- Override the italic style if the no_italic option is set to false.
-				if O.no_italic and style == "italic" then
-					properties[style] = false
-				end
+				if O.no_italic and style == "italic" then properties[style] = false end
 
 				-- Override the bold style if the no_bold option is set to false.
-				if O.no_bold and style == "bold" then
-					properties[style] = false
-				end
+				if O.no_bold and style == "bold" then properties[style] = false end
 
 				-- Override the underline style if the no_underline option is set to false.
-				if O.no_underline and style == "underline" then
-					properties[style] = false
-				end
+				if O.no_underline and style == "underline" then properties[style] = false end
 
 				-- Override the undercurl style if the no_undercurl option is set to false.
-				if O.no_undercurl and style == "undercurl" then
-					properties[style] = false
-				end
+				if O.no_undercurl and style == "undercurl" then properties[style] = false end
 
 				-- Override the strikethrough style if the no_strikethrough option is set to false.
-				if O.no_strikethrough and style == "strikethrough" then
-					properties[style] = false
-				end
+				if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
 			end
 		end
 

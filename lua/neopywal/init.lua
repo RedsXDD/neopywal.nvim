@@ -283,9 +283,7 @@ local function get_colorscheme_file()
 		or M.options.use_wallust == true and cache_dir .. "/wallust/colors_neopywal.vim"
 		or cache_dir .. "/wal/colors-wal.vim"
 
-	if G.path_sep == "\\" then
-		colorscheme_file = colorscheme_file:gsub("/", "\\")
-	end
+	if G.path_sep == "\\" then colorscheme_file = colorscheme_file:gsub("/", "\\") end
 
 	return colorscheme_file
 end
@@ -293,17 +291,13 @@ end
 ---@param theme_style? string
 ---@param export_user_colors boolean
 local function get_palette(theme_style, export_user_colors)
-	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
-		theme_style = vim.o.background
-	end
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
 	if type(M.options.colorscheme_file) ~= "string" then
 		notify.error("`colorscheme_file` option must be of type string.")
 	end
 
-	if M.options.colorscheme_file == "" then
-		M.options.colorscheme_file = get_colorscheme_file()
-	end
+	if M.options.colorscheme_file == "" then M.options.colorscheme_file = get_colorscheme_file() end
 	local colorscheme_file = M.options.colorscheme_file
 
 	local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
@@ -387,9 +381,7 @@ Below is the error message that we captured:
 	local C = vim.tbl_deep_extend("keep", palette[theme_style], palette.colors)
 	if export_user_colors == true then
 		user_colors = M.options.custom_colors
-		if type(user_colors) == "function" then
-			user_colors = user_colors(C)
-		end
+		if type(user_colors) == "function" then user_colors = user_colors(C) end
 	end
 
 	return vim.tbl_deep_extend("keep", user_colors, C)
@@ -397,9 +389,7 @@ end
 
 ---@param theme_style? string
 function M.get_colors(theme_style)
-	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
-		theme_style = vim.o.background
-	end
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 	local C = get_palette(theme_style, true)
 
 	local extra_colors = {
@@ -534,17 +524,20 @@ function M.setup(user_config)
 	user_config = user_config or {}
 	user_config.plugins = check_nil_option(user_config.plugins, {})
 
-        -- stylua: ignore start
-        -- Handle plugin tables.
-	M.default_options.default_plugins = check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
+	-- Handle plugin tables.
+	M.default_options.default_plugins =
+		check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
 	M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
-	M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
+	M.default_options.plugins.mini =
+		disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
 
 	-- Disable fileformats if treesitter is enabled (unless the user manually specifies otherwise).
-        ---@diagnostic disable-next-line: undefined-field
-	M.default_options.default_fileformats = check_nil_option(user_config.default_fileformats, not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter))
-	M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
-	-- stylua: ignore end
+	M.default_options.default_fileformats = check_nil_option(
+		user_config.default_fileformats,
+		not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter)
+	)
+	M.default_options.fileformats =
+		disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
 
 	-- Create the final configuration table.
 	M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
@@ -555,7 +548,8 @@ function M.setup(user_config)
 	-- For backwards compatability (check `https://github.com/RedsXDD/neopywal.nvim/commit/f2973005932257b81dbd10bca67ce51490bf7599`).
 	M.options.plugins.lsp = vim.tbl_deep_extend(
 		"keep",
-		type(M.options.plugins.lsp) == "boolean" and { enabled = M.options.plugins.lsp } or M.options.plugins.lsp,
+		type(M.options.plugins.lsp) == "boolean" and { enabled = M.options.plugins.lsp }
+			or M.options.plugins.lsp,
 		type(M.options.styles.lsp) == "table" and M.options.styles.lsp or {},
 		M.default_options.plugins.lsp
 	)
@@ -567,13 +561,8 @@ end
 local lock = false -- Avoid g:colors_name reloading
 ---@param theme_style? string
 function M.load(theme_style)
-	if lock then
-		return
-	end
-
-	if not did_setup then
-		gen_cache()
-	end
+	if lock then return end
+	if not did_setup then gen_cache() end
 
 	local bg = vim.o.background
 	local style_bg = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
@@ -601,9 +590,7 @@ end
 
 vim.api.nvim_create_user_command("NeopywalCompile", function()
 	for name, _ in pairs(package.loaded) do
-		if name:match("^neopywal.") then
-			package.loaded[name] = nil
-		end
+		if name:match("^neopywal.") then package.loaded[name] = nil end
 	end
 	compiler.compile()
 	notify.info("Successfully compiled cache.")
@@ -614,9 +601,7 @@ if vim.g.neopywal_debug then
 	vim.api.nvim_create_autocmd("BufWritePost", {
 		pattern = "*/neopywal/*",
 		callback = function()
-			vim.schedule(function()
-				vim.cmd("NeopywalCompile")
-			end)
+			vim.schedule(function() vim.cmd("NeopywalCompile") end)
 		end,
 	})
 end

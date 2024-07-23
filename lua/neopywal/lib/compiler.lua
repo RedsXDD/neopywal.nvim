@@ -24,9 +24,7 @@ end
 
 ---@param theme_style? string
 local function compile(theme_style)
-	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
-		theme_style = vim.o.background
-	end
+	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
 	local O = require("neopywal").options
 	local G = require("neopywal").compiler
@@ -38,9 +36,7 @@ local function compile(theme_style)
 	local highlights =
 		vim.tbl_deep_extend("keep", theme.custom_highlights, theme.editor, theme.fileformats, theme.plugins)
 
-	if path_sep == "\\" then
-		compile_path = compile_path:gsub("/", "\\")
-	end
+	if path_sep == "\\" then compile_path = compile_path:gsub("/", "\\") end
 
 	local lines = {
 		string.format(
@@ -65,25 +61,15 @@ local h = vim.api.nvim_set_hl]],
 			for _, style in pairs(properties.styles) do
 				properties[style] = true
 
-				if O.no_italic and style == "italic" then
-					properties[style] = false
-				end
+				if O.no_italic and style == "italic" then properties[style] = false end
 
-				if O.no_bold and style == "bold" then
-					properties[style] = false
-				end
+				if O.no_bold and style == "bold" then properties[style] = false end
 
-				if O.no_underline and style == "underline" then
-					properties[style] = false
-				end
+				if O.no_underline and style == "underline" then properties[style] = false end
 
-				if O.no_undercurl and style == "undercurl" then
-					properties[style] = false
-				end
+				if O.no_undercurl and style == "undercurl" then properties[style] = false end
 
-				if O.no_strikethrough and style == "strikethrough" then
-					properties[style] = false
-				end
+				if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
 			end
 		end
 
@@ -98,9 +84,7 @@ local h = vim.api.nvim_set_hl]],
 
 	table.insert(lines, "end, true)")
 
-	if vim.fn.isdirectory(compile_path) == 0 then
-		vim.fn.mkdir(compile_path, "p")
-	end
+	if vim.fn.isdirectory(compile_path) == 0 then vim.fn.mkdir(compile_path, "p") end
 
 	if vim.g.neopywal_debug then -- Debugging purpose
 		local deb = io.open(compile_path .. path_sep .. filename .. ".lua", "wb")
