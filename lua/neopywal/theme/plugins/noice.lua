@@ -2,7 +2,8 @@ local M = {}
 
 function M.get()
 	-- folke/noice.nvim
-	return {
+	local kinds = require("neopywal.utils.kinds").get("NoiceCompletionItemKind%s")
+	return vim.tbl_deep_extend("force", kinds, {
 		NoiceCmdlinePopup = { link = "NormalFloat" },
 
 		NoiceMini = { link = "NoiceLspProgressTitle" },
@@ -42,7 +43,7 @@ function M.get()
 
 		NoiceCmdlineIconFilter = { fg = C.color1 },
 		NoiceCmdlinePopupBorderFilter = { link = "NoiceCmdlineIconFilter" },
-	}
+	})
 end
 
 return M
