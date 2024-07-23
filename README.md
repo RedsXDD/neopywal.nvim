@@ -1473,6 +1473,21 @@ treesitter = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- symbols-outline.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/simrat39/symbols-outline.nvim">symbols-outline.nvim</a> </td>
+<td>
+
+> [!NOTE]
+> This plugin has been archived by the author, consider using [outline.nvim](https://github.com/hedyhli/outline.nvim)
+
+```lua
+symbols_outline = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- telescope.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/nvim-telescope/telescope.nvim">telescope.nvim</a> </td>
