@@ -101,6 +101,7 @@
 ---@field zsh boolean?
 
 ---@class NeopywalPlugins
+---@field aerial boolean?
 ---@field alpha boolean?
 ---@field coc boolean?
 ---@field colorful_winsep NeopywalPluginsColorful_winsep | boolean?
@@ -117,6 +118,7 @@
 ---@field noice boolean?
 ---@field notify boolean?
 ---@field nvim_cmp boolean?
+---@field symbols_outline boolean?
 ---@field telescope NeopywalPluginsTelescope | boolean?
 ---@field treesitter boolean?
 ---@field undotree boolean?
