@@ -12,16 +12,16 @@ M.compiler = {
 local G = M.compiler
 
 M.default_options = {
-	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
-	-- pywal template at `~/.cache/wal/colors-wal.vim`
+	-- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the
+	-- regular pywal template at `~/.cache/wal/colors-wal.vim`.
 	use_wallust = false,
 
-	-- This option allows to specify where Neopywal should look for a ".vim" template file.
-	colorscheme_file = "", -- e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim".
+	-- This option allows to specify where Neopywal should look for a ".vim" template file
+	-- (e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim").
+	colorscheme_file = "",
 
 	-- This option allows to use a custom built-in theme palettes like "catppuccin-mocha" or "tokyonight".
-	-- To get the list of available themes take a look at `:h neopywal-alternative-palettes` or at
-	-- `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
+	-- To get the list of available themes take a look at `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
 	-- Take note that this option takes precedence over `use_wallust` and `colorscheme_file`.
 	use_palette = "",
 
@@ -30,10 +30,11 @@ M.default_options = {
 	transparent_background = false,
 
 	-- With this option you can overwrite all the base colors the colorscheme uses.
-	-- For more information scroll down (https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors)
+	-- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors`
 	custom_colors = {},
 
 	-- With this option you can overwrite any highlight groups set by the colorscheme.
+	-- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`
 	custom_highlights = {},
 
 	-- Dims the background when another window is focused.
@@ -73,9 +74,8 @@ M.default_options = {
 
 	-- Setting this to false disables all default file format highlights.
 	-- Useful if you want to enable specific file format options.
-	-- NOTE: if the treesitter plugin integration is enabled, this option
-	-- will be automatically set to false unless the user manually sets it back on
-	-- using the setup() function.
+	-- Defaults to false when treesitter is enabled,
+	-- unless manually enabled inside the `setup()` function.
 	default_fileformats = true,
 
 	-- Setting this to false disables all default plugin highlights.
@@ -237,11 +237,11 @@ M.default_options = {
 			starter = true,
 			statusline = {
 				enabled = true,
-				mode_colors = {
-					-- Any of the color values must be one of Neopywal's colors
-					-- exported by "get_colors()" (e.g.: `color8`)
-					-- or a hexadecimal color (e.g.: "#ff0000").
 
+				-- Any of the color values must be one of Neopywal's colors
+				-- exported by "get_colors()" (e.g.: `color8`)
+				-- or a hexadecimal color (e.g.: "#ff0000").
+				mode_colors = {
 					normal = "color4",
 					visual = "color5",
 					insert = "color6",
