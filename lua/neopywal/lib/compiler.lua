@@ -22,7 +22,7 @@ local function inspect(t)
 	return string.format([[{ %s }]], table.concat(list, ", "))
 end
 
----@param theme_style? string
+---@param theme_style? ThemeStyles
 local function compile(theme_style)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 

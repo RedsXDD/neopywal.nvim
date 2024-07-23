@@ -1,6 +1,6 @@
 local M = {}
 
----@param theme_style? string
+---@param theme_style? ThemeStyles
 function M.get(theme_style)
 	local theme = {}
 

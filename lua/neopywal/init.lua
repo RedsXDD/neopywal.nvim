@@ -1,3 +1,5 @@
+---@type Neopywal
+---@diagnostic disable-next-line: missing-fields
 local M = {}
 local U = require("neopywal.utils.color")
 local notify = require("neopywal.lib.notify")
@@ -288,7 +290,7 @@ local function get_colorscheme_file()
 	return colorscheme_file
 end
 
----@param theme_style? string
+---@param theme_style? ThemeStyles
 ---@param export_user_colors boolean
 local function get_palette(theme_style, export_user_colors)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
@@ -387,7 +389,7 @@ Below is the error message that we captured:
 	return vim.tbl_deep_extend("keep", user_colors, C)
 end
 
----@param theme_style? string
+---@param theme_style? ThemeStyles
 function M.get_colors(theme_style)
 	if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 	local C = get_palette(theme_style, true)
@@ -459,7 +461,7 @@ function M.get_colors(theme_style)
 	return vim.tbl_deep_extend("keep", C, extra_colors)
 end
 
----@param user_config? table
+---@param user_config? NeopywalOptions
 local function gen_cache(user_config)
 	user_config = user_config or {}
 
@@ -507,7 +509,6 @@ local function disable_table(original_table, default_option)
 		or original_table
 end
 
----@param option boolean
 local function check_nil_option(option, fallback_result)
 	-- NOTE: `return option == nil and fallback_result or option`
 	-- doesn't work because "option" will be returned if "fallback_result" is false.
@@ -519,7 +520,7 @@ local function check_nil_option(option, fallback_result)
 end
 
 local did_setup = false
----@param user_config? table
+---@param user_config? NeopywalOptions
 function M.setup(user_config)
 	user_config = user_config or {}
 	user_config.plugins = check_nil_option(user_config.plugins, {})
@@ -559,7 +560,7 @@ function M.setup(user_config)
 end
 
 local lock = false -- Avoid g:colors_name reloading
----@param theme_style? string
+---@param theme_style? ThemeStyles
 function M.load(theme_style)
 	if lock then return end
 	if not did_setup then gen_cache() end
