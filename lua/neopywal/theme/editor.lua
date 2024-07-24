@@ -113,7 +113,7 @@ function M.get()
         WinBar = { link = "TabLineFill" }, -- Per-buffer tabline.
         WinBarNC = { link = "NormalNC" }, -- Per-buffer tabline on inactive buffers.
         TabLine = {
-            bg = O.transparent_background and C.none or C.cursorline,
+            bg = O.transparent_background and C.none or C.dim_bg,
         }, -- tab pages line, not active tab page label.
         TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
         TabLineSel = {
