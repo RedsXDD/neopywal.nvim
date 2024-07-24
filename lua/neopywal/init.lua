@@ -134,6 +134,7 @@ M.default_options = {
     },
     plugins = {
         aerial = true,
+        ale = false,
         alpha = true,
         beacon = {
             enabled = false,

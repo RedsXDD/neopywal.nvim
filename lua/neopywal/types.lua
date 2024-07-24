@@ -168,6 +168,7 @@
 
 ---@class NeopywalPlugins
 ---@field aerial boolean?
+---@field ale boolean?
 ---@field alpha boolean?
 ---@field beacon {enabled: boolean, color: string<ValidColors[]>?} | boolean?
 ---@field coc boolean?

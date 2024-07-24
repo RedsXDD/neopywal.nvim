@@ -634,6 +634,18 @@ aerial = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- ale {{{ -->
+<tr>
+<td> <a href="https://github.com/dense-analysis/ale">ale</a> </td>
+<td>
+
+```lua
+ale = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- alpha-nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/goolord/alpha-nvim">alpha-nvim</a> </td>
