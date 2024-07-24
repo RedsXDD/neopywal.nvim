@@ -799,6 +799,15 @@ bufferline.setup({
 coc = false
 ```
 
+Setting `enabled` to `true` will also enable the LSP plugin.
+
+```lua
+lsp = true,
+```
+
+> [!Note]
+> coc.nvim by default links to the native LSP highlight groups so the configuration from the `lsp` option will also apply to coc.
+
 </td>
 </tr>
 <!-- }}} -->
