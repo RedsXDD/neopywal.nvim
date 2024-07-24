@@ -1,5 +1,71 @@
 ---@alias ThemeStyles "dark" | "light" | nil
 ---@alias HighlightStyles "bold" | "underline" | "undercurl" | "underdouble" | "underdotted" | "underdashed" | "strikethrough" | "reverse" | "inverse" | "italic" | "standout" | "altfont" | "nocombine" | "NONE"
+---@alias ValidColors
+---| "background"
+---| "foreground"
+---| "cursor"
+---| "color0"
+---| "color1"
+---| "color2"
+---| "color3"
+---| "color4"
+---| "color5"
+---| "color6"
+---| "color7"
+---| "color8"
+---| "color9"
+---| "color10"
+---| "color11"
+---| "color12"
+---| "color13"
+---| "color14"
+---| "color15"
+---| "dim_bg"
+---| "comment"
+---| "cursorline"
+---| "directory"
+---| "diff_added"
+---| "diff_changed"
+---| "diff_removed"
+---| "diff_untracked"
+---| "error"
+---| "hint"
+---| "info"
+---| "unnecessary"
+---| "warn"
+---| "ok"
+---| "inlay_hints"
+---| "variable"
+---| "constant"
+---| "string"
+---| "character"
+---| "number"
+---| "boolean"
+---| "float"
+---| "identifier"
+---| "func"
+---| "statement"
+---| "conditional"
+---| "loop"
+---| "label"
+---| "exception"
+---| "operator"
+---| "keyword"
+---| "debug"
+---| "preproc"
+---| "include"
+---| "define"
+---| "macro"
+---| "precondit"
+---| "type"
+---| "structure"
+---| "storageclass"
+---| "typedef"
+---| "special"
+---| "secialchar"
+---| "tag"
+---| "delimiter"
+---| "specialcomment"
 
 ---@class Neopywal
 ---@field compiler CompilerOptions
@@ -103,14 +169,14 @@
 ---@class NeopywalPlugins
 ---@field aerial boolean?
 ---@field alpha boolean?
----@field beacon {enabled: boolean, color: string?} | boolean?
+---@field beacon {enabled: boolean, color: string<ValidColors[]>?} | boolean?
 ---@field coc boolean?
----@field colorful_winsep {enabled: boolean, color: string?} | boolean?
+---@field colorful_winsep {enabled: boolean, color: string<ValidColors[]>?} | boolean?
 ---@field dashboard boolean?
 ---@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field git_gutter boolean?
 ---@field gitsigns boolean?
----@field indent_blankline {enabled: boolean, scope_color: string?, colored_indent_levels: boolean?} | boolean?
+---@field indent_blankline {enabled: boolean, scope_color: string<ValidColors[]>?, colored_indent_levels: boolean?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?
 ---@field lsp NeopywalPluginsLSP?
@@ -142,7 +208,7 @@
 ---@field files boolean?
 ---@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, note: HighlightStyles[]?, todo: HighlightStyles[]?}?} | boolean?
 ---@field icons boolean?
----@field indentscope {enabled: boolean, scope_color: string?} | boolean?
+---@field indentscope {enabled: boolean, scope_color: string<ValidColors[]>?} | boolean?
 ---@field jump {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field jump2d {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field map boolean?
@@ -150,11 +216,11 @@
 ---@field operators boolean?
 ---@field pick boolean?
 ---@field starter boolean?
----@field statusline {enabled: boolean, mode_colors: table<string, string>} | boolean?
+---@field statusline {enabled: boolean, mode_colors: {normal: string<ValidColors[]>?, visual: string<ValidColors[]>?, insert: string<ValidColors[]>?, command: string<ValidColors[]>?, replace: string<ValidColors[]>?, other: string<ValidColors[]>?}?} | boolean?
 ---@field surround boolean?
 ---@field tabline boolean?
 ---@field test boolean?
----@field trailspace {enabled: boolean, color: string?} | boolean?
+---@field trailspace {enabled: boolean, color: string<ValidColors[]>?} | boolean?
 
 ---@class NeopywalPluginsBarbecue
 ---@field default_options NeopywalPluginsBarbecueOptions
@@ -180,8 +246,8 @@
 
 ---@class NeopywalPluginsFelineOptions
 ---@field assets {left_separator: string?, right_separator: string?, mode_icon: string?, dir: string?, file: string?, lsp: {server: string?, error: string?, warning: string?, info: string?, hint: string?}?, git: {branch: string?, added: string?, changed: string?, removed: string?}? }
----@field mode_colors table<string, table>
----@field sett {text: string?, bkg: string?, diffs: string?, extras: string?, curr_file: string?, curr_dir: string?, show_modified: boolean?, show_lazy_updates: boolean?}
+---@field mode_colors table<string, table<string, string<ValidColors[]>>>
+---@field sett {text: string<ValidColors[]>?, bkg: string<ValidColors[]>?, diffs: string<ValidColors[]>?, extras: string<ValidColors[]>?, curr_file: string<ValidColors[]>?, curr_dir: string<ValidColors[]>?, show_modified: boolean?, show_lazy_updates: boolean?}
 ---@field view {lsp: {progress: boolean?, name: boolean?, exclude_lsp_names: table?, separator: string?}?}
 
 ---@class NeopywalPluginsLualine
@@ -191,5 +257,5 @@
 ---@field get fun(): table
 
 ---@class NeopywalPluginsLualineOptions
----@field mode_colors {normal: string?, visual: string?, insert: string?, command: string?, replace: string?, terminal: string?}
+---@field mode_colors {normal: string<ValidColors[]>?, visual: string<ValidColors[]>?, insert: string<ValidColors[]>?, command: string<ValidColors[]>?, replace: string<ValidColors[]>?, terminal: string<ValidColors[]>?}
 ---@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}
