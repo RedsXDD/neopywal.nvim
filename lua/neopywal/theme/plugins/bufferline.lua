@@ -110,31 +110,16 @@ function M.setup(user_conf)
     local highlights = vim.tbl_deep_extend("keep", user_conf, default_highlights)
 
     for _, properties in pairs(highlights) do
-        -- This if statement applies styles to a highlight group, taking into account user options to disable certain styles.
-        -- It iterates over each style in the styles table in the highlight group, sets them to true by default,
-        -- and overrides them to false if the corresponding user option is set to disable the style.
         if properties.styles then
             for _, style in pairs(properties.styles) do
                 properties[style] = true
-
-                -- Override the italic style if the no_italic option is set to false.
                 if O.no_italic and style == "italic" then properties[style] = false end
-
-                -- Override the bold style if the no_bold option is set to false.
                 if O.no_bold and style == "bold" then properties[style] = false end
-
-                -- Override the underline style if the no_underline option is set to false.
                 if O.no_underline and style == "underline" then properties[style] = false end
-
-                -- Override the undercurl style if the no_undercurl option is set to false.
                 if O.no_undercurl and style == "undercurl" then properties[style] = false end
-
-                -- Override the strikethrough style if the no_strikethrough option is set to false.
                 if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
             end
         end
-
-        -- Remove the styles table to avoid passing unnecessary data.
         properties.styles = nil
     end
 
