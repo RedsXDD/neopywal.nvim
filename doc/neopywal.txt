@@ -127,16 +127,16 @@ options and settings.
 
 >lua
     require("neopywal").setup({
-        -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the regular
-        -- Pywal template at `~/.cache/wal/colors-wal.vim`
+        -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the
+        -- regular pywal template at `~/.cache/wal/colors-wal.vim`.
         use_wallust = false,
     
-        -- This option allows to specify where Neopywal should look for a ".vim" template file.
-        colorscheme_file = "", -- e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim".
+        -- This option allows to specify where Neopywal should look for a ".vim" template file
+        -- (e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim").
+        colorscheme_file = "",
     
         -- This option allows to use a custom built-in theme palettes like "catppuccin-mocha" or "tokyonight".
-        -- To get the list of available themes take a look at `:h neopywal-alternative-palettes` or at
-        -- `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
+        -- To get the list of available themes take a look at `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
         -- Take note that this option takes precedence over `use_wallust` and `colorscheme_file`.
         use_palette = "",
     
@@ -145,11 +145,11 @@ options and settings.
         transparent_background = false,
     
         -- With this option you can overwrite all the base colors the colorscheme uses.
-        -- For more information scroll down (https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors)
+        -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors`
         custom_colors = {},
     
         -- With this option you can overwrite any highlight groups set by the colorscheme.
-        -- For more information scroll down (https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights)
+        -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`
         custom_highlights = {},
     
         -- Dims the background when another window is focused.
@@ -189,9 +189,8 @@ options and settings.
     
         -- Setting this to false disables all default file format highlights.
         -- Useful if you want to enable specific file format options.
-        -- NOTE: if the treesitter plugin integration is enabled, this option
-        -- will be automatically set to false unless the user manually sets it back on
-        -- using the setup() function.
+        -- Defaults to false when treesitter is enabled,
+        -- unless manually enabled inside the `setup()` function.
         default_fileformats = true,
     
         -- Setting this to false disables all default plugin highlights.
@@ -598,8 +597,57 @@ Some plugins are enabled by default, you can control this behaviour with the
 Below is a list of supported plugins and their corresponding configuration
 module.
 
-PluginDefaultalpha-nvim>lua
+PluginDefaultaerial.nvim>lua
+    aerial = true
+<
+
+alpha-nvim>lua
     alpha = true
+<
+
+barbecue.nvimSpecial ~
+
+Update your Barbecue config to use the Neopywal theme:
+
+>lua
+    local has_barbecue, barbecue = pcall(require, "barbecue")
+    if not has_barbecue then
+        return
+    end
+    
+    local has_neopywal, neopywal_barbecue = pcall(require, "neopywal.theme.plugins.barbecue")
+    if not has_neopywal then
+        return
+    end
+    
+    neopywal_barbecue.setup()
+    
+    barbecue.setup({
+        theme = "neopywal"
+        -- The rest of your barbecue config ...
+    })
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change style settings and any of groups from the Neopywal theme.
+
+>lua
+    local neopywal_barbecue = require("neopywal.theme.plugins.barbecue")
+    
+    neopywal_barbecue.setup({
+        dim_background = false, -- Whether to dim the background.
+        dim_context = true, -- Whether the context should be dimmed.
+        dim_dirname = true, -- Whether the directory name should be dimmed.
+        hide_separator = false, -- Whether to hide the separator character.
+        basename_style = { "bold", "italic" },
+        context_style = {},
+        dirname_style = {},
+    
+        -- With this option you can overwrite any of the groups from the builtin theme.
+        -- For more information take a look at `:h barbecue-recipes` and at
+        -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`.
+        theme = {},
+    })
 <
 
 bufferline.nvimSpecial ~
@@ -1094,6 +1142,13 @@ nvim-notify>lua
 
 nvim-treesitter>lua
     treesitter = true
+<
+
+symbols-outline.nvim
+  [!NOTE] This plugin has been archived by the author, consider using
+  outline.nvim <https://github.com/hedyhli/outline.nvim>
+>lua
+    symbols_outline = false
 <
 
 telescope.nvim>lua
