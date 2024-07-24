@@ -993,6 +993,16 @@ gitsigns = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- harpoon {{{ -->
+<tr>
+<td> <a href="https://github.com/ThePrimeagen/harpoon">harpoon</a> </td>
+<td>
+
+```lua
+harpoon = false
+```
+
+<!-- }}} -->
 <!-- indent-blankline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/lukas-reineke/indent-blankline.nvim">indent-blankline.nvim</a> </td>

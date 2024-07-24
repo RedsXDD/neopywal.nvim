@@ -158,6 +158,7 @@ M.default_options = {
         },
         git_gutter = true,
         gitsigns = true,
+        harpoon = false,
         indent_blankline = {
             enabled = true,
 
