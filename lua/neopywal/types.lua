@@ -105,12 +105,12 @@
 ---@field alpha boolean?
 ---@field beacon {enabled: boolean, color: string?} | boolean?
 ---@field coc boolean?
----@field colorful_winsep NeopywalPluginsColorful_winsep | boolean?
+---@field colorful_winsep {enabled: boolean, color: string?} | boolean?
 ---@field dashboard boolean?
----@field flash NeopywalPluginsFlash | boolean?
+---@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field git_gutter boolean?
 ---@field gitsigns boolean?
----@field indent_blankline NeopywalPluginsIndent_blankline | boolean?
+---@field indent_blankline {enabled: boolean, scope_color: string?, colored_indent_levels: boolean?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?
 ---@field lsp NeopywalPluginsLSP?
@@ -120,115 +120,41 @@
 ---@field notify boolean?
 ---@field nvim_cmp boolean?
 ---@field symbols_outline boolean?
----@field telescope NeopywalPluginsTelescope | boolean?
+---@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
 ---@field treesitter boolean?
 ---@field undotree boolean?
 ---@field which_key boolean?
 ---@field mini NeopywalPluginsMiniNvim?
 
----@class NeopywalPluginsColorful_winsep
----@field enabled boolean
----@field color string?
-
----@class NeopywalPluginsFlash
----@field enabled boolean
----@field style HighlightStyles[]?
-
----@class NeopywalPluginsIndent_blankline
----@field enabled boolean
----@field scope_color string?
----@field colored_indent_levels boolean?
-
 ---@class NeopywalPluginsLSP
 ---@field enabled boolean
----@field virtual_text NeopywalPluginsLSPVirtualText?
----@field underlines NeopywalPluginsLSPUnderlines?
----@field inlay_hints NeopywalPluginsLSPInlayHints?
-
----@class NeopywalPluginsLSPVirtualText
----@field errors HighlightStyles[]?
----@field hints HighlightStyles[]?
----@field information HighlightStyles[]?
----@field ok HighlightStyles[]?
----@field warnings HighlightStyles[]?
----@field unnecessary HighlightStyles[]?
-
----@class NeopywalPluginsLSPUnderlines
----@field errors HighlightStyles[]?
----@field hints HighlightStyles[]?
----@field information HighlightStyles[]?
----@field ok HighlightStyles[]?
----@field warnings HighlightStyles[]?
-
----@class NeopywalPluginsLSPInlayHints
----@field background boolean?
----@field style HighlightStyles[]?
-
----@class NeopywalPluginsTelescope
----@field enabled boolean
----@field style "classic" | "nvchad" | nil?
+---@field virtual_text {errors: HighlightStyles[]?, hints: HighlightStyles[]?, information: HighlightStyles[]?, ok: HighlightStyles[]?, warnings: HighlightStyles[]?, unnecessary: HighlightStyles[]?}?
+---@field underlines {errors: HighlightStyles[]?, hints: HighlightStyles[]?, information: HighlightStyles[]?, ok: HighlightStyles[]?, warnings: HighlightStyles[]?}?
+---@field inlay_hints {background: boolean?, style: HighlightStyles[]?}?
 
 ---@class NeopywalPluginsMiniNvim
 ---@field animate boolean?
 ---@field clue boolean?
----@field completion NeopywalPluginsMiniCompletion | boolean?
----@field cursorword NeopywalPluginsMiniCursorword | boolean?
+---@field completion {enabled: boolean, parameter_style: HighlightStyles[]?} | boolean?
+---@field cursorword {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field deps boolean?
 ---@field diff boolean?
 ---@field files boolean?
----@field hipatterns NeopywalPluginsMiniHipatterns | boolean?
+---@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, note: HighlightStyles[]?, todo: HighlightStyles[]?}?} | boolean?
 ---@field icons boolean?
----@field indentscope NeopywalPluginsMiniIndentscope | boolean?
----@field jump NeopywalPluginsMiniJump | boolean?
----@field jump2d NeopywalPluginsMiniJump | boolean?
+---@field indentscope {enabled: boolean, scope_color: string?} | boolean?
+---@field jump {enabled: boolean, style: HighlightStyles[]?} | boolean?
+---@field jump2d {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field map boolean?
 ---@field notify boolean?
 ---@field operators boolean?
 ---@field pick boolean?
 ---@field starter boolean?
----@field statusline NeopywalPluginsMiniStatusline | boolean?
+---@field statusline {enabled: boolean, mode_colors: table<string, string>} | boolean?
 ---@field surround boolean?
 ---@field tabline boolean?
 ---@field test boolean?
----@field trailspace NeopywalPluginsMiniTrailspace | boolean?
-
----@class NeopywalPluginsMiniCompletion
----@field enabled boolean
----@field parameter_style HighlightStyles[]?
-
----@class NeopywalPluginsMiniCursorword
----@field enabled boolean
----@field style HighlightStyles[]?
-
----@class NeopywalPluginsMiniHipatterns
----@field enabled boolean
----@field style NeopywalPluginsHipatternsStyles?
-
----@class NeopywalPluginsHipatternsStyles
----@field fixme HighlightStyles[]?
----@field hack HighlightStyles[]?
----@field note HighlightStyles[]?
----@field todo HighlightStyles[]?
-
----@class NeopywalPluginsMiniIndentscope
----@field enabled boolean
----@field scope_color string?
-
----@class NeopywalPluginsMiniJump
----@field enabled boolean
----@field style HighlightStyles[]?
-
----@class NeopywalPluginsMiniJump2d
----@field enabled boolean
----@field style HighlightStyles[]?
-
----@class NeopywalPluginsMiniStatusline
----@field enabled boolean
----@field mode_colors table<string, string>?
-
----@class NeopywalPluginsMiniTrailspace
----@field enabled boolean
----@field color string?
+---@field trailspace {enabled: boolean, color: string?} | boolean?
 
 ---@class NeopywalPluginsBarbecue
 ---@field default_options NeopywalPluginsBarbecueOptions
