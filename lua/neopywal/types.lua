@@ -244,3 +244,15 @@
 ---@field context_style HighlightStyles[]?
 ---@field dirname_style HighlightStyles[]?
 ---@field theme table | function<table>
+
+---@class NeopywalPluginsFeline
+---@field default_options NeopywalPluginsFelineOptions
+---@field options NeopywalPluginsFelineOptions
+---@field setup fun(user_config: NeopywalPluginsFelineOptions?)
+---@field get fun(): table
+
+---@class NeopywalPluginsFelineOptions
+---@field assets {left_separator: string?, right_separator: string?, mode_icon: string?, dir: string?, file: string?, lsp: {server: string?, error: string?, warning: string?, info: string?, hint: string?}?, git: {branch: string?, added: string?, changed: string?, removed: string?}? }
+---@field mode_colors table<string, table>
+---@field sett {text: string?, bkg: string?, diffs: string?, extras: string?, curr_file: string?, curr_dir: string?, show_modified: boolean?, show_lazy_updates: boolean?}
+---@field view {lsp: {progress: boolean?, name: boolean?, exclude_lsp_names: table?, separator: string?}?}
