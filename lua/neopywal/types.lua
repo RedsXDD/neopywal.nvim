@@ -103,6 +103,7 @@
 ---@class NeopywalPlugins
 ---@field aerial boolean?
 ---@field alpha boolean?
+---@field beacon {enabled: boolean, color: string?} | boolean?
 ---@field coc boolean?
 ---@field colorful_winsep NeopywalPluginsColorful_winsep | boolean?
 ---@field dashboard boolean?

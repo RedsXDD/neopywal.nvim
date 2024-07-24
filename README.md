@@ -700,6 +700,24 @@ neopywal_barbecue.setup({
 </td>
 </tr>
 <!-- }}} -->
+<!-- beacon.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/DanilaMihailov/beacon.nvim">beacon.nvim</a> </td>
+<td>
+
+```lua
+beacon = {
+    enabled = false,
+
+    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+    -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+    color = "",
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- bufferline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/akinsho/bufferline.nvim">bufferline.nvim</a> </td>

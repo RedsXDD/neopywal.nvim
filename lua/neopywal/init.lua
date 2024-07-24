@@ -135,6 +135,13 @@ M.default_options = {
     plugins = {
         aerial = true,
         alpha = true,
+        beacon = {
+            enabled = false,
+
+            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+            -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+            color = "",
+        },
         coc = true,
         colorful_winsep = {
             enabled = false,
