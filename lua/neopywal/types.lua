@@ -256,3 +256,13 @@
 ---@field mode_colors table<string, table>
 ---@field sett {text: string?, bkg: string?, diffs: string?, extras: string?, curr_file: string?, curr_dir: string?, show_modified: boolean?, show_lazy_updates: boolean?}
 ---@field view {lsp: {progress: boolean?, name: boolean?, exclude_lsp_names: table?, separator: string?}?}
+
+---@class NeopywalPluginsLualine
+---@field default_options NeopywalPluginsLualineOptions
+---@field options NeopywalPluginsLualineOptions
+---@field setup fun(user_config: NeopywalPluginsLualineOptions?)
+---@field get fun(): table
+
+---@class NeopywalPluginsLualineOptions
+---@field mode_colors {normal: string?, visual: string?, insert: string?, command: string?, replace: string?, terminal: string?}
+---@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}

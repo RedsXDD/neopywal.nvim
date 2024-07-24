@@ -3,12 +3,14 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 
+---@type NeopywalPluginsLualine
+---@diagnostic disable-next-line: missing-fields
 local M = {}
 local O = require("neopywal").options
 local C = require("neopywal").get_colors()
 local U = require("neopywal.utils.color")
 
-local default_options = {
+M.default_options = {
     mode_colors = {
         -- Any of the color values must be one of Neopywal's colors
         -- exported by "get_colors()" (e.g.: `color8`)
@@ -30,17 +32,18 @@ local default_options = {
         z = { "bold" },
     },
 }
-M.options = default_options
+M.options = M.default_options
 
 local did_setup = false
-function M.setup(user_conf)
-    user_conf = user_conf or {}
-    M.options = vim.tbl_deep_extend("keep", user_conf, default_options)
+---@param user_config NeopywalPluginsLualineOptions?
+function M.setup(user_config)
+    user_config = user_config or {}
+    M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
     local hex_chars = "[abcdef0-9][abcdef0-9]"
     local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
     for option in pairs(M.options.mode_colors) do
-        local default_color = C[default_options.mode_colors[option]]
+        local default_color = C[M.default_options.mode_colors[option]]
 
         local final_color = M.options.mode_colors[option]
         final_color = final_color ~= "" and final_color or default_color
