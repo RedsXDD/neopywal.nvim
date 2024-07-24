@@ -561,6 +561,9 @@ function M.setup(user_config)
         M.default_options.plugins.lsp
     )
 
+    -- Coc.nvim depeds on lsp highlights.
+    M.options.plugins.lsp.enabled = M.options.plugins.coc or M.options.plugins.lsp.enabled
+
     gen_cache(user_config)
     did_setup = true
 end
