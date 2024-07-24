@@ -646,6 +646,59 @@ alpha = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- barbecue.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/utilyre/barbecue.nvim">barbecue.nvim</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+Update your Barbecue config to use the Neopywal theme:
+
+```lua
+local has_barbecue, barbecue = pcall(require, "barbecue")
+if not has_barbecue then
+    return
+end
+
+local has_neopywal, neopywal_barbecue = pcall(require, "neopywal.theme.plugins.barbecue")
+if not has_neopywal then
+    return
+end
+
+neopywal_barbecue.setup()
+
+barbecue.setup({
+    theme = "neopywal"
+    -- The rest of your barbecue config ...
+})
+```
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to change style settings and any of groups from the Neopywal theme.
+
+```lua
+local neopywal_barbecue = require("neopywal.theme.plugins.barbecue")
+
+neopywal_barbecue.setup({
+    dim_background = false, -- Whether to dim the background.
+    dim_context = true, -- Whether the context should be dimmed.
+    dim_dirname = true, -- Whether the directory name should be dimmed.
+    hide_separator = false, -- Whether to hide the separator character.
+    basename_style = { "bold", "italic" },
+    context_style = {},
+    dirname_style = {},
+
+    -- With this option you can overwrite any of the groups from the builtin theme.
+    -- For more information take a look at `:h barbecue-recipes` and at
+    -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`.
+    theme = {},
+})
+```
+
+</details>
+</td>
+</tr>
+<!-- }}} -->
 <!-- bufferline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/akinsho/bufferline.nvim">bufferline.nvim</a> </td>

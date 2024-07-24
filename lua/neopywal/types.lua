@@ -228,3 +228,19 @@
 ---@class NeopywalPluginsMiniTrailspace
 ---@field enabled boolean
 ---@field color string?
+
+---@class NeopywalPluginsBarbecue
+---@field default_options NeopywalPluginsBarbecueOptions
+---@field options NeopywalPluginsBarbecueOptions
+---@field setup fun(user_config: NeopywalPluginsBarbecueOptions?)
+---@field get fun(): table
+
+---@class NeopywalPluginsBarbecueOptions
+---@field dim_background boolean?
+---@field dim_context boolean?
+---@field dim_dirname boolean?
+---@field hide_separator boolean?
+---@field basename_style HighlightStyles[]?
+---@field context_style HighlightStyles[]?
+---@field dirname_style HighlightStyles[]?
+---@field theme table | function<table>
