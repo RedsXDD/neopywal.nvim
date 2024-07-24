@@ -237,7 +237,7 @@ require("neopywal").setup({
     -- For more plugin options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Plugins)
     plugins = {
         alpha = true,
-        coc = true,
+        coc = false,
         mini = {
             cursorword = true,
             files = true,
@@ -796,7 +796,7 @@ bufferline.setup({
 <td>
 
 ```lua
-coc = true
+coc = false
 ```
 
 </td>

@@ -143,7 +143,7 @@ M.default_options = {
             -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
             color = "",
         },
-        coc = true,
+        coc = false,
         colorful_winsep = {
             enabled = false,
 
