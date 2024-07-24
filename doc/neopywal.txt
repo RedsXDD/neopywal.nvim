@@ -206,7 +206,7 @@ options and settings.
         -- For more plugin options please scroll down (https://github.com/RedsXDD/neopywal.nvim#Plugins)
         plugins = {
             alpha = true,
-            coc = true,
+            coc = false,
             mini = {
                 cursorword = true,
                 files = true,
@@ -601,6 +601,10 @@ PluginDefaultaerial.nvim>lua
     aerial = true
 <
 
+ale>lua
+    ale = false
+<
+
 alpha-nvim>lua
     alpha = true
 <
@@ -645,9 +649,20 @@ change style settings and any of groups from the Neopywal theme.
     
         -- With this option you can overwrite any of the groups from the builtin theme.
         -- For more information take a look at `:h barbecue-recipes` and at
-        -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`.
+        -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`
+        -- as this option works exactly the same as `custom_highlights`.
         theme = {},
     })
+<
+
+beacon.nvim>lua
+    beacon = {
+        enabled = false,
+    
+        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+        -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+        color = "",
+    }
 <
 
 bufferline.nvimSpecial ~
@@ -704,9 +719,18 @@ Overriding configurations can be done inside the setup() function, see
 <
 
 coc.nvim>lua
-    coc = true
+    coc = false
 <
 
+Setting `enabled` to `true` will also enable the LSP plugin.
+
+>lua
+    lsp = true,
+<
+
+
+  [!Note] coc.nvim by default links to the native LSP highlight groups so the
+  configuration from the `lsp` option will also apply to coc.
 colorful-winsep.nvim>lua
     colorful_winsep = {
         enabled = false,
