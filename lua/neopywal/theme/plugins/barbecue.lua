@@ -15,7 +15,8 @@ M.default_options = {
 
     -- With this option you can overwrite any of the groups from the builtin theme.
     -- For more information take a look at `:h barbecue-recipes` and at
-    -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`.
+    -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`
+    -- as this option works exactly the same as `custom_highlights`.
     theme = {},
 }
 M.options = M.default_options
