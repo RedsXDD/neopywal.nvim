@@ -721,10 +721,13 @@ neopywal_barbecue.setup({
 beacon = {
     enabled = false,
 
-    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-    -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+    -- Can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
     color = "",
-}
+},
 ```
 
 </td>
@@ -820,8 +823,11 @@ lsp = true,
 colorful_winsep = {
     enabled = false,
 
-    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-    -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+    -- Can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
     color = "",
 }
 ```
@@ -1011,11 +1017,14 @@ harpoon = false
 ```lua
 indent_blankline = {
     enabled = true,
-
-    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-    -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
-    scope_color = "",
     colored_indent_levels = false,
+
+    -- Can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
+    scope_color = "",
 }
 ```
 
@@ -1084,11 +1093,12 @@ Notice that calling `setup()` is optional. You may pass a lua table in order to 
 local neopywal_lualine = require("neopywal.theme.plugins.lualine")
 
 neopywal_lualine.setup({
+    -- Any of the color values can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
     mode_colors = {
-        -- Any of the color values must be one of Neopywal's colors
-        -- exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000").
-
         normal = "color4",
         visual = "color5",
         insert = "color6",
@@ -1273,8 +1283,11 @@ mini = {
     indentscope = {
         enabled = true,
 
-        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
         scope_color = "",
     }
 }
@@ -1394,7 +1407,23 @@ mini = {
 
 ```lua
 mini = {
-    statusline = true
+    statusline = {
+        enabled = true,
+
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        mode_colors = {
+            normal = "color4",
+            visual = "color5",
+            insert = "color6",
+            command = "color1",
+            replace = "color2",
+            other = "color3", -- e.g.: terminal.
+        },
+    },
 }
 ```
 
@@ -1453,8 +1482,11 @@ mini = {
     trailspace = {
         enabled = true,
 
-        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000"), default: `warn`
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
         color = "",
     },
 }
@@ -1516,8 +1548,11 @@ navic = {
     hide_separator = false, -- Whether to hide the separator character.
     text_style = { "bold", "italic" },
 
-    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-    -- or a hexadecimal color (e.g.: "#ff0000").
+    -- Can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
     bg_color = "",
 },
 ```
