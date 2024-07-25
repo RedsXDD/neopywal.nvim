@@ -1,90 +1,61 @@
 local M = {}
+local C = require("neopywal").get_colors()
 
 -- LSP symbol kind and completion kind highlights.
-local has_treesitter = require("neopywal").options.plugins.treesitter
--- stylua: ignore
-local kinds = has_treesitter and {
-        Array = "@punctuation.bracket",
-        Boolean = "@boolean",
-        Class = "@type",
-        Color = "Constant",
-        Constant = "@constant",
-        Constructor = "@constructor",
-        Enum = "@lsp.type.enum",
-        EnumMember = "@lsp.type.enumMember",
-        Event = "@type",
-        Field = "@field",
-        File = "@text.uri",
-        Folder = "Directory",
-        Function = "@function",
-        Interface = "@lsp.type.interface",
-        Key = "@variable.member",
-        Keyword = "@keyword",
-        Method = "@method",
-        Module = "@module",
-        Namespace = "@namespace",
-        Null = "@constant.builtin",
-        Number = "@number",
-        Object = "@constant",
-        Operator = "@operator",
-        Package = "@module",
-        Property = "@property",
-        Reference = "@markup.link",
-        Snippet = "@module",
-        String = "@string",
-        Struct = "@lsp.type.struct",
-        Text = "@markup",
-        TypeParameter = "@lsp.type.typeParameter",
-        Unit = "@lsp.type.struct",
-        Value = "@string",
-        Variable = "@variable",
-} or {
-        Array = "Special",
-        Boolean = "Boolean",
-        Class = "Type",
-        Color = "Constant",
-        Constant = "Constant",
-        Constructor = "Special",
-        Enum = "Type",
-        EnumMember = "Constant",
-        Event = "Type",
-        Field = "Function",
-        File = "URLlink",
-        Folder = "Directory",
-        Function = "Function",
-        Interface = "Variable",
-        Key = "Function",
-        Keyword = "Keyword",
-        Method = "Function",
-        Module = "Include",
-        Namespace = "Include",
-        Null = "Special",
-        Number = "Number",
-        Object = "Constant",
-        Operator = "Operator",
-        Package = "Include",
-        Property = "Function",
-        Reference = "Tag",
-        Snippet = "Include",
-        String = "String",
-        Struct = "Type",
-        Text = "Normal",
-        TypeParameter = "TypeDef",
-        Unit = "Type",
-        Value = "String",
-        Variable = "Variable",
+local kinds = {
+    Array = { fg = C.special }, --  Links to "@punctuation.bracket" => "Special".
+    Boolean = { fg = C.boolean }, --  Links to "@boolean" => "Boolean".
+    Class = { fg = C.type }, --  Links to "@type" => "Type".
+    Color = { fg = C.constant }, --  Links to "@constant" => "Constant".
+    Constant = { fg = C.constant }, --  Links to "@constant" => "Constant".
+    Constructor = { fg = C.special }, --  Links to "@constructor" => "Special".
+    Enum = { fg = C.type }, --  Links to "@lsp.type.enum" => "Type".
+    EnumMember = { fg = C.constant }, --  Links to "@lsp.type.enumMember" => "Constant".
+    Event = { fg = C.type }, --  Links to "@type" => "Type".
+    Field = { fg = C.func }, --  Links to "@field" => "Function".
+    File = { fg = C.color4 }, --  Links to "@text.uri" => "URLlink".
+    Folder = { fg = C.color4 }, -- Links to "Directory".
+    Function = { fg = C.func }, --  Links to "@function" => "Function".
+    Interface = { fg = C.variable }, --  Links to "@lsp.type.interface" => "Variable".
+    Key = { fg = C.func }, --  Links to "@variable.member" => "Function".
+    Keyword = { fg = C.keyword }, --  Links to "@keyword" => "Keyword".
+    Method = { fg = C.func }, --  Links to "@method" => "Function".
+    Module = { fg = C.include }, --  Links to "@module" => "Include".
+    Namespace = { fg = C.include }, --  Links to "@namespace" => "Include".
+    Null = { fg = C.special }, --  Links to "@constant.builtin" => "Special".
+    Number = { fg = C.number }, --  Links to "@number" => "Number".
+    Object = { fg = C.constant }, --  Links to "@constant" => "Constant".
+    Operator = { fg = C.operator }, --  Links to "@operator" => "Operator".
+    Package = { fg = C.include }, --  Links to "@module" => "Include".
+    Property = { fg = C.func }, --  Links to "@property" => "Function".
+    Reference = { fg = C.tag }, --  Links to "@markup.link" => "Tag".
+    Snippet = { fg = C.include }, --  Links to "@module" => "Include".
+    String = { fg = C.string }, --  Links to "@string" => "String".
+    Struct = { fg = C.type }, --  Links to "@lsp.type.struct" => "Type".
+    Text = { fg = C.foreground }, -- Links to "Normal".
+    TypeParameter = { fg = C.type }, --  Links to "@lsp.type.typeParameter" => "TypeDef".
+    Unit = { fg = C.type }, --  Links to "@lsp.type.struct" => "Type".
+    Value = { fg = C.string }, --  Links to "@string" => "String".
+    Variable = { fg = C.variable }, --  Links to "@variable" => "Variable".
 }
 
 ---@param pattern string?
-function M.get(pattern)
+---@param append_to_hls table?
+function M.get(pattern, append_to_hls)
     local hl = {}
-    for kind, link in pairs(kinds) do
-        if pattern then
-            hl[pattern:format(kind)] = { link = link }
+    pattern = pattern or ""
+
+    for kind, kind_properties in pairs(kinds) do
+        local basename = kind
+        if pattern ~= "" then basename = pattern:format(kind) end
+
+        if type(append_to_hls) == "table" and next(append_to_hls) ~= nil then
+            hl[basename] = vim.tbl_extend("keep", append_to_hls, kind_properties)
         else
-            hl[kind] = { link = link }
+            hl[basename] = kind_properties
         end
     end
+
     return hl
 end
 
