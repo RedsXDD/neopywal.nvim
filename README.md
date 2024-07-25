@@ -1121,6 +1121,163 @@ neopywal_lualine.setup({
 </td>
 </tr>
 <!-- }}} -->
+<!-- nvim-lspconfig {{{ -->
+<tr>
+<td> <a href="https://github.com/neovim/nvim-lspconfig">nvim-lspconfig</a> </td>
+<td>
+
+```lua
+lsp = {
+    enabled = true,
+    virtual_text = {
+        errors = { "bold", "italic" },
+        hints = { "bold", "italic" },
+        information = { "bold", "italic" },
+        ok = { "bold", "italic" },
+        warnings = { "bold", "italic" },
+        unnecessary = { "bold", "italic" },
+    },
+    underlines = {
+        errors = { "undercurl" },
+        hints = { "undercurl" },
+        information = { "undercurl" },
+        ok = { "undercurl" },
+        warnings = { "undercurl" },
+    },
+    inlay_hints = {
+        background = true,
+        style = { "bold", "italic" },
+    },
+},
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-navic {{{ -->
+<tr>
+<td> <a href="https://github.com/SmiteshP/nvim-navic">nvim-navic</a> </td>
+<td>
+
+```lua
+navic = {
+    enabled = false,
+    dim_text = false, -- Whether the text should be dimmed.
+    hide_separator = false, -- Whether to hide the separator character.
+    text_style = { "bold", "italic" },
+
+    -- Can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
+    bg_color = "",
+},
+```
+
+<details> <summary>Special</summary>
+
+```lua
+-- You NEED to enable highlight in nvim-navic setting or it won't work.
+require("nvim-navic").setup {
+    highlight = true
+}
+```
+
+If you want to make background color similar to what's used on lualine/feline you can do the following:
+
+```lua
+require("neopywal").setup({
+    plugins = {
+        navic = {
+            bg_color = function(C)
+                local U = require("neopywal.utils.color")
+
+                -- `0.5` would match the color used on lualine's "b" section.
+                return U.blend(C.color8, C.background, 0.3)
+            end
+        }
+    }
+})
+```
+
+</details>
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- neo-tree.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/nvim-neo-tree/neo-tree.nvim">neo-tree.nvim</a> </td>
+<td>
+
+```lua
+neotree = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- netrw {{{ -->
+<tr>
+<td> <a href="https://www.vim.org/scripts/script.php?script_id=1075">netrw</a> </td>
+<td>
+
+```lua
+netrw = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- noice.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/folke/noice.nvim">noice.nvim</a> </td>
+<td>
+
+```lua
+noice = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-cmp {{{ -->
+<tr>
+<td> <a href="https://github.com/hrsh7th/nvim-cmp">nvim-cmp</a> </td>
+<td>
+
+```lua
+nvim_cmp = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-notify {{{ -->
+<tr>
+<td> <a href="https://github.com/rcarriga/nvim-notify">nvim-notify</a> </td>
+<td>
+
+```lua
+notify = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-treesitter {{{ -->
+<tr>
+<td> <a href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</a> </td>
+<td>
+
+```lua
+treesitter = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- mini.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/echasnovski/mini.nvim">mini.nvim</a> </td>
@@ -1499,163 +1656,6 @@ mini = {
 </table>
 
 </details>
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- nvim-lspconfig {{{ -->
-<tr>
-<td> <a href="https://github.com/neovim/nvim-lspconfig">nvim-lspconfig</a> </td>
-<td>
-
-```lua
-lsp = {
-    enabled = true,
-    virtual_text = {
-        errors = { "bold", "italic" },
-        hints = { "bold", "italic" },
-        information = { "bold", "italic" },
-        ok = { "bold", "italic" },
-        warnings = { "bold", "italic" },
-        unnecessary = { "bold", "italic" },
-    },
-    underlines = {
-        errors = { "undercurl" },
-        hints = { "undercurl" },
-        information = { "undercurl" },
-        ok = { "undercurl" },
-        warnings = { "undercurl" },
-    },
-    inlay_hints = {
-        background = true,
-        style = { "bold", "italic" },
-    },
-},
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- nvim-navic {{{ -->
-<tr>
-<td> <a href="https://github.com/SmiteshP/nvim-navic">nvim-navic</a> </td>
-<td>
-
-```lua
-navic = {
-    enabled = false,
-    dim_text = false, -- Whether the text should be dimmed.
-    hide_separator = false, -- Whether to hide the separator character.
-    text_style = { "bold", "italic" },
-
-    -- Can either be:
-    --   - A color exported by "get_colors()" (e.g.: `color8`)
-    --   - A hexadecimal color (e.g.: "#ff0000").
-    --   - A function with an optional "C" parameter that returns one of the two options above.
-    --     e.g: function(C) return C.color1 end
-    bg_color = "",
-},
-```
-
-<details> <summary>Special</summary>
-
-```lua
--- You NEED to enable highlight in nvim-navic setting or it won't work.
-require("nvim-navic").setup {
-    highlight = true
-}
-```
-
-If you want to make background color similar to what's used on lualine/feline you can do the following:
-
-```lua
-require("neopywal").setup({
-    plugins = {
-        navic = {
-            bg_color = function(C)
-                local U = require("neopywal.utils.color")
-
-                -- `0.5` would match the color used on lualine's "b" section.
-                return U.blend(C.color8, C.background, 0.3)
-            end
-        }
-    }
-})
-```
-
-</details>
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- neo-tree.nvim {{{ -->
-<tr>
-<td> <a href="https://github.com/nvim-neo-tree/neo-tree.nvim">neo-tree.nvim</a> </td>
-<td>
-
-```lua
-neotree = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- netrw {{{ -->
-<tr>
-<td> <a href="https://www.vim.org/scripts/script.php?script_id=1075">netrw</a> </td>
-<td>
-
-```lua
-netrw = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- noice.nvim {{{ -->
-<tr>
-<td> <a href="https://github.com/folke/noice.nvim">noice.nvim</a> </td>
-<td>
-
-```lua
-noice = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- nvim-cmp {{{ -->
-<tr>
-<td> <a href="https://github.com/hrsh7th/nvim-cmp">nvim-cmp</a> </td>
-<td>
-
-```lua
-nvim_cmp = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- nvim-notify {{{ -->
-<tr>
-<td> <a href="https://github.com/rcarriga/nvim-notify">nvim-notify</a> </td>
-<td>
-
-```lua
-notify = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- nvim-treesitter {{{ -->
-<tr>
-<td> <a href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</a> </td>
-<td>
-
-```lua
-treesitter = true
-```
 
 </td>
 </tr>
