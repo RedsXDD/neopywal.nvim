@@ -659,10 +659,13 @@ beacon.nvim>lua
     beacon = {
         enabled = false,
     
-        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
         color = "",
-    }
+    },
 <
 
 bufferline.nvimSpecial ~
@@ -735,8 +738,11 @@ colorful-winsep.nvim>lua
     colorful_winsep = {
         enabled = false,
     
-        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
         color = "",
     }
 <
@@ -874,14 +880,21 @@ gitsigns.nvim>lua
     gitsigns = true
 <
 
+harpoon>lua
+    harpoon = false
+<
+
 indent-blankline.nvim>lua
     indent_blankline = {
         enabled = true,
-    
-        -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
-        scope_color = "",
         colored_indent_levels = false,
+    
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        scope_color = "",
     }
 <
 
@@ -930,11 +943,12 @@ change style settings and the colors per vim mode.
     local neopywal_lualine = require("neopywal.theme.plugins.lualine")
     
     neopywal_lualine.setup({
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
         mode_colors = {
-            -- Any of the color values must be one of Neopywal's colors
-            -- exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000").
-    
             normal = "color4",
             visual = "color5",
             insert = "color6",
@@ -951,6 +965,98 @@ change style settings and the colors per vim mode.
             z = { "bold" },
         },
     })
+<
+
+nvim-lspconfig>lua
+    lsp = {
+        enabled = true,
+        virtual_text = {
+            errors = { "bold", "italic" },
+            hints = { "bold", "italic" },
+            information = { "bold", "italic" },
+            ok = { "bold", "italic" },
+            warnings = { "bold", "italic" },
+            unnecessary = { "bold", "italic" },
+        },
+        underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            information = { "undercurl" },
+            ok = { "undercurl" },
+            warnings = { "undercurl" },
+        },
+        inlay_hints = {
+            background = true,
+            style = { "bold", "italic" },
+        },
+    },
+<
+
+nvim-navic>lua
+    navic = {
+        enabled = false,
+        dim_text = false, -- Whether the text should be dimmed.
+        hide_separator = false, -- Whether to hide the separator character.
+        text_style = { "bold", "italic" },
+    
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        bg_color = "",
+    },
+<
+
+Special ~
+
+>lua
+    -- You NEED to enable highlight in nvim-navic setting or it won't work.
+    require("nvim-navic").setup {
+        highlight = true
+    }
+<
+
+If you want to make background color similar to what’s used on lualine/feline
+you can do the following:
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            navic = {
+                bg_color = function(C)
+                    local U = require("neopywal.utils.color")
+    
+                    -- `0.5` would match the color used on lualine's "b" section.
+                    return U.blend(C.color8, C.background, 0.3)
+                end
+            }
+        }
+    })
+<
+
+neo-tree.nvim>lua
+    neotree = true
+<
+
+netrw>lua
+    netrw = true
+<
+
+noice.nvim>lua
+    noice = true
+<
+
+nvim-cmp>lua
+    nvim_cmp = true
+<
+
+nvim-notify>lua
+    notify = true
+<
+
+nvim-treesitter>lua
+    treesitter = true
 <
 
 mini.nvimSpecial ~
@@ -1028,8 +1134,11 @@ mini.indentscope>lua
         indentscope = {
             enabled = true,
     
-            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
             scope_color = "",
         }
     }
@@ -1085,7 +1194,23 @@ mini.starter>lua
 
 mini.statusline>lua
     mini = {
-        statusline = true
+        statusline = {
+            enabled = true,
+    
+            -- Any of the color values can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            mode_colors = {
+                normal = "color4",
+                visual = "color5",
+                insert = "color6",
+                command = "color1",
+                replace = "color2",
+                other = "color3", -- e.g.: terminal.
+            },
+        },
     }
 <
 
@@ -1112,60 +1237,14 @@ mini.trailspace>lua
         trailspace = {
             enabled = true,
     
-            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000"), default: `warn`
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
             color = "",
         },
     }
-<
-
-nvim-lspconfig>lua
-    lsp = {
-        enabled = true,
-        virtual_text = {
-            errors = { "bold", "italic" },
-            hints = { "bold", "italic" },
-            information = { "bold", "italic" },
-            ok = { "bold", "italic" },
-            warnings = { "bold", "italic" },
-            unnecessary = { "bold", "italic" },
-        },
-        underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            information = { "undercurl" },
-            ok = { "undercurl" },
-            warnings = { "undercurl" },
-        },
-        inlay_hints = {
-            background = true,
-            style = { "bold", "italic" },
-        },
-    },
-<
-
-neo-tree.nvim>lua
-    neotree = true
-<
-
-netrw>lua
-    netrw = true
-<
-
-noice.nvim>lua
-    noice = true
-<
-
-nvim-cmp>lua
-    nvim_cmp = true
-<
-
-nvim-notify>lua
-    notify = true
-<
-
-nvim-treesitter>lua
-    treesitter = true
 <
 
 symbols-outline.nvim
