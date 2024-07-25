@@ -64,13 +64,9 @@ function M.setup(user_config)
 
         for _, style in pairs(section_styles) do
             if not O.no_italic and style == "italic" then table.insert(properties, style) end
-
             if not O.no_bold and style == "bold" then table.insert(properties, style) end
-
             if not O.no_underline and style == "underline" then table.insert(properties, style) end
-
             if not O.no_undercurl and style == "undercurl" then table.insert(properties, style) end
-
             if not O.no_strikethrough and style == "strikethrough" then table.insert(properties, style) end
         end
 
