@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.4.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.3.0...v2.4.0) (2024-07-25)
+
+
+### Features
+
+* **bufferline:** improve tabline colors ([e1ac55b](https://github.com/RedsXDD/neopywal.nvim/commit/e1ac55b0dfa633d738dba81c6bb65f0854770ec5))
+* consistent item kinds highlights ([159e886](https://github.com/RedsXDD/neopywal.nvim/commit/159e886ef875c50e971fb33a0e2635a0f4493c80))
+* **editor:** improve tabline colors ([e1ac55b](https://github.com/RedsXDD/neopywal.nvim/commit/e1ac55b0dfa633d738dba81c6bb65f0854770ec5))
+* **plugins:** accept functions for "color" options ([5def8ac](https://github.com/RedsXDD/neopywal.nvim/commit/5def8ac41844f489808b313d196e1546a9fb2785))
+* **plugins:** add aerial.nvim ([4943f7d](https://github.com/RedsXDD/neopywal.nvim/commit/4943f7d09379ec8a684d087db440bbbba61bfe30))
+* **plugins:** add ALE ([f54f442](https://github.com/RedsXDD/neopywal.nvim/commit/f54f442d6f48bd5554d2fc6b3fe72ca45ac3a9f5))
+* **plugins:** add barbecue.nvim ([1e283de](https://github.com/RedsXDD/neopywal.nvim/commit/1e283de611f1c9cf17a80ef68cc91e7bfb2d4994))
+* **plugins:** add beacon.nvim ([133f82c](https://github.com/RedsXDD/neopywal.nvim/commit/133f82c6b6118cb292fc2e99a63a1a90f09fc322))
+* **plugins:** add harpoon ([6babc4a](https://github.com/RedsXDD/neopywal.nvim/commit/6babc4aae72a29407c5eb6fdf882f9f6c159d5d2))
+* **plugins:** add nvim-navic ([c497fcf](https://github.com/RedsXDD/neopywal.nvim/commit/c497fcf004395f6dbe70ff7035fc6d1ba3140388))
+* **plugins:** add symbols_outline.nvim ([bd80566](https://github.com/RedsXDD/neopywal.nvim/commit/bd8056625b4267409ba80a4a52159b1f3c953c31))
+
 ## [2.3.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.2.0...v2.3.0) (2024-07-22)
 
 
