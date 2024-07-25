@@ -455,13 +455,11 @@ vim.api.nvim_create_user_command("NeopywalCompile", function()
     vim.cmd.colorscheme("neopywal")
 end, {})
 
-if vim.g.neopywal_debug then
-    vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = "*/neopywal/*",
-        callback = function()
-            vim.schedule(function() vim.cmd("NeopywalCompile") end)
-        end,
-    })
-end
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = { "*/neopywal/*", "*/neopywal.lua" },
+    callback = function()
+        vim.schedule(function() vim.cmd("NeopywalCompile") end)
+    end,
+})
 
 return M
