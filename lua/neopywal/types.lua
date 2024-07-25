@@ -182,6 +182,7 @@
 ---@field lazy boolean?
 ---@field lazygit boolean?
 ---@field lsp NeopywalPluginsLSP?
+---@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: string<string<ValidColors[]> | fun(C: table<ValidColors[]>?): ValidColors[]? | "">} | boolean?
 ---@field neotree boolean?
 ---@field netrw boolean?
 ---@field noice boolean?

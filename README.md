@@ -1504,6 +1504,55 @@ lsp = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- nvim-navic {{{ -->
+<tr>
+<td> <a href="https://github.com/SmiteshP/nvim-navic">nvim-navic</a> </td>
+<td>
+
+```lua
+navic = {
+    enabled = false,
+    dim_text = false, -- Whether the text should be dimmed.
+    hide_separator = false, -- Whether to hide the separator character.
+    text_style = { "bold", "italic" },
+
+    -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+    -- or a hexadecimal color (e.g.: "#ff0000").
+    bg_color = "",
+},
+```
+
+<details> <summary>Special</summary>
+
+```lua
+-- You NEED to enable highlight in nvim-navic setting or it won't work.
+require("nvim-navic").setup {
+    highlight = true
+}
+```
+
+If you want to make background color similar to what's used on lualine/feline you can do the following:
+
+```lua
+require("neopywal").setup({
+    plugins = {
+        navic = {
+            bg_color = function(C)
+                local U = require("neopywal.utils.color")
+
+                -- `0.5` would match the color used on lualine's "b" section.
+                return U.blend(C.color8, C.background, 0.3)
+            end
+        }
+    }
+})
+```
+
+</details>
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- neo-tree.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/nvim-neo-tree/neo-tree.nvim">neo-tree.nvim</a> </td>

@@ -191,6 +191,16 @@ M.default_options = {
                 style = { "bold", "italic" },
             },
         },
+        navic = {
+            enabled = false,
+            dim_text = false, -- Whether the text should be dimmed.
+            hide_separator = false, -- Whether to hide the separator character.
+            text_style = { "bold" },
+
+            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
+            -- or a hexadecimal color (e.g.: "#ff0000").
+            bg_color = "",
+        },
         neotree = true,
         netrw = true,
         noice = true,
