@@ -11,11 +11,12 @@ local C = require("neopywal").get_colors()
 local U = require("neopywal.utils.color")
 
 M.default_options = {
+    -- Any of the color values can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
     mode_colors = {
-        -- Any of the color values must be one of Neopywal's colors
-        -- exported by "get_colors()" (e.g.: `color8`)
-        -- or a hexadecimal color (e.g.: "#ff0000").
-
         normal = "color4",
         visual = "color5",
         insert = "color6",
@@ -46,6 +47,8 @@ function M.setup(user_config)
         local default_color = C[M.default_options.mode_colors[option]]
 
         local final_color = M.options.mode_colors[option]
+        if type(final_color) == "function" then final_color = final_color(C) end
+
         final_color = final_color ~= "" and final_color or default_color
         final_color = string.lower(final_color)
         final_color = string.find(final_color, pattern) ~= nil and final_color

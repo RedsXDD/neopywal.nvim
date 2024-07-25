@@ -139,16 +139,22 @@ M.default_options = {
         beacon = {
             enabled = false,
 
-            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
             color = "",
         },
         coc = false,
         colorful_winsep = {
             enabled = false,
 
-            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000"), default: `color4`
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
             color = "",
         },
         dashboard = true,
@@ -161,11 +167,14 @@ M.default_options = {
         harpoon = false,
         indent_blankline = {
             enabled = true,
-
-            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
-            scope_color = "",
             colored_indent_levels = false,
+
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            scope_color = "",
         },
         lazy = true,
         lazygit = true,
@@ -197,8 +206,11 @@ M.default_options = {
             hide_separator = false, -- Whether to hide the separator character.
             text_style = { "bold" },
 
-            -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-            -- or a hexadecimal color (e.g.: "#ff0000").
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
             bg_color = "",
         },
         neotree = true,
@@ -241,8 +253,11 @@ M.default_options = {
             indentscope = {
                 enabled = true,
 
-                -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-                -- or a hexadecimal color (e.g.: "#ff0000"), default: `comment`
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
                 scope_color = "",
             },
             jump = {
@@ -261,9 +276,11 @@ M.default_options = {
             statusline = {
                 enabled = true,
 
-                -- Any of the color values must be one of Neopywal's colors
-                -- exported by "get_colors()" (e.g.: `color8`)
-                -- or a hexadecimal color (e.g.: "#ff0000").
+                -- Any of the color values can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
                 mode_colors = {
                     normal = "color4",
                     visual = "color5",
@@ -279,8 +296,11 @@ M.default_options = {
             trailspace = {
                 enabled = true,
 
-                -- One of Neopywal's colors exported by "get_colors()" (e.g.: `color8`)
-                -- or a hexadecimal color (e.g.: "#ff0000"), default: `warn`
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
                 color = "",
             },
         },

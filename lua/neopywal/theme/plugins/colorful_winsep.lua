@@ -5,6 +5,8 @@ function M.get()
     local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
 
     local winsep_color = O.plugins.colorful_winsep.color
+    if type(winsep_color) == "function" then winsep_color = winsep_color(C) end
+
     winsep_color = winsep_color ~= "" and winsep_color or C.color4
     winsep_color = string.lower(winsep_color)
     winsep_color = string.find(winsep_color, pattern) ~= nil and winsep_color

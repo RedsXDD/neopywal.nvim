@@ -1,5 +1,6 @@
 ---@alias ThemeStyles "dark" | "light" | nil
 ---@alias HighlightStyles "bold" | "underline" | "undercurl" | "underdouble" | "underdotted" | "underdashed" | "strikethrough" | "reverse" | "inverse" | "italic" | "standout" | "altfont" | "nocombine" | "NONE"
+---@alias ValidColorOptions string<string<ValidColors[]> | fun(C: table<ValidColors[]>?): ValidColors[]? | "">
 ---@alias ValidColors
 ---| "background"
 ---| "foreground"
@@ -170,19 +171,19 @@
 ---@field aerial boolean?
 ---@field ale boolean?
 ---@field alpha boolean?
----@field beacon {enabled: boolean, color: string<ValidColors[]>?} | boolean?
+---@field beacon {enabled: boolean, color: ValidColorOptions?} | boolean?
 ---@field coc boolean?
----@field colorful_winsep {enabled: boolean, color: string<ValidColors[]>?} | boolean?
+---@field colorful_winsep {enabled: boolean, color: ValidColorOptions?} | boolean?
 ---@field dashboard boolean?
 ---@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field git_gutter boolean?
 ---@field gitsigns boolean?
 ---@field harpoon boolean?
----@field indent_blankline {enabled: boolean, scope_color: string<ValidColors[]>?, colored_indent_levels: boolean?} | boolean?
+---@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?
 ---@field lsp NeopywalPluginsLSP?
----@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: string<string<ValidColors[]> | fun(C: table<ValidColors[]>?): ValidColors[]? | "">} | boolean?
+---@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: ValidColorOptions?} | boolean?
 ---@field neotree boolean?
 ---@field netrw boolean?
 ---@field noice boolean?
@@ -211,7 +212,7 @@
 ---@field files boolean?
 ---@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, note: HighlightStyles[]?, todo: HighlightStyles[]?}?} | boolean?
 ---@field icons boolean?
----@field indentscope {enabled: boolean, scope_color: string<ValidColors[]>?} | boolean?
+---@field indentscope {enabled: boolean, scope_color: ValidColorOptions?} | boolean?
 ---@field jump {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field jump2d {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field map boolean?
@@ -219,11 +220,11 @@
 ---@field operators boolean?
 ---@field pick boolean?
 ---@field starter boolean?
----@field statusline {enabled: boolean, mode_colors: {normal: string<ValidColors[]>?, visual: string<ValidColors[]>?, insert: string<ValidColors[]>?, command: string<ValidColors[]>?, replace: string<ValidColors[]>?, other: string<ValidColors[]>?}?} | boolean?
+---@field statusline {enabled: boolean, mode_colors: {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, other: ValidColorOptions?}?} | boolean?
 ---@field surround boolean?
 ---@field tabline boolean?
 ---@field test boolean?
----@field trailspace {enabled: boolean, color: string<ValidColors[]>?} | boolean?
+---@field trailspace {enabled: boolean, color: ValidColorOptions?} | boolean?
 
 ---@class NeopywalPluginsBarbecue
 ---@field default_options NeopywalPluginsBarbecueOptions
@@ -260,5 +261,5 @@
 ---@field get fun(): table
 
 ---@class NeopywalPluginsLualineOptions
----@field mode_colors {normal: string<ValidColors[]>?, visual: string<ValidColors[]>?, insert: string<ValidColors[]>?, command: string<ValidColors[]>?, replace: string<ValidColors[]>?, terminal: string<ValidColors[]>?}
+---@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
 ---@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}

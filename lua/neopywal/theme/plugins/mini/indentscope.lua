@@ -5,6 +5,8 @@ function M.get()
     local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
 
     local scope_color = O.plugins.mini.indentscope.scope_color
+    if type(scope_color) == "function" then scope_color = scope_color(C) end
+
     scope_color = scope_color ~= "" and scope_color or C.comment
     scope_color = string.lower(scope_color)
     scope_color = string.find(scope_color, pattern) ~= nil and scope_color
