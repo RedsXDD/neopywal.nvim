@@ -1,7 +1,6 @@
 ---@type Neopywal
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local notify = require("neopywal.utils.notify")
 local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")
 
@@ -448,23 +447,13 @@ function M.load(theme_style)
     end
     f()
     lock = false
+
+    -- Initialize live reloading on template file changes.
+    vim.schedule(function() require("neopywal.lib.reload").init() end)
+
     did_load = true
 end
 
-vim.api.nvim_create_user_command("NeopywalCompile", function()
-    for name, _ in pairs(package.loaded) do
-        if name:match("^neopywal.") then package.loaded[name] = nil end
-    end
-    compiler.compile()
-    notify.info("Successfully compiled cache.")
-    vim.cmd.colorscheme("neopywal")
-end, {})
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = { "*/neopywal/*", "*/neopywal.lua" },
-    callback = function()
-        vim.schedule(function() vim.cmd("NeopywalCompile") end)
-    end,
-})
+vim.api.nvim_create_user_command("NeopywalCompile", function() require("neopywal.lib.reload").recompile() end, {})
 
 return M

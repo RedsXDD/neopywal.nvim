@@ -98,7 +98,7 @@ local h = vim.api.nvim_set_hl]],
     local ls = load or loadstring
     local f = ls(table.concat(lines, "\n"))
     if not f then
-        local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_error.lua"
+        local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_compiler_error.lua"
         notify.error(string.format(
             [[
 Most likely some mistake made in your Neopywal config
