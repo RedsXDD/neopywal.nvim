@@ -1,7 +1,6 @@
 ---@type Neopywal
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local notify = require("neopywal.utils.notify")
 local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")
 
@@ -316,39 +315,6 @@ function M.get_colors(theme_style)
     return palette.get_colors(theme_style)
 end
 
----@param user_config? NeopywalOptions
-local function gen_cache(user_config)
-    user_config = user_config or {}
-
-    -- Get cached hash.
-    local cached_path = G.compile_path .. G.path_sep .. "cached"
-    local file = io.open(cached_path)
-    local cached = nil
-    if file then
-        cached = file:read()
-        file:close()
-    end
-
-    -- Get current hash.
-    local minimal_palette = palette.get(nil, true)
-    local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
-    local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
-    local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
-        .. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
-        .. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
-        .. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
-
-    -- Recompile if hash changed.
-    if cached ~= hash then
-        compiler.compile()
-        file = io.open(cached_path, "wb")
-        if file then
-            file:write(hash)
-            file:close()
-        end
-    end
-end
-
 ---@param original_table table
 ---@param default_option any
 local function disable_table(original_table, default_option)
@@ -375,9 +341,10 @@ local function check_nil_option(option, fallback_result)
 end
 
 local did_setup = false
----@param user_config? NeopywalOptions
-function M.setup(user_config)
-    user_config = user_config or {}
+local user_config = {}
+---@param user_conf? NeopywalOptions
+function M.setup(user_conf)
+    user_config = user_conf or {}
     user_config.plugins = check_nil_option(user_config.plugins, {})
 
     -- Handle plugin tables.
@@ -412,15 +379,51 @@ function M.setup(user_config)
     -- Setup new palette configuration.
     palette.setup(M.options.colorscheme_file, M.options.use_palette, M.options.use_wallust, M.options.custom_colors)
 
-    gen_cache(user_config)
     did_setup = true
 end
 
+local function gen_cache()
+    -- Get cached hash.
+    local cached_path = G.compile_path .. G.path_sep .. "cached"
+    local file = io.open(cached_path)
+    local cached = nil
+    if file then
+        cached = file:read()
+        file:close()
+    end
+
+    -- Get current hash.
+    local minimal_palette = palette.get(nil, true)
+    local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
+    local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
+    local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
+        .. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
+        .. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
+        .. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
+
+    -- Recompile if hash changed.
+    if cached ~= hash then
+        compiler.compile()
+        file = io.open(cached_path, "wb")
+        if file then
+            file:write(hash)
+            file:close()
+        end
+    end
+end
+
 local lock = false -- Avoid g:colors_name reloading
+local did_load = false
 ---@param theme_style? ThemeStyles
 function M.load(theme_style)
     if lock then return end
-    if not did_setup then gen_cache() end
+    if not did_setup then M.setup() end
+    if did_load then
+        for name, _ in pairs(package.loaded) do
+            if name:match("^neopywal.") then package.loaded[name] = nil end
+        end
+    end
+    gen_cache()
 
     local bg = vim.o.background
     local style_bg = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
@@ -444,22 +447,13 @@ function M.load(theme_style)
     end
     f()
     lock = false
+
+    -- Initialize live reloading on template file changes.
+    vim.schedule(function() require("neopywal.lib.reload").init() end)
+
+    did_load = true
 end
 
-vim.api.nvim_create_user_command("NeopywalCompile", function()
-    for name, _ in pairs(package.loaded) do
-        if name:match("^neopywal.") then package.loaded[name] = nil end
-    end
-    compiler.compile()
-    notify.info("Successfully compiled cache.")
-    vim.cmd.colorscheme("neopywal")
-end, {})
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = { "*/neopywal/*", "*/neopywal.lua" },
-    callback = function()
-        vim.schedule(function() vim.cmd("NeopywalCompile") end)
-    end,
-})
+vim.api.nvim_create_user_command("NeopywalCompile", function() require("neopywal.lib.reload").recompile() end, {})
 
 return M
