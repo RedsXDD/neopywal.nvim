@@ -414,10 +414,16 @@ local function gen_cache()
 end
 
 local lock = false -- Avoid g:colors_name reloading
+local did_load = false
 ---@param theme_style? ThemeStyles
 function M.load(theme_style)
     if lock then return end
     if not did_setup then M.setup() end
+    if did_load then
+        for name, _ in pairs(package.loaded) do
+            if name:match("^neopywal.") then package.loaded[name] = nil end
+        end
+    end
     gen_cache()
 
     local bg = vim.o.background
@@ -442,6 +448,7 @@ function M.load(theme_style)
     end
     f()
     lock = false
+    did_load = true
 end
 
 vim.api.nvim_create_user_command("NeopywalCompile", function()
