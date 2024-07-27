@@ -2,7 +2,7 @@ local M = {}
 
 function M.get()
     local mode_colors = O.plugins.mini.statusline.mode_colors
-    local default_mode_colors = require("neopywal").default_options.plugins.mini.statusline.mode_colors
+    local default_mode_colors = require("neopywal.lib.config").default_options.plugins.mini.statusline.mode_colors
 
     local hex_chars = "[abcdef0-9][abcdef0-9]"
     local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"

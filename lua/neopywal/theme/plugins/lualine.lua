@@ -6,7 +6,7 @@
 ---@type NeopywalPluginsLualine
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local O = require("neopywal").options
+local O = require("neopywal.lib.config").options
 local C = require("neopywal").get_colors()
 local U = require("neopywal.utils.color")
 

@@ -1,5 +1,5 @@
 local M = {}
-local G = require("neopywal").compiler
+local G = require("neopywal.lib.config").compiler
 local notify = require("neopywal.utils.notify")
 local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")

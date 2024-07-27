@@ -2,7 +2,7 @@
 -- Reference: see `:h bufferline-highlights`
 
 local M = {}
-local O = require("neopywal").options
+local O = require("neopywal.lib.config").options
 local U = require("neopywal.utils.color")
 local C = require("neopywal").get_colors()
 
