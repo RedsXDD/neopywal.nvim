@@ -5,9 +5,7 @@ local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")
 
 function M.recompile()
-    for name, _ in pairs(package.loaded) do
-        if name:match("^neopywal.") then package.loaded[name] = nil end
-    end
+    require("neopywal.utils.reset").reset()
     compiler.compile()
     notify.info("Successfully compiled cache.")
     vim.cmd.colorscheme("neopywal")
