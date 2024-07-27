@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.5.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.4.0...v2.5.0) (2024-07-27)
+
+
+### Features
+
+* live reload when pywal theme changes ([dc5cad2](https://github.com/RedsXDD/neopywal.nvim/commit/dc5cad28c2ba53ebdb6dd5d4fc4a855cf8868168)), closes [#25](https://github.com/RedsXDD/neopywal.nvim/issues/25)
+
+
+### Bug Fixes
+
+* improper live config reloading ([28feac3](https://github.com/RedsXDD/neopywal.nvim/commit/28feac3c50e1f7d3134f34162d88b5572372df26))
+
 ## [2.4.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.3.0...v2.4.0) (2024-07-25)
 
 
