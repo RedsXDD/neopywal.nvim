@@ -2,7 +2,7 @@
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
 local O = require("neopywal.lib.config").options
-local C = require("neopywal").get_colors()
+local C = require("neopywal.lib.palette").get_colors()
 
 M.default_options = {
     dim_background = false, -- Whether to dim the background.
