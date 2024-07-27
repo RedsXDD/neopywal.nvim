@@ -8,6 +8,36 @@ local G = config.compiler
 M.setup = config.setup
 M.get_colors = palette.get_colors
 
+local function gen_cache()
+    -- Get cached hash.
+    local cached_path = G.compile_path .. G.path_sep .. "cached"
+    local file = io.open(cached_path)
+    local cached = nil
+    if file then
+        cached = file:read()
+        file:close()
+    end
+
+    -- Get current hash.
+    local minimal_palette = palette.get(nil, true)
+    local git_path = debug.getinfo(1).source:sub(2, -22) .. ".git"
+    local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
+    local hash = require("neopywal.lib.hashing").hash({ config.user_config, minimal_palette })
+        .. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
+        .. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
+        .. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
+
+    -- Recompile if hash changed.
+    if cached ~= hash then
+        compiler.compile()
+        file = io.open(cached_path, "wb")
+        if file then
+            file:write(hash)
+            file:close()
+        end
+    end
+end
+
 local lock = false -- Avoid g:colors_name reloading
 local did_load = false
 ---@param theme_style? ThemeStyles
@@ -15,6 +45,7 @@ function M.load(theme_style)
     if lock then return end
     if not config.did_setup then config.setup() end
     if did_load then require("neopywal.utils.reset").reset() end
+    gen_cache()
 
     local bg = vim.o.background
     local style_bg = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style

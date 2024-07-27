@@ -330,25 +330,27 @@ local function check_nil_option(option, fallback_result)
 end
 
 M.did_setup = false
----@param user_config? NeopywalOptions
-function M.setup(user_config)
-    user_config = user_config or {}
-    user_config.plugins = check_nil_option(user_config.plugins, {})
+M.user_config = {}
+---@param user_conf? NeopywalOptions
+function M.setup(user_conf)
+    M.user_config = user_conf or {}
+    M.user_config.plugins = check_nil_option(M.user_config.plugins, {})
 
     -- Handle plugin tables.
-    M.default_options.default_plugins = check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
+    M.default_options.default_plugins =
+        check_nil_option(M.user_config.default_plugins, M.default_options.default_plugins)
     M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
     M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
 
     -- Disable fileformats if treesitter is enabled (unless the user manually specifies otherwise).
     M.default_options.default_fileformats = check_nil_option(
-        user_config.default_fileformats,
-        not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter)
+        M.user_config.default_fileformats,
+        not check_nil_option(M.user_config.plugins.treesitter, M.default_options.plugins.treesitter)
     )
     M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
 
     -- Create the final configuration table.
-    M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
+    M.options = vim.tbl_deep_extend("keep", M.user_config, M.default_options)
 
     -- Neovide doesn't play well with transparent background colors.
     M.options.transparent_background = not vim.g.neovide and M.options.transparent_background or false
@@ -372,7 +374,6 @@ function M.setup(user_config)
         custom_colors = M.options.custom_colors,
     })
 
-    require("neopywal.lib.cache").gen_cache(user_config, M.compiler)
     M.did_setup = true
 end
 
