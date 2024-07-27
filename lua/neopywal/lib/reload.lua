@@ -38,7 +38,7 @@ function M.init()
                 .. "neopywal_reload_error.lua"
             notify.error(string.format(
                 [[
-An error occurred when trying to live reload the colorscheme while using the template file "%s"
+An error occurred when trying to reload the colorscheme with the "%s" template file.
 You can open %s for debugging
 
 If you think this is a bug, kindly open an issue and attach %s file
