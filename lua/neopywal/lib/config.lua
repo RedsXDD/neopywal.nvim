@@ -1,5 +1,6 @@
 local M = {}
 local palette = require("neopywal.lib.palette")
+local compiler = require("neopywal.lib.compiler")
 
 M.compiler = {
     ---@diagnostic disable-next-line: undefined-global
@@ -330,27 +331,25 @@ local function check_nil_option(option, fallback_result)
 end
 
 M.did_setup = false
-M.user_config = {}
----@param user_conf? NeopywalOptions
-function M.setup(user_conf)
-    M.user_config = user_conf or {}
-    M.user_config.plugins = check_nil_option(M.user_config.plugins, {})
+---@param user_config? NeopywalOptions
+function M.setup(user_config)
+    user_config = user_config or {}
+    user_config.plugins = check_nil_option(user_config.plugins, {})
 
     -- Handle plugin tables.
-    M.default_options.default_plugins =
-        check_nil_option(M.user_config.default_plugins, M.default_options.default_plugins)
+    M.default_options.default_plugins = check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
     M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
     M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
 
     -- Disable fileformats if treesitter is enabled (unless the user manually specifies otherwise).
     M.default_options.default_fileformats = check_nil_option(
-        M.user_config.default_fileformats,
-        not check_nil_option(M.user_config.plugins.treesitter, M.default_options.plugins.treesitter)
+        user_config.default_fileformats,
+        not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter)
     )
     M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
 
     -- Create the final configuration table.
-    M.options = vim.tbl_deep_extend("keep", M.user_config, M.default_options)
+    M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
     -- Neovide doesn't play well with transparent background colors.
     M.options.transparent_background = not vim.g.neovide and M.options.transparent_background or false
@@ -373,6 +372,34 @@ function M.setup(user_conf)
         use_wallust = M.options.use_wallust,
         custom_colors = M.options.custom_colors,
     })
+
+    -- Get cached hash.
+    local cached_path = M.compiler.compile_path .. M.compiler.path_sep .. "cached"
+    local file = io.open(cached_path)
+    local cached = nil
+    if file then
+        cached = file:read()
+        file:close()
+    end
+
+    -- Get current hash.
+    local minimal_palette = palette.get(nil, true)
+    local git_path = debug.getinfo(1).source:sub(2, -28) .. ".git"
+    local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
+    local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
+        .. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
+        .. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
+        .. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
+
+    -- Recompile if hash changed.
+    if cached ~= hash then
+        compiler.compile()
+        file = io.open(cached_path, "wb")
+        if file then
+            file:write(hash)
+            file:close()
+        end
+    end
 
     M.did_setup = true
 end
