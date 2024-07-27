@@ -16,7 +16,7 @@ function M.init()
     if M.lock then return end
     M.lock = true
 
-    if not palette.did_setup then palette.setup("", "", false, {}) end
+    if not palette.did_setup then palette.setup() end
 
     vim.api.nvim_create_autocmd("BufWritePost", {
         pattern = { "*/neopywal/*", "*/neopywal.lua" },
@@ -27,7 +27,7 @@ function M.init()
 
     ---@diagnostic disable-next-line: undefined-field
     local event = vim.uv.new_fs_event()
-    local template_path = palette.colorscheme_file
+    local template_path = palette.options.colorscheme_file
     event:start(template_path, {
         watch_entry = true,
         stat = true,

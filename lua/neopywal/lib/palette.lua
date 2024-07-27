@@ -4,46 +4,58 @@ local M = {}
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
 local notify = require("neopywal.utils.notify")
 
+local cache_dir
+if path_sep == "\\" then
+    cache_dir = os.getenv("LOCALAPPDATA") -- Windows
+else
+    cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
+end
+
+M.default_options = {
+    colorscheme_file = cache_dir .. "/wal/colors-wal.vim",
+    use_palette = "",
+    use_wallust = false,
+    custom_colors = {},
+}
+M.options = M.default_options
+
+local function check_nil_option(option, fallback_result)
+    -- NOTE: `return option == nil and fallback_result or option`
+    -- doesn't work because "option" will be returned if "fallback_result" is false.
+    if option == nil then
+        return fallback_result
+    else
+        return option
+    end
+end
+
 -- This is the function that setups the path for the colorscheme file, as well as the user custom colors which later can be appended to the final palette.
 M.did_setup = false
----@param colorscheme_file string?
----@param use_palette string?
----@param use_wallust boolean?
-function M.setup(colorscheme_file, use_palette, use_wallust, user_colors)
-    M.user_colors = user_colors or {}
+function M.setup(config)
+    config = config or {}
 
-    use_wallust = use_wallust or false
-    if type(use_wallust) == "function" then use_wallust = use_wallust() end
+    config.use_wallust = check_nil_option(config.use_wallust, M.default_options.use_wallust)
+    if type(config.use_wallust) == "function" then config.use_wallust = config.use_wallust() end
 
-    colorscheme_file = colorscheme_file or ""
-    if type(colorscheme_file) == "function" then colorscheme_file = colorscheme_file() end
+    config.colorscheme_file = check_nil_option(config.colorscheme_file, M.default_options.colorscheme_file)
+    if type(config.colorscheme_file) == "function" then config.colorscheme_file = config.colorscheme_file() end
 
-    use_palette = use_palette or ""
-    if type(use_palette) == "function" then use_palette = use_palette() end
+    config.use_palette = check_nil_option(config.use_palette, M.default_options.use_palette)
+    if type(config.use_palette) == "function" then config.use_palette = config.use_palette() end
 
-    vim.validate({
-        template_path = { colorscheme_file, "string" },
-        use_palette = { use_palette, "string" },
-        use_wallust = { use_wallust, "boolean" },
-        user_colors = { user_colors, "table" },
-    })
+    config.custom_colors = check_nil_option(config.custom_colors, M.default_options.custom_colors)
 
-    local cache_dir
-    if path_sep == "\\" then
-        cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-    else
-        cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
-    end
+    M.options = vim.tbl_deep_extend("keep", config, M.default_options)
 
     local plugin_dir = debug.getinfo(1).source:sub(2, -25)
     local palette_dir = plugin_dir .. "palettes/"
-    local template_file = use_palette ~= "" and "" .. palette_dir .. use_palette .. ".vim"
-        or colorscheme_file ~= "" and colorscheme_file
-        or use_wallust and cache_dir .. "/wallust/colors_neopywal.vim"
-        or cache_dir .. "/wal/colors-wal.vim"
+    local template_file = M.options.use_palette ~= "" and "" .. palette_dir .. M.options.use_palette .. ".vim"
+        or M.options.colorscheme_file ~= "" and M.options.colorscheme_file
+        or M.options.use_wallust and cache_dir .. "/wallust/colors_neopywal.vim"
+        or M.default_options.colorscheme_file
 
     if path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
-    M.colorscheme_file = template_file
+    M.options.colorscheme_file = template_file
 
     M.did_setup = true
 end
@@ -64,7 +76,7 @@ function M.get(theme_style, minimal_palette, extra_colors)
 
     local U = require("neopywal.utils.color")
 
-    local colorscheme_file = M.colorscheme_file
+    local colorscheme_file = M.options.colorscheme_file
     local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
     if not file_exists then
         notify.error(
@@ -150,7 +162,8 @@ Below is the error message that we captured:
     -- Setup user colors.
     extra_colors = extra_colors or {}
     if type(extra_colors) == "function" then extra_colors = extra_colors(C) end
-    extra_colors = vim.tbl_deep_extend("keep", extra_colors, M.user_colors or {})
+    if type(M.options.custom_colors) == "function" then M.options.custom_colors = M.options.custom_colors(C) end
+    extra_colors = vim.tbl_deep_extend("keep", extra_colors, M.options.custom_colors)
 
     local extra_palette = {
         -- Extras:
