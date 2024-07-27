@@ -5,7 +5,7 @@ function M.get(theme_style)
     local theme = {}
 
     local _O, _C, _U = O, C, U -- Borrowing global variables (setfenv doesn't work with require)
-    O = require("neopywal").options
+    O = require("neopywal.lib.config").options
     C = require("neopywal").get_colors(theme_style)
     U = require("neopywal.utils.color")
 
@@ -13,7 +13,7 @@ function M.get(theme_style)
     local fileformats = {}
     for fileformat, option in pairs(O.fileformats) do
         if option == true or type(option) == "table" and option.enabled then
-            local default_config = require("neopywal").default_options.fileformats[fileformat]
+            local default_config = require("neopywal.lib.config").default_options.fileformats[fileformat]
             O.fileformats[fileformat] = type(default_config) == "table" and default_config or {}
             O.fileformats[fileformat].enabled = true
             fileformats = vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats")[fileformat]())
@@ -24,8 +24,8 @@ function M.get(theme_style)
     local plugins = {}
     local function load_plugin(plugin, is_mini)
         local option = is_mini and O.plugins.mini[plugin] or O.plugins[plugin]
-        local default_config = is_mini and require("neopywal").default_options.plugins.mini[plugin]
-            or require("neopywal").default_options.plugins[plugin]
+        local default_config = is_mini and require("neopywal.lib.config").default_options.plugins.mini[plugin]
+            or require("neopywal.lib.config").default_options.plugins[plugin]
 
         local apply = false
         if type(option) == "table" and option.enabled then
