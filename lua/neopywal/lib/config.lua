@@ -367,7 +367,12 @@ function M.setup(user_conf)
     M.options.plugins.lsp.enabled = M.options.plugins.coc or M.options.plugins.lsp.enabled
 
     -- Setup new palette configuration.
-    palette.setup(M.options.colorscheme_file, M.options.use_palette, M.options.use_wallust, M.options.custom_colors)
+    palette.setup({
+        colorscheme_file = M.options.colorscheme_file,
+        use_palette = M.options.use_palette,
+        use_wallust = M.options.use_wallust,
+        custom_colors = M.options.custom_colors,
+    })
 
     M.did_setup = true
 end
