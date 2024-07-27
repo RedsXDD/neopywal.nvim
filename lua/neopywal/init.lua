@@ -6,12 +6,7 @@ local palette = require("neopywal.lib.palette")
 local config = require("neopywal.lib.config")
 local G = config.compiler
 M.setup = config.setup
-
-function M.get_colors(theme_style)
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
-    if not config.did_setup then config.setup() end
-    return palette.get_colors(theme_style)
-end
+M.get_colors = palette.get_colors
 
 local function gen_cache()
     -- Get cached hash.
