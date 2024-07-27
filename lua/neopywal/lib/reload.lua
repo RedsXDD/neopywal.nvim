@@ -4,8 +4,14 @@ local notify = require("neopywal.utils.notify")
 local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")
 
+function M.reset()
+    for name, _ in pairs(package.loaded) do
+        if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
+    end
+end
+
 function M.recompile()
-    require("neopywal.utils.reset").reset()
+    M.reset()
     compiler.compile()
     notify.info("Successfully compiled cache.")
     vim.cmd.colorscheme("neopywal")
