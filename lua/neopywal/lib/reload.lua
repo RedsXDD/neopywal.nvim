@@ -43,10 +43,12 @@ You can open %s for debugging
 
 If you think this is a bug, kindly open an issue and attach %s file
 Below is the error message that we captured:
+%s
         ]],
                 template_path,
                 err_path,
-                err_path
+                err_path,
+                err
             ))
 
             local err_file = io.open(err_path, "wb")
