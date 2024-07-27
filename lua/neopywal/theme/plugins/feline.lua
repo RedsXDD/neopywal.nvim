@@ -84,7 +84,7 @@ function M.setup(user_config)
 end
 
 function M.get()
-    if require("neopywal").options.transparent_background then M.options.sett.bkg = "NONE" end
+    if require("neopywal.lib.config").options.transparent_background then M.options.sett.bkg = "NONE" end
 
     local assets = M.options.assets
     local mode_colors = M.options.mode_colors
