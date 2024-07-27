@@ -5,7 +5,7 @@
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
 
-local C = require("neopywal").get_colors()
+local C = require("neopywal.lib.palette").get_colors()
 local U = require("neopywal.utils.color")
 local lsp = require("feline.providers.lsp")
 
