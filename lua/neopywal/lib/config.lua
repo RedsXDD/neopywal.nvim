@@ -1,6 +1,6 @@
 local M = {}
-local palette = require("neopywal.lib.palette")
-local compiler = require("neopywal.lib.compiler")
+local Palette = require("neopywal.lib.palette")
+local Compiler = require("neopywal.lib.compiler")
 
 ---@type NeopywalOptions
 M.default_options = {
@@ -359,7 +359,7 @@ function M.setup(user_config)
     M.options.plugins.lsp.enabled = M.options.plugins.coc or M.options.plugins.lsp.enabled
 
     -- Setup new palette configuration.
-    palette.setup({
+    Palette.setup({
         colorscheme_file = M.options.colorscheme_file,
         use_palette = M.options.use_palette,
         use_wallust = M.options.use_wallust,
@@ -367,7 +367,7 @@ function M.setup(user_config)
     })
 
     -- Get cached hash.
-    local cached_path = compiler.options.compile_path .. compiler.options.path_sep .. "cached"
+    local cached_path = Compiler.options.compile_path .. Compiler.options.path_sep .. "cached"
     local file = io.open(cached_path)
     local cached = nil
     if file then
@@ -376,7 +376,7 @@ function M.setup(user_config)
     end
 
     -- Get current hash.
-    local minimal_palette = palette.get(nil, true)
+    local minimal_palette = Palette.get(nil, true)
     local git_path = debug.getinfo(1).source:sub(2, -28) .. ".git"
     local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
     local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })
@@ -386,7 +386,7 @@ function M.setup(user_config)
 
     -- Recompile if hash changed.
     if cached ~= hash then
-        compiler.compile()
+        Compiler.compile()
         file = io.open(cached_path, "wb")
         if file then
             file:write(hash)

@@ -12,7 +12,7 @@ local M = {
         compile_path = vim.fn.stdpath("cache") .. "/neopywal",
     },
 }
-local notify = require("neopywal.utils.notify")
+local Notify = require("neopywal.utils.notify")
 
 local function inspect(t)
     local list = {}
@@ -107,7 +107,7 @@ local h = vim.api.nvim_set_hl]],
     local f = ls(table.concat(lines, "\n"))
     if not f then
         local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_compiler_error.lua"
-        notify.error(string.format(
+        Notify.error(string.format(
             [[
 Most likely some mistake made in your Neopywal config
 You can open %s for debugging
@@ -139,7 +139,7 @@ Below is the error message that we captured:
 end
 
 function M.compile()
-    notify.clear()
+    Notify.clear()
     compile("dark")
     compile("light")
 end

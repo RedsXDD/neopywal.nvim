@@ -1,7 +1,7 @@
 local M = {}
-local notify = require("neopywal.utils.notify")
-local compiler = require("neopywal.lib.compiler")
-local palette = require("neopywal.lib.palette")
+local Notify = require("neopywal.utils.notify")
+local Compiler = require("neopywal.lib.compiler")
+local Palette = require("neopywal.lib.palette")
 
 function M.reset()
     for name, _ in pairs(package.loaded) do
@@ -11,8 +11,8 @@ end
 
 function M.recompile()
     M.reset()
-    compiler.compile()
-    notify.info("Successfully compiled cache.")
+    Compiler.compile()
+    Notify.info("Successfully compiled cache.")
     vim.cmd.colorscheme("neopywal")
 end
 
@@ -21,7 +21,7 @@ function M.init()
     if M.lock then return end
     M.lock = true
 
-    if not palette.did_setup then palette.setup() end
+    if not Palette.did_setup then Palette.setup() end
 
     vim.api.nvim_create_autocmd("BufWritePost", {
         pattern = { "*/neopywal/*", "*/neopywal.lua" },
@@ -32,16 +32,16 @@ function M.init()
 
     ---@diagnostic disable-next-line: undefined-field
     local event = vim.uv.new_fs_event()
-    local template_path = palette.options.colorscheme_file
+    local template_path = Palette.options.colorscheme_file
     event:start(template_path, {
         watch_entry = true,
         stat = true,
     }, function(err)
         if err then
-            local err_path = (compiler.options.path_sep == "/" and "/tmp" or os.getenv("TMP"))
-                .. compiler.options.path_sep
+            local err_path = (Compiler.options.path_sep == "/" and "/tmp" or os.getenv("TMP"))
+                .. Compiler.options.path_sep
                 .. "neopywal_reload_error.lua"
-            notify.error(string.format(
+            Notify.error(string.format(
                 [[
 An error occurred when trying to reload the colorscheme with the "%s" template file.
 You can open %s for debugging
@@ -65,7 +65,7 @@ Below is the error message that we captured:
         end
 
         vim.schedule(function()
-            notify.info(
+            Notify.info(
                 string.format([[Change detected in template file "%s", recompiling colorscheme.]], template_path)
             )
             M.recompile()

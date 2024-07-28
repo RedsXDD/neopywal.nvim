@@ -1,11 +1,11 @@
 local M = {}
 
 ---@diagnostic disable-next-line: undefined-global
-local compiler = require("neopywal.lib.compiler")
-local notify = require("neopywal.utils.notify")
+local Compiler = require("neopywal.lib.compiler")
+local Notify = require("neopywal.utils.notify")
 
 local cache_dir
-if compiler.options.path_sep == "\\" then
+if Compiler.options.path_sep == "\\" then
     cache_dir = os.getenv("LOCALAPPDATA") -- Windows
 else
     cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
@@ -54,7 +54,7 @@ function M.setup(config)
         or M.options.use_wallust and cache_dir .. "/wallust/colors_neopywal.vim"
         or M.default_options.colorscheme_file
 
-    if compiler.options.path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
+    if Compiler.options.path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
     M.options.colorscheme_file = template_file
 
     M.did_setup = true
@@ -79,7 +79,7 @@ function M.get(theme_style, minimal_palette, extra_colors)
     local colorscheme_file = M.options.colorscheme_file
     local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
     if not file_exists then
-        notify.error(
+        Notify.error(
             string.format(
                 "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
                 colorscheme_file
@@ -89,7 +89,7 @@ function M.get(theme_style, minimal_palette, extra_colors)
         ---@diagnostic disable-next-line: param-type-mismatch
         local could_load_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
         if not could_load_file then
-            notify.error(string.format(
+            Notify.error(string.format(
                 [[
 Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
 Below is the error message that we captured:

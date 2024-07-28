@@ -1,18 +1,18 @@
 ---@type Neopywal
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local compiler = require("neopywal.lib.compiler")
-local palette = require("neopywal.lib.palette")
-local config = require("neopywal.lib.config")
-M.setup = config.setup
-M.get_colors = palette.get_colors
+local Compiler = require("neopywal.lib.compiler")
+local Palette = require("neopywal.lib.palette")
+local Config = require("neopywal.lib.config")
+M.setup = Config.setup
+M.get_colors = Palette.get_colors
 
 local lock = false -- Avoid g:colors_name reloading
 local did_load = false
 ---@param theme_style? ThemeStyles
 function M.load(theme_style)
     if lock then return end
-    if not config.did_setup then config.setup() end
+    if not Config.did_setup then Config.setup() end
     if did_load then require("neopywal.lib.reload").reset() end
 
     local bg = vim.o.background
@@ -26,13 +26,13 @@ function M.load(theme_style)
     end
 
     M.current_style = style_bg
-    local filename = compiler.options.filename .. "-" .. M.current_style
-    local compiled_path = compiler.options.compile_path .. compiler.options.path_sep .. filename
+    local filename = Compiler.options.filename .. "-" .. M.current_style
+    local compiled_path = Compiler.options.compile_path .. Compiler.options.path_sep .. filename
 
     lock = true
     local f = loadfile(compiled_path)
     if not f then
-        compiler.compile()
+        Compiler.compile()
         f = assert(loadfile(compiled_path), "could not load neopywal cache.")
     end
     f()
