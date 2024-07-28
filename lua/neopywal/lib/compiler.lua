@@ -41,8 +41,14 @@ local function compile(theme_style)
     local filename = M.options.filename .. "-" .. theme_style
 
     local theme = require("neopywal.lib.mapper").get(theme_style)
-    local highlights =
-        vim.tbl_deep_extend("keep", theme.custom_highlights, theme.editor, theme.fileformats, theme.plugins)
+    local highlights = vim.tbl_deep_extend(
+        "keep",
+        theme.custom_highlights,
+        theme.editor,
+        theme.syntax,
+        theme.fileformats,
+        theme.plugins
+    )
 
     if path_sep == "\\" then compile_path = compile_path:gsub("/", "\\") end
 
