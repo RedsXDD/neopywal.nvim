@@ -61,6 +61,6 @@ jobs:
           cp ./tests/colors-wal.vim "$HOME/.cache/wal/"
       - name: Lazy.nvim Tests
         run: |
-          nvim --headless -V -u tests/lazy.lua +q
+          nvim --headless -u tests/lazy.lua +q
       - name: Plenary Tests
-        run: nvim --headless --noplugin -V -u tests/plenary.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/plenary.lua', sequential = true }"
+        run: nvim --headless --noplugin -u tests/plenary.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/plenary.lua', sequential = true }"
