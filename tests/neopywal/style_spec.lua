@@ -6,7 +6,7 @@ describe("loading respects vim.o.background", function()
         require("neopywal").setup()
     end)
 
-    it("did proper init", function()
+    it("and did proper init", function()
         assert.same("default", vim.g.colors_name)
         assert.same("dark", vim.o.background)
     end)
@@ -53,7 +53,7 @@ describe("loading respects vim.o.background", function()
         assert.same("neopywal-light", vim.g.colors_name)
     end)
 
-    it(" and switches to light", function()
+    it("= dark and switches to light", function()
         vim.o.background = "dark"
         vim.cmd.colorscheme("neopywal")
         vim.o.background = "light"
@@ -61,7 +61,7 @@ describe("loading respects vim.o.background", function()
         assert.same("neopywal-light", vim.g.colors_name)
     end)
 
-    it(" and switches to dark", function()
+    it("= light and switches to dark", function()
         vim.o.background = "light"
         vim.cmd.colorscheme("neopywal")
         vim.o.background = "dark"
@@ -69,7 +69,7 @@ describe("loading respects vim.o.background", function()
         assert.same("neopywal-dark", vim.g.colors_name)
     end)
 
-    it(" and remembers dark", function()
+    it("= dark, switches to light and remembers dark", function()
         vim.o.background = "dark"
         vim.cmd.colorscheme("neopywal")
         vim.o.background = "light"
