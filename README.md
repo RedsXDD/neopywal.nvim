@@ -751,9 +751,9 @@ Configuration for [packer.nvim](https://github.com/wbthomason/packer.nvim) users
 use "akinsho/bufferline.nvim" {
   after = "neopywal",
   config = function()
-    require("bufferline").setup {
+    require("bufferline").setup({
       highlights = require("neopywal.theme.plugins.bufferline").setup()
-    }
+    })
   end
 }
 ```
@@ -961,9 +961,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
         package.loaded["feline"] = nil
         package.loaded["neopywal.theme.plugins.feline"] = nil
-        require("feline").setup {
+        require("feline").setup({
             components = require("neopywal.theme.plugins.feline").get(),
-        }
+        })
     end,
 })
 ```
@@ -1561,9 +1561,9 @@ navic = {
 
 ```lua
 -- You NEED to enable highlight in nvim-navic setting or it won't work.
-require("nvim-navic").setup {
+require("nvim-navic").setup({
     highlight = true
-}
+})
 ```
 
 If you want to make background color similar to what's used on lualine/feline you can do the following:
