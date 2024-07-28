@@ -69,8 +69,6 @@
 ---| "specialcomment"
 
 ---@class Neopywal
----@field default_options NeopywalOptions
----@field options NeopywalOptions
 ---@field current_style ThemeStyles
 ---@field get_colors fun(theme_style: ThemeStyles?): table
 ---@field load fun(theme_style: ThemeStyles?)
@@ -80,6 +78,12 @@
 ---@field options {path_sep: string, filename: string, compile_path: string}
 ---@field compile fun()
 ---@field recompile fun()
+
+---@class NeopywalConfig
+---@field default_options NeopywalOptions
+---@field options NeopywalOptions
+---@field setup fun(user_config: NeopywalOptions?)
+---@field did_setup boolean
 
 ---@class NeopywalOptions
 ---@field use_wallust boolean?

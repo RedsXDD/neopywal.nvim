@@ -1,8 +1,9 @@
+---@type NeopywalConfig
+---@diagnostic disable-next-line: missing-fields
 local M = {}
 local Palette = require("neopywal.lib.palette")
 local Compiler = require("neopywal.lib.compiler")
 
----@type NeopywalOptions
 M.default_options = {
     -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the
     -- regular pywal template at `~/.cache/wal/colors-wal.vim`.
