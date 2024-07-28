@@ -9,13 +9,6 @@ function M.reset()
     end
 end
 
-function M.recompile()
-    M.reset()
-    Compiler.compile()
-    Notify.info("Successfully compiled cache.")
-    vim.cmd.colorscheme("neopywal")
-end
-
 M.lock = false
 function M.init()
     if M.lock then return end
@@ -26,7 +19,7 @@ function M.init()
     vim.api.nvim_create_autocmd("BufWritePost", {
         pattern = { "*/neopywal/*", "*/neopywal.lua" },
         callback = function()
-            vim.schedule(function() M.recompile() end)
+            vim.schedule(function() Compiler.recompile() end)
         end,
     })
 
@@ -68,7 +61,7 @@ Below is the error message that we captured:
             Notify.info(
                 string.format([[Change detected in template file "%s", recompiling colorscheme.]], template_path)
             )
-            M.recompile()
+            Compiler.recompile()
         end)
     end)
 end

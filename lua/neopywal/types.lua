@@ -79,6 +79,7 @@
 ---@class Compiler
 ---@field options {path_sep: string, filename: string, compile_path: string}
 ---@field compile fun()
+---@field recompile fun()
 
 ---@class NeopywalOptions
 ---@field use_wallust boolean?

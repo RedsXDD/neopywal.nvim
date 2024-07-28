@@ -144,4 +144,13 @@ function M.compile()
     compile("light")
 end
 
+function M.recompile()
+    for name, _ in pairs(package.loaded) do
+        if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
+    end
+    M.compile()
+    Notify.info("Successfully compiled cache.")
+    vim.cmd.colorscheme("neopywal")
+end
+
 return M

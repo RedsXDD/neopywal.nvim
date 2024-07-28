@@ -44,6 +44,6 @@ function M.load(theme_style)
     did_load = true
 end
 
-vim.api.nvim_create_user_command("NeopywalCompile", function() require("neopywal.lib.reload").recompile() end, {})
+vim.api.nvim_create_user_command("NeopywalCompile", function() require("neopywal.lib.compiler").recompile() end, {})
 
 return M
