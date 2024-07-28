@@ -3,12 +3,6 @@ local Notify = require("neopywal.utils.notify")
 local Compiler = require("neopywal.lib.compiler")
 local Palette = require("neopywal.lib.palette")
 
-function M.reset()
-    for name, _ in pairs(package.loaded) do
-        if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
-    end
-end
-
 M.lock = false
 function M.init()
     if M.lock then return end

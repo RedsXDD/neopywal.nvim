@@ -13,7 +13,11 @@ local did_load = false
 function M.load(theme_style)
     if lock then return end
     if not Config.did_setup then Config.setup() end
-    if did_load then require("neopywal.lib.reload").reset() end
+    if did_load then
+        for name, _ in pairs(package.loaded) do
+            if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
+        end
+    end
 
     local bg = vim.o.background
     local style_bg = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
