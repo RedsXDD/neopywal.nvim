@@ -74,8 +74,6 @@ function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
-    local U = require("neopywal.utils.color")
-
     local colorscheme_file = M.options.colorscheme_file
     local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
     if not file_exists then
@@ -165,6 +163,7 @@ Below is the error message that we captured:
     if type(M.options.custom_colors) == "function" then M.options.custom_colors = M.options.custom_colors(C) end
     extra_colors = vim.tbl_deep_extend("keep", extra_colors, M.options.custom_colors)
 
+    local U = require("neopywal.utils.color")
     local extra_palette = {
         -- Extras:
         dim_bg = U.darken(C.background, 5),
