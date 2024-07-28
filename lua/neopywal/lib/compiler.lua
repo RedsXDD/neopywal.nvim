@@ -2,7 +2,16 @@
 -- https://github.com/catppuccin/nvim -- Where i took the original compiler code.
 -- https://github.com/EdenEast/nightfox.nvim -- The plugin catppuccin credits.
 
-local M = {}
+---@type Compiler
+---@diagnostic disable-next-line: missing-fields
+local M = {
+    options = {
+        ---@diagnostic disable-next-line: undefined-global
+        path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
+        filename = "neopywal",
+        compile_path = vim.fn.stdpath("cache") .. "/neopywal",
+    },
+}
 local notify = require("neopywal.utils.notify")
 
 local function inspect(t)
@@ -27,10 +36,9 @@ local function compile(theme_style)
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
     local O = require("neopywal.lib.config").options
-    local G = require("neopywal.lib.config").compiler
-    local compile_path = G.compile_path
-    local path_sep = G.path_sep
-    local filename = G.filename .. "-" .. theme_style
+    local compile_path = M.options.compile_path
+    local path_sep = M.options.path_sep
+    local filename = M.options.filename .. "-" .. theme_style
 
     local theme = require("neopywal.lib.mapper").get(theme_style)
     local highlights =

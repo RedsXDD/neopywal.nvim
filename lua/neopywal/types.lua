@@ -69,7 +69,6 @@
 ---| "specialcomment"
 
 ---@class Neopywal
----@field compiler CompilerOptions
 ---@field default_options NeopywalOptions
 ---@field options NeopywalOptions
 ---@field current_style ThemeStyles
@@ -77,10 +76,9 @@
 ---@field load fun(theme_style: ThemeStyles?)
 ---@field setup fun(user_config: NeopywalOptions?)
 
----@class CompilerOptions
----@field path_sep string
----@field filename string
----@field compile_path string
+---@class Compiler
+---@field options {path_sep: string, filename: string, compile_path: string}
+---@field compile fun()
 
 ---@class NeopywalOptions
 ---@field use_wallust boolean?

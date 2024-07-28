@@ -1,5 +1,4 @@
 local M = {}
-local G = require("neopywal.lib.config").compiler
 local notify = require("neopywal.utils.notify")
 local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")
@@ -39,8 +38,8 @@ function M.init()
         stat = true,
     }, function(err)
         if err then
-            local err_path = (G.path_sep == "/" and "/tmp" or os.getenv("TMP"))
-                .. G.path_sep
+            local err_path = (compiler.options.path_sep == "/" and "/tmp" or os.getenv("TMP"))
+                .. compiler.options.path_sep
                 .. "neopywal_reload_error.lua"
             notify.error(string.format(
                 [[

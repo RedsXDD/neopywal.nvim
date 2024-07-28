@@ -1,11 +1,11 @@
 local M = {}
 
 ---@diagnostic disable-next-line: undefined-global
-local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
+local compiler = require("neopywal.lib.compiler")
 local notify = require("neopywal.utils.notify")
 
 local cache_dir
-if path_sep == "\\" then
+if compiler.options.path_sep == "\\" then
     cache_dir = os.getenv("LOCALAPPDATA") -- Windows
 else
     cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
@@ -54,7 +54,7 @@ function M.setup(config)
         or M.options.use_wallust and cache_dir .. "/wallust/colors_neopywal.vim"
         or M.default_options.colorscheme_file
 
-    if path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
+    if compiler.options.path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
     M.options.colorscheme_file = template_file
 
     M.did_setup = true

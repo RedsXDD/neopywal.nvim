@@ -2,13 +2,6 @@ local M = {}
 local palette = require("neopywal.lib.palette")
 local compiler = require("neopywal.lib.compiler")
 
-M.compiler = {
-    ---@diagnostic disable-next-line: undefined-global
-    path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
-    filename = "neopywal",
-    compile_path = vim.fn.stdpath("cache") .. "/neopywal",
-}
-
 ---@type NeopywalOptions
 M.default_options = {
     -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the
@@ -374,7 +367,7 @@ function M.setup(user_config)
     })
 
     -- Get cached hash.
-    local cached_path = M.compiler.compile_path .. M.compiler.path_sep .. "cached"
+    local cached_path = compiler.options.compile_path .. compiler.options.path_sep .. "cached"
     local file = io.open(cached_path)
     local cached = nil
     if file then

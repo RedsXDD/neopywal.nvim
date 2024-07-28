@@ -4,7 +4,6 @@ local M = {}
 local compiler = require("neopywal.lib.compiler")
 local palette = require("neopywal.lib.palette")
 local config = require("neopywal.lib.config")
-local G = config.compiler
 M.setup = config.setup
 M.get_colors = palette.get_colors
 
@@ -27,8 +26,8 @@ function M.load(theme_style)
     end
 
     M.current_style = style_bg
-    local filename = G.filename .. "-" .. M.current_style
-    local compiled_path = G.compile_path .. G.path_sep .. filename
+    local filename = compiler.options.filename .. "-" .. M.current_style
+    local compiled_path = compiler.options.compile_path .. compiler.options.path_sep .. filename
 
     lock = true
     local f = loadfile(compiled_path)
