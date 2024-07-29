@@ -43,7 +43,7 @@ function M.load(theme_style)
     lock = false
 
     -- Initialize live reloading on template file changes.
-    vim.schedule(function() require("neopywal.lib.reload").init() end)
+    vim.schedule(function() require("neopywal.lib.reloader").init() end)
 
     did_load = true
 end
