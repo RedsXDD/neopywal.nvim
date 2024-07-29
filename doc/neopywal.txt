@@ -682,9 +682,9 @@ users:
     use "akinsho/bufferline.nvim" {
       after = "neopywal",
       config = function()
-        require("bufferline").setup {
+        require("bufferline").setup({
           highlights = require("neopywal.theme.plugins.bufferline").setup()
-        }
+        })
       end
     }
 <
@@ -862,9 +862,9 @@ Here are the defaults:
         callback = function()
             package.loaded["feline"] = nil
             package.loaded["neopywal.theme.plugins.feline"] = nil
-            require("feline").setup {
+            require("feline").setup({
                 components = require("neopywal.theme.plugins.feline").get(),
-            }
+            })
         end,
     })
 <
@@ -965,98 +965,6 @@ change style settings and the colors per vim mode.
             z = { "bold" },
         },
     })
-<
-
-nvim-lspconfig>lua
-    lsp = {
-        enabled = true,
-        virtual_text = {
-            errors = { "bold", "italic" },
-            hints = { "bold", "italic" },
-            information = { "bold", "italic" },
-            ok = { "bold", "italic" },
-            warnings = { "bold", "italic" },
-            unnecessary = { "bold", "italic" },
-        },
-        underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            information = { "undercurl" },
-            ok = { "undercurl" },
-            warnings = { "undercurl" },
-        },
-        inlay_hints = {
-            background = true,
-            style = { "bold", "italic" },
-        },
-    },
-<
-
-nvim-navic>lua
-    navic = {
-        enabled = false,
-        dim_text = false, -- Whether the text should be dimmed.
-        hide_separator = false, -- Whether to hide the separator character.
-        text_style = { "bold", "italic" },
-    
-        -- Can either be:
-        --   - A color exported by "get_colors()" (e.g.: `color8`)
-        --   - A hexadecimal color (e.g.: "#ff0000").
-        --   - A function with an optional "C" parameter that returns one of the two options above.
-        --     e.g: function(C) return C.color1 end
-        bg_color = "",
-    },
-<
-
-Special ~
-
->lua
-    -- You NEED to enable highlight in nvim-navic setting or it won't work.
-    require("nvim-navic").setup {
-        highlight = true
-    }
-<
-
-If you want to make background color similar to what’s used on lualine/feline
-you can do the following:
-
->lua
-    require("neopywal").setup({
-        plugins = {
-            navic = {
-                bg_color = function(C)
-                    local U = require("neopywal.utils.color")
-    
-                    -- `0.5` would match the color used on lualine's "b" section.
-                    return U.blend(C.color8, C.background, 0.3)
-                end
-            }
-        }
-    })
-<
-
-neo-tree.nvim>lua
-    neotree = true
-<
-
-netrw>lua
-    netrw = true
-<
-
-noice.nvim>lua
-    noice = true
-<
-
-nvim-cmp>lua
-    nvim_cmp = true
-<
-
-nvim-notify>lua
-    notify = true
-<
-
-nvim-treesitter>lua
-    treesitter = true
 <
 
 mini.nvimSpecial ~
@@ -1245,6 +1153,98 @@ mini.trailspace>lua
             color = "",
         },
     }
+<
+
+nvim-lspconfig>lua
+    lsp = {
+        enabled = true,
+        virtual_text = {
+            errors = { "bold", "italic" },
+            hints = { "bold", "italic" },
+            information = { "bold", "italic" },
+            ok = { "bold", "italic" },
+            warnings = { "bold", "italic" },
+            unnecessary = { "bold", "italic" },
+        },
+        underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            information = { "undercurl" },
+            ok = { "undercurl" },
+            warnings = { "undercurl" },
+        },
+        inlay_hints = {
+            background = true,
+            style = { "bold", "italic" },
+        },
+    },
+<
+
+nvim-navic>lua
+    navic = {
+        enabled = false,
+        dim_text = false, -- Whether the text should be dimmed.
+        hide_separator = false, -- Whether to hide the separator character.
+        text_style = { "bold", "italic" },
+    
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        bg_color = "",
+    },
+<
+
+Special ~
+
+>lua
+    -- You NEED to enable highlight in nvim-navic setting or it won't work.
+    require("nvim-navic").setup({
+        highlight = true
+    })
+<
+
+If you want to make background color similar to what’s used on lualine/feline
+you can do the following:
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            navic = {
+                bg_color = function(C)
+                    local U = require("neopywal.utils.color")
+    
+                    -- `0.5` would match the color used on lualine's "b" section.
+                    return U.blend(C.color8, C.background, 0.3)
+                end
+            }
+        }
+    })
+<
+
+neo-tree.nvim>lua
+    neotree = true
+<
+
+netrw>lua
+    netrw = true
+<
+
+noice.nvim>lua
+    noice = true
+<
+
+nvim-cmp>lua
+    nvim_cmp = true
+<
+
+nvim-notify>lua
+    notify = true
+<
+
+nvim-treesitter>lua
+    treesitter = true
 <
 
 symbols-outline.nvim
