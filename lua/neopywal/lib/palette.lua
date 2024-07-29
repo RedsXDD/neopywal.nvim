@@ -47,7 +47,7 @@ function M.setup(config)
 
     M.options = vim.tbl_deep_extend("keep", config, M.default_options)
 
-    local plugin_dir = debug.getinfo(1).source:sub(2, -25)
+    local plugin_dir = debug.getinfo(1).source:sub(2, -29)
     local palette_dir = plugin_dir .. "palettes/"
     local template_file = M.options.use_palette ~= "" and "" .. palette_dir .. M.options.use_palette .. ".vim"
         or M.options.colorscheme_file ~= "" and M.options.colorscheme_file
