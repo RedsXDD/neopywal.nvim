@@ -12,7 +12,7 @@ else
 end
 
 M.default_options = {
-    colorscheme_file = cache_dir .. "/wal/colors-wal.vim",
+    colorscheme_file = "",
     use_palette = "",
     use_wallust = false,
     custom_colors = {},
@@ -49,10 +49,10 @@ function M.setup(config)
 
     local plugin_dir = debug.getinfo(1).source:sub(2, -29)
     local palette_dir = plugin_dir .. "palettes/"
-    local template_file = M.options.use_palette ~= "" and "" .. palette_dir .. M.options.use_palette .. ".vim"
-        or M.options.colorscheme_file ~= "" and M.options.colorscheme_file
-        or M.options.use_wallust and cache_dir .. "/wallust/colors_neopywal.vim"
-        or M.default_options.colorscheme_file
+    local template_file = cache_dir .. "/wal/colors-wal.vim"
+    if M.options.use_wallust then template_file = cache_dir .. "/wallust/colors_neopywal.vim" end
+    if M.options.colorscheme_file ~= "" then template_file = M.options.colorscheme_file end
+    if M.options.use_palette ~= "" then template_file = "" .. palette_dir .. M.options.use_palette .. ".vim" end
 
     if Compiler.options.path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
     M.options.colorscheme_file = template_file
