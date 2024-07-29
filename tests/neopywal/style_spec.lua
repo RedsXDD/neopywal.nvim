@@ -77,4 +77,13 @@ describe("loading respects vim.o.background", function()
         assert.same("dark", vim.o.background)
         assert.same("neopywal-dark", vim.g.colors_name)
     end)
+
+    it("= light, switches to dark and remembers light", function()
+        vim.o.background = "light"
+        vim.cmd.colorscheme("neopywal")
+        vim.o.background = "dark"
+        vim.o.background = "light"
+        assert.same("light", vim.o.background)
+        assert.same("neopywal-light", vim.g.colors_name)
+    end)
 end)
