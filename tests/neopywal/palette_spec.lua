@@ -421,7 +421,7 @@ describe("palette", function()
             color15 = "#A6ADC8",
         }
 
-        Palette.setup()
+        Palette.setup({ colorscheme_file = "null" })
         local C = Palette.get()
         assert.equals(C.none, expected.none)
         assert.equals(C.background, expected.background)
