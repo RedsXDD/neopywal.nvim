@@ -150,6 +150,10 @@ M.default_options = {
             color = "",
         },
         dashboard = true,
+        dropbar = {
+            enabled = false,
+            colored_text = false, -- Whether to add color for kind's texts.
+        },
         flash = {
             enabled = true,
             style = { "bold", "italic" },

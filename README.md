@@ -859,6 +859,21 @@ dashboard = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- dropbar.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/Bekaboo/dropbar.nvim">dropbar.nvim</a> </td>
+<td>
+
+```lua
+dropbar = {
+    enabled = false,
+    colored_text = false, -- Whether to add color for kind's texts.
+},
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- feline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/freddiehaddad/feline.nvim/">feline.nvim</a> </td>

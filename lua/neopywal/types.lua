@@ -179,6 +179,7 @@
 ---@field coc boolean?
 ---@field colorful_winsep {enabled: boolean, color: ValidColorOptions?} | boolean?
 ---@field dashboard boolean?
+---@field dropbar {enabled: boolean, colored_text: boolean?}?
 ---@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field git_gutter boolean?
 ---@field gitsigns boolean?
