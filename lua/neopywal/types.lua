@@ -174,6 +174,7 @@
 ---@field aerial boolean?
 ---@field ale boolean?
 ---@field alpha boolean?
+---@field barbar boolean?
 ---@field beacon {enabled: boolean, color: ValidColorOptions?} | boolean?
 ---@field coc boolean?
 ---@field colorful_winsep {enabled: boolean, color: ValidColorOptions?} | boolean?

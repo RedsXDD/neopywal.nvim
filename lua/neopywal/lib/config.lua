@@ -127,6 +127,7 @@ M.default_options = {
         aerial = true,
         ale = false,
         alpha = true,
+        barbar = false,
         beacon = {
             enabled = false,
 

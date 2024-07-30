@@ -658,6 +658,18 @@ alpha = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- barbar.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/romgrk/barbar.nvim">barbar.nvim</a> </td>
+<td>
+
+```lua
+barbar = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- barbecue.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/utilyre/barbecue.nvim">barbecue.nvim</a> </td>
