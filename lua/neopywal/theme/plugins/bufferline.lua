@@ -6,7 +6,7 @@ local O = require("neopywal.lib.config").options
 local U = require("neopywal.utils.color")
 local C = require("neopywal.lib.palette").get_colors()
 
-local fill_bg = O.transparent_background and C.background or U.darken(C.dim_bg, 5)
+local fill_bg = O.transparent_background and C.background or U.darken(C.dim_bg, 4)
 local unselected_bg = O.transparent_background and C.none or C.dim_bg
 local selected_bg = O.transparent_background and C.none or C.background
 
