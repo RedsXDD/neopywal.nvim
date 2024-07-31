@@ -227,6 +227,17 @@ M.default_options = {
         noice = true,
         notify = true,
         nvim_cmp = true,
+        sneak = {
+            enabled = false,
+            style = { "bold", "italic" },
+
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            sneak_color = "",
+        },
         symbols_outline = false,
         telescope = {
             enabled = true,
