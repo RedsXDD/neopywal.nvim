@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.5.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.4.0...v2.5.0) (2024-07-31)
+
+
+### Features
+
+* live reload when pywal theme changes ([dc5cad2](https://github.com/RedsXDD/neopywal.nvim/commit/dc5cad28c2ba53ebdb6dd5d4fc4a855cf8868168)), closes [#25](https://github.com/RedsXDD/neopywal.nvim/issues/25)
+* **plugins:** add barbar.nvim ([cc8df70](https://github.com/RedsXDD/neopywal.nvim/commit/cc8df701e85e4183ecf67fbb036489d347def5d3))
+* **plugins:** add dropbar.nvim ([57476bc](https://github.com/RedsXDD/neopywal.nvim/commit/57476bc81b59d9e48cef30e8263166987584fa28))
+* **plugins:** add hop.nvim ([37fdbf5](https://github.com/RedsXDD/neopywal.nvim/commit/37fdbf57be66a8557cccc389a295e14a743884d3))
+* **plugins:** add leap.nvim ([9e3dae1](https://github.com/RedsXDD/neopywal.nvim/commit/9e3dae1e8eebd1ec4c2494003f31c5813fca091f))
+* **plugins:** add telekasten.nvim ([1d4c8cb](https://github.com/RedsXDD/neopywal.nvim/commit/1d4c8cb96be865af614e74f37893ba45b3dfe68b))
+* **plugins:** add vim-illuminate ([d167b77](https://github.com/RedsXDD/neopywal.nvim/commit/d167b7719f13bd9d56aba0e394920aa22d4c7765))
+* **plugins:** add vim-sandwich ([f0438ba](https://github.com/RedsXDD/neopywal.nvim/commit/f0438ba7b01417cd5639cd7a7a4c70e2c5cd23c9))
+* **plugins:** add vim-sneak ([25dddc5](https://github.com/RedsXDD/neopywal.nvim/commit/25dddc5061d8717138f78f7299dddba5de4dbe37))
+
+
+### Bug Fixes
+
+* improper live config reloading ([28feac3](https://github.com/RedsXDD/neopywal.nvim/commit/28feac3c50e1f7d3134f34162d88b5572372df26))
+* **palette:** default "colorscheme_file" overwritting "use_wallust" ([9519132](https://github.com/RedsXDD/neopywal.nvim/commit/95191323489490cf135b4b1a9f9131fa50e45114))
+* **palette:** improper evaluation for "use_palette" option ([24b79ea](https://github.com/RedsXDD/neopywal.nvim/commit/24b79ea8f0465934f7ba62d88484bc6759c0a030))
+
+
+### Reverts
+
+* "docs(readme,plugins): put "mini.nvim" in alphabetical order" ([8cf93f2](https://github.com/RedsXDD/neopywal.nvim/commit/8cf93f284ea1cd0d942ec4dd658bda079a61c4ab))
+* "perf(load): split setup and cache generation" ([38f2a74](https://github.com/RedsXDD/neopywal.nvim/commit/38f2a74c66410f46fe68af58d9d63e0ba62cb208))
+* "refactor(cache): add cache module" ([279a491](https://github.com/RedsXDD/neopywal.nvim/commit/279a491585b86332bd4bf6c1b95d9def0bb7a218))
+
 ## [2.4.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.3.0...v2.4.0) (2024-07-25)
 
 
