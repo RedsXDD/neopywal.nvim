@@ -149,18 +149,27 @@ M.default_options = {
             --     e.g: function(C) return C.color1 end
             color = "",
         },
+        dadbod_ui = false,
+        dap = false,
+        dap_ui = false,
         dashboard = true,
+        diffview = false,
         dropbar = {
             enabled = false,
             colored_text = false, -- Whether to add color for kind's texts.
         },
+        fern = false,
         flash = {
             enabled = true,
             style = { "bold", "italic" },
         },
+        fzf = false,
         git_gutter = true,
         gitsigns = true,
+        glyph_palette = false,
+        grug_far = false,
         harpoon = false,
+        headlines = false,
         hop = {
             enabled = false,
             style = { "bold", "italic" },
@@ -181,11 +190,26 @@ M.default_options = {
             --     e.g: function(C) return C.color1 end
             scope_color = "",
         },
+        indentmini = {
+            enabled = false,
+
+            -- These options either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            scope_color = "",
+            current_scope_color = "",
+        },
         lazy = true,
         lazygit = true,
         leap = {
             enabled = false,
             style = { "bold", "italic" },
+        },
+        lir = {
+            enabled = false,
+            git_status = false,
         },
         lsp = {
             enabled = true,
@@ -209,6 +233,15 @@ M.default_options = {
                 style = { "bold", "italic" },
             },
         },
+        lspsaga = {
+            enabled = false,
+            dim_folder = true, -- Whether to dim the folder name on the winbar.
+            dim_filename = true, -- Whether to dim the filename on the winbar.
+            dim_separator = true, -- Whether to dim the separator character on the winbar.
+            winbar_style = { "bold" },
+        },
+        markdown = false,
+        mason = true,
         navic = {
             enabled = false,
             dim_text = false, -- Whether the text should be dimmed.
@@ -222,12 +255,25 @@ M.default_options = {
             --     e.g: function(C) return C.color1 end
             bg_color = "",
         },
+        neogit = false,
+        neotest = false,
         neotree = true,
         netrw = true,
         noice = true,
+        NormalNvim = false,
+        notifier = false,
         notify = true,
         nvim_cmp = true,
+        nvimtree = true,
+        octo = false,
+        overseer = false,
+        pounce = {
+            enabled = false,
+            style = { "bold", "italic" },
+        },
+        rainbow = false,
         sandwich = false,
+        scrollbar = false,
         sneak = {
             enabled = false,
             style = { "bold", "italic" },
@@ -239,6 +285,7 @@ M.default_options = {
             --     e.g: function(C) return C.color1 end
             sneak_color = "",
         },
+        surround = false,
         symbols_outline = false,
         telekasten = false,
         telescope = {
@@ -246,8 +293,32 @@ M.default_options = {
             -- style = "nvchad",
         },
         treesitter = true,
+        trouble = false,
+        ts_context = {
+            enabled = true,
+            dim_background = false,
+
+            -- NOTE: This option only applies to the current context line.
+            -- You may want to disable "underline" if you configured the "separator" option within ts_context.
+            style = { "underline" },
+        },
+        ts_rainbow = false,
+        ts_rainbow2 = false,
+        ufo = true,
         undotree = true,
+        vimwiki = false,
         which_key = true,
+        window_picker = {
+            enabled = false,
+
+            -- Can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            color = "",
+        },
+        yanky = false,
         mini = {
             animate = true,
             clue = true,

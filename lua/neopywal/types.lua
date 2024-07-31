@@ -245,33 +245,66 @@
 ---@field beacon {enabled: boolean, color: ValidColorOptions?} | boolean?
 ---@field coc boolean?
 ---@field colorful_winsep {enabled: boolean, color: ValidColorOptions?} | boolean?
+---@field dadbod_ui boolean?
+---@field dap boolean?
+---@field dap_ui boolean?
 ---@field dashboard boolean?
+---@field diffview boolean?
 ---@field dropbar {enabled: boolean, colored_text: boolean?}?
+---@field fern boolean?
 ---@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
+---@field fzf boolean?
 ---@field git_gutter boolean?
 ---@field gitsigns boolean?
+---@field glyph_palette boolean?
+---@field grug_far boolean?
 ---@field harpoon boolean?
+---@field headlines boolean?
 ---@field hop {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field illuminate {enabled: boolean, lsp: boolean?, style: HighlightStyles[]?} | boolean?
 ---@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
+---@field indentmini {enabled: boolean, scope_color: ValidColorOptions?, current_scope_color: ValidColorOptions?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?
 ---@field leap {enabled: boolean, style: HighlightStyles[]?} | boolean?
+---@field lir {enabled: boolean, git_status: boolean?} | boolean?
 ---@field lsp NeopywalPluginsLSP?
+---@field lspsaga {enabled: boolean, dim_folder: boolean?, dim_filename: boolean?, dim_separator: boolean?, winbar_style: HighlightStyles[]?} | boolean?
+---@field markdown boolean?
+---@field mason boolean?
 ---@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: ValidColorOptions?} | boolean?
+---@field neogit boolean?
+---@field neotest boolean?
 ---@field neotree boolean?
 ---@field netrw boolean?
 ---@field noice boolean?
+---@field NormalNvim boolean?
+---@field notifier boolean?
 ---@field notify boolean?
 ---@field nvim_cmp boolean?
+---@field nvimtree boolean?
+---@field octo boolean?
+---@field overseer boolean?
+---@field pounce {enabled: boolean, style: HighlightStyles[]?} | boolean?
+---@field rainbow boolean?
 ---@field sandwich boolean?
+---@field scrollbar boolean?
 ---@field sneak {enabled: boolean, sneak_color: ValidColorOptions?, style: HighlightStyles[]?} | boolean?
+---@field surround boolean?
 ---@field symbols_outline boolean?
 ---@field telekasten boolean?
 ---@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
+---@field ts_context {enabled: boolean, dim_background: boolean?, style: HighlightStyles[]?} | boolean?
 ---@field treesitter boolean?
+---@field trouble boolean?
+---@field ts_rainbow boolean?
+---@field ts_rainbow2 boolean?
+---@field ufo boolean?
 ---@field undotree boolean?
+---@field vimwiki boolean?
 ---@field which_key boolean?
+---@field window_picker {enabled: boolean, color: ValidColorOptions?} | boolean?
+---@field yanky boolean?
 ---@field mini NeopywalPluginsMiniNvim?
 
 ---@class NeopywalPluginsLSP
@@ -340,4 +373,28 @@
 
 ---@class NeopywalPluginsLualineOptions
 ---@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
+---@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}
+
+---@class NeopywalPluginsReactiveOptions
+---@field color_percentage number
+---@field mode_colors {visual: ValidColorOptions?, insert: ValidColorOptions?, replace: ValidColorOptions?, change: ValidColorOptions?, delete: ValidColorOptions?, pending: ValidColorOptions?, yank: ValidColorOptions?}
+
+---@class NeopywalPluginsFidgetGroups
+---@field FidgetDone table?
+---@field FidgetGroup table?
+---@field FidgetIcon table?
+---@field FidgetNormal table?
+---@field FidgetProgress table?
+---@field FidgetSeparator table?
+
+---@class NeopywalPluginsLightlineOptions
+---@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
+
+---@class NeopywalPluginsClapOptions
+---@field colors {indicator: ValidColorOptions?, spinner: ValidColorOptions?, selected: ValidColorOptions?, current_selection: ValidColorOptions?}
+---@field styles {indicator: HighlightStyles[]?, spinner: HighlightStyles[]?, selected: HighlightStyles[]?, current_selection: HighlightStyles[]?}
+
+---@class NeopywalPluginsAirlineOptions
+---@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, commandline: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
+---@field cterm_colors {normal: number?, visual: number?, insert: number?, commandline: number?, replace: number?, terminal: number?}
 ---@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}

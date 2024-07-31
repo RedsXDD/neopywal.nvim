@@ -859,6 +859,18 @@ dashboard = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- diffview.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/sindrets/diffview.nvim">diffview.nvim</a> </td>
+<td>
+
+```lua
+diffview = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- dropbar.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/Bekaboo/dropbar.nvim">dropbar.nvim</a> </td>
@@ -999,6 +1011,87 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 </td>
 </tr>
 <!-- }}} -->
+<!-- fern.vim {{{ -->
+<tr>
+<td> <a href="https://github.com/lambdalisue/fern.vim">fern.vim</a> </td>
+<td>
+
+```lua
+fern = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- fidget.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/j-hui/fidget.nvim">fidget.nvim</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+Update your Fidget config to use Neopywal's highlight groups.
+
+```lua
+local has_fidget, fidget = pcall(require, "fidget")
+if not has_fidget then
+    return
+end
+
+local has_neopywal, neopywal_fidget = pcall(require, "neopywal.theme.plugins.fidget")
+if not has_neopywal then
+    return
+end
+
+-- This is what loads the highlight groups that are used inside Fidget's setup function.
+neopywal_fidget.setup()
+
+fidget.setup({
+    progress = {
+        display = {
+            done_style = "FidgetDone",
+            progress_style = "FigdetProgress",
+            group_style = "FidgetGroup",
+            icon_style = "FidgetIcon",
+        },
+    },
+    notification = {
+        view = {
+            group_separator_hl = "FidgetSeparator",
+        },
+        window = {
+            normal_hl = "FidgetNormal",
+
+            -- You can use this option to adjust the background color opacity for the notification window.
+            -- But it's recommended set this to "0" if you don't plan on changing any of the custom highlight groups.
+            winblend = 0,
+        },
+    },
+    -- The rest of your fidget config ...
+})
+```
+
+Overriding highlight groups can be done inside the setup() function.
+
+```lua
+local neopywal_fidget = require("neopywal.theme.plugins.fidget")
+
+local C = require("neopywal").get_colors()
+local bg = require("neopywal.lib.config").options.transparent_background and C.none or C.dim_bg
+neopywal_fidget.setup({
+    FidgetDone = { bg = bg, fg = C.ok, styles = { "bold", "italic" } },
+    FidgetGroup = { bg = bg, fg = C.foreground, styles = { "bold", "italic" } },
+    FidgetIcon = { bg = bg, fg = C.color4, styles = { "bold", "italic" } },
+    FidgetNormal = { bg = bg, fg = C.comment, styles = { "bold", "italic" } },
+    FidgetProgress = { bg = bg, fg = C.color3, styles = { "bold", "italic" } },
+    FidgetSeparator = { bg = bg, fg = C.comment, styles = { "bold", "italic" } },
+})
+```
+
+</details>
+</td>
+</tr>
+<!-- }}} -->
 <!-- flash.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/folke/flash.nvim">flash.nvim</a> </td>
@@ -1009,6 +1102,18 @@ flash = {
     enabled = true,
     style = { "bold", "italic" }
 }
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- fzf-lua {{{ -->
+<tr>
+<td> <a href="https://github.com/ibhagwan/fzf-lua">fzf-lua</a> </td>
+<td>
+
+```lua
+fzf = false
 ```
 
 </td>
@@ -1026,6 +1131,18 @@ gitsigns = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- grug-far.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/MagicDuck/grug-far.nvim">grug-far.nvim</a> </td>
+<td>
+
+```lua
+grug_far = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- harpoon {{{ -->
 <tr>
 <td> <a href="https://github.com/ThePrimeagen/harpoon">harpoon</a> </td>
@@ -1033,6 +1150,16 @@ gitsigns = true
 
 ```lua
 harpoon = false
+```
+
+<!-- }}} -->
+<!-- headlines.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/lukas-reineke/headlines.nvim">headlines.nvim</a> </td>
+<td>
+
+```lua
+headlines = false
 ```
 
 <!-- }}} -->
@@ -1075,6 +1202,28 @@ indent_blankline = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- indentmini.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/nvimdev/indentmini.nvim">indentmini.nvim</a> </td>
+<td>
+
+```lua
+indentmini = {
+    enabled = false,
+
+    -- These options either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
+    scope_color = "",
+    current_scope_color = "",
+},
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- lazy.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/folke/lazy.nvim">lazy.nvim</a> </td>
@@ -1109,6 +1258,99 @@ leap = {
     enabled = false,
     style = { "bold", "italic" }
 }
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- lightline.vim {{{ -->
+<tr>
+<td> <a href="https://github.com/itchyny/lightline.vim">lightline.vim</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+Update your Lightline config to use the Neopywal theme:
+
+```vim
+lua << EOF
+    local has_neopywal, neopywal_lightline = pcall(require, "neopywal.theme.plugins.lightline")
+    if not has_neopywal then
+        return
+    end
+
+    neopywal_lightline.setup()
+EOF
+
+let g:lightline = {'colorscheme': 'neopywal'}
+```
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to change the colors per vim mode.
+
+```vim
+lua << EOF
+    local neopywal_lightline = require("neopywal.theme.plugins.lightline")
+
+    neopywal_lightline.setup({
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        mode_colors = {
+            normal = "color4",
+            visual = "color5",
+            insert = "color6",
+            command = "color1",
+            replace = "color2",
+            terminal = "color3",
+        },
+    })
+EOF
+```
+
+</details>
+</td>
+</tr>
+<!-- }}} -->
+<!-- lir.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/tamago324/lir.nvim">lir.nvim</a> </td>
+<td>
+
+```lua
+lir = {
+    enabled = false,
+    git_status = false,
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- lspsaga.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/glepnir/lspsaga.nvim">lspsaga.nvim</a> </td>
+<td>
+
+```lua
+lspsaga = {
+    enabled = false,
+    dim_folder = true, -- Whether to dim the folder name on the winbar.
+    dim_filename = true, -- Whether to dim the filename on the winbar.
+    dim_separator = true, -- Whether to dim the separator character on the winbar.
+    winbar_style = { "bold" },
+},
+```
+
+For custom LSP kind icons and color:
+
+```lua
+require("lspsaga").setup({
+    ui = {
+        kind = require("neopywal.theme.plugins.lspsaga").get_kinds(),
+    },
+})
 ```
 
 </td>
@@ -1175,6 +1417,30 @@ neopywal_lualine.setup({
 ```
 
 </details>
+</td>
+</tr>
+<!-- }}} -->
+<!-- markdown.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/MeanderingProgrammer/markdown.nvim">markdown.nvim</a> </td>
+<td>
+
+```lua
+markdown = false,
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- mason.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/williamboman/mason.nvim">mason.nvim</a> </td>
+<td>
+
+```lua
+mason = true,
+```
+
 </td>
 </tr>
 <!-- }}} -->
@@ -1560,6 +1826,30 @@ mini = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- neogit {{{ -->
+<tr>
+<td> <a href="https://github.com/TimUntersberger/neogit">neogit</a> </td>
+<td>
+
+```lua
+neogit = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- neotest {{{ -->
+<tr>
+<td> <a href="https://github.com/nvim-neotest/neotest">neotest</a> </td>
+<td>
+
+```lua
+neotest = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- neo-tree.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/nvim-neo-tree/neo-tree.nvim">neo-tree.nvim</a> </td>
@@ -1596,6 +1886,30 @@ noice = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- NormalNvim {{{ -->
+<tr>
+<td> <a href="https://github.com/NormalNvim/NormalNvim">NormalNvim</a> </td>
+<td>
+
+```lua
+NormalNvim = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- notifier.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/vigoux/notifier.nvim">notifier.nvim</a> </td>
+<td>
+
+```lua
+notifier = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- nvim-cmp {{{ -->
 <tr>
 <td> <a href="https://github.com/hrsh7th/nvim-cmp">nvim-cmp</a> </td>
@@ -1603,6 +1917,42 @@ noice = true
 
 ```lua
 nvim_cmp = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-dap {{{ -->
+<tr>
+<td> <a href="https://github.com/mfussenegger/nvim-dap">nvim-dap</a> </td>
+<td>
+
+```lua
+dap = false
+```
+
+<details> <summary>Special</a> </summary>
+
+```lua
+local sign = vim.fn.sign_define
+
+sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = ""})
+sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
+sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = ""})
+```
+
+</details>
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-dap-ui {{{ -->
+<tr>
+<td> <a href="https://github.com/rcarriga/nvim-dap-ui">nvim-dap-ui</a> </td>
+<td>
+
+```lua
+dap_ui = false
 ```
 
 </td>
@@ -1705,6 +2055,36 @@ notify = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- nvim-scrollbar {{{ -->
+<tr>
+<td> <a href="https://github.com/petertriho/nvim-scrollbar">nvim-scrollbar</a> </td>
+<td>
+
+```lua
+scrollbar = false
+```
+
+<!-- }}} -->
+<!-- nvim-tree.lua {{{ -->
+<tr>
+<td> <a href="https://github.com/kyazdani42/nvim-tree.lua">nvim-tree.lua</a> </td>
+<td>
+
+```lua
+nvimtree = true
+```
+
+<!-- }}} -->
+<!-- nvim-surround {{{ -->
+<tr>
+<td> <a href="https://github.com/kylechui/nvim-surround">nvim-surround</a> </td>
+<td>
+
+```lua
+surround = false
+```
+
+<!-- }}} -->
 <!-- nvim-treesitter {{{ -->
 <tr>
 <td> <a href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</a> </td>
@@ -1714,6 +2094,193 @@ notify = true
 treesitter = true
 ```
 
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-treesitter-context {{{ -->
+<tr>
+<td> <a href="https://github.com/nvim-treesitter/nvim-treesitter-context">nvim-treesitter-context</a> </td>
+<td>
+
+```lua
+ts_context = {
+    enabled = true,
+    dim_background = false,
+
+    -- NOTE: This option only applies to the current context line.
+    -- You may want to disable "underline" if you configured the "separator" option within ts_context.
+    style = { "bold", "underline" },
+},
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-ts-rainbow {{{ -->
+<tr>
+<td> <a href="https://github.com/p00f/nvim-ts-rainbow">nvim-ts-rainbow</a> </td>
+<td>
+
+```lua
+ts_rainbow = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-ts-rainbow2 {{{ -->
+<tr>
+<td> <a href="https://github.com/HiPhish/nvim-ts-rainbow2">nvim-ts-rainbow2</a> </td>
+<td>
+
+```lua
+ts_rainbow2 = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-ufo {{{ -->
+<tr>
+<td> <a href="https://github.com/kevinhwang91/nvim-ufo">nvim-ufo</a> </td>
+<td>
+
+```lua
+ufo = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-window-picker {{{ -->
+<tr>
+<td> <a href="https://github.com/s1n7ax/nvim-window-picker">nvim-window-picker</a> </td>
+<td>
+
+```lua
+window_picker = {
+    enabled = false,
+
+    -- Can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
+    color = "",
+},
+```
+
+<!-- }}} -->
+<!-- octo.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/pwntester/octo.nvim">octo.nvim</a> </td>
+<td>
+
+```lua
+octo = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- overseer.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/stevearc/overseer.nvim">overseer.nvim</a> </td>
+<td>
+
+```lua
+overseer = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- pounce.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/rlane/pounce.nvim">pounce.nvim</a> </td>
+<td>
+
+```lua
+pounce = {
+    enabled = false,
+    style = { "bold", "italic" }
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- rainbow-delimiters.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/HiPhish/rainbow-delimiters.nvim">rainbow-delimiters.nvim</a> </td>
+<td>
+
+```lua
+rainbow = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- reactive.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/rasulomaroff/reactive.nvim">reactive.nvim</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+Update your Reactive config to use the Neopywal theme:
+
+```lua
+local has_reactive, reactive = pcall(require, "reactive")
+if not has_reactive then
+    return
+end
+
+local has_neopywal, neopywal_reactive = pcall(require, "neopywal.theme.plugins.reactive")
+if not has_neopywal then
+    return
+end
+
+neopywal_reactive.setup()
+
+reactive.setup({
+    -- Note that there are 2 available presets, `cursor` and `cursorline`.
+    load = { "neopywal-cursor", "neopywal-cursorline" }
+    -- The rest of your reactive config ...
+})
+```
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to change the color settings per vim mode.
+
+```lua
+local neopywal_reactive = require("neopywal.theme.plugins.reactive")
+
+neopywal_reactive.setup({
+    -- A higher percentage means more vibrant mode colors,
+    -- where "1" means to use "exactly" the mode color without any color transparency.
+    color_percentage = 0.3,
+
+    -- Any of the color values can either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
+    mode_colors = {
+        visual = "color5",
+        insert = "color6",
+        replace = "color2",
+
+        -- Normal mode operations.
+        change = "color2",
+        delete = "color1",
+        pending = "color4",
+        yank = "color3",
+    },
+})
+```
+
+</details>
 </td>
 </tr>
 <!-- }}} -->
@@ -1759,6 +2326,18 @@ telescope = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- trouble.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/folke/trouble.nvim">trouble.nvim</a> </td>
+<td>
+
+```lua
+trouble = false,
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- undotree {{{ -->
 <tr>
 <td> <a href="https://github.com/jiaoshijie/undotree">undotree</a> </td>
@@ -1771,6 +2350,153 @@ undotree = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- vimwiki {{{ -->
+<tr>
+<td> <a href="https://github.com/vimwiki/vimwiki">vimwiki</a> </td>
+<td>
+
+```lua
+vimwiki = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- vim-dadbod-ui {{{ -->
+<tr>
+<td> <a href="https://github.com/kristijanhusak/vim-dadbod-ui">vim-dadbod-ui</a> </td>
+<td>
+
+```lua
+dadbod_ui = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- vim-airline {{{ -->
+<tr>
+<td> <a href="https://github.com/vim-airline/vim-airline">vim-airline</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+Update your Airline config to use the Neopywal theme:
+
+```vim
+lua << EOF
+    local has_neopywal, neopywal_airline = pcall(require, "neopywal.theme.plugins.airline")
+    if not has_neopywal then
+        return
+    end
+
+    neopywal_airline.setup()
+EOF
+
+let g:airline_theme = 'neopywal'
+```
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to change style settings and the colors per vim mode.
+
+```vim
+lua << EOF
+    local neopywal_airline = require("neopywal.theme.plugins.airline")
+
+    neopywal_airline.setup({
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        mode_colors = {
+            normal = "color4",
+            visual = "color5",
+            insert = "color6",
+            commandline = "color1",
+            replace = "color2",
+            terminal = "color3",
+        },
+
+        -- This is the same as `mode_colors` except it uses cterm numbers instead (see `:h cterm`)
+        -- e.g.: "normal = 4" means "ctermfg=4".
+        cterm_colors = {
+            normal = 4,
+            visual = 5,
+            insert = 6,
+            commandline = 1,
+            replace = 2,
+            terminal = 3,
+        },
+        styles = {
+            a = { "bold" },
+            b = { "bold" },
+            c = { "bold" },
+            x = { "bold" },
+            y = { "bold" },
+            z = { "bold" },
+        },
+    })
+EOF
+```
+
+</details>
+</td>
+</tr>
+<!-- }}} -->
+<!-- vim-clap {{{ -->
+<tr>
+<td> <a href="https://github.com/liuchengxu/vim-clap">vim-clap</a> </td>
+<td>
+
+<details> <summary>Special</summary>
+
+Update your Clap config to use the Neopywal theme:
+
+```vim
+lua << EOF
+    local has_neopywal, neopywal_clap = pcall(require, "neopywal.theme.plugins.clap")
+    if not has_neopywal then
+        return
+    end
+
+    neopywal_clap.setup()
+EOF
+
+let g:clap_theme = 'neopywal'
+```
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to change style settings and the text colors.
+
+```vim
+lua << EOF
+    local neopywal_clap = require("neopywal.theme.plugins.clap")
+
+    neopywal_clap.setup({
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        colors = {
+            indicator = "color8", -- The text for the number of matches.
+            spinner = "color2", -- The text representing the mode.
+            selected = "color6", -- The text of the line of a selected item.
+            current_selection = "color4", -- The text of the line of the currently selected item.
+        },
+        styles = {
+            indicator = { "italic" }, -- The text for the number of matches.
+            spinner = { "bold" }, -- The text representing the mode.
+            selected = { "bold", "underline" }, -- The line for a selected item.
+            current_selection = { "bold" }, -- The line for the currently selected item.
+        },
+    })
+EOF
+```
+
+</details>
+</td>
+</tr>
+<!-- }}} -->
 <!-- vim-gitgutter {{{ -->
 <tr>
 <td> <a href="https://github.com/airblade/vim-gitgutter">vim-gitgutter</a> </td>
@@ -1778,6 +2504,18 @@ undotree = true
 
 ```lua
 git_gutter = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- vim-glyph-palette {{{ -->
+<tr>
+<td> <a href="https://github.com/lambdalisue/vim-glyph-palette">vim-glyph-palette</a> </td>
+<td>
+
+```lua
+glyph_palette = false
 ```
 
 </td>
@@ -1840,6 +2578,18 @@ sneak = {
 
 ```lua
 which_key = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- yanky.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/gbprod/yanky.nvim">yanky.nvim</a> </td>
+<td>
+
+```lua
+yanky = false
 ```
 
 </td>
