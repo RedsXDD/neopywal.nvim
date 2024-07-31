@@ -227,6 +227,7 @@ M.default_options = {
         noice = true,
         notify = true,
         nvim_cmp = true,
+        sandwich = false,
         sneak = {
             enabled = false,
             style = { "bold", "italic" },

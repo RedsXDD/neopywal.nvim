@@ -197,6 +197,7 @@
 ---@field noice boolean?
 ---@field notify boolean?
 ---@field nvim_cmp boolean?
+---@field sandwich boolean?
 ---@field sneak {enabled: boolean, sneak_color: ValidColorOptions?, style: HighlightStyles[]?} | boolean?
 ---@field symbols_outline boolean?
 ---@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
