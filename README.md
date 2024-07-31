@@ -1099,6 +1099,21 @@ lazygit = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- leap.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/ggandor/leap.nvim">leap.nvim</a> </td>
+<td>
+
+```lua
+leap = {
+    enabled = false,
+    style = { "bold", "italic" }
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- lualine.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/nvim-lualine/lualine.nvim">lualine.nvim</a> </td>

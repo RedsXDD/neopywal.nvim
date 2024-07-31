@@ -188,6 +188,7 @@
 ---@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?
+---@field leap {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field lsp NeopywalPluginsLSP?
 ---@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: ValidColorOptions?} | boolean?
 ---@field neotree boolean?

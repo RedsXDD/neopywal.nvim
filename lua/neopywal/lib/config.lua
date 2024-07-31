@@ -178,6 +178,10 @@ M.default_options = {
         },
         lazy = true,
         lazygit = true,
+        leap = {
+            enabled = false,
+            style = { "bold", "italic" },
+        },
         lsp = {
             enabled = true,
             virtual_text = {
