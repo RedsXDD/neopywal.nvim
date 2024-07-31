@@ -1771,18 +1771,6 @@ undotree = true
 </td>
 </tr>
 <!-- }}} -->
-<!-- vim-sandwich {{{ -->
-<tr>
-<td> <a href="https://github.com/machakann/vim-sandwich">vim-sandwich</a> </td>
-<td>
-
-```lua
-sandwich = false
-```
-
-</td>
-</tr>
-<!-- }}} -->
 <!-- vim-gitgutter {{{ -->
 <tr>
 <td> <a href="https://github.com/airblade/vim-gitgutter">vim-gitgutter</a> </td>
@@ -1806,6 +1794,18 @@ illuminate = {
     lsp = true,
     style = { "bold" },
 },
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- vim-sandwich {{{ -->
+<tr>
+<td> <a href="https://github.com/machakann/vim-sandwich">vim-sandwich</a> </td>
+<td>
+
+```lua
+sandwich = false
 ```
 
 </td>
