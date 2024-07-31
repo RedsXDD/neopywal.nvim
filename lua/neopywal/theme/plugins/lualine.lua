@@ -41,20 +41,11 @@ function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
-    local hex_chars = "[abcdef0-9][abcdef0-9]"
-    local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
     for option in pairs(M.options.mode_colors) do
         local default_color = C[M.default_options.mode_colors[option]]
-
         local final_color = M.options.mode_colors[option]
         if type(final_color) == "function" then final_color = final_color(C) end
-
-        final_color = final_color ~= "" and final_color or default_color
-        final_color = string.lower(final_color)
-        final_color = string.find(final_color, pattern) ~= nil and final_color
-            or C[final_color] ~= nil and C[final_color]
-            or default_color
-
+        final_color = require("neopywal.utils.hex").validate(final_color, default_color)
         M.options.mode_colors[option] = final_color
     end
 
