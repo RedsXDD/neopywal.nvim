@@ -1036,6 +1036,21 @@ harpoon = false
 ```
 
 <!-- }}} -->
+<!-- hop.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/phaazon/hop.nvim">hop.nvim</a> </td>
+<td>
+
+```lua
+hop = {
+    enabled = false,
+    style = { "bold", "italic" }
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- indent-blankline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/lukas-reineke/indent-blankline.nvim">indent-blankline.nvim</a> </td>

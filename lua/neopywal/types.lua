@@ -184,6 +184,7 @@
 ---@field git_gutter boolean?
 ---@field gitsigns boolean?
 ---@field harpoon boolean?
+---@field hop {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?

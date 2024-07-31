@@ -161,6 +161,10 @@ M.default_options = {
         git_gutter = true,
         gitsigns = true,
         harpoon = false,
+        hop = {
+            enabled = false,
+            style = { "bold", "italic" },
+        },
         indent_blankline = {
             enabled = true,
             colored_indent_levels = false,
