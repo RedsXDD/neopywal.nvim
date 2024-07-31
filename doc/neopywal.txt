@@ -1294,10 +1294,6 @@ undotree>lua
     undotree = true
 <
 
-vim-sandwich>lua
-    sandwich = false
-<
-
 vim-gitgutter>lua
     git_gutter = true
 <
@@ -1308,6 +1304,10 @@ vim-illuminate>lua
         lsp = true,
         style = { "bold" },
     },
+<
+
+vim-sandwich>lua
+    sandwich = false
 <
 
 vim-sneak>lua
