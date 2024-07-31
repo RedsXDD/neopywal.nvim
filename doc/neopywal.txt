@@ -609,6 +609,10 @@ alpha-nvim>lua
     alpha = true
 <
 
+barbar.nvim>lua
+    barbar = false
+<
+
 barbecue.nvimSpecial ~
 
 Update your Barbecue config to use the Neopywal theme:
@@ -751,6 +755,13 @@ dashboard-nvim>lua
     dashboard = true
 <
 
+dropbar.nvim>lua
+    dropbar = {
+        enabled = false,
+        colored_text = false, -- Whether to add color for kind's texts.
+    },
+<
+
 feline.nvimSpecial ~
 
 Update your Feline config to use the Neopywal components:
@@ -884,6 +895,13 @@ harpoon>lua
     harpoon = false
 <
 
+hop.nvim>lua
+    hop = {
+        enabled = false,
+        style = { "bold", "italic" }
+    }
+<
+
 indent-blankline.nvim>lua
     indent_blankline = {
         enabled = true,
@@ -909,6 +927,13 @@ lazy.nvim>lua
 
 lazygit.nvim>lua
     lazygit = true
+<
+
+leap.nvim>lua
+    leap = {
+        enabled = false,
+        style = { "bold", "italic" }
+    }
 <
 
 lualine.nvimSpecial ~
@@ -1254,6 +1279,10 @@ symbols-outline.nvim
     symbols_outline = false
 <
 
+telekasten.nvim>lua
+    telekasten = false
+<
+
 telescope.nvim>lua
     telescope = {
         enabled = true,
@@ -1265,8 +1294,34 @@ undotree>lua
     undotree = true
 <
 
+vim-sandwich>lua
+    sandwich = false
+<
+
 vim-gitgutter>lua
     git_gutter = true
+<
+
+vim-illuminate>lua
+    illuminate = {
+        enabled = false,
+        lsp = true,
+        style = { "bold" },
+    },
+<
+
+vim-sneak>lua
+    sneak = {
+        enabled = false,
+        style = { "bold", "italic" },
+    
+        -- Can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        sneak_color = "",
+    },
 <
 
 which-key.nvim>lua
