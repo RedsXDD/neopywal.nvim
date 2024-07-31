@@ -1732,6 +1732,18 @@ symbols_outline = false
 </td>
 </tr>
 <!-- }}} -->
+<!-- telekasten.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/renerocksai/telekasten.nvim">telekasten.nvim</a> </td>
+<td>
+
+```lua
+telekasten = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- telescope.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/nvim-telescope/telescope.nvim">telescope.nvim</a> </td>

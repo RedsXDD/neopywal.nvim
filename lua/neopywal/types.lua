@@ -200,6 +200,7 @@
 ---@field sandwich boolean?
 ---@field sneak {enabled: boolean, sneak_color: ValidColorOptions?, style: HighlightStyles[]?} | boolean?
 ---@field symbols_outline boolean?
+---@field telekasten boolean?
 ---@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
 ---@field treesitter boolean?
 ---@field undotree boolean?

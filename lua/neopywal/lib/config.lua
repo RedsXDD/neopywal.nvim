@@ -240,6 +240,7 @@ M.default_options = {
             sneak_color = "",
         },
         symbols_outline = false,
+        telekasten = false,
         telescope = {
             enabled = true,
             -- style = "nvchad",
