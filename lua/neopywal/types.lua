@@ -185,6 +185,7 @@
 ---@field gitsigns boolean?
 ---@field harpoon boolean?
 ---@field hop {enabled: boolean, style: HighlightStyles[]?} | boolean?
+---@field illuminate {enabled: boolean, lsp: boolean?, style: HighlightStyles[]?} | boolean?
 ---@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
 ---@field lazy boolean?
 ---@field lazygit boolean?

@@ -165,6 +165,11 @@ M.default_options = {
             enabled = false,
             style = { "bold", "italic" },
         },
+        illuminate = {
+            enabled = false,
+            lsp = true,
+            style = { "bold" },
+        },
         indent_blankline = {
             enabled = true,
             colored_indent_levels = false,

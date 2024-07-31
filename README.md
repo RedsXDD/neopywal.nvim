@@ -1771,6 +1771,22 @@ git_gutter = true
 </td>
 </tr>
 <!-- }}} -->
+<!-- vim-illuminate {{{ -->
+<tr>
+<td> <a href="https://github.com/RRethy/vim-illuminate">vim-illuminate</a> </td>
+<td>
+
+```lua
+illuminate = {
+    enabled = false,
+    lsp = true,
+    style = { "bold" },
+},
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- which-key.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/folke/which-key.nvim">which-key.nvim</a> </td>
