@@ -92,26 +92,6 @@ function M.get()
         ["@comment.todo"] = { link = "Todo" },
         ["@comment.note"] = { bg = C.info, fg = C.background, styles = { "bold", "italic" } },
         --: }}}
-        --: Markup {{{
-        ["@markup"] = { fg = C.foreground }, -- For strings considerated text in a markup language.
-        ["@markup.strong"] = { link = "Bold" }, -- bold text
-        ["@markup.italic"] = { link = "Italic" }, -- italic text
-        ["@markup.strikethrough"] = { link = "Strikethrough" }, -- strikethrough text
-        ["@markup.underline"] = { link = "Underlined" }, -- underlined text
-        ["@markup.heading"] = { link = "Title" }, -- titles like: # Example
-        ["@markup.math"] = { link = "Special" }, -- math environments (e.g. `$ ... $` in LaTeX)
-        ["@markup.quote"] = { link = "Identifier" }, -- block quotes
-        ["@markup.environment"] = { link = "Macro" }, -- text environments of markup languages
-        ["@markup.environment.name"] = { link = "Type" }, -- text indicating the type of an environment
-        ["@markup.link"] = { link = "Tag" }, -- text references, footnotes, citations, etc.
-        ["@markup.link.url"] = { link = "URLlink" }, -- urls, links and emails
-        ["@markup.link.label"] = { link = "Label" }, -- link, reference descriptions
-        ["@markup.link.label.symbol"] = { link = "Identifier" },
-        ["@markup.raw"] = { link = "String" }, -- used for inline code in markdown and for doc in python (""")
-        ["@markup.list"] = { link = "Special" },
-        ["@markup.list.checked"] = { fg = C.color2 }, -- todo notes
-        ["@markup.list.unchecked"] = { fg = C.color4 }, -- todo notes
-        --: }}}
         --: Diff {{{
         ["@diff.plus"] = { link = "DiffAdd" }, -- added text (for diff files)
         ["@diff.minus"] = { link = "DiffDelete" }, -- deleted text (for diff files)
@@ -130,6 +110,24 @@ function M.get()
         ["@keyword.export"] = { fg = C.color6 },
         --: }}}
         --: Markdown {{{
+        ["@markup"] = { fg = C.foreground }, -- For strings considerated text in a markup language.
+        ["@markup.strong"] = { link = "Bold" }, -- bold text
+        ["@markup.italic"] = { link = "Italic" }, -- italic text
+        ["@markup.strikethrough"] = { link = "Strikethrough" }, -- strikethrough text
+        ["@markup.underline"] = { link = "Underlined" }, -- underlined text
+        ["@markup.heading"] = { link = "Title" }, -- titles like: # Example
+        ["@markup.math"] = { link = "Special" }, -- math environments (e.g. `$ ... $` in LaTeX)
+        ["@markup.quote"] = { link = "Identifier" }, -- block quotes
+        ["@markup.environment"] = { link = "Macro" }, -- text environments of markup languages
+        ["@markup.environment.name"] = { link = "Type" }, -- text indicating the type of an environment
+        ["@markup.link"] = { link = "Tag" }, -- text references, footnotes, citations, etc.
+        ["@markup.link.url"] = { link = "URLlink" }, -- urls, links and emails
+        ["@markup.link.label"] = { link = "Label" }, -- link, reference descriptions
+        ["@markup.link.label.symbol"] = { link = "Identifier" },
+        ["@markup.raw"] = { link = "String" }, -- used for inline code in markdown and for doc in python (""")
+        ["@markup.list"] = { link = "Special" },
+        ["@markup.list.checked"] = { fg = C.color2 }, -- todo notes
+        ["@markup.list.unchecked"] = { fg = C.color4 }, -- todo notes
         ["@markup.heading.1.markdown"] = { link = "rainbow1" },
         ["@markup.heading.2.markdown"] = { link = "rainbow2" },
         ["@markup.heading.3.markdown"] = { link = "rainbow3" },
