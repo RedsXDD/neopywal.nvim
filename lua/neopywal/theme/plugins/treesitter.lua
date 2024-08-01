@@ -182,7 +182,7 @@ function M.get()
         ["@comment.warning.gitcommit"] = { fg = C.color3 },
         --: }}}
         --: }}}
-        --: LSP Semantic Token Groups {{{
+        --: LSP Semantic Tokens {{{
         ["@lsp.type.boolean"] = { link = "@boolean" },
         ["@lsp.type.builtinType"] = { link = "@type.builtin" },
         ["@lsp.type.comment"] = { link = "@comment" },
