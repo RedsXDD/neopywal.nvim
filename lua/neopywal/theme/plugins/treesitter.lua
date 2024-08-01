@@ -83,11 +83,7 @@ function M.get()
         ["@comment"] = { link = "Comment" },
         ["@comment.documentation"] = { link = "Comment" }, -- For comments documenting code
         ["@comment.error"] = { bg = C.error, fg = C.background, styles = { "bold", "italic" } },
-        ["@comment.warning"] = {
-            bg = C.warn,
-            fg = C.background,
-            styles = { "bold", "italic" },
-        },
+        ["@comment.warning"] = { bg = C.warn, fg = C.background, styles = { "bold", "italic" } },
         ["@comment.hint"] = { bg = C.hint, fg = C.background, styles = { "bold", "italic" } },
         ["@comment.todo"] = { link = "Todo" },
         ["@comment.note"] = { bg = C.info, fg = C.background, styles = { "bold", "italic" } },
