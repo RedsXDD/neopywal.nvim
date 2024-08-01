@@ -57,12 +57,12 @@ function M.get()
         URLlink = { fg = C.color4, styles = { "italic", "underline" } }, -- (preferred) urls, links and emails
 
         -- Rainbow
-        rainbow1 = { fg = C.color1 },
-        rainbow2 = { fg = U.blend(C.color1, C.color3, 0.5) },
-        rainbow3 = { fg = C.color3 },
-        rainbow4 = { fg = C.color2 },
-        rainbow5 = { fg = C.color4 },
-        rainbow6 = { fg = C.color5 },
+        rainbow1 = { fg = require("neopywal.utils.rainbow").get()[1] },
+        rainbow2 = { fg = require("neopywal.utils.rainbow").get()[2] },
+        rainbow3 = { fg = require("neopywal.utils.rainbow").get()[3] },
+        rainbow4 = { fg = require("neopywal.utils.rainbow").get()[4] },
+        rainbow5 = { fg = require("neopywal.utils.rainbow").get()[5] },
+        rainbow6 = { fg = require("neopywal.utils.rainbow").get()[6] },
 
         -- Diagnostics:
         DiagnosticOk = { fg = C.ok, styles = O.plugins.lsp.virtual_text.ok or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
