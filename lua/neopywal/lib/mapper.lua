@@ -16,7 +16,8 @@ function M.get(theme_style)
             local default_config = require("neopywal.lib.config").default_options.fileformats[fileformat]
             O.fileformats[fileformat] = type(default_config) == "table" and default_config or {}
             O.fileformats[fileformat].enabled = true
-            fileformats = vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats")[fileformat]())
+            fileformats =
+                vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats." .. fileformat).get())
         end
     end
 
