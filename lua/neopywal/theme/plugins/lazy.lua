@@ -6,7 +6,7 @@ function M.get()
         LazySpecial = { fg = C.specialchar },
         LazyDir = { link = "Directory" },
         LazyValue = { fg = C.string },
-        LazyUrl = { link = "LazyDir" },
+        LazyUrl = { link = "URLlink" },
         LazyDimmed = { link = (O.dim_inactive and "NormalNC" or "Conceal") },
         LazyCommit = { fg = C.identifier },
         LazyH1 = { bg = U.blend(C.background, C.foreground, 0.7), styles = { "bold" } }, -- Non-selected buttons.
