@@ -63,7 +63,7 @@
 ---| "storageclass"
 ---| "typedef"
 ---| "special"
----| "secialchar"
+---| "specialchar"
 ---| "tag"
 ---| "delimiter"
 ---| "specialcomment"
@@ -131,7 +131,7 @@
 ---@field storageclass string
 ---@field typedef string
 ---@field special string
----@field secialchar string
+---@field specialchar string
 ---@field tag string
 ---@field delimiter string
 ---@field specialcomment string
