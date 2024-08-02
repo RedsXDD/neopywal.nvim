@@ -69,7 +69,6 @@
 ---| "specialcomment"
 
 ---@class Neopywal
----@field current_style ThemeStyles
 ---@field get_colors fun(theme_style: ThemeStyles?): table
 ---@field load fun(theme_style: ThemeStyles?)
 ---@field setup fun(user_config: NeopywalOptions?)

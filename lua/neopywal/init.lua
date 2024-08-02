@@ -20,17 +20,16 @@ function M.load(theme_style)
     end
 
     local bg = vim.o.background
-    local style_bg = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
-    if style_bg ~= bg then
-        if vim.g.colors_name == "neopywal-" .. style_bg then
-            style_bg = (bg == "light" and style_bg == "dark") and "light" or "dark"
+    theme_style = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
+    if theme_style ~= bg then
+        if vim.g.colors_name == "neopywal-" .. theme_style then
+            theme_style = (bg == "light" and theme_style == "dark") and "light" or "dark"
         else
-            vim.o.background = style_bg
+            vim.o.background = theme_style
         end
     end
 
-    M.current_style = style_bg
-    local filename = Compiler.options.filename .. "-" .. M.current_style
+    local filename = Compiler.options.filename .. "-" .. theme_style
     local compiled_path = Compiler.options.compile_path .. Compiler.options.path_sep .. filename
 
     lock = true
