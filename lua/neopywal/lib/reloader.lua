@@ -52,6 +52,12 @@ Below is the error message that we captured:
         end
 
         vim.schedule(function()
+            if not vim.g.colors_name:match("^neopywal") then
+                M.lock = false
+                package.loaded["neopywal.lib.reloader"] = nil
+                return
+            end
+
             Notify.info(
                 string.format([[Change detected in template file "%s", recompiling colorscheme.]], template_path)
             )
