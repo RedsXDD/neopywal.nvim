@@ -68,8 +68,76 @@
 ---| "delimiter"
 ---| "specialcomment"
 
+---@class NeopywalPalette
+---@field none string
+---@field background string
+---@field foreground string
+---@field cursor string
+---@field color0 string
+---@field color1 string
+---@field color2 string
+---@field color3 string
+---@field color4 string
+---@field color5 string
+---@field color6 string
+---@field color7 string
+---@field color8 string
+---@field color9 string
+---@field color10 string
+---@field color11 string
+---@field color12 string
+---@field color13 string
+---@field color14 string
+---@field color15 string
+---@field dim_bg string
+---@field comment string
+---@field cursorline string
+---@field directory string
+---@field diff_added string
+---@field diff_changed string
+---@field diff_removed string
+---@field diff_untracked string
+---@field error string
+---@field hint string
+---@field info string
+---@field unnecessary string
+---@field warn string
+---@field ok string
+---@field inlay_hints string
+---@field variable string
+---@field constant string
+---@field string string
+---@field character string
+---@field number string
+---@field boolean string
+---@field float string
+---@field identifier string
+---@field func string
+---@field statement string
+---@field conditional string
+---@field loop string
+---@field label string
+---@field exception string
+---@field operator string
+---@field keyword string
+---@field debug string
+---@field preproc string
+---@field include string
+---@field define string
+---@field macro string
+---@field precondit string
+---@field type string
+---@field structure string
+---@field storageclass string
+---@field typedef string
+---@field special string
+---@field secialchar string
+---@field tag string
+---@field delimiter string
+---@field specialcomment string
+
 ---@class Neopywal
----@field get_colors fun(theme_style: ThemeStyles?): table
+---@field get_colors fun(theme_style: ThemeStyles?): NeopywalPalette
 ---@field load fun(theme_style: ThemeStyles?)
 ---@field setup fun(user_config: NeopywalOptions?)
 

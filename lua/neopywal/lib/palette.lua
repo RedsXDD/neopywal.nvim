@@ -67,6 +67,7 @@ end
     E.g.:
         M.get("dark", false, function(C) return { red = C.color1 }) end)
 ]]
+---@return NeopywalPalette
 ---@param theme_style ThemeStyles?
 ---@param minimal_palette boolean?
 ---@param extra_colors table?
