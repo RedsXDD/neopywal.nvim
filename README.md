@@ -1560,6 +1560,54 @@ mini = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- neo-tree.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/nvim-neo-tree/neo-tree.nvim">neo-tree.nvim</a> </td>
+<td>
+
+```lua
+neotree = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- netrw {{{ -->
+<tr>
+<td> <a href="https://www.vim.org/scripts/script.php?script_id=1075">netrw</a> </td>
+<td>
+
+```lua
+netrw = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- noice.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/folke/noice.nvim">noice.nvim</a> </td>
+<td>
+
+```lua
+noice = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- nvim-cmp {{{ -->
+<tr>
+<td> <a href="https://github.com/hrsh7th/nvim-cmp">nvim-cmp</a> </td>
+<td>
+
+```lua
+nvim_cmp = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- nvim-lspconfig {{{ -->
 <tr>
 <td> <a href="https://github.com/neovim/nvim-lspconfig">nvim-lspconfig</a> </td>
@@ -1641,54 +1689,6 @@ require("neopywal").setup({
 ```
 
 </details>
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- neo-tree.nvim {{{ -->
-<tr>
-<td> <a href="https://github.com/nvim-neo-tree/neo-tree.nvim">neo-tree.nvim</a> </td>
-<td>
-
-```lua
-neotree = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- netrw {{{ -->
-<tr>
-<td> <a href="https://www.vim.org/scripts/script.php?script_id=1075">netrw</a> </td>
-<td>
-
-```lua
-netrw = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- noice.nvim {{{ -->
-<tr>
-<td> <a href="https://github.com/folke/noice.nvim">noice.nvim</a> </td>
-<td>
-
-```lua
-noice = true
-```
-
-</td>
-</tr>
-<!-- }}} -->
-<!-- nvim-cmp {{{ -->
-<tr>
-<td> <a href="https://github.com/hrsh7th/nvim-cmp">nvim-cmp</a> </td>
-<td>
-
-```lua
-nvim_cmp = true
-```
 
 </td>
 </tr>
