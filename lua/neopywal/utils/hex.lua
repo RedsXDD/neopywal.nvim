@@ -3,6 +3,8 @@ local M = {}
 ---@param hex_color string? The color you want to validate as a valid hexadecimal color.
 ---@param fallback_color string? A fallback color in case the first parameter color turns out to be invalid.
 function M.validate(hex_color, fallback_color)
+    local C = require("neopywal.lib.palette").get()
+
     hex_color = hex_color or ""
     fallback_color = fallback_color or ""
 
