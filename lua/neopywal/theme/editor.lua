@@ -59,10 +59,10 @@ function M.get()
         ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
 
         -- Diff:
-        DiffAdd = { fg = C.diff_added }, -- diff mode: Added line |diff.txt|.
-        DiffChange = { fg = C.diff_changed }, -- diff mode: Changed line |diff.txt|.
-        DiffDelete = { fg = C.diff_removed }, -- diff mode: Deleted line |diff.txt|.
-        DiffText = { reverse = true }, -- diff mode: Changed text within a changed line |diff.txt|.
+        DiffAdd = { bg = U.blend(C.diff_added, C.background, 0.2) }, -- diff mode: Added line |diff.txt|.
+        DiffChange = { bg = U.blend(C.diff_changed, C.background, 0.2) }, -- diff mode: Changed line |diff.txt|.
+        DiffDelete = { bg = U.blend(C.diff_removed, C.background, 0.2) }, -- diff mode: Deleted line |diff.txt|.
+        DiffText = { bg = U.blend(C.background, C.foreground, 0.5) }, -- diff mode: Changed text within a changed line |diff.txt|.
 
         -- Misc:
         Conceal = { fg = C.color8 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
