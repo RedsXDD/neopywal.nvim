@@ -24,7 +24,9 @@ function M.get()
         VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
         WinSeparator = {
             bg = O.transparent_background and C.none or O.dim_inactive and C.dim_bg or C.background,
-            fg = O.show_split_lines and C.color8 or O.dim_inactive and C.dim_bg or C.background,
+            fg = (O.transparent_background or O.show_split_lines) and C.color8
+                or O.dim_inactive and C.dim_bg
+                or C.background,
         }, -- the column separating vertically split windows
         Visual = { bg = U.blend(C.color5, C.background, 0.2), fg = C.color5, styles = { "bold" } }, -- Visual mode selection.
         VisualNOS = {
