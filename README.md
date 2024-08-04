@@ -752,7 +752,7 @@ beacon = {
 
 <details> <summary>Special</summary>
 
-Update your bufferline config to use the Neopywal components:
+Update your bufferline config to use the Neopywal highlights:
 
 > [!Note]
 > Bufferline needs to be loaded after setting up Neopywal or it will highlight incorrectly.
@@ -789,7 +789,7 @@ Configuration for [lazy.nvim](https://github.com/folke/lazy.nvim) users:
 }
 ```
 
-Overriding configurations can be done inside the setup() function, see `:h bufferline-highlights` for detailed explanations:
+Overwriting highlights can be done inside the setup() function, see `:h bufferline-highlights` for detailed explanations:
 
 ```lua
 local C = require("neopywal").get_colors()
