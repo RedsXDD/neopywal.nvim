@@ -17,7 +17,6 @@ function M.get()
         Identifier = { fg = C.identifier },
         IfStatement = { fg = C.conditional },
         List = { fg = C.specialchar },
-        Macro = { fg = C.preproc },
         MarkdownH1 = { link = "rainbow1" },
         MarkdownH2 = { link = "rainbow2" },
         MarkdownH3 = { link = "rainbow3" },
@@ -29,7 +28,6 @@ function M.get()
         Specifier = { fg = C.special },
         Statement = { fg = C.statement },
         SwitchStatement = { fg = C.conditional },
-        Type = { fg = C.type },
         WhileStatement = { fg = C.loop },
     })
 

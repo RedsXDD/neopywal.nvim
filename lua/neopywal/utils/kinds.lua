@@ -19,6 +19,7 @@ local kinds = {
     Interface = { fg = C.variable }, --  Links to "@lsp.type.interface" => "Variable".
     Key = { fg = C.func }, --  Links to "@variable.member" => "Function".
     Keyword = { fg = C.keyword }, --  Links to "@keyword" => "Keyword".
+    Macro = { fg = C.preproc }, -- Links to "Macro" => "Preproc".
     Method = { fg = C.func }, --  Links to "@method" => "Function".
     Module = { fg = C.include }, --  Links to "@module" => "Include".
     Namespace = { fg = C.include }, --  Links to "@namespace" => "Include".
@@ -36,6 +37,7 @@ local kinds = {
     Struct = { fg = C.type }, --  Links to "@lsp.type.struct" => "Type".
     Text = { fg = C.foreground }, -- Links to "Normal".
     TypeAlias = { fg = C.typedef }, -- Links to "@lsp.type.typeAlias" => "TypeDef".
+    Type = { fg = C.type },
     TypeParameter = { fg = C.type }, --  Links to "@lsp.type.typeParameter" => "TypeDef".
     Unit = { fg = C.type }, --  Links to "@lsp.type.struct" => "Type".
     Value = { fg = C.string }, --  Links to "@string" => "String".
