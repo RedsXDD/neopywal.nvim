@@ -27,12 +27,15 @@ local kinds = {
     Object = { fg = C.constant }, --  Links to "@constant" => "Constant".
     Operator = { fg = C.operator }, --  Links to "@operator" => "Operator".
     Package = { fg = C.include }, --  Links to "@module" => "Include".
+    Parameter = { fg = C.identifier }, -- Links to "@parameter" => "Identifier".
     Property = { fg = C.func }, --  Links to "@property" => "Function".
     Reference = { fg = C.tag }, --  Links to "@markup.link" => "Tag".
     Snippet = { fg = C.include }, --  Links to "@module" => "Include".
+    StaticMethod = { fg = C.func }, -- Links to "@method" => "Function".
     String = { fg = C.string }, --  Links to "@string" => "String".
     Struct = { fg = C.type }, --  Links to "@lsp.type.struct" => "Type".
     Text = { fg = C.foreground }, -- Links to "Normal".
+    TypeAlias = { fg = C.typedef }, -- Links to "@lsp.type.typeAlias" => "TypeDef".
     TypeParameter = { fg = C.type }, --  Links to "@lsp.type.typeParameter" => "TypeDef".
     Unit = { fg = C.type }, --  Links to "@lsp.type.struct" => "Type".
     Value = { fg = C.string }, --  Links to "@string" => "String".
