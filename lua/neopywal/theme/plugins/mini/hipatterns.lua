@@ -18,7 +18,7 @@ function M.get()
             styles = O.plugins.mini.hipatterns.style.todo or {},
         },
         MiniHipatternsNote = {
-            bg = C.foreground,
+            bg = C.info,
             fg = C.background,
             styles = O.plugins.mini.hipatterns.style.note or {},
         },
