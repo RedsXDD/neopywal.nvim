@@ -1,5 +1,61 @@
 # Changelog
 
+## [2.6.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.5.0...v2.6.0) (2024-08-09)
+
+
+### Features
+
+* **editor:** improve Diff highlights ([0c3f219](https://github.com/RedsXDD/neopywal.nvim/commit/0c3f2192837db0500601a8c5ef800e7a7fd7bea0))
+* **kinds:** add "Macro" and "Type" kinds ([e96f789](https://github.com/RedsXDD/neopywal.nvim/commit/e96f78955d90c73612e6aaf5bf7afdffcf0259b5))
+* **kinds:** add ccls-specific kinds ([2a6370b](https://github.com/RedsXDD/neopywal.nvim/commit/2a6370bb1017fa7427f866badc3c9cdf0dc2884f))
+* **plugins:** add diffview.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add fern.vim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add fidget.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add fzf-lua ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add grug-far.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add headlines.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add indentmini.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add lightline.vim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add lir.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add lspsaga.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add markdown.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add mason.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add neogit ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add neotest ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add NormalNvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add notifier.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-dap ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-dap-ui ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-scrollbar ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-surround ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-tree.lua ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-treesitter-context ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-ts-rainbow ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-ts-rainbow2 ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-ufo ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add nvim-window-picker ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add octo.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add overseer.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add pounce.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add rainbow-delimiters.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add reactive.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add trouble.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add vim-airline ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add vim-clap ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add vim-dadbod-ui ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add vim-glyph-palette ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add vimwiki ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** add yanky.nvim ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **plugins:** additional plugin support ([c2db621](https://github.com/RedsXDD/neopywal.nvim/commit/c2db621ef3e4c0391f48fdefa0b14950cb077f24))
+* **utils:** consistent rainbow colors ([3eb1e61](https://github.com/RedsXDD/neopywal.nvim/commit/3eb1e61c66044f4452b31977210d5ef5a169c403))
+
+
+### Bug Fixes
+
+* **editor:** dark window seperator with transparent background ([aa5ce21](https://github.com/RedsXDD/neopywal.nvim/commit/aa5ce21cb9b474bfd90cf5163ba4e75d78d8e966))
+* **reloader:** prevent reloading on other colorschemes ([511b110](https://github.com/RedsXDD/neopywal.nvim/commit/511b110999d85e46982774457639280f704ed704))
+* **utils,hex:** fix undefined "C" variable ([df0d54a](https://github.com/RedsXDD/neopywal.nvim/commit/df0d54a79633e30b0647d388d3951516375e288f))
+
 ## [2.5.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.4.0...v2.5.0) (2024-07-31)
 
 
