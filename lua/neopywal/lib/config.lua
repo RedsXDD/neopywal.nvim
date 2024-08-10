@@ -451,16 +451,17 @@ function M.setup(user_config)
     -- Neovide doesn't play well with transparent background colors.
     M.options.transparent_background = not vim.g.neovide and M.options.transparent_background or false
 
-    -- For backwards compatability (check `https://github.com/RedsXDD/neopywal.nvim/commit/f2973005932257b81dbd10bca67ce51490bf7599`).
-    M.options.plugins.lsp = vim.tbl_deep_extend(
-        "keep",
-        type(M.options.plugins.lsp) == "boolean" and { enabled = M.options.plugins.lsp } or M.options.plugins.lsp,
-        type(M.options.styles.lsp) == "table" and M.options.styles.lsp or {},
-        M.default_options.plugins.lsp
-    )
-
-    -- Coc.nvim depeds on lsp highlights.
-    M.options.plugins.lsp.enabled = M.options.plugins.coc or M.options.plugins.lsp.enabled
+    -- Coc.nvim depends on lsp highlights.
+    if
+        M.options.plugins.coc == true
+        or type(M.options.plugins.coc) == "table" and M.options.plugins.coc.enabled == true
+    then
+        if type(M.options.plugins.lsp) == "table" and M.options.plugins.lsp.enabled ~= true then
+            M.options.plugins.lsp.enabled = true
+        elseif type(M.options.plugins.lsp) == "boolean" and M.options.plugins.lsp ~= true then
+            M.options.plugins.lsp = true
+        end
+    end
 
     -- Setup new palette configuration.
     Palette.setup({
