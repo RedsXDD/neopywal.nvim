@@ -431,9 +431,9 @@ M.did_setup = false
 ---@param user_config? NeopywalOptions
 function M.setup(user_config)
     user_config = user_config or {}
-    user_config.plugins = check_nil_option(user_config.plugins, {})
 
     -- Handle plugin tables.
+    user_config.plugins = check_nil_option(user_config.plugins, {})
     M.default_options.default_plugins = check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
     M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
     M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
