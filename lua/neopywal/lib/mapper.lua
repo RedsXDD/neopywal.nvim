@@ -1,4 +1,19 @@
 local M = {}
+local Notify = require("neopywal.utils.notify")
+
+local function couldnt_load(type, module)
+    Notify.error(string.format(
+        [[
+Unable to import highlight groups for the %s "%s".
+This could be a problem with your Neopywal configuration.
+If you think this is a bug, kindly open an issue specifying
+which %s module couldn't be loaded.
+                ]],
+        type,
+        module,
+        type
+    ))
+end
 
 ---@param theme_style? ThemeStyles
 function M.get(theme_style)
@@ -16,8 +31,15 @@ function M.get(theme_style)
             local default_config = require("neopywal.lib.config").default_options.fileformats[fileformat]
             O.fileformats[fileformat] = type(default_config) == "table" and default_config or {}
             O.fileformats[fileformat].enabled = true
-            fileformats =
-                vim.tbl_deep_extend("force", fileformats, require("neopywal.theme.fileformats." .. fileformat).get())
+            local has_groups, groups = pcall(
+                function() return require("neopywal.theme.fileformats." .. fileformat).get() end
+            )
+
+            if not has_groups then
+                couldnt_load("fileformat", fileformat)
+            else
+                fileformats = vim.tbl_deep_extend("force", fileformats, groups)
+            end
         end
     end
 
@@ -44,7 +66,15 @@ function M.get(theme_style)
 
         if apply then
             local plugin_name = is_mini and "mini." .. plugin or plugin
-            plugins = vim.tbl_deep_extend("force", plugins, require("neopywal.theme.plugins." .. plugin_name).get())
+            local has_groups, groups = pcall(
+                function() return require("neopywal.theme.plugins." .. plugin_name).get() end
+            )
+
+            if not has_groups then
+                couldnt_load("plugin", plugin_name)
+            else
+                plugins = vim.tbl_deep_extend("force", plugins, groups)
+            end
         end
     end
 
