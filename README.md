@@ -1991,6 +1991,18 @@ lsp = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- nvim-navbuddy {{{ -->
+<tr>
+<td> <a href="https://github.com/SmiteshP/nvim-navbuddy">nvim-navbuddy</a> </td>
+<td>
+
+```lua
+navbuddy = false
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- nvim-navic {{{ -->
 <tr>
 <td> <a href="https://github.com/SmiteshP/nvim-navic">nvim-navic</a> </td>

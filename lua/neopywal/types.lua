@@ -272,6 +272,7 @@
 ---@field lspsaga {enabled: boolean, dim_folder: boolean?, dim_filename: boolean?, dim_separator: boolean?, winbar_style: HighlightStyles[]?} | boolean?
 ---@field markdown boolean?
 ---@field mason boolean?
+---@field navbuddy boolean?
 ---@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: ValidColorOptions?} | boolean?
 ---@field neogit boolean?
 ---@field neotest boolean?

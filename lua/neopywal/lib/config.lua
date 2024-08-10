@@ -242,6 +242,7 @@ M.default_options = {
         },
         markdown = false,
         mason = true,
+        navbuddy = false,
         navic = {
             enabled = false,
             dim_text = false, -- Whether the text should be dimmed.
