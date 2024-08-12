@@ -1,31 +1,22 @@
 local M = {}
-
----@diagnostic disable-next-line: undefined-global
 local Compiler = require("neopywal.lib.compiler")
 local Notify = require("neopywal.utils.notify")
 
-local cache_dir
-if Compiler.options.path_sep == "\\" then
-    cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-else
-    cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
-end
-
 M.default_options = {
-    colorscheme_file = "",
-    use_palette = "",
-    use_wallust = false,
+    use_palette = {
+        dark = "",
+        light = "",
+    },
     custom_colors = {},
 }
 M.options = M.default_options
 
-local function check_nil_option(option, fallback_result)
-    -- NOTE: `return option == nil and fallback_result or option`
-    -- doesn't work because "option" will be returned if "fallback_result" is false.
-    if option == nil then
-        return fallback_result
+---@return string
+local function fixPathSep(path)
+    if Compiler.options.path_sep == "\\" then
+        return path:gsub("/", "\\")
     else
-        return option
+        return path
     end
 end
 
@@ -34,28 +25,41 @@ M.did_setup = false
 function M.setup(config)
     config = config or {}
 
-    config.use_wallust = check_nil_option(config.use_wallust, M.default_options.use_wallust)
-    if type(config.use_wallust) == "function" then config.use_wallust = config.use_wallust() end
-
-    config.colorscheme_file = check_nil_option(config.colorscheme_file, M.default_options.colorscheme_file)
-    if type(config.colorscheme_file) == "function" then config.colorscheme_file = config.colorscheme_file() end
-
-    config.use_palette = check_nil_option(config.use_palette, M.default_options.use_palette)
-    if type(config.use_palette) == "function" then config.use_palette = config.use_palette() end
-
-    config.custom_colors = check_nil_option(config.custom_colors, M.default_options.custom_colors)
-
     M.options = vim.tbl_deep_extend("keep", config, M.default_options)
 
-    local plugin_dir = debug.getinfo(1).source:sub(2, -29)
-    local palette_dir = plugin_dir .. "palettes/"
-    local template_file = cache_dir .. "/wal/colors-wal.vim"
-    if M.options.use_wallust then template_file = cache_dir .. "/wallust/colors_neopywal.vim" end
-    if M.options.colorscheme_file ~= "" then template_file = M.options.colorscheme_file end
-    if M.options.use_palette ~= "" then template_file = "" .. palette_dir .. M.options.use_palette .. ".vim" end
+    if type(M.options.use_palette) == "function" then M.options.use_palette = M.options.use_palette() end
+    if type(M.options.use_palette) == "string" then
+        M.options.use_palette = { dark = M.options.use_palette, light = M.options.use_palette }
+    end
 
-    if Compiler.options.path_sep == "\\" then template_file = template_file:gsub("/", "\\") end
-    M.options.colorscheme_file = template_file
+    local cache_dir
+    if Compiler.options.path_sep == "\\" then
+        cache_dir = os.getenv("LOCALAPPDATA") -- Windows
+    else
+        cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
+    end
+
+    local palette_map = {
+        wal = cache_dir .. "/wal/colors-wal.vim",
+        pywal = cache_dir .. "/wal/colors-wal.vim",
+        wallust = cache_dir .. "/wallust/colors_neopywal.vim",
+    }
+
+    for option, value in pairs(M.options.use_palette) do
+        if palette_map[value] then
+            M.options.use_palette[option] = fixPathSep(palette_map[value])
+        else
+            value = fixPathSep(value)
+            local palettes_dir = fixPathSep(debug.getinfo(1).source:sub(2, -29) .. "palettes/")
+            local file = io.open(value, "r")
+            if file then
+                file:close()
+                M.options.use_palette[option] = value
+            else
+                M.options.use_palette[option] = palettes_dir .. value .. ".vim"
+            end
+        end
+    end
 
     M.did_setup = true
 end
@@ -75,7 +79,8 @@ function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
-    local colorscheme_file = M.options.colorscheme_file
+    ---@type string
+    local colorscheme_file = M.options.use_palette[theme_style]
     local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
     if not file_exists then
         Notify.error(

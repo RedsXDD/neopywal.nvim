@@ -5,18 +5,12 @@ local Palette = require("neopywal.lib.palette")
 local Compiler = require("neopywal.lib.compiler")
 
 M.default_options = {
-    -- Uses a template file `~/.cache/wallust/colors_neopywal.vim` instead of the
-    -- regular pywal template at `~/.cache/wal/colors-wal.vim`.
-    use_wallust = false,
-
-    -- This option allows to specify where Neopywal should look for a ".vim" template file
-    -- (e.g.: os.getenv("HOME") .. "/.cache/wal/custom_neopywal_template.vim").
-    colorscheme_file = "",
-
-    -- This option allows to use a custom built-in theme palettes like "catppuccin-mocha" or "tokyonight".
-    -- To get the list of available themes take a look at `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
-    -- Take note that this option takes precedence over `use_wallust` and `colorscheme_file`.
-    use_palette = "",
+    -- This option allows to use a custom theme palettes for each Neopywal style.
+    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
+    use_palette = {
+        dark = "pywal",
+        light = "pywal",
+    },
 
     -- Sets the background color of certain highlight groups to be transparent.
     -- Use this when your terminal opacity is < 1.
@@ -465,9 +459,7 @@ function M.setup(user_config)
 
     -- Setup new palette configuration.
     Palette.setup({
-        colorscheme_file = M.options.colorscheme_file,
         use_palette = M.options.use_palette,
-        use_wallust = M.options.use_wallust,
         custom_colors = M.options.custom_colors,
     })
 

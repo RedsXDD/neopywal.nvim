@@ -19,7 +19,8 @@ function M.init()
 
     ---@diagnostic disable-next-line: undefined-field
     local event = vim.uv.new_fs_event()
-    local template_path = Palette.options.colorscheme_file
+    local bg = vim.o.background
+    local template_path = Palette.options.use_palette[bg]
     event:start(template_path, {
         watch_entry = true,
         stat = true,

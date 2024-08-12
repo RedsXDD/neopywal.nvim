@@ -153,9 +153,7 @@
 ---@field did_setup boolean
 
 ---@class NeopywalOptions
----@field use_wallust boolean?
----@field colorscheme_file string
----@field use_palette string?
+---@field use_palette {dark: string?, light: string?} | string?
 ---@field transparent_background boolean?
 ---@field custom_colors table?
 ---@field custom_highlights table?
