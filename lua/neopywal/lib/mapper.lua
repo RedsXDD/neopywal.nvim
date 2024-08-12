@@ -18,6 +18,7 @@ end
 ---@param theme_style? ThemeStyles
 function M.get(theme_style)
     local theme = {}
+    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
     local _O, _C, _U = O, C, U -- Borrowing global variables (setfenv doesn't work with require)
     O = require("neopywal.lib.config").options
@@ -84,8 +85,8 @@ function M.get(theme_style)
     end
 
     -- Get user-defined highlights.
-    local user_highlights = O.custom_highlights
-    if type(user_highlights) == "function" then user_highlights = user_highlights(C) end
+    local custom_highlights = O.custom_highlights
+    if type(custom_highlights) == "function" then custom_highlights = custom_highlights(C) end
 
     -- This section MUST happen AFTER all the manipulation on the "O" table has been done.
     theme.editor = require("neopywal.theme.editor").get()
@@ -93,7 +94,13 @@ function M.get(theme_style)
     theme.terminal = require("neopywal.theme.terminal").get()
     theme.fileformats = fileformats
     theme.plugins = plugins
-    theme.custom_highlights = user_highlights
+    theme.custom_highlights = vim.tbl_deep_extend(
+        "keep",
+        type(custom_highlights[theme_style]) == "function" and custom_highlights[theme_style](C)
+            or custom_highlights[theme_style]
+            or {},
+        type(custom_highlights.all) == "function" and custom_highlights.all(C) or custom_highlights.all or {}
+    )
 
     O, C, U = _O, _C, _U -- Returning global variables
 
