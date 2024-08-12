@@ -22,6 +22,7 @@ end
 
 -- This is the function that setups the path for the colorscheme file, as well as the user custom colors which later can be appended to the final palette.
 M.did_setup = false
+---@param config table?
 function M.setup(config)
     config = config or {}
 

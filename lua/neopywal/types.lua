@@ -1,3 +1,20 @@
+---@class ValidHighlights
+---@field fg string?
+---@field bg string?
+---@field style HighlightStyles[]?
+---@field link string?
+
+---@class CustomHighlightsOption
+---@field all? { [string]: ValidHighlights? } | fun(C: table<ValidColors[]>?): { [string]: ValidHighlights? }
+---@field dark? { [string]: ValidHighlights? } | fun(C: table<ValidColors[]>?): { [string]: ValidHighlights? }
+---@field light? { [string]: ValidHighlights? } | fun(C: table<ValidColors[]>?): { [string]: ValidHighlights? }
+
+---@class CustomColorsOption
+---@field all? { [string]: string? } | fun(C: table<ValidColors[]>?): { [string]: string? }
+---@field dark? { [string]: string? } | fun(C: table<ValidColors[]>?): { [string]: string? }
+---@field light? { [string]: string? } | fun(C: table<ValidColors[]>?): { [string]: string? }
+
+---@alias BasicModule {enabled: boolean} | boolean
 ---@alias ThemeStyles "dark" | "light" | nil
 ---@alias HighlightStyles "bold" | "underline" | "undercurl" | "underdouble" | "underdotted" | "underdashed" | "strikethrough" | "reverse" | "inverse" | "italic" | "standout" | "altfont" | "nocombine" | "NONE"
 ---@alias ValidColorOptions string<string<ValidColors[]> | fun(C: table<ValidColors[]>?): ValidColors[]? | "">
@@ -155,8 +172,8 @@
 ---@class NeopywalOptions
 ---@field use_palette {dark: string?, light: string?} | string?
 ---@field transparent_background boolean?
----@field custom_colors table?
----@field custom_highlights table?
+---@field custom_colors CustomColorsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
+---@field custom_highlights CustomHighlightsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
 ---@field dim_inactive boolean?
 ---@field terminal_colors boolean?
 ---@field show_end_of_buffer boolean?
@@ -188,122 +205,122 @@
 ---@field lsp NeopywalPluginsLSP?
 
 ---@class NeopywalFileformats
----@field c_cpp boolean?
----@field c_sharp boolean?
----@field clojure boolean?
----@field cmake boolean?
----@field common_lisp boolean?
----@field css boolean?
----@field dart boolean?
----@field diff boolean?
----@field elixir boolean?
----@field erlang boolean?
----@field git_commit boolean?
----@field go boolean?
----@field haskell boolean?
----@field help boolean?
----@field html boolean?
----@field ini boolean?
----@field java boolean?
----@field javascript boolean?
----@field javascript_react boolean?
----@field json boolean?
----@field kotlin boolean?
----@field latex boolean?
----@field less boolean?
----@field lua boolean?
----@field makefile boolean?
----@field markdown boolean?
----@field matlab boolean?
----@field objectivec boolean?
----@field ocaml boolean?
----@field perl boolean?
----@field php boolean?
----@field powershell boolean?
----@field python boolean?
----@field restructuredtext boolean?
----@field ruby boolean?
----@field rust boolean?
----@field sass boolean?
----@field scala boolean?
----@field shell boolean?
----@field swift boolean?
----@field toml boolean?
----@field typescript boolean?
----@field viml boolean?
----@field xml boolean?
----@field yaml boolean?
----@field zsh boolean?
+---@field c_cpp BasicModule?
+---@field c_sharp BasicModule?
+---@field clojure BasicModule?
+---@field cmake BasicModule?
+---@field common_lisp BasicModule?
+---@field css BasicModule?
+---@field dart BasicModule?
+---@field diff BasicModule?
+---@field elixir BasicModule?
+---@field erlang BasicModule?
+---@field git_commit BasicModule?
+---@field go BasicModule?
+---@field haskell BasicModule?
+---@field help BasicModule?
+---@field html BasicModule?
+---@field ini BasicModule?
+---@field java BasicModule?
+---@field javascript BasicModule?
+---@field javascript_react BasicModule?
+---@field json BasicModule?
+---@field kotlin BasicModule?
+---@field latex BasicModule?
+---@field less BasicModule?
+---@field lua BasicModule?
+---@field makefile BasicModule?
+---@field markdown BasicModule?
+---@field matlab BasicModule?
+---@field objectivec BasicModule?
+---@field ocaml BasicModule?
+---@field perl BasicModule?
+---@field php BasicModule?
+---@field powershell BasicModule?
+---@field python BasicModule?
+---@field restructuredtext BasicModule?
+---@field ruby BasicModule?
+---@field rust BasicModule?
+---@field sass BasicModule?
+---@field scala BasicModule?
+---@field shell BasicModule?
+---@field swift BasicModule?
+---@field toml BasicModule?
+---@field typescript BasicModule?
+---@field viml BasicModule?
+---@field xml BasicModule?
+---@field yaml BasicModule?
+---@field zsh BasicModule?
 
 ---@class NeopywalPlugins
----@field aerial boolean?
----@field ale boolean?
----@field alpha boolean?
----@field barbar boolean?
+---@field aerial BasicModule?
+---@field ale BasicModule?
+---@field alpha BasicModule?
+---@field barbar BasicModule?
 ---@field beacon {enabled: boolean, color: ValidColorOptions?} | boolean?
----@field coc boolean?
+---@field coc BasicModule?
 ---@field colorful_winsep {enabled: boolean, color: ValidColorOptions?} | boolean?
----@field dadbod_ui boolean?
----@field dap boolean?
----@field dap_ui boolean?
----@field dashboard boolean?
----@field diffview boolean?
+---@field dadbod_ui BasicModule?
+---@field dap BasicModule?
+---@field dap_ui BasicModule?
+---@field dashboard BasicModule?
+---@field diffview BasicModule?
 ---@field dropbar {enabled: boolean, colored_text: boolean?}?
----@field fern boolean?
+---@field fern BasicModule?
 ---@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field fzf boolean?
----@field git_gutter boolean?
----@field gitsigns boolean?
----@field glyph_palette boolean?
----@field grug_far boolean?
----@field harpoon boolean?
----@field headlines boolean?
+---@field fzf BasicModule?
+---@field git_gutter BasicModule?
+---@field gitsigns BasicModule?
+---@field glyph_palette BasicModule?
+---@field grug_far BasicModule?
+---@field harpoon BasicModule?
+---@field headlines BasicModule?
 ---@field hop {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field illuminate {enabled: boolean, lsp: boolean?, style: HighlightStyles[]?} | boolean?
 ---@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
 ---@field indentmini {enabled: boolean, scope_color: ValidColorOptions?, current_scope_color: ValidColorOptions?} | boolean?
----@field lazy boolean?
----@field lazygit boolean?
+---@field lazy BasicModule?
+---@field lazygit BasicModule?
 ---@field leap {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field lir {enabled: boolean, git_status: boolean?} | boolean?
----@field lsp NeopywalPluginsLSP?
+---@field lsp NeopywalPluginsLSP | boolean?
 ---@field lspsaga {enabled: boolean, dim_folder: boolean?, dim_filename: boolean?, dim_separator: boolean?, winbar_style: HighlightStyles[]?} | boolean?
----@field markdown boolean?
----@field mason boolean?
----@field navbuddy boolean?
+---@field markdown BasicModule?
+---@field mason BasicModule?
+---@field navbuddy BasicModule?
 ---@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: ValidColorOptions?} | boolean?
----@field neogit boolean?
----@field neotest boolean?
----@field neotree boolean?
----@field netrw boolean?
----@field noice boolean?
----@field NormalNvim boolean?
----@field notifier boolean?
----@field notify boolean?
----@field nvim_cmp boolean?
----@field nvimtree boolean?
----@field octo boolean?
----@field overseer boolean?
+---@field neogit BasicModule?
+---@field neotest BasicModule?
+---@field neotree BasicModule?
+---@field netrw BasicModule?
+---@field noice BasicModule?
+---@field NormalNvim BasicModule?
+---@field notifier BasicModule?
+---@field notify BasicModule?
+---@field nvim_cmp BasicModule?
+---@field nvimtree BasicModule?
+---@field octo BasicModule?
+---@field overseer BasicModule?
 ---@field pounce {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field rainbow boolean?
----@field sandwich boolean?
----@field scrollbar boolean?
+---@field rainbow BasicModule?
+---@field sandwich BasicModule?
+---@field scrollbar BasicModule?
 ---@field sneak {enabled: boolean, sneak_color: ValidColorOptions?, style: HighlightStyles[]?} | boolean?
----@field surround boolean?
----@field symbols_outline boolean?
----@field telekasten boolean?
+---@field surround BasicModule?
+---@field symbols_outline BasicModule?
+---@field telekasten BasicModule?
 ---@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
 ---@field ts_context {enabled: boolean, dim_background: boolean?, style: HighlightStyles[]?} | boolean?
----@field treesitter boolean?
----@field trouble boolean?
----@field ts_rainbow boolean?
----@field ts_rainbow2 boolean?
----@field ufo boolean?
----@field undotree boolean?
----@field vimwiki boolean?
----@field which_key boolean?
+---@field treesitter BasicModule?
+---@field trouble BasicModule?
+---@field ts_rainbow BasicModule?
+---@field ts_rainbow2 BasicModule?
+---@field ufo BasicModule?
+---@field undotree BasicModule?
+---@field vimwiki BasicModule?
+---@field which_key BasicModule?
 ---@field window_picker {enabled: boolean, color: ValidColorOptions?} | boolean?
----@field yanky boolean?
+---@field yanky BasicModule?
 ---@field mini NeopywalPluginsMiniNvim?
 
 ---@class NeopywalPluginsLSP
@@ -313,27 +330,27 @@
 ---@field inlay_hints {background: boolean?, style: HighlightStyles[]?}?
 
 ---@class NeopywalPluginsMiniNvim
----@field animate boolean?
----@field clue boolean?
+---@field animate BasicModule?
+---@field clue BasicModule?
 ---@field completion {enabled: boolean, parameter_style: HighlightStyles[]?} | boolean?
 ---@field cursorword {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field deps boolean?
----@field diff boolean?
----@field files boolean?
+---@field deps BasicModule?
+---@field diff BasicModule?
+---@field files BasicModule?
 ---@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, note: HighlightStyles[]?, todo: HighlightStyles[]?}?} | boolean?
----@field icons boolean?
+---@field icons BasicModule?
 ---@field indentscope {enabled: boolean, scope_color: ValidColorOptions?} | boolean?
 ---@field jump {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field jump2d {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field map boolean?
----@field notify boolean?
----@field operators boolean?
----@field pick boolean?
----@field starter boolean?
+---@field map BasicModule?
+---@field notify BasicModule?
+---@field operators BasicModule?
+---@field pick BasicModule?
+---@field starter BasicModule?
 ---@field statusline {enabled: boolean, mode_colors: {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, other: ValidColorOptions?}?} | boolean?
----@field surround boolean?
----@field tabline boolean?
----@field test boolean?
+---@field surround BasicModule?
+---@field tabline BasicModule?
+---@field test BasicModule?
 ---@field trailspace {enabled: boolean, color: ValidColorOptions?} | boolean?
 
 ---@class NeopywalPluginsBarbecue
