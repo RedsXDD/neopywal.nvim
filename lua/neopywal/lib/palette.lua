@@ -166,8 +166,17 @@ Below is the error message that we captured:
     -- Setup user colors.
     extra_colors = extra_colors or {}
     if type(extra_colors) == "function" then extra_colors = extra_colors(C) end
-    if type(M.options.custom_colors) == "function" then M.options.custom_colors = M.options.custom_colors(C) end
-    extra_colors = vim.tbl_deep_extend("keep", extra_colors, M.options.custom_colors)
+
+    local custom_colors = M.options.custom_colors
+    if type(custom_colors) == "function" then custom_colors = custom_colors(C) end
+    extra_colors = vim.tbl_deep_extend(
+        "keep",
+        extra_colors or {},
+        type(custom_colors[theme_style]) == "function" and custom_colors[theme_style](C)
+            or custom_colors[theme_style]
+            or {},
+        type(custom_colors.all) == "function" and custom_colors.all(C) or custom_colors.all or {}
+    )
 
     local U = require("neopywal.utils.color")
     local extra_palette = {

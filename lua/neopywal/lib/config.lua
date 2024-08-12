@@ -16,7 +16,7 @@ M.default_options = {
     -- Use this when your terminal opacity is < 1.
     transparent_background = false,
 
-    -- With this option you can overwrite all the base colors the colorscheme uses.
+    -- With this option you can create/overwrite any color.
     -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors`
     custom_colors = {},
 
