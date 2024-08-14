@@ -494,4 +494,21 @@ function M.setup(user_config)
     M.did_setup = true
 end
 
+-- Reference: https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/lib/collect.lua
+
+local function deep_copy(obj, seen)
+    if type(obj) ~= "table" then return obj end
+    if seen and seen[obj] then return seen[obj] end
+
+    local s = seen or {}
+    local res = {}
+    s[obj] = res
+    for k, v in pairs(obj) do
+        res[deep_copy(k, s)] = deep_copy(v, s)
+    end
+    return setmetatable(res, getmetatable(obj))
+end
+
+function M.reset() M.options = deep_copy(M.default_options) end
+
 return M

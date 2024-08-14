@@ -167,6 +167,7 @@
 ---@field default_options NeopywalOptions
 ---@field options NeopywalOptions
 ---@field setup fun(user_config: NeopywalOptions?)
+---@field reset fun()
 ---@field did_setup boolean
 
 ---@class NeopywalOptions

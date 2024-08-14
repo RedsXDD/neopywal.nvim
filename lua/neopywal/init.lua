@@ -48,5 +48,6 @@ function M.load(theme_style)
 end
 
 vim.api.nvim_create_user_command("NeopywalCompile", function() require("neopywal.lib.compiler").recompile() end, {})
+vim.api.nvim_create_user_command("NeopywalInteractive", function() require("neopywal.lib.interactive").toggle() end, {})
 
 return M
