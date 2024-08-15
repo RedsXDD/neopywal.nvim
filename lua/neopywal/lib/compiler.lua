@@ -74,15 +74,10 @@ local h = vim.api.nvim_set_hl]],
         if properties.styles then
             for _, style in pairs(properties.styles) do
                 properties[style] = true
-
                 if O.no_italic and style == "italic" then properties[style] = false end
-
                 if O.no_bold and style == "bold" then properties[style] = false end
-
                 if O.no_underline and style == "underline" then properties[style] = false end
-
                 if O.no_undercurl and style == "undercurl" then properties[style] = false end
-
                 if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
             end
         end
