@@ -22,7 +22,7 @@ function M.get(theme_style)
 
     local _O, _C, _U = O, C, U -- Borrowing global variables (setfenv doesn't work with require)
     O = require("neopywal.lib.config").options
-    C = require("neopywal.lib.palette").get_colors(theme_style)
+    C = require("neopywal.lib.palette").get(theme_style)
     U = require("neopywal.utils.color")
 
     -- Get highlights for enabled fileformats.

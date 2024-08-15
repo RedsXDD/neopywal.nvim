@@ -247,11 +247,4 @@ Below is the error message that we captured:
     return vim.tbl_deep_extend("keep", extra_colors, extra_palette, C)
 end
 
--- This works like the original "M.get_colors" function. It only accepts either "dark", "light", nil as a parameter and exports the full palette.
----@param theme_style ThemeStyles?
-function M.get_colors(theme_style)
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
-    return M.get(theme_style, false)
-end
-
 return M
