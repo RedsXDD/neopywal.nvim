@@ -4,8 +4,8 @@ local Notify = require("neopywal.utils.notify")
 
 M.default_options = {
     use_palette = {
-        dark = "",
-        light = "",
+        dark = "pywal",
+        light = "pywal",
     },
     custom_colors = {},
 }
@@ -40,26 +40,52 @@ function M.setup(config)
         cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
     end
 
-    local palette_map = {
+    local program_palette_map = {
         wal = cache_dir .. "/wal/colors-wal.vim",
         pywal = cache_dir .. "/wal/colors-wal.vim",
         wallust = cache_dir .. "/wallust/colors_neopywal.vim",
     }
 
+    -- List of supported builting palettes.
+    local builtin_palette_map = {
+        ["catppuccin-frappe"] = true,
+        ["catppuccin-macchiato"] = true,
+        ["catppuccin-mocha"] = true,
+        ["doomone"] = true,
+        ["everforest-hard"] = true,
+        ["everforest-medium"] = true,
+        ["everforest-soft"] = true,
+        ["gruvbox-dark"] = true,
+        ["gruvbox-hard"] = true,
+        ["gruvbox-soft"] = true,
+        ["material"] = true,
+        ["material-darker"] = true,
+        ["material-ocean"] = true,
+        ["material-palenight"] = true,
+        ["monokaipro"] = true,
+        ["nord"] = true,
+        ["oceanic-next"] = true,
+        ["onedark"] = true,
+        ["onedark-darker"] = true,
+        ["onedark-vivid"] = true,
+        ["palenight"] = true,
+        ["solarized"] = true,
+        ["sonokai"] = true,
+        ["tokyonight"] = true,
+        ["tokyonight-storm"] = true,
+        ["tomorrow-night"] = true,
+    }
+
     for option, value in pairs(M.options.use_palette) do
-        if palette_map[value] then
-            M.options.use_palette[option] = fixPathSep(palette_map[value])
-        else
-            value = fixPathSep(value)
-            local palettes_dir = fixPathSep(debug.getinfo(1).source:sub(2, -29) .. "palettes/")
-            local file = io.open(value, "r")
-            if file then
-                file:close()
-                M.options.use_palette[option] = value
-            else
-                M.options.use_palette[option] = palettes_dir .. value .. ".vim"
-            end
+        value = fixPathSep(value)
+
+        local function getkey(key)
+            if builtin_palette_map[key] ~= nil then return key end
         end
+
+        M.options.use_palette[option] = program_palette_map[value]
+            or builtin_palette_map[value] and "neopywal.palettes." .. getkey(value)
+            or value
     end
 
     M.did_setup = true
@@ -81,9 +107,14 @@ function M.get(theme_style, minimal_palette, extra_colors)
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
     ---@type string
-    local colorscheme_file = M.options.use_palette[theme_style]
+    local colorscheme_file = fixPathSep(M.options.use_palette[theme_style])
+
     local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
-    if not file_exists then
+    local file_is_requireable, file = pcall(require, colorscheme_file)
+
+    if file_is_requireable then
+        file.get()
+    elseif not file_exists then
         Notify.error(
             string.format(
                 "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
@@ -92,8 +123,8 @@ function M.get(theme_style, minimal_palette, extra_colors)
         )
     else
         ---@diagnostic disable-next-line: param-type-mismatch
-        local could_load_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
-        if not could_load_file then
+        local could_source_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
+        if not could_source_file then
             Notify.error(string.format(
                 [[
 Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
