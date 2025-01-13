@@ -21,15 +21,15 @@ function M.get()
         }, -- Virtual text of the inlay hints.
 
         LspReferenceText = {
-            bg = U.blend(C.background, C.foreground, darkening_percentage),
+            bg = U.blend(C.foreground, C.background, darkening_percentage),
             styles = { "bold" },
         }, -- used for highlighting "text" references
         LspReferenceRead = {
-            bg = U.blend(C.background, C.foreground, darkening_percentage),
+            bg = U.blend(C.foreground, C.background, darkening_percentage),
             styles = { "bold" },
         }, -- used for highlighting "read" references
         LspReferenceWrite = {
-            bg = U.blend(C.background, C.foreground, darkening_percentage),
+            bg = U.blend(C.foreground, C.background, darkening_percentage),
             styles = { "bold" },
         }, -- used for highlighting "write" references
 
