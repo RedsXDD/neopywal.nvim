@@ -120,8 +120,8 @@ function M.get()
         TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
         TabLineSel = {
             bg = O.transparent_background and U.lighten(C.background, 20) or C.background,
-            fg = C.foreground,
-            styles = { "bold", "italic" },
+            fg = C.color2,
+            styles = { "bold" },
         }, -- tab pages line, active tab page label.
     }
 end
