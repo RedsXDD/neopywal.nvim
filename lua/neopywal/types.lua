@@ -306,6 +306,7 @@
 ---@field rainbow BasicModule?
 ---@field sandwich BasicModule?
 ---@field scrollbar BasicModule?
+---@field snacks {enabled: boolean, scope_color: ValidColorOptions?, current_scope_color: ValidColorOptions?} | boolean?
 ---@field sneak {enabled: boolean, sneak_color: ValidColorOptions?, style: HighlightStyles[]?} | boolean?
 ---@field surround BasicModule?
 ---@field symbols_outline BasicModule?

@@ -2296,6 +2296,28 @@ neopywal_reactive.setup({
 </td>
 </tr>
 <!-- }}} -->
+<!-- snacks.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/folke/snacks.nvim">snacks.nvim</a> </td>
+<td>
+
+```lua
+snacks = {
+    enabled = false,
+
+    -- These options either be:
+    --   - A color exported by "get_colors()" (e.g.: `color8`)
+    --   - A hexadecimal color (e.g.: "#ff0000").
+    --   - A function with an optional "C" parameter that returns one of the two options above.
+    --     e.g: function(C) return C.color1 end
+    scope_color = "",
+    current_scope_color = "",
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- symbols-outline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/simrat39/symbols-outline.nvim">symbols-outline.nvim</a> </td>

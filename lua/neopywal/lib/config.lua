@@ -269,6 +269,17 @@ M.default_options = {
         rainbow = false,
         sandwich = false,
         scrollbar = false,
+        snacks = {
+            enabled = false,
+
+            -- These options either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            scope_color = "",
+            current_scope_color = "",
+        },
         sneak = {
             enabled = false,
             style = { "bold", "italic" },
