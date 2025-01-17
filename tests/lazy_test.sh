@@ -4,4 +4,4 @@ set -euo pipefail
 
 CWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd | sed 's|/tests$||g')"
 cd "${CWD}" || exit 1
-nvim -u "${CWD}/tests/manual_tests.lua" "$@"
+nvim -u "${CWD}/tests/lazy_test.lua" "$@"

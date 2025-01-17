@@ -1,0 +1,36 @@
+name: Act Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  skip_on_release:
+    name: Skip on Release
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore(master)') }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          exit 0
+
+  act_tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+      - name: Neovim Version
+        run: nvim --version
+      - name: colors-wal.vim
+        run: |
+          mkdir -p "$HOME/.cache/wal/"
+          cp ./tests/colors-wal.vim "$HOME/.cache/wal/"
+      - name: Lazy.nvim Tests
+        run: |
+          nvim --headless -u tests/lazy.lua +q
+      - name: Plenary Tests
+        run: nvim --headless --noplugin -u tests/plenary.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/plenary.lua', sequential = true }"
