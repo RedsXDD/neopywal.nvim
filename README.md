@@ -745,6 +745,18 @@ beacon = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- blink.cmp {{{ -->
+<tr>
+<td> <a href="https://github.com/Saghen/blink.cmp">blink.cmp</a> </td>
+<td>
+
+```lua
+blink_cmp = true
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- bufferline.nvim {{{ -->
 <tr>
 <td> <a href="https://github.com/akinsho/bufferline.nvim">bufferline.nvim</a> </td>

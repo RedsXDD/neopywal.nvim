@@ -132,6 +132,7 @@ M.default_options = {
             --     e.g: function(C) return C.color1 end
             color = "",
         },
+        blink_cmp = true,
         coc = false,
         colorful_winsep = {
             enabled = false,
