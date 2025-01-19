@@ -2,7 +2,7 @@ local M = {}
 
 function M.get()
     return {
-        MiniIconsAzure = { fg = C.foreground },
+        MiniIconsAzure = { fg = C.color4 },
         MiniIconsBlue = { fg = C.color4 },
         MiniIconsCyan = { fg = C.color6 },
         MiniIconsGreen = { fg = C.color2 },
