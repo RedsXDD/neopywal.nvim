@@ -2,10 +2,16 @@ local M = {}
 
 function M.get()
     return {
-        IlluminatedWordText = { bg = U.darken(C.dim_bg, 5), styles = O.plugins.illuminate.style or {} },
-        IlluminatedWordRead = { bg = U.darken(C.dim_bg, 5), styles = O.plugins.illuminate.style or {} },
+        IlluminatedWordText = {
+            bg = U.blend(C.foreground, C.background, 0.2),
+            styles = O.plugins.illuminate.style or {},
+        },
+        IlluminatedWordRead = {
+            bg = U.blend(C.foreground, C.background, 0.2),
+            styles = O.plugins.illuminate.style or {},
+        },
         IlluminatedWordWrite = {
-            bg = U.darken(C.dim_bg, 5),
+            bg = U.blend(C.foreground, C.background, 0.2),
             styles = vim.tbl_deep_extend(
                 "keep",
                 O.plugins.illuminate.lsp and { "standout" } or {},
