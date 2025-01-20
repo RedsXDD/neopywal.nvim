@@ -12,6 +12,9 @@
 > As April 26, 2024, [Pywal](https://github.com/dylanaraps/pywal) is officially deprecated, so it's not recommended to use it.
 > You can look for alternatives that will work with Neopywal.nvim on the section [Pywal Alternatives](#Pywal-Alternatives).
 
+> [!IMPORTANT]
+> Neopywal is under the process of a documentation update, this README may be slightly outdated for the changes that will be released on Neopywal.nvim v3.0.0
+
 ![01](./assets/screenshots/01.png)
 \
 ![02](./assets/screenshots/02.png)
