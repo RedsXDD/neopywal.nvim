@@ -672,6 +672,10 @@ beacon.nvim>lua
     },
 <
 
+blink.cmp>lua
+    blink_cmp = true
+<
+
 bufferline.nvimSpecial ~
 
 Update your bufferline config to use the Neopywal highlights:
@@ -1290,6 +1294,15 @@ mini.pick>lua
     }
 <
 
+mini.snippets>lua
+    mini = {
+        snippets = {
+            enabled = true,
+            style = { "underdouble" },
+        },
+    }
+<
+
 mini.starter>lua
     mini = {
         starter = true
@@ -1600,6 +1613,20 @@ change the color settings per vim mode.
             yank = "color3",
         },
     })
+<
+
+snacks.nvim>lua
+    snacks = {
+        enabled = false,
+    
+        -- These options either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        scope_color = "",
+        current_scope_color = "",
+    }
 <
 
 symbols-outline.nvim
