@@ -1721,6 +1721,23 @@ mini = {
 </td>
 </tr>
 <!-- }}} -->
+<!-- mini.snippets {{{ -->
+<tr>
+<td> <a href="https://github.com/echasnovski/mini.snippets">mini.snippets</a> </td>
+<td>
+
+```lua
+mini = {
+    snippets = {
+        enabled = true,
+        style = { "underdouble" },
+    },
+}
+```
+
+</td>
+</tr>
+<!-- }}} -->
 <!-- mini.starter {{{ -->
 <tr>
 <td> <a href="https://github.com/echasnovski/mini.starter">mini.starter</a> </td>

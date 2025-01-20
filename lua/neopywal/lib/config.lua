@@ -372,6 +372,10 @@ M.default_options = {
             notify = true,
             operators = true,
             pick = true,
+            snippets = {
+                enabled = true,
+                style = { "underdouble" },
+            },
             starter = true,
             statusline = {
                 enabled = true,

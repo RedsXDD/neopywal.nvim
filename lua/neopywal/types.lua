@@ -348,6 +348,7 @@
 ---@field notify BasicModule?
 ---@field operators BasicModule?
 ---@field pick BasicModule?
+---@field snippets {enabled: boolean, style: HighlightStyles[]?} | boolean?
 ---@field starter BasicModule?
 ---@field statusline {enabled: boolean, mode_colors: {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, other: ValidColorOptions?}?} | boolean?
 ---@field surround BasicModule?
