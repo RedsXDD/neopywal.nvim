@@ -77,15 +77,15 @@ function M.setup(config)
     }
 
     for option, value in pairs(M.options.use_palette) do
-        value = fixPathSep(value)
-
         local function getkey(key)
             if builtin_palette_map[key] ~= nil then return key end
         end
 
-        M.options.use_palette[option] = program_palette_map[value]
+        local file_path = program_palette_map[value]
             or builtin_palette_map[value] and "neopywal.palettes." .. getkey(value)
             or value
+
+        M.options.use_palette[option] = fixPathSep(file_path)
     end
 
     M.did_setup = true
