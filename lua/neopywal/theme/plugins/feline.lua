@@ -59,19 +59,15 @@ M.default_options = {
         extras = C.foreground,
         curr_file = U.blend(C.color8, C.background, 0.5),
         curr_dir = C.color4,
-        show_modified = false, -- Show if the file has been modified.
-
-        -- Show the count of updatable plugins from lazy.nvim.
-        -- Need to set checker.enabled = true in lazy.nvim first
-        -- the icon is set in ui.icons.plugin in lazy.nvim.
+        show_modified = false,
         show_lazy_updates = false,
     },
     view = {
         lsp = {
-            progress = true, -- If true the status bar will display an lsp progress indicator.
-            name = false, -- If true the status bar will display the lsp servers name, otherwise it will display the text "Lsp".
-            exclude_lsp_names = {}, -- Lsp server names that should not be displayed when name is set to true.
-            separator = "|", -- The separator used when there are multiple lsp servers.
+            progress = true,
+            name = false,
+            exclude_lsp_names = {},
+            separator = "|",
         },
     },
 }

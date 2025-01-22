@@ -5,18 +5,13 @@ local O = require("neopywal.lib.config").options
 local C = require("neopywal.lib.palette").get()
 
 M.default_options = {
-    dim_background = false, -- Whether to dim the background.
-    dim_context = true, -- Whether the context should be dimmed.
-    dim_dirname = true, -- Whether the directory name should be dimmed.
-    hide_separator = false, -- Whether to hide the separator character.
+    dim_background = false,
+    dim_context = true,
+    dim_dirname = true,
+    hide_separator = false,
     basename_style = { "bold", "italic" },
     context_style = {},
     dirname_style = {},
-
-    -- With this option you can overwrite any of the groups from the builtin theme.
-    -- For more information take a look at `:h barbecue-recipes` and at
-    -- `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`
-    -- as this option works exactly the same as `custom_highlights`.
     theme = {},
 }
 M.options = M.default_options

@@ -4,11 +4,6 @@ local U = require("neopywal.utils.color")
 
 ---@type NeopywalPluginsLightlineOptions
 M.default_options = {
-    -- Any of the color values can either be:
-    --   - A color exported by "get_colors()" (e.g.: `color8`)
-    --   - A hexadecimal color (e.g.: "#ff0000").
-    --   - A function with an optional "C" parameter that returns one of the two options above.
-    --     e.g: function(C) return C.color1 end
     mode_colors = {
         normal = "color4",
         visual = "color5",

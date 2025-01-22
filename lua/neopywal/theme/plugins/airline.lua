@@ -5,11 +5,6 @@ local O = require("neopywal.lib.config").options
 
 ---@type NeopywalPluginsAirlineOptions
 M.default_options = {
-    -- Any of the color values can either be:
-    --   - A color exported by "get_colors()" (e.g.: `color8`)
-    --   - A hexadecimal color (e.g.: "#ff0000").
-    --   - A function with an optional "C" parameter that returns one of the two options above.
-    --     e.g: function(C) return C.color1 end
     mode_colors = {
         normal = "color4",
         visual = "color5",
@@ -18,9 +13,6 @@ M.default_options = {
         replace = "color2",
         terminal = "color3",
     },
-
-    -- This is the same as `mode_colors` except it uses cterm numbers instead (see `:h cterm`)
-    -- e.g.: "normal = 4" means "ctermfg=4".
     cterm_colors = {
         normal = 4,
         visual = 5,
