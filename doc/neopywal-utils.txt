@@ -1,0 +1,132 @@
+*neopywal-utils*                                            Neopywal Utils
+
+==============================================================================
+1. Manipulation Functions              *neopywal-utils-manipulation-functions*
+
+Neopywal offers a neat set of utility functions that allows the user to
+manipulate Neopywal’s colors in case you want, for example, a darker color
+than `color1`. Or a brighter and more saturated version of the color `color3`.
+And so on … These functions are all present under `utils/color.lua` module
+and can be required like so:
+
+>lua
+    local U = require("neopywal.utils.color")
+    
+    U.darken(color, factor)
+    U.lighten(color, factor)
+    U.blend(color1, color2, percentage)
+    U.brighten(color, percentage)
+    U.blacken(color, percentage)
+    U.saturate(color, percentage)
+    U.invert(color)
+<
+
+
+  [!IMPORTANT] All color parameters for the functions have to be in hexadecimal
+  format (e.g.: "#000000").
+
+DARKEN AND LIGHTEN  *neopywal-utils-manipulation-functions-darken-and-lighten*
+
+As the name suggests, the `darken()` and `lighten()` functions are able to
+create new colors by darkening/lightening existing colors. Both functions take
+two parameters, the first one is the hexadecimal code of color you want to
+modify, the second is an integer from 0 to 100 that defines how much said color
+will be darken/lighten.
+
+>lua
+    local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
+    local U = require("neopywal.utils.color")
+    
+    print(C.color1) -- For comparison: #F38BA8"
+    print(U.darken(C.color1, 70)) -- Output: "#AD4562"
+    print(U.lighten(C.color1, 70)) -- Output: "#FFD1EE"
+<
+
+It is important to know that these functions do NOT modify the color based on
+percentage values. Instead they work in a more linear way by converting the
+hexadecimal color to it’s numeric RGB values and then subtracting/adding the
+value present on the `factor` argument given to them.
+
+
+BLEND                            *neopywal-utils-manipulation-functions-blend*
+
+The `blend()` function combines two colors to create a new color that is a
+mixture of the two colors specified. The function takes three parameters, the
+first two parameters define the colors to be blended. While the third
+`percentage` parameter is a number between 0 and 1 that determines the
+proportion of each color in the final output. Where 1 means "use the exact same
+color as the first parameter" and 0 means "use the exact same color as the
+second parameter".
+
+>lua
+    local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
+    local U = require("neopywal.utils.color")
+    
+    -- In this example:
+    
+    -- `U.blend(C.color1, C.color3, 0)` will be identical to `C.color3`.
+    -- `U.blend(C.color1, C.color3, 1)` will be identical to `C.color1`.
+    -- `U.blend(C.color1, C.color3, 0.5)` will be a 50/50 mix of `C.color1` and `C.color3`.
+    
+    print(C.color1) -- For comparison: #F38BA8"
+    print(C.color3) -- For comparison: "#F9E2AF"
+    print(U.blend(C.color1, C.color3, 0)) -- Output: "#F9E2AF"
+    print(U.blend(C.color1, C.color3, 1)) -- Output: "#F38BA8"
+    print(U.blend(C.color1, C.color3, 0.5)) -- Output: "#F6B7AC"
+<
+
+
+BLACKEN AND BRIGHTEN*neopywal-utils-manipulation-functions-blacken-and-brighten*
+
+The `blacken()` and the `brighten()` functions are similar to the `darken()`
+and `lighten()` functions. However they work in completely different ways.
+While `darken()`/`lighten()` first convert the input hexadecimal color as a RGB
+number before manipulating it. `blacken()`/`brighten()` instead take the
+hexadecimal color and convert it to the HSL color space, were it will be
+manipulated by increasing/decreasing the "L" lightness value of the color based
+on a percentage. Both functions take two parameters, the first one is the
+hexadecimal code of color you want to modify, and the second is an number from
+0 to 1 that defines how much said color will be brightened/blackened out.
+
+>lua
+    local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
+    local U = require("neopywal.utils.color")
+    
+    print(C.color1) -- For comparison: #F38BA8"
+    print(U.blacken(C.color1, 0.7)) -- Output: "#621130"
+    print(U.brighten(C.color1, 0.7)) -- Output: "#FBDEE4"
+<
+
+
+SATURATE                      *neopywal-utils-manipulation-functions-saturate*
+
+The `saturate()` function increases the saturation of a given color. It take
+two parameters, the first one is the hexadecimal code of color you want to
+saturate, and the second is an number between 0 and 1 that defines how much
+said color will be saturated.
+
+>lua
+    local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
+    local U = require("neopywal.utils.color")
+    
+    print(C.color4) -- For comparison: "#89B4FA"
+    print(U.saturate(C.color4, 0.7)) -- Output: "#FA4B8D"
+<
+
+
+INVERT                          *neopywal-utils-manipulation-functions-invert*
+
+The `invert()` simply takes an hexadecimal color code and, well …, inverts
+it’s color.
+
+>lua
+    local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
+    local U = require("neopywal.utils.color")
+    
+    print(C.color4) -- For comparison: "#89B4FA"
+    print(U.invert(C.color4)) -- Output: "#2276c9"
+<
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:

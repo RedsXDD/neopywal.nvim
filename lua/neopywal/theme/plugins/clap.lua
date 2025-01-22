@@ -4,22 +4,17 @@ local O = require("neopywal.lib.config").options
 
 ---@type NeopywalPluginsClapOptions
 M.default_options = {
-    -- Any of the color values can either be:
-    --   - A color exported by "get_colors()" (e.g.: `color8`)
-    --   - A hexadecimal color (e.g.: "#ff0000").
-    --   - A function with an optional "C" parameter that returns one of the two options above.
-    --     e.g: function(C) return C.color1 end
     colors = {
-        indicator = "color8", -- The text for the number of matches.
-        spinner = "color2", -- The text representing the mode.
-        selected = "color6", -- The text of the line of a selected item.
-        current_selection = "color4", -- The text of the line of the currently selected item.
+        indicator = "color8",
+        spinner = "color2",
+        selected = "color6",
+        current_selection = "color4",
     },
     styles = {
-        indicator = { "italic" }, -- The text for the number of matches.
-        spinner = { "bold" }, -- The text representing the mode.
-        selected = { "bold", "underline" }, -- The line for a selected item.
-        current_selection = { "bold" }, -- The line for the currently selected item.
+        indicator = { "italic" },
+        spinner = { "bold" },
+        selected = { "bold", "underline" },
+        current_selection = { "bold" },
     },
 }
 M.options = M.default_options
