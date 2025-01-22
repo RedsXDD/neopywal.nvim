@@ -5,45 +5,22 @@ local Palette = require("neopywal.lib.palette")
 local Compiler = require("neopywal.lib.compiler")
 
 M.default_options = {
-    -- This option allows to use a custom theme palettes for each Neopywal style.
-    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Alternative-Palettes`.
     use_palette = {
         dark = "pywal",
         light = "pywal",
     },
-
-    -- Sets the background color of certain highlight groups to be transparent.
-    -- Use this when your terminal opacity is < 1.
     transparent_background = false,
-
-    -- With this option you can create/overwrite any color.
-    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Colors`
     custom_colors = {},
-
-    -- With this option you can overwrite any highlight groups set by the colorscheme.
-    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim#Customizing-Highlights`
     custom_highlights = {},
-
-    -- Dims the background when another window is focused.
     dim_inactive = true,
-
-    -- Apply colorscheme for Neovim's terminal (e.g. `g:terminal_color_0`).
     terminal_colors = true,
-
-    -- Shows the '~' characters after the end of buffers.
     show_end_of_buffer = false,
-
-    -- Shows the '|' split separator characters.
-    -- It's worth noting that this options works better in conjunction with `dim_inactive`.
     show_split_lines = true,
-
-    no_italic = false, -- Force no italic.
-    no_bold = false, -- Force no bold.
-    no_underline = false, -- Force no underline.
-    no_undercurl = false, -- Force no undercurl.
-    no_strikethrough = false, -- Force no strikethrough.
-
-    -- Handles the styling of certain highlight groups (see `:h highlight-args`).
+    no_italic = false,
+    no_bold = false,
+    no_underline = false,
+    no_undercurl = false,
+    no_strikethrough = false,
     styles = {
         comments = { "italic" },
         conditionals = { "italic" },
@@ -58,17 +35,8 @@ M.default_options = {
         types = { "italic" },
         operators = {},
     },
-
-    -- Setting this to false disables all default file format highlights.
-    -- Useful if you want to enable specific file format options.
-    -- Defaults to false when treesitter is enabled,
-    -- unless manually enabled inside the `setup()` function.
     default_fileformats = true,
-
-    -- Setting this to false disables all default plugin highlights.
-    -- Useful if you want to enable specific plugin options.
     default_plugins = true,
-
     fileformats = {
         c_cpp = true,
         c_sharp = true,
@@ -124,24 +92,12 @@ M.default_options = {
         barbar = false,
         beacon = {
             enabled = false,
-
-            -- Can either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             color = "",
         },
         blink_cmp = true,
         coc = false,
         colorful_winsep = {
             enabled = false,
-
-            -- Can either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             color = "",
         },
         dadbod_ui = false,
@@ -151,7 +107,7 @@ M.default_options = {
         diffview = false,
         dropbar = {
             enabled = false,
-            colored_text = false, -- Whether to add color for kind's texts.
+            colored_text = false,
         },
         fern = false,
         flash = {
@@ -177,22 +133,10 @@ M.default_options = {
         indent_blankline = {
             enabled = true,
             colored_indent_levels = false,
-
-            -- Can either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             scope_color = "",
         },
         indentmini = {
             enabled = false,
-
-            -- These options either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             scope_color = "",
             current_scope_color = "",
         },
@@ -230,9 +174,9 @@ M.default_options = {
         },
         lspsaga = {
             enabled = false,
-            dim_folder = true, -- Whether to dim the folder name on the winbar.
-            dim_filename = true, -- Whether to dim the filename on the winbar.
-            dim_separator = true, -- Whether to dim the separator character on the winbar.
+            dim_folder = true,
+            dim_filename = true,
+            dim_separator = true,
             winbar_style = { "bold" },
         },
         markdown = false,
@@ -240,15 +184,9 @@ M.default_options = {
         navbuddy = false,
         navic = {
             enabled = false,
-            dim_text = false, -- Whether the text should be dimmed.
-            hide_separator = false, -- Whether to hide the separator character.
+            dim_text = false,
+            hide_separator = false,
             text_style = { "bold" },
-
-            -- Can either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             bg_color = "",
         },
         neogit = false,
@@ -272,24 +210,12 @@ M.default_options = {
         scrollbar = false,
         snacks = {
             enabled = false,
-
-            -- These options either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             scope_color = "",
             current_scope_color = "",
         },
         sneak = {
             enabled = false,
             style = { "bold", "italic" },
-
-            -- Can either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             sneak_color = "",
         },
         surround = false,
@@ -297,16 +223,12 @@ M.default_options = {
         telekasten = false,
         telescope = {
             enabled = true,
-            -- style = "nvchad",
         },
         treesitter = true,
         trouble = false,
         ts_context = {
             enabled = true,
             dim_background = false,
-
-            -- NOTE: This option only applies to the current context line.
-            -- You may want to disable "underline" if you configured the "separator" option within ts_context.
             style = { "underline" },
         },
         ts_rainbow = false,
@@ -317,12 +239,6 @@ M.default_options = {
         which_key = true,
         window_picker = {
             enabled = false,
-
-            -- Can either be:
-            --   - A color exported by "get_colors()" (e.g.: `color8`)
-            --   - A hexadecimal color (e.g.: "#ff0000").
-            --   - A function with an optional "C" parameter that returns one of the two options above.
-            --     e.g: function(C) return C.color1 end
             color = "",
         },
         yanky = false,
@@ -352,12 +268,6 @@ M.default_options = {
             icons = true,
             indentscope = {
                 enabled = true,
-
-                -- Can either be:
-                --   - A color exported by "get_colors()" (e.g.: `color8`)
-                --   - A hexadecimal color (e.g.: "#ff0000").
-                --   - A function with an optional "C" parameter that returns one of the two options above.
-                --     e.g: function(C) return C.color1 end
                 scope_color = "",
             },
             jump = {
@@ -379,19 +289,13 @@ M.default_options = {
             starter = true,
             statusline = {
                 enabled = true,
-
-                -- Any of the color values can either be:
-                --   - A color exported by "get_colors()" (e.g.: `color8`)
-                --   - A hexadecimal color (e.g.: "#ff0000").
-                --   - A function with an optional "C" parameter that returns one of the two options above.
-                --     e.g: function(C) return C.color1 end
                 mode_colors = {
                     normal = "color4",
                     visual = "color5",
                     insert = "color6",
                     command = "color1",
                     replace = "color2",
-                    other = "color3", -- e.g.: terminal.
+                    other = "color3",
                 },
             },
             surround = true,
@@ -399,12 +303,6 @@ M.default_options = {
             test = true,
             trailspace = {
                 enabled = true,
-
-                -- Can either be:
-                --   - A color exported by "get_colors()" (e.g.: `color8`)
-                --   - A hexadecimal color (e.g.: "#ff0000").
-                --   - A function with an optional "C" parameter that returns one of the two options above.
-                --     e.g: function(C) return C.color1 end
                 color = "",
             },
         },

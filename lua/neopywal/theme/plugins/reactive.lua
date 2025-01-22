@@ -4,21 +4,11 @@ local U = require("neopywal.utils.color")
 
 ---@type NeopywalPluginsReactiveOptions
 M.default_options = {
-    -- A higher percentage means more vibrant mode colors,
-    -- where "1" means to use "exactly" the mode color without any color transparency.
     color_percentage = 0.3,
-
-    -- Any of the color values can either be:
-    --   - A color exported by "get_colors()" (e.g.: `color8`)
-    --   - A hexadecimal color (e.g.: "#ff0000").
-    --   - A function with an optional "C" parameter that returns one of the two options above.
-    --     e.g: function(C) return C.color1 end
     mode_colors = {
         visual = "color5",
         insert = "color6",
         replace = "color2",
-
-        -- Normal mode operations.
         change = "color2",
         delete = "color1",
         pending = "color4",
