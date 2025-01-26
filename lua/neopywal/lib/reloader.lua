@@ -10,12 +10,14 @@ function M.init()
 
     if not Palette.did_setup then Palette.setup() end
 
-    vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = { "*/neopywal/*", "*/neopywal.lua" },
-        callback = function()
-            vim.schedule(function() Compiler.recompile() end)
-        end,
-    })
+    if vim.g.neopywal_debug then
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            pattern = { "*/neopywal/*", "*/neopywal.lua" },
+            callback = function()
+                vim.schedule(function() Compiler.recompile() end)
+            end,
+        })
+    end
 
     ---@diagnostic disable-next-line: undefined-field
     local event = vim.uv.new_fs_event()
