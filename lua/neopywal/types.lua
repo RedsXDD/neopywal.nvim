@@ -173,7 +173,7 @@
 ---@class NeopywalOptions
 ---@field use_palette {dark: string?, light: string?} | string?
 ---@field transparent_background boolean?
----@field custom_colors CustomColorsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
+---@field custom_colors CustomColorsOption | fun(C: table<ValidColors[]>?): CustomColorsOption?
 ---@field custom_highlights CustomHighlightsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
 ---@field dim_inactive boolean?
 ---@field terminal_colors boolean?
