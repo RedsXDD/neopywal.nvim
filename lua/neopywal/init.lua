@@ -5,12 +5,7 @@ local Compiler = require("neopywal.lib.compiler")
 local Palette = require("neopywal.lib.palette")
 local Config = require("neopywal.lib.config")
 M.setup = Config.setup
-
----@param theme_style ThemeStyles?
-function M.get_colors(theme_style)
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
-    return Palette.get(theme_style, false)
-end
+M.get_colors = Palette.get
 
 local lock = false -- Avoid g:colors_name reloading
 local did_load = false

@@ -101,7 +101,7 @@ end
 ---@return NeopywalPalette
 ---@param theme_style ThemeStyles?
 ---@param minimal_palette boolean?
----@param extra_colors table?
+---@param extra_colors CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }?
 function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
@@ -197,6 +197,7 @@ Below is the error message that we captured:
 
     -- Setup user colors.
     extra_colors = extra_colors or {}
+    ---@diagnostic disable-next-line: cast-local-type
     if type(extra_colors) == "function" then extra_colors = extra_colors(C) end
 
     local custom_colors = M.options.custom_colors
@@ -212,7 +213,7 @@ Below is the error message that we captured:
 
     local U = require("neopywal.utils.color")
     local extra_palette = {
-        -- Extras:
+        -- Misc:
         dim_bg = U.darken(C.background, 5),
         comment = C.color8,
         cursorline = U.blend(C.background, C.foreground, 0.9),
@@ -275,6 +276,7 @@ Below is the error message that we captured:
         specialcomment = C.color8, -- special things inside a comment
     }
 
+    ---@diagnostic disable-next-line: return-type-mismatch
     return vim.tbl_deep_extend("keep", extra_colors, extra_palette, C)
 end
 
