@@ -154,7 +154,7 @@
 ---@field specialcomment string
 
 ---@class Neopywal
----@field get_colors fun(theme_style: ThemeStyles?): NeopywalPalette
+---@field get_colors fun(theme_style: ThemeStyles?, minimal_palette: boolean?, extra_colors: CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }?): NeopywalPalette
 ---@field load fun(theme_style: ThemeStyles?)
 ---@field setup fun(user_config: NeopywalOptions?)
 
