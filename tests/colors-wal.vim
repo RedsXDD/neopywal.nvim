@@ -1,7 +1,7 @@
 " Catppuccin theme:
 let background = "#1E1E2E"
 let foreground = "#CDD6F4"
-let cursor = "#F5E0DC"
+let cursor = "#CDD6F4"
 let color0 = "#45475A"
 let color1 = "#F38BA8"
 let color2 = "#A6E3A1"

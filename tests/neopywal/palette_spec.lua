@@ -446,7 +446,7 @@ describe("palette", function()
             none = "NONE",
             background = "#1E1E2E",
             foreground = "#CDD6F4",
-            cursor = "#F5E0DC",
+            cursor = "#CDD6F4",
             color0 = "#45475A",
             color1 = "#F38BA8",
             color2 = "#A6E3A1",

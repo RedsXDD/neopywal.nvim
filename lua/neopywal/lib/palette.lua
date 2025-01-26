@@ -149,7 +149,7 @@ Below is the error message that we captured:
         },
         colors = {
             none = "NONE",
-            cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#F5E0DC",
+            cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#CDD6F4",
             color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
             color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
             color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
