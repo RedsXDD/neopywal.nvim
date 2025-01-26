@@ -202,9 +202,17 @@ Below is the error message that we captured:
 
     local custom_colors = M.options.custom_colors
     if type(custom_colors) == "function" then custom_colors = custom_colors(C) end
+    ---@cast extra_colors table
     extra_colors = vim.tbl_deep_extend(
         "keep",
-        extra_colors or {},
+
+        -- Handle extra_colors function paramater.
+        type(extra_colors[theme_style]) == "function" and extra_colors[theme_style](C)
+            or extra_colors[theme_style]
+            or {},
+        type(extra_colors.all) == "function" and extra_colors.all(C) or extra_colors.all or {},
+
+        -- Handle M.options.custom_colors table
         type(custom_colors[theme_style]) == "function" and custom_colors[theme_style](C)
             or custom_colors[theme_style]
             or {},
