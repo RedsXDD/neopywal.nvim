@@ -3,7 +3,7 @@ local M = {}
 function M.get()
     local winsep_color = O.plugins.colorful_winsep.color
     if type(winsep_color) == "function" then winsep_color = winsep_color(C) end
-    winsep_color = require("neopywal.utils.hex").validate(winsep_color, C.color4)
+    winsep_color = require("neopywal.utils.color").validate(winsep_color, C.color4)
 
     return {
         NvimSeparator = {

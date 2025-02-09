@@ -3,7 +3,7 @@ local M = {}
 function M.get()
     local sneak_color = O.plugins.sneak.sneak_color
     if type(sneak_color) == "function" then sneak_color = sneak_color(C) end
-    sneak_color = require("neopywal.utils.hex").validate(sneak_color, C.color5)
+    sneak_color = require("neopywal.utils.color").validate(sneak_color, C.color5)
 
     return {
         Sneak = { bg = sneak_color, fg = C.background, styles = O.plugins.sneak.style or {} },

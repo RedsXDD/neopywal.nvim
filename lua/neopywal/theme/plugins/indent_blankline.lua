@@ -3,7 +3,7 @@ local M = {}
 function M.get()
     local scope_color = O.plugins.indent_blankline.scope_color
     if type(scope_color) == "function" then scope_color = scope_color(C) end
-    scope_color = require("neopywal.utils.hex").validate(scope_color, C.comment)
+    scope_color = require("neopywal.utils.color").validate(scope_color, C.comment)
 
     local highlights = {
         IblIndent = { fg = scope_color },

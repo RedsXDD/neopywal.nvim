@@ -45,7 +45,7 @@ function M.setup(user_config)
         local default_color = C[M.default_options.mode_colors[option]]
         local final_color = M.options.mode_colors[option]
         if type(final_color) == "function" then final_color = final_color(C) end
-        final_color = require("neopywal.utils.hex").validate(final_color, default_color)
+        final_color = require("neopywal.utils.color").validate(final_color, default_color)
         M.options.mode_colors[option] = final_color
     end
 
