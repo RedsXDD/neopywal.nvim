@@ -99,9 +99,9 @@ end
         M.get("dark", false, function(C) return { red = C.color1 }) end)
 ]]
 ---@return NeopywalPalette
----@param theme_style ThemeStyles?
----@param minimal_palette boolean?
----@param extra_colors CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }?
+---@param theme_style? ThemeStyles
+---@param minimal_palette? boolean
+---@param extra_colors? CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }
 function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
