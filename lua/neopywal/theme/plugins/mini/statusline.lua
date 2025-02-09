@@ -8,7 +8,7 @@ function M.get()
         local default_color = C[default_mode_colors[option]]
         local final_color = mode_colors[option]
         if type(final_color) == "function" then final_color = final_color(C) end
-        final_color = require("neopywal.utils.hex").validate(final_color, default_color)
+        final_color = require("neopywal.utils.color").validate(final_color, default_color)
         mode_colors[option] = final_color
     end
 

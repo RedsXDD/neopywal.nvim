@@ -5,7 +5,7 @@ function M.get()
     local fallback_bg = O.transparent_background and C.none or C.background
     local bg_color = O.plugins.navic.bg_color
     if type(bg_color) == "function" then bg_color = bg_color(C) end
-    bg_color = require("neopywal.utils.hex").validate(bg_color, fallback_bg)
+    bg_color = require("neopywal.utils.color").validate(bg_color, fallback_bg)
 
     local kinds = require("neopywal.utils.kinds").get("NavicIcons%s", { bg = bg_color })
     return vim.tbl_deep_extend("force", kinds, {

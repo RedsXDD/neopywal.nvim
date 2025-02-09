@@ -3,7 +3,7 @@ local M = {}
 function M.get()
     local color = O.plugins.window_picker.color
     if type(color) == "function" then color = color(C) end
-    color = require("neopywal.utils.hex").validate(color, C.color4)
+    color = require("neopywal.utils.color").validate(color, C.color4)
 
     return {
         WindowPickerStatusLine = { fg = color, styles = { "bold", "italic" } },
