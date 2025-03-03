@@ -89,8 +89,7 @@ function M.get()
 
         -- Pmenu:
         Pmenu = {
-            bg = (O.transparent_background and vim.o.winblend == 0 and vim.o.pumblend == 0) and C.none
-                or U.blend(C.background, C.foreground, 0.85),
+            bg = (O.transparent_background and vim.o.winblend == 0 and vim.o.pumblend == 0) and C.none or C.dim_bg,
         }, -- Popup menu: normal item.
         PmenuSel = { bg = U.blend(C.background, C.foreground, 0.75), styles = { "bold", "italic" } }, -- Popup menu: selected item.
         PmenuSbar = { bg = U.blend(C.background, C.foreground, 0.95) }, -- Popup menu: scrollbar.
