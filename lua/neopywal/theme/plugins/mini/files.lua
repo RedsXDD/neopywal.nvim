@@ -3,12 +3,18 @@ local M = {}
 function M.get()
     return {
         MiniFilesBorder = { link = "FloatBorder" },
-        MiniFilesBorderModified = { fg = C.warn },
+        MiniFilesBorderModified = {
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            fg = C.warn,
+        },
         MiniFilesCursorLine = { link = "CursorLine" },
         MiniFilesDirectory = { link = "Directory" },
         MiniFilesFile = {},
         MiniFilesNormal = { link = "NormalFloat" },
-        MiniFilesTitle = { fg = C.comment },
+        MiniFilesTitle = {
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            fg = C.comment,
+        },
         MiniFilesTitleFocused = { link = "FloatTitle" },
     }
 end
