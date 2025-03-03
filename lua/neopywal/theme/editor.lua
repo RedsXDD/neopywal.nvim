@@ -19,7 +19,12 @@ function M.get()
         }, -- Title text in floating windows.
         Comment = { fg = C.comment, styles = O.styles.comments or {} }, -- any comment
         NonText = { fg = C.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-        EndOfBuffer = { fg = O.show_end_of_buffer and C.color8 or C.background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
+        EndOfBuffer = {
+            fg = O.show_end_of_buffer and C.comment
+                or O.transparent_background and U.brighten(C.background, 0.05) -- Slightly brighter bg to make the EOF chars less visible on transparent windows (This trick only works on terminals with about 90%+ opacity).
+                or O.dim_inactive and U.blacken(C.background, 0.075) -- Can't be too dark otherwise EOF will visible on normal buffers and can't be too bright otherwise will visible on non-current buffers.
+                or C.background, -- If the above isn't met, that means that all windows have the same bg color and thus we can just match that.
+        }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
         Title = { fg = C.color4, styles = { "bold" } }, -- titles for output from ":set all", ":autocmd" etc.
         VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
         WinSeparator = {
