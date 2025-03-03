@@ -459,7 +459,7 @@ function M.setup(user_config)
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
     -- Neovide doesn't play well with transparent background colors.
-    M.options.transparent_background = not vim.g.neovide and M.options.transparent_background or false
+    if vim.g.neovide then M.options.transparent_background = false end
 
     -- Coc.nvim depends on lsp highlights.
     if
@@ -496,6 +496,7 @@ function M.setup(user_config)
         .. (git == -1 and git_path or git) -- no .git in /nix/store -> cache path
         .. (vim.o.winblend == 0 and 1 or 0) -- :h winblend
         .. (vim.o.pumblend == 0 and 1 or 0) -- :h pumblend
+        .. (vim.g.neovide ~= nil and 1 or 0) -- This is needed to avoid Neopywal running inside Neovide with an older terminal cache.
 
     -- Recompile if hash changed.
     if cached ~= hash then
