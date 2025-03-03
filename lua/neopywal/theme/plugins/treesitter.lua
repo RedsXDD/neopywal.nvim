@@ -40,7 +40,7 @@ function M.get()
         --: }}}
         --: Types {{{
         ["@type"] = { link = "Type" }, -- For types.
-        ["@type.builtin"] = { fg = C.color4, styles = { "italic" } }, -- For builtin types.
+        ["@type.builtin"] = { link = "@type" }, -- For builtin types.
         ["@type.definition"] = { link = "Typedef" },
         ["@type.qualifier"] = { link = "@keyword.modifier" },
         ["@attribute"] = { link = "Constant" }, -- attribute annotations (e.g. Python decorators)
@@ -174,8 +174,8 @@ function M.get()
         ["@function.method.call.php"] = { link = "Function" },
         --: }}}
         --: C/CPP {{{
-        ["@type.builtin.c"] = { link = "Identifier" }, -- int, float, char, etc.
-        ["@type.builtin.cpp"] = { link = "Identifier" }, -- int, float, char, etc.
+        ["@lsp.typemod.type.defaultLibrary.c"] = { link = "@type.builtin.c" },
+        ["@lsp.typemod.type.defaultLibrary.cpp"] = { link = "@type.builtin.c" },
         ["@property.cpp"] = { fg = C.foreground },
         --: }}}
         --: Gitcommit {{{
