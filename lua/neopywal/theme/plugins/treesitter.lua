@@ -92,6 +92,7 @@ function M.get()
         ["@diff.plus"] = { link = "DiffAdd" }, -- added text (for diff files)
         ["@diff.minus"] = { link = "DiffDelete" }, -- deleted text (for diff files)
         ["@diff.delta"] = { link = "DiffChange" }, -- deleted text (for diff files)
+        ["@string.special.path.diff"] = { fg = C.foreground },
         --: }}}
         --: Tags {{{
         ["@tag"] = { link = "Label" }, -- Tags like html tag names.
