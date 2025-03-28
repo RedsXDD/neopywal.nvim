@@ -18,7 +18,15 @@ function M.init()
     })
 
     ---@diagnostic disable-next-line: undefined-field
-    local event = vim.uv.new_fs_event()
+    local event
+    -- luv binding in 0.9
+    if vim.loop then
+        event = vim.loop.new_fs_event()
+    end
+    -- luv binding from 0.10 onwards
+    if vim.uv then
+        event = vim.uv.new_fs_event()
+    end
     local bg = vim.o.background
     local template_path = Palette.options.use_palette[bg]
     event:start(template_path, {
