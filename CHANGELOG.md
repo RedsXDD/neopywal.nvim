@@ -1,5 +1,47 @@
 # Changelog
 
+## [3.0.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.6.0...v3.0.0) (2025-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **config:** Overwriting highlight groups across both colorscheme styles now has to be done inside the "all" table, e.g.:
+* **config:** Overwriting colors across both colorscheme styles now has to be done inside the "all" table, e.g.:
+* **palette:** The "use_wallust" and "colorscheme_file" options have been removed in favour of the "use_palette" option.
+* **config:** remove "styles.lsp" backwards compatability
+
+### Features
+
+* **config:** add "dark/light" options to "custom_colors" ([9d496c9](https://github.com/RedsXDD/neopywal.nvim/commit/9d496c98511520aec1433683d3c4c604d5a94d28))
+* **config:** add "dark/light" options to "custom_highlights" ([1534b19](https://github.com/RedsXDD/neopywal.nvim/commit/1534b19c6b19d40989e9864e8647f0a438f26786))
+* **editor:** improve TabLineSel highlight ([9b4e013](https://github.com/RedsXDD/neopywal.nvim/commit/9b4e01395fc88385f48fc1f1b4079a72077fc4e4))
+* improve styles of dashboard plugins ([eb31878](https://github.com/RedsXDD/neopywal.nvim/commit/eb318782d782ee1357095766972a5b153a28793e))
+* **interactive:** add interactive mode ([fa13d2a](https://github.com/RedsXDD/neopywal.nvim/commit/fa13d2a4a9e9b44049145a28775ccf4f02815807))
+* **lsp:** improve LspReference highlights ([accafa2](https://github.com/RedsXDD/neopywal.nvim/commit/accafa2a3ee1da5f71f1895abedd68131fa82e39))
+* **mini.icons:** improve fallback icon color ([9331a1c](https://github.com/RedsXDD/neopywal.nvim/commit/9331a1cf72ffd33ee285f05b07922d8a164947f7))
+* **palette:** add "dark/light" palette options ([df179ff](https://github.com/RedsXDD/neopywal.nvim/commit/df179ff0697301164ec21215d9ab14e20bac18e9))
+* **plugins:** add blink.cmp ([4534676](https://github.com/RedsXDD/neopywal.nvim/commit/453467601ecd6668797363f5fd6be333accf3c4f))
+* **plugins:** add mini.snippets ([615e8c7](https://github.com/RedsXDD/neopywal.nvim/commit/615e8c7946cabde4eafe4f1fb3de508fedac8f18))
+* **plugins:** add nvim-navbuddy ([61653ec](https://github.com/RedsXDD/neopywal.nvim/commit/61653ecd33fe4f08b370fcacec49a5eee9bd3910))
+* **plugins:** add snacks.nvim ([26cceac](https://github.com/RedsXDD/neopywal.nvim/commit/26cceac0810f902b33c4fc63b32d164390ddb1c9))
+* **plugins:** improve bg of "leap" plugins ([a07b63a](https://github.com/RedsXDD/neopywal.nvim/commit/a07b63a4ba80a76ba147bcab95f3e62c808efca8))
+
+
+### Bug Fixes
+
+* **mapper:** support non-existent modules ([a66a612](https://github.com/RedsXDD/neopywal.nvim/commit/a66a6120e937fcd89e0e4370c0e6f2dd2ff5968f))
+* **palette:** invalid path sep on windows ([928d112](https://github.com/RedsXDD/neopywal.nvim/commit/928d112194d26210545da735e73fee68568e2d79))
+
+
+### Performance Improvements
+
+* **palettes:** convert palettes into .lua ([669eaae](https://github.com/RedsXDD/neopywal.nvim/commit/669eaae0e2aac566a023c01e3718d7a3866ae01a))
+
+
+### Code Refactoring
+
+* **config:** remove "styles.lsp" backwards compatability ([c5abf50](https://github.com/RedsXDD/neopywal.nvim/commit/c5abf50d8af65814119d67a1b108e7b84215ba9e))
+
 ## [2.6.0](https://github.com/RedsXDD/neopywal.nvim/compare/v2.5.0...v2.6.0) (2024-08-09)
 
 
