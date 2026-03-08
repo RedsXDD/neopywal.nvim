@@ -35,7 +35,7 @@ function M.setup(config)
 
     local cache_dir
     if Compiler.options.path_sep == "\\" then
-        cache_dir = os.getenv("LOCALAPPDATA") -- Windows
+        cache_dir = os.getenv("USERPROFILE") .. "\\.cache" -- Windows
     else
         cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
     end
