@@ -2179,6 +2179,7 @@ require("neopywal").setup({
             --     e.g: function(C) return C.color1 end
             scope_color = "",
             current_scope_color = "",
+            -- style = "nvchad"
         }
     }
 })

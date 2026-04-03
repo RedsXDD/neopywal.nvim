@@ -42,6 +42,14 @@ function M.get()
         SnacksDashboardTerminal = { fg = C.error, styles = { "bold" } },
         SnacksDashboardTitle = { fg = C.color4, styles = { "bold" } },
 
+        -- Picker
+        SnacksTitle = { fg = C.color4 },
+        SnacksPickerInputTitle = { link = "SnacksTitle" },
+        SnacksPickerTitle = { fg = C.color3 },
+        SnacksPickerPrompt = { fg = C.color4, styles = { "bold" } },
+        SnacksPickerListCursorLine = { bg = U.blend(C.color4, C.background, 0.2), fg = C.color4 },
+        SnacksPickerPreviewCursorLine = { link = "SnacksPickerListCursorLine" },
+
         -- Notifier.
         SnacksNotifierInfo = { fg = C.info },
         SnacksNotifierIconInfo = { link = "SnacksNotifierInfo" },
@@ -73,6 +81,22 @@ function M.get()
         SnacksNotifierBorderDebug = { link = "SnacksNotifierDebug" },
         SnacksNotifierFooterDebug = { link = "DiagnosticUnnecessary" },
     }
+
+    hl = O.plugins.snacks.style ~= nil
+            and string.lower(O.plugins.snacks.style) == "nvchad"
+            and not O.transparent_background
+            and vim.tbl_deep_extend("force", hl, {
+                SnacksPickerBorder = {
+                    bg = C.background,
+                    fg = C.background,
+                },
+                SnacksTitle = { bg = C.color4, fg = C.background },
+                SnacksPickerTitle = { bg = C.color3, fg = C.background },
+                -- SnacksPickerBox = { bg = C.cursorline },
+                SnacksPickerInput = { bg = C.cursorline },
+                SnacksPickerInputBorder = { bg = C.cursorline, fg = C.cursorline },
+            })
+        or hl
 
     for i, color in ipairs(require("neopywal.utils.rainbow").get()) do
         hl["SnacksIndent" .. i] = { fg = color, styles = { "nocombine" } }
