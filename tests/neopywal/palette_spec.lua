@@ -465,7 +465,7 @@ describe("palette", function()
             color15 = "#A6ADC8",
         }
 
-        Palette.setup({ colorscheme_file = "null" })
+        Palette.setup({ use_palette = "null" })
         local C = Palette.get()
         assert.equals(C.none, expected.none)
         assert.equals(C.background, expected.background)
@@ -508,10 +508,12 @@ describe("palette", function()
         local C_dark = Palette.get("dark")
         assert.same(C_dark.color1, "#ff0000")
         assert.same(C_dark.color3, "#ffff00")
+        assert.are_not.same(C_dark.color2, "#00ff00")
 
         local C_light = Palette.get("light")
         assert.same(C_light.color2, "#00ff00")
         assert.same(C_light.color3, "#ffff00")
+        assert.are_not.same(C_light.color1, "#ff0000")
     end)
     --: }}}
     --: setup can overwrite colors using a function {{{
@@ -538,35 +540,39 @@ describe("palette", function()
         local C_dark = Palette.get("dark")
         assert.same(C_dark.color1, C_dark_old.color3)
         assert.same(C_dark.color3, C_dark_old.color4)
+        assert.are_not.same(C_dark.color2, C_dark_old.color6)
 
         local C_light = Palette.get("light")
         assert.same(C_light.color2, C_light_old.color6)
         assert.same(C_light.color3, C_light_old.color4)
+        assert.are_not.same(C_light.color1, C_light_old.color3)
     end)
     --: }}}
     --: setup can create new colors {{{
     it("setup can create new colors", function()
         Palette.setup({
             custom_colors = {
-                all = {
-                    test_color_all = "#ff0000",
-                },
                 dark = {
                     test_color_dark = "#000000",
                 },
                 light = {
                     test_color_light = "#ffffff",
                 },
+                all = {
+                    test_color_all = "#ff0000",
+                },
             },
         })
 
         local C_dark = Palette.get("dark")
-        assert.same(C_dark.test_color_dark, "#000000")
         assert.same(C_dark.test_color_all, "#ff0000")
+        assert.same(C_dark.test_color_dark, "#000000")
+        assert.are_not.same(C_dark.test_color_light, "#ffffff")
 
         local C_light = Palette.get("light")
-        assert.same(C_light.test_color_light, "#ffffff")
         assert.same(C_light.test_color_all, "#ff0000")
+        assert.same(C_light.test_color_light, "#ffffff")
+        assert.are_not.same(C_light.test_color_dark, "#000000")
     end)
     --: }}}
     --: setup can create new colors using a function {{{
@@ -574,51 +580,186 @@ describe("palette", function()
         Palette.setup({
             custom_colors = function(C)
                 return {
-                    all = {
-                        test_color_all = C.color1,
-                    },
                     dark = {
                         test_color_dark = C.color0,
                     },
                     light = {
                         test_color_light = C.color7,
                     },
+                    all = {
+                        test_color_all = C.color1,
+                    },
                 }
             end,
         })
 
         local C_dark = Palette.get("dark")
-        assert.same(C_dark.test_color_dark, C_dark.color0)
         assert.same(C_dark.test_color_all, C_dark.color1)
+        assert.same(C_dark.test_color_dark, C_dark.color0)
+        assert.are_not.same(C_dark.test_color_light, C_dark.color7)
 
         local C_light = Palette.get("light")
-        assert.same(C_light.test_color_light, C_light.color7)
         assert.same(C_light.test_color_all, C_light.color1)
+        assert.same(C_light.test_color_light, C_light.color7)
+        assert.are_not.same(C_light.test_color_dark, C_light.color0)
     end)
     --: }}}
     --: can overwrite and export colors {{{
     it("can overwrite and export colors", function()
-        local C = Palette.get("dark", false, { color1 = "#ff0000" })
-        assert.same(C.color1, "#ff0000")
+        local C_dark = Palette.get("dark", false, {
+            dark = { color0 = "#000000" },
+            light = { color7 = "#ffffff" },
+            all = { color1 = "#ff0000" },
+        })
+
+        local C_light = Palette.get("light", false, {
+            dark = { color6 = "#00ffff" },
+            light = { color4 = "#0000ff" },
+            all = { color3 = "#ffff00" },
+        })
+
+        assert.same(C_dark.color1, "#ff0000")
+        assert.same(C_dark.color0, "#000000")
+        assert.are_not.same(C_dark.color7, "#ffffff")
+
+        assert.same(C_light.color3, "#ffff00")
+        assert.same(C_light.color4, "#0000ff")
+        assert.are_not.same(C_light.color6, "#00ffff")
     end)
     --: }}}
     --: can overwrite and export colors using a function {{{
     it("can overwrite and export colors using a function", function()
-        local C = Palette.get("dark", false, function(C) return { color1 = C.color0 } end)
-        assert.same(C.color1, C.color0)
+        local C_dark_old = Palette.get("dark")
+        local C_light_old = Palette.get("light")
+
+        local C_dark = Palette.get(
+            "dark",
+            false,
+            function(C)
+                return {
+                    dark = {
+                        color1 = C.color0,
+                    },
+                    light = {
+                        color2 = C.color6,
+                    },
+                    all = {
+                        color3 = C.color4,
+                    },
+                }
+            end
+        )
+
+        local C_light = Palette.get(
+            "light",
+            false,
+            function(C)
+                return {
+                    dark = {
+                        color6 = C.color7,
+                    },
+                    light = {
+                        color5 = C.color8,
+                    },
+                    all = {
+                        color4 = C.color1,
+                    },
+                }
+            end
+        )
+
+        assert.same(C_dark.color1, C_dark_old.color0)
+        assert.same(C_dark.color3, C_dark_old.color4)
+        assert.are_not.same(C_dark.color2, C_dark_old.color6)
+
+        assert.same(C_light.color5, C_light.color8)
+        assert.same(C_light.color4, C_light.color1)
+        assert.are_not.same(C_light.color6, C_light_old.color7)
     end)
     --: }}}
     --: can create and export new colors {{{
     it("can create and export new colors", function()
-        local C = Palette.get("dark", false, { test_color = "#ff0000" })
-        assert.same(C.test_color, "#ff0000")
+        local C_dark = Palette.get("dark", false, {
+            dark = {
+                dark_test_color_dark = "#000000",
+            },
+            light = {
+                dark_test_color_light = "#ffffff",
+            },
+            all = {
+                dark_test_color_all = "#ff0000",
+            },
+        })
+
+        local C_light = Palette.get("light", false, {
+            dark = {
+                light_test_color_dark = "#00ffff",
+            },
+            light = {
+                light_test_color_light = "#0000ff",
+            },
+            all = {
+                light_test_color_all = "#ffff00",
+            },
+        })
+
+        assert.same(C_dark.dark_test_color_dark, "#000000")
+        assert.same(C_dark.dark_test_color_all, "#ff0000")
+        assert.are_not.same(C_dark.dark_test_color_light, "#ffffff")
+
+        assert.same(C_light.light_test_color_light, "#0000ff")
+        assert.same(C_light.light_test_color_all, "#ffff00")
+        assert.are_not.same(C_light.light_test_color_dark, "#00ffff")
     end)
     --: }}}
     --: can create and export new colors using a function {{{
     it("can create and export new colors using a function", function()
-        ---@diagnostic disable-next-line: param-type-mismatch
-        local C = Palette.get("dark", false, function(C) return { test_color = C.color1 } end)
-        assert.same(C.test_color, C.color1)
+        local C_dark_old = Palette.get("dark")
+        local C_light_old = Palette.get("light")
+
+        local C_dark = Palette.get(
+            "dark",
+            false,
+            function(C)
+                return {
+                    dark = {
+                        dark_test_color_dark = C.color0,
+                    },
+                    light = {
+                        dark_test_color_light = C.color7,
+                    },
+                    all = {
+                        dark_test_color_all = C.color1,
+                    },
+                }
+            end
+        )
+
+        local C_light = Palette.get(
+            "light",
+            false,
+            function(C)
+                return {
+                    dark = {
+                        light_test_color_dark = C.color3,
+                    },
+                    light = {
+                        light_test_color_light = C.color2,
+                    },
+                    all = {
+                        light_test_color_all = C.color4,
+                    },
+                }
+            end
+        )
+
+        assert.same(C_dark.dark_test_color_dark, C_dark_old.color0)
+        assert.same(C_dark.dark_test_color_all, C_dark_old.color1)
+        assert.are_not.same(C_dark.dark_test_color_light, C_dark_old.color7)
+
+        assert.same(C_light.light_test_color_light, C_light_old.color2)
+        assert.same(C_light.light_test_color_all, C_light_old.color4)
+        assert.are_not.same(C_light.light_test_color_dark, C_light_old.color3)
     end)
     --: }}}
 end)

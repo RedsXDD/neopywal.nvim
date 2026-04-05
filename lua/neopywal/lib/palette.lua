@@ -200,6 +200,7 @@ Below is the error message that we captured:
     ---@diagnostic disable-next-line: cast-local-type
     if type(extra_colors) == "function" then extra_colors = extra_colors(C) end
 
+    -- Import from require("neopywal").setup({ custom_colors = {} })
     local custom_colors = M.options.custom_colors
     if type(custom_colors) == "function" then custom_colors = custom_colors(C) end
     ---@cast extra_colors table
