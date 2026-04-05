@@ -118,7 +118,10 @@ jobs:
 
   docs:
     name: Finalize vimdocs
-    needs: docs-multi
+    needs:
+      - docs-once
+      - docs-build
+      - docs-multi
     permissions:
       contents: write
     runs-on: ubuntu-latest
