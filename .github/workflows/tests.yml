@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Prevent from running on release commits
+  # Prevent from running on release commits.
   skip_on_release:
     name: Skip on Release
     if: ${{ !startsWith(github.event.head_commit.message, 'chore(master)') }}

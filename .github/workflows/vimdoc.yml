@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Prevent from running on release commits
+  # Prevent from running on release commits.
   skip_on_release:
     name: Skip on Release
     if: ${{ !startsWith(github.event.head_commit.message, 'chore(master)') }}
@@ -16,24 +16,129 @@ jobs:
       - run: |
           exit 0
 
-  docs:
-    name: Gen Vimdoc
+  docs-build:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    outputs:
+      docs_matrix: ${{ steps.set-docs-matrix.outputs.docs_matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - id: set-docs-matrix
+        run: |
+          # Create a JSON array of objects, each containing module, desc, and section
+          first=true
+          json_array="[]"
+          docs_matrix="[]"
+          tmpfile="$(mktemp)"
+          trap 'rm -rf "$tmpfile"' 0 1 15
+
+          if [ -d "docs" ] && [ "$(ls -A docs/*.md 2>/dev/null)" ]; then
+                  find ./docs -type f -name '*.md' 2>/dev/null >"$tmpfile"
+                  while read -r file; do
+                          if [ -f "$file" ]; then
+                                  module="$file"
+                                  desc="$(basename "$file" .md | sed 's/-/ /g; s/[^ ]*/\u&/g')"
+                                  section="$(basename "$file" .md)"
+
+                                  # Build JSON object manually
+                                  json_object="{\"module\":\"$module\",\"desc\":\"$desc\",\"section\":\"$section\"}"
+
+                                  if [ "$first" = true ]; then
+                                          first=false
+                                          json_array="[$json_object"
+                                  else
+                                          json_array="$json_array,$json_object"
+                                  fi
+                          fi
+                  done <"$tmpfile"
+
+                  if [ "$first" = false ]; then
+                          json_array="$json_array]"
+                          docs_matrix="$json_array"
+                  else
+                          docs_matrix="[]"
+                  fi
+          fi
+
+          echo "docs_matrix=$docs_matrix" >>$GITHUB_OUTPUT
+
+  docs-once:
+    name: Gen README.md
+    needs: docs-build
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Gen Vimdoc
+
+      - name: Create doc directory.
+        run: rm -rvf doc; mkdir -pv doc
+
+      - name: README.md
         uses: kdheepak/panvimdoc@main
         with:
           vimdoc: neopywal
-          description: "(Neo)pywal for (Neo)vim"
           pandoc: "README.md"
           toc: true
-          version: "nvim >= 0.8.0"
           treesitter: true
-      - name: Commit Docs
+          demojify: true
+          version: "nvim >= 0.8.0"
+          description: "(Neo)pywal for (Neo)vim"
+
+  docs-multi:
+    name: Gen docs/*.md
+    needs:
+      - docs-once
+      - docs-build
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docs: ${{ fromJson(needs.docs-build.outputs.docs_matrix) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: docs/*.md
+        uses: kdheepak/panvimdoc@main
+        with:
+          toc: false
+          demojify: true
+          treesitter: true
+          shiftheadinglevelby: -1
+          pandoc: ${{ matrix.docs.module }}
+          vimdoc: ${{ matrix.docs.section }}
+          description: ${{ matrix.docs.desc }}
+          version: "nvim >= 0.8.0"
+
+  docs:
+    name: Finalize vimdocs
+    needs: docs-multi
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: "stable"
+
+      - name: Neovim Version
+        run: nvim --version
+
+      - name: Gen helptags
+        run: nvim --headless -c 'echo "Generating helptags ...\n"' -c 'helptags ./doc' -c 'echo "Helptags generated.\n"' -c 'quit'
+
+      - name: Commit docs
         if: ${{ !env.ACT }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
