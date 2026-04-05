@@ -23,7 +23,21 @@ jobs:
       docs_matrix: ${{ steps.set-docs-matrix.outputs.docs_matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - name: Create doc directory.
+        run: rm -rvf doc; mkdir -pv doc
+
+      - name: Gen README.md
+        uses: kdheepak/panvimdoc@main
+        with:
+          vimdoc: neopywal
+          pandoc: "README.md"
+          toc: true
+          treesitter: true
+          demojify: true
+          version: "nvim >= 0.8.0"
+          description: "(Neo)pywal for (Neo)vim"
 
       - id: set-docs-matrix
         run: |
@@ -64,34 +78,9 @@ jobs:
 
           echo "docs_matrix=$docs_matrix" >>$GITHUB_OUTPUT
 
-  docs-once:
-    name: Gen README.md
-    needs: docs-build
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Create doc directory.
-        run: rm -rvf doc; mkdir -pv doc
-
-      - name: README.md
-        uses: kdheepak/panvimdoc@main
-        with:
-          vimdoc: neopywal
-          pandoc: "README.md"
-          toc: true
-          treesitter: true
-          demojify: true
-          version: "nvim >= 0.8.0"
-          description: "(Neo)pywal for (Neo)vim"
-
   docs-multi:
     name: Gen docs/*.md
     needs:
-      - docs-once
       - docs-build
     permissions:
       contents: write
@@ -102,7 +91,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: docs/*.md
         uses: kdheepak/panvimdoc@main
@@ -119,7 +108,6 @@ jobs:
   docs:
     name: Finalize vimdocs
     needs:
-      - docs-once
       - docs-build
       - docs-multi
     permissions:
@@ -127,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Neovim
         uses: rhysd/action-setup-vim@v1
@@ -143,7 +131,7 @@ jobs:
 
       - name: Commit docs
         if: ${{ !env.ACT }}
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: "docs: auto generate vimdoc"
-          branch: ${{ github.head_ref }}
+          commit_message: "docs: auto generate vimdocs"
+          # branch: ${{ github.head_ref }}
