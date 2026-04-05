@@ -54,3 +54,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --color always --check lua
+          version: latest
