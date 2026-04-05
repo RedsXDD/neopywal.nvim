@@ -173,18 +173,19 @@
 ---@class NeopywalOptions
 ---@field use_palette {dark: string?, light: string?} | string?
 ---@field transparent_background boolean?
----@field custom_colors CustomColorsOption | fun(C: table<ValidColors[]>?): CustomColorsOption?
----@field custom_highlights CustomHighlightsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
 ---@field dim_inactive boolean?
 ---@field terminal_colors boolean?
 ---@field show_end_of_buffer boolean?
 ---@field show_split_lines boolean?
+---@field notify "all" | "warn" | "error" | "none"
 ---@field no_italic boolean?
 ---@field no_bold boolean?
 ---@field no_underline boolean?
 ---@field no_undercurl boolean?
 ---@field no_strikethrough boolean?
 ---@field styles NeopywalStyles?
+---@field custom_colors CustomColorsOption | fun(C: table<ValidColors[]>?): CustomColorsOption?
+---@field custom_highlights CustomHighlightsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
 ---@field default_fileformats boolean?
 ---@field default_plugins boolean?
 ---@field fileformats NeopywalFileformats?

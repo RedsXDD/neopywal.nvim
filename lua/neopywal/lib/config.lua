@@ -10,12 +10,11 @@ M.default_options = {
         light = "pywal",
     },
     transparent_background = false,
-    custom_colors = {},
-    custom_highlights = {},
     dim_inactive = true,
     terminal_colors = true,
     show_end_of_buffer = false,
     show_split_lines = true,
+    notify = "all",
     no_italic = false,
     no_bold = false,
     no_underline = false,
@@ -35,6 +34,8 @@ M.default_options = {
         types = { "italic" },
         operators = {},
     },
+    custom_colors = {},
+    custom_highlights = {},
     default_fileformats = true,
     default_plugins = true,
     fileformats = {
@@ -358,6 +359,21 @@ function M.setup(user_config)
 
     -- Neovide doesn't play well with transparent background colors.
     if vim.g.neovide then M.options.transparent_background = false end
+
+    -- Validate M.options.notifier to be one of it's proper values.
+    local validated_notify = false
+    for _, v in pairs({ "all", "warn", "error", "none" }) do
+        if M.options.notify == v then validated_notify = true end
+    end
+
+    if not validated_notify then
+        local Notify = require("neopywal.utils.notify")
+        local old_notify_opt = M.options.notify
+        M.options.notify = "all"
+        Notify.error([[
+Invalid `require("neopywal").setup({ notify = "]] .. old_notify_opt .. [[" })` configuration,
+make sure it's one of "all", "warn", "error" or "none".]])
+    end
 
     -- Coc.nvim depends on lsp highlights.
     if

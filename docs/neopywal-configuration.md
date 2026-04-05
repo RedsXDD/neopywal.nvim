@@ -17,14 +17,6 @@ require("neopywal").setup({
     -- as it doesn't play well with transparent background colors.
     transparent_background = false,
 
-    -- With this option you can create/overwrite any color.
-    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim/blob/master/docs/neopywal-colors.md`
-    custom_colors = {},
-
-    -- With this option you can overwrite any highlight groups set by the colorscheme.
-    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim/blob/master/docs/neopywal-highlights.md`
-    custom_highlights = {},
-
     -- Dims the background when another window is focused.
     dim_inactive = true,
 
@@ -37,6 +29,15 @@ require("neopywal").setup({
     -- Shows the '|' split separator characters.
     -- It's worth noting that this options works better in conjunction with `dim_inactive`.
     show_split_lines = true,
+
+    --[[
+        Used to control the notifications sent by Neopywal, can be one of:
+            - "all": Display all notifications;
+            - "warn": Only display warning and error notifications;
+            - "error": Only display error notifications;
+            - "none": Do not display ANY notifications.
+    --]]
+    notify = "all",
 
     no_italic = false, -- Force no italic.
     no_bold = false, -- Force no bold.
@@ -59,6 +60,14 @@ require("neopywal").setup({
         types = { "italic" },
         operators = {},
     },
+
+    -- With this option you can create/overwrite any color.
+    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim/blob/master/docs/neopywal-colors.md`
+    custom_colors = {},
+
+    -- With this option you can overwrite any highlight groups set by the colorscheme.
+    -- For more information take a look at `https://github.com/RedsXDD/neopywal.nvim/blob/master/docs/neopywal-highlights.md`
+    custom_highlights = {},
 
     -- Setting this to false disables all default file format highlights.
     -- Useful if you want to enable specific file format options.
