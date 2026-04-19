@@ -355,6 +355,7 @@ function M.setup(user_config)
     M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
 
     -- Create the final configuration table.
+    ---@diagnostic disable-next-line: assign-type-mismatch
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
     -- Neovide doesn't play well with transparent background colors.
