@@ -1,0 +1,1713 @@
+*neopywal-plugins.txt*                                        Neopywal Plugins
+                               For nvim >= 0.8.0    Last change: 2026 April 19
+
+Neopywal provides theme support for other plugins in the Vim/Neovim ecosystem.
+Most of them can be configured under the `plugins` table on Neopywal’s
+`setup()` function as it is shown below:
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            alpha = true,
+            dashboard = false,
+            git_gutter = true,
+            indent_blankline = true,
+            lazy = true,
+            lazygit = true,
+            noice = false,
+            notify = true,
+            nvim_cmp = true,
+            mini = {
+                hipatterns = true,
+                indentscope = {
+                    enabled = false,
+                },
+                pick = true,
+                starter = true,
+            },
+        },
+    })
+<
+
+Take note that some plugins have additional configuration options within
+Neopywal’s main `plugin` table, here’s an example.
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                hipatterns = {
+                    enabled = true,
+                    style = {
+                        fixme = { "bold", "italic" },
+                        hack = { "bold", "italic" },
+                        note = { "bold", "italic" },
+                        todo = { "bold", "italic" },
+                    }
+                }
+            }
+        }
+    })
+<
+
+If you don’t want to change any of the default configurations for a certain
+plugin, you can easily set the plugin to `true` instead of passing a table of
+options to it, this will make it so Neopywal loads all the default
+configuration values for said plugin module.
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                -- Note that the same plugin from before has been set to `true` instead of being set
+                -- as a table of configuration options, therefore Neopywal will still load this plugin
+                -- but use it's default configuration values instead.
+                hipatterns = true
+            }
+        }
+    })
+<
+
+Some other plugins cannot be configured directly from Neopywal’s `setup()`
+function. Instead those plugins have their own `setup()` functions where you
+can tweak their configuration options. And here’s an example of a plugin
+configuration made from an external `setup()` function not related to the
+`plugins` table on Neopywal’s own `setup()` function.
+
+>lua
+    -- Note that you can call `require()` directly instead of wrapping it around the `pcall()` function.
+    -- However using `pcall()` is generally a safer approach as it can prevent Neovim from erring out
+    -- if Neopywal could not be loaded for X reason.
+    
+    local has_lualine, lualine = pcall(require, "lualine")
+    if not has_lualine then return end
+    
+    local has_neopywal, neopywal_lualine = pcall(require, "neopywal.theme.plugins.lualine")
+    if not has_neopywal then return end
+    
+    -- You would put Neopywal's configuration for lualine inside this `setup()` function instead.
+    neopywal_lualine.setup({
+        mode_colors = { normal = "color2" },
+    })
+    
+    lualine.setup({
+        options = {
+            theme = "neopywal"
+            -- The rest of your lualine config ...
+        }
+    })
+<
+
+
+==============================================================================
+1. Defaults                                        *neopywal-plugins-defaults*
+
+Some plugins are enabled by default, you can see which ones are or aren’t
+enabled by default by looking at the default plugin’s configuration on the
+right side of the support plugins table. Here’s an example:
+
+yanky.nvim>lua
+    -- Here's the default configuration for yanky.nvim for example.
+    -- You can see that by default the plugin is disabled.
+    require("neopywal").setup({
+        plugins = {
+            yanky = false
+        }
+    })
+<
+
+If you want tot disable all the plugins that are enabled by default by
+Neopywal, you can set the `default_plugins` option to false to disable all of
+them.
+
+>lua
+    require("neopywal").setup({
+        default_plugins = false,
+    })
+<
+
+Below is a list of supported plugins and their corresponding configuration
+module.
+
+aerial.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            aerial = true
+        }
+    })
+<
+
+ale>lua
+    require("neopywal").setup({
+        plugins = {
+            ale = false
+        }
+    })
+<
+
+alpha-nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            alpha = true
+        }
+    })
+<
+
+barbar.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            barbar = false
+        }
+    })
+<
+
+barbecue.nvimSpecial ~
+
+Update your Barbecue config to use the Neopywal theme:
+
+>lua
+    local has_barbecue, barbecue = pcall(require, "barbecue")
+    if not has_barbecue then return end
+    
+    local has_neopywal, neopywal_barbecue = pcall(require, "neopywal.theme.plugins.barbecue")
+    if not has_neopywal then return end
+    
+    neopywal_barbecue.setup()
+    
+    barbecue.setup({
+        theme = "neopywal"
+        -- The rest of your barbecue config ...
+    })
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change style settings and any of groups from the Neopywal theme.
+
+>lua
+    local neopywal_barbecue = require("neopywal.theme.plugins.barbecue")
+    
+    neopywal_barbecue.setup({
+        dim_background = false, -- Whether to dim the background.
+        dim_context = true, -- Whether the context should be dimmed.
+        dim_dirname = true, -- Whether the directory name should be dimmed.
+        hide_separator = false, -- Whether to hide the separator character.
+        basename_style = { "bold", "italic" },
+        context_style = {},
+        dirname_style = {},
+    
+        -- With this option you can overwrite any of the groups from the builtin theme.
+        -- For more information take a look at `:h barbecue-recipes` and at
+        -- `https://github.com/RedsXDD/neopywal.nvim/blob/master/docs/neopywal-highlights.md`
+        -- as this option works exactly the same as `custom_highlights`.
+        theme = {},
+    })
+<
+
+beacon.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            beacon = {
+                enabled = false,
+    
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                color = "",
+            }
+        }
+    })
+<
+
+blink.cmp>lua
+    require("neopywal").setup({
+        plugins = {
+            blink_cmp = true
+        }
+    })
+<
+
+bufferline.nvimSpecial ~
+
+Update your bufferline config to use the Neopywal highlights:
+
+
+  [!Note] Bufferline needs to be loaded AFTER setting up Neopywal or it will
+  highlight incorrectly.
+Configuration for packer.nvim users: ~
+
+>lua
+    use "akinsho/bufferline.nvim" {
+      after = "neopywal",
+      config = function()
+        require("bufferline").setup({
+          highlights = require("neopywal.theme.plugins.bufferline").setup()
+        })
+      end
+    }
+<
+
+Configuration for lazy.nvim users: ~
+
+>lua
+    {
+        "RedsXDD/neopywal.nvim",
+        name = "neopywal",
+        lazy = false,
+        priority = 1000, -- Neopywal loads first because it has higher priority.
+    },
+    {
+        "akinsho/bufferline.nvim",
+        config = function()
+            require("bufferline").setup({
+                highlights = require("neopywal.theme.plugins.bufferline").setup()
+            })
+        end
+    }
+<
+
+Overwriting highlights can be done inside the setup() function, see
+|bufferline-highlights| for detailed explanations:
+
+>lua
+    local C = require("neopywal").get_colors()
+    
+    bufferline.setup({
+        highlights = require("neopywal.theme.plugins.bufferline").setup({
+            fill = { bg = C.color1 },
+            background = { fg = "#00ff00" },
+        })
+    })
+<
+
+coc.nvim>lua
+    require("neopywal").setup({
+        plugings = {
+            coc = false
+        }
+    })
+<
+
+Setting `enabled` to `true` will also enable the LSP plugin.
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            lsp = true,
+        }
+    })
+<
+
+
+  [!Note] coc.nvim by default links to the native LSP highlight groups so the
+  configuration from the `lsp` option will also apply to coc.
+colorful-winsep.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            colorful_winsep = {
+                enabled = false,
+    
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                color = "",
+            }
+        }
+    })
+<
+
+dashboard-nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            dashboard = true
+        }
+    })
+<
+
+diffview.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            diffview = false
+        }
+    })
+<
+
+dropbar.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            dropbar = {
+                enabled = false,
+                colored_text = false, -- Whether to add color for kind's texts.
+            }
+        }
+    })
+<
+
+feline.nvimSpecial ~
+
+Update your Feline config to use the Neopywal components:
+
+>lua
+    local has_feline, feline = pcall(require, "feline")
+    if not has_feline then return end
+    
+    local has_neopywal, neopywal_feline = pcall(require, "neopywal.theme.plugins.feline")
+    if not has_neopywal then return end
+    
+    neopywal_feline.setup()
+    
+    feline.setup({
+        components = neopywal_feline.get(),
+    })
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change assets, settings and the colors per vim mode.
+
+Here are the defaults:
+
+>lua
+    local C = require("neopywal").get_colors()
+    local U = require("neopywal.utils.color")
+    
+    local neopywal_feline = require("neopywal.theme.plugins.feline")
+    
+    neopywal_feline.setup({
+        assets = {
+            left_separator = "",
+            right_separator = "",
+            mode_icon = "",
+            dir = "󰉋",
+            file = "󰈙",
+            lsp = {
+                server = "󰅡",
+                error = "",
+                warning = "",
+                info = "",
+                hint = "",
+            },
+            git = {
+                branch = "",
+                added = "",
+                changed = "",
+                removed = "",
+            },
+        },
+        mode_colors = {
+            ["n"] = { "NORMAL", C.color4 },
+            ["no"] = { "N-PENDING", C.color4 },
+            ["i"] = { "INSERT", C.color6 },
+            ["ic"] = { "INSERT", C.color6 },
+            ["t"] = { "TERMINAL", C.color3 },
+            ["v"] = { "VISUAL", C.color5 },
+            ["V"] = { "V-LINE", C.color5 },
+            [""] = { "V-BLOCK", C.color5 },
+            ["R"] = { "REPLACE", C.color2 },
+            ["Rv"] = { "V-REPLACE", C.color2 },
+            ["s"] = { "SELECT", U.blend(C.color1, C.color3, 0.5) },
+            ["S"] = { "S-LINE", U.blend(C.color1, C.color3, 0.5) },
+            [""] = { "S-BLOCK", U.blend(C.color1, C.color3, 0.5) },
+            ["c"] = { "COMMAND", C.color1 },
+            ["cv"] = { "COMMAND", C.color1 },
+            ["ce"] = { "COMMAND", C.color1 },
+            ["r"] = { "PROMPT", C.foreground },
+            ["rm"] = { "MORE", C.foreground },
+            ["r?"] = { "CONFIRM", C.color2 },
+            ["!"] = { "SHELL", C.color1 },
+        },
+        sett = {
+            text = C.foreground,
+            bkg = U.blend(C.color8, C.background, 0.3),
+            diffs = U.blend(C.color8, C.background, 0.5),
+            extras = C.foreground,
+            curr_file = U.blend(C.color8, C.background, 0.5),
+            curr_dir = C.color4,
+            show_modified = false, -- Show if the file has been modified.
+    
+            -- Show the count of updatable plugins from lazy.nvim.
+            -- Need to set checker.enabled = true in lazy.nvim first
+            -- the icon is set in ui.icons.plugin in lazy.nvim.
+            show_lazy_updates = false,
+        },
+        view = {
+            lsp = {
+                progress = true, -- If true the status bar will display an lsp progress indicator.
+                name = false, -- If true the status bar will display the lsp servers name, otherwise it will display the text "Lsp".
+                exclude_lsp_names = {}, -- Lsp server names that should not be displayed when name is set to true.
+                separator = "|", -- The separator used when there are multiple lsp servers.
+            },
+        },
+    })
+<
+
+
+  [!Warning] Currently feline doesn’t officially support custom themes
+  <https://github.com/feline-nvim/feline.nvim/issues/302>. In order for
+  `:colorscheme neopywal` to work you could add this autocmd as a workaround:
+>lua
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+            package.loaded["feline"] = nil
+            package.loaded["neopywal.theme.plugins.feline"] = nil
+            require("feline").setup({
+                components = require("neopywal.theme.plugins.feline").get(),
+            })
+        end,
+    })
+<
+
+fern.vim>lua
+    require("neopywal").setup({
+        plugins = {
+            fern = false
+        }
+    })
+<
+
+fidget.nvimSpecial ~
+
+Update your Fidget config to use Neopywal’s highlight groups.
+
+>lua
+    local has_fidget, fidget = pcall(require, "fidget")
+    if not has_fidget then return end
+    
+    local has_neopywal, neopywal_fidget = pcall(require, "neopywal.theme.plugins.fidget")
+    if not has_neopywal then return end
+    
+    -- This is what loads the highlight groups that are used inside Fidget's setup function.
+    neopywal_fidget.setup()
+    
+    fidget.setup({
+        progress = {
+            display = {
+                done_style = "FidgetDone",
+                progress_style = "FigdetProgress",
+                group_style = "FidgetGroup",
+                icon_style = "FidgetIcon",
+            },
+        },
+        notification = {
+            view = {
+                group_separator_hl = "FidgetSeparator",
+            },
+            window = {
+                normal_hl = "FidgetNormal",
+    
+                -- You can use this option to adjust the background color opacity for the notification window.
+                -- But it's recommended set this to "0" if you don't plan on changing any of the custom highlight groups.
+                winblend = 0,
+            },
+        },
+        -- The rest of your fidget config ...
+    })
+<
+
+Overriding highlight groups can be done inside the setup() function.
+
+>lua
+    local neopywal_fidget = require("neopywal.theme.plugins.fidget")
+    
+    local C = require("neopywal").get_colors()
+    local bg = require("neopywal.lib.config").options.transparent_background and C.none or C.dim_bg
+    
+    neopywal_fidget.setup({
+        FidgetDone = { bg = bg, fg = C.ok, styles = { "bold", "italic" } },
+        FidgetGroup = { bg = bg, fg = C.foreground, styles = { "bold", "italic" } },
+        FidgetIcon = { bg = bg, fg = C.color4, styles = { "bold", "italic" } },
+        FidgetNormal = { bg = bg, fg = C.comment, styles = { "bold", "italic" } },
+        FidgetProgress = { bg = bg, fg = C.color3, styles = { "bold", "italic" } },
+        FidgetSeparator = { bg = bg, fg = C.comment, styles = { "bold", "italic" } },
+    })
+<
+
+flash.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            flash = {
+                enabled = true,
+                style = { "bold", "italic" }
+            }
+        }
+    })
+<
+
+fzf-lua>lua
+    require("neopywal").setup({
+        require("neopywal").setup({
+            plugins = {
+                plugins = {
+                    fzf = false
+                }
+            })
+        }
+    })
+<
+
+gitsigns.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            gitsigns = true
+        }
+    })
+<
+
+grug-far.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            grug_far = false
+        }
+    })
+<
+
+harpoon>lua
+    require("neopywal").setup({
+        plugins = {
+            harpoon = false
+        }
+    })
+<
+
+headlines.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            headlines = false
+        }
+    })
+<
+
+hop.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            hop = {
+                enabled = false,
+                style = { "bold", "italic" }
+            }
+        }
+    })
+<
+
+indent-blankline.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            indent_blankline = {
+                enabled = true,
+                colored_indent_levels = false,
+    
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                scope_color = "",
+            }
+        }
+    })
+<
+
+`colored_indent_levels` enables character highlights per indent level. Follow
+the instructions here
+<https://github.com/lukas-reineke/indent-blankline.nvim#multiple-indent-colors>
+to set the latter up.
+
+indentmini.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            indentmini = {
+                enabled = false,
+    
+                -- These options either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                scope_color = "",
+                current_scope_color = "",
+            }
+        }
+    })
+<
+
+lazy.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            lazy = true
+        }
+    })
+<
+
+lazygit.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            lazygit = true
+        }
+    })
+<
+
+leap.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            leap = {
+                enabled = false,
+                style = { "bold", "italic" }
+            }
+        }
+    })
+<
+
+lightline.vimSpecial ~
+
+Update your Lightline config to use the Neopywal theme:
+
+>vim
+    " Notice that the 'lua' block is necessary if you're configuring Lightline with vim-script.
+    
+    lua << EOF
+        local has_neopywal, neopywal_lightline = pcall(require, "neopywal.theme.plugins.lightline")
+        if not has_neopywal then return end
+    
+        neopywal_lightline.setup()
+    EOF
+    
+    let g:lightline = {'colorscheme': 'neopywal'}
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change the colors per vim mode.
+
+>vim
+    " Notice that the 'lua' block is necessary if you're configuring Lightline with vim-script.
+    
+    lua << EOF
+        local neopywal_lightline = require("neopywal.theme.plugins.lightline")
+    
+        neopywal_lightline.setup({
+            -- Any of the color values can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            mode_colors = {
+                normal = "color4",
+                visual = "color5",
+                insert = "color6",
+                command = "color1",
+                replace = "color2",
+                terminal = "color3",
+            }
+        })
+    EOF
+<
+
+lir.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            lir = {
+                enabled = false,
+                git_status = false,
+            }
+        }
+    })
+<
+
+lspsaga.nvim>lua
+    require("neopywal").setup({
+        plugings = {
+            lspsaga = {
+                enabled = false,
+                dim_folder = true, -- Whether to dim the folder name on the winbar.
+                dim_filename = true, -- Whether to dim the filename on the winbar.
+                dim_separator = true, -- Whether to dim the separator character on the winbar.
+                winbar_style = { "bold" },
+            }
+        }
+    })
+<
+
+For custom LSP kind icons and color:
+
+>lua
+    require("lspsaga").setup({
+        ui = {
+            kind = require("neopywal.theme.plugins.lspsaga").get_kinds(),
+        }
+    })
+<
+
+lualine.nvimSpecial ~
+
+Update your Lualine config to use the Neopywal theme:
+
+>lua
+    local has_lualine, lualine = pcall(require, "lualine")
+    if not has_lualine then return end
+    
+    local has_neopywal, neopywal_lualine = pcall(require, "neopywal.theme.plugins.lualine")
+    if not has_neopywal then return end
+    
+    neopywal_lualine.setup()
+    
+    lualine.setup({
+        options = {
+            theme = "neopywal"
+            -- The rest of your lualine config ...
+        }
+    })
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change style settings and the colors per vim mode.
+
+>lua
+    local neopywal_lualine = require("neopywal.theme.plugins.lualine")
+    
+    neopywal_lualine.setup({
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        mode_colors = {
+            normal = "color4",
+            visual = "color5",
+            insert = "color6",
+            command = "color1",
+            replace = "color2",
+            terminal = "color3",
+        },
+        styles = {
+            a = { "bold" },
+            b = { "bold" },
+            c = { "bold" },
+            x = { "bold" },
+            y = { "bold" },
+            z = { "bold" },
+        },
+    })
+<
+
+markdown.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            markdown = false,
+        }
+    })
+<
+
+mason.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            mason = true,
+        }
+    })
+<
+
+mini.animate>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                animate = true
+            }
+        }
+    })
+<
+
+mini.clue>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                clue = true
+            }
+        }
+    })
+<
+
+mini.completion>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                completion = {
+                    enabled = true,
+                    parameter_style = { "underline" },
+                }
+            }
+        }
+    })
+<
+
+mini.cursorword>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                cursorword = {
+                    enabled = true,
+                    style = { "underline" },
+                }
+            }
+        }
+    })
+<
+
+mini.deps>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                deps = true
+            }
+        }
+    })
+<
+
+mini.diff>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                diff = true
+            }
+        }
+    })
+<
+
+mini.files>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                files = true
+            }
+        }
+    })
+<
+
+mini.hipatterns>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                hipatterns = {
+                    enabled = true,
+                    style = {
+                        fixme = { "bold", "italic" },
+                        hack = { "bold", "italic" },
+                        note = { "bold", "italic" },
+                        todo = { "bold", "italic" },
+                    }
+                }
+            }
+        }
+    })
+<
+
+mini.icons>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                icons = true
+            }
+        }
+    })
+<
+
+mini.indentscope>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                indentscope = {
+                    enabled = true,
+    
+                    -- Can either be:
+                    --   - A color exported by "get_colors()" (e.g.: `color8`)
+                    --   - A hexadecimal color (e.g.: "#ff0000").
+                    --   - A function with an optional "C" parameter that returns one of the two options above.
+                    --     e.g: function(C) return C.color1 end
+                    scope_color = "",
+                }
+            }
+        }
+    })
+<
+
+mini.jump>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                jump = {
+                    enabled = true,
+                    style = { "bold", "italic" },
+                }
+            }
+        }
+    })
+<
+
+mini.jump2d>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                jump2d = {
+                    enabled = true,
+                    style = { "bold", "italic" },
+                }
+            }
+        }
+    })
+<
+
+mini.map>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                map = true
+            }
+        }
+    })
+<
+
+mini.notify>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                notify = true
+            }
+        }
+    })
+<
+
+mini.operators>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                operators = true
+            }
+        }
+    })
+<
+
+mini.pick>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                pick = true
+            }
+        }
+    })
+<
+
+mini.snippets>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                snippets = {
+                    enabled = true,
+                    style = { "underdouble" },
+                }
+            }
+        }
+    })
+<
+
+mini.starter>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                starter = true
+            }
+        }
+    })
+<
+
+mini.statusline>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                statusline = {
+                    enabled = true,
+    
+                    -- Any of the color values can either be:
+                    --   - A color exported by "get_colors()" (e.g.: `color8`)
+                    --   - A hexadecimal color (e.g.: "#ff0000").
+                    --   - A function with an optional "C" parameter that returns one of the two options above.
+                    --     e.g: function(C) return C.color1 end
+                    mode_colors = {
+                        normal = "color4",
+                        visual = "color5",
+                        insert = "color6",
+                        command = "color1",
+                        replace = "color2",
+                        other = "color3", -- e.g.: terminal.
+                    }
+                }
+            }
+        }
+    })
+<
+
+mini.surround>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                surround = true
+            }
+        }
+    })
+<
+
+mini.tabline>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                tabline = true
+            }
+        }
+    })
+<
+
+mini.test>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                test = true
+            }
+        }
+    })
+<
+
+mini.trailspace>lua
+    require("neopywal").setup({
+        plugins = {
+            mini = {
+                trailspace = {
+                    enabled = true,
+    
+                    -- Can either be:
+                    --   - A color exported by "get_colors()" (e.g.: `color8`)
+                    --   - A hexadecimal color (e.g.: "#ff0000").
+                    --   - A function with an optional "C" parameter that returns one of the two options above.
+                    --     e.g: function(C) return C.color1 end
+                    color = "",
+                }
+            }
+        }
+    })
+<
+
+neogit>lua
+    require("neopywal").setup({
+        plugins = {
+            neogit = false
+        }
+    })
+<
+
+neotest>lua
+    require("neopywal").setup({
+        plugins = {
+            neotest = false
+        }
+    })
+<
+
+neo-tree.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            neotree = true
+        }
+    })
+<
+
+netrw>lua
+    require("neopywal").setup({
+        plugins = {
+            netrw = true
+        }
+    })
+<
+
+noice.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            noice = true
+        }
+    })
+<
+
+NormalNvim>lua
+    require("neopywal").setup({
+        plugins = {
+            NormalNvim = false
+        }
+    })
+<
+
+notifier.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            notifier = false
+        }
+    })
+<
+
+nvim-cmp>lua
+    require("neopywal").setup({
+        plugins = {
+            nvim_cmp = true
+        }
+    })
+<
+
+nvim-dap>lua
+    require("neopywal").setup({
+        plugins = {
+            dap = false
+        }
+    })
+<
+
+Special ~
+
+>lua
+    local sign = vim.fn.sign_define
+    
+    sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = ""})
+    sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
+    sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = ""})
+<
+
+nvim-dap-ui>lua
+    require("neopywal").setup({
+        plugins = {
+            dap_ui = false
+        }
+    })
+<
+
+nvim-lspconfig>lua
+    require("neopywal").setup({
+        plugins = {
+            lsp = {
+                enabled = true,
+                virtual_text = {
+                    errors = { "bold", "italic" },
+                    hints = { "bold", "italic" },
+                    information = { "bold", "italic" },
+                    ok = { "bold", "italic" },
+                    warnings = { "bold", "italic" },
+                    unnecessary = { "bold", "italic" },
+                },
+                underlines = {
+                    errors = { "undercurl" },
+                    hints = { "undercurl" },
+                    information = { "undercurl" },
+                    ok = { "undercurl" },
+                    warnings = { "undercurl" },
+                },
+                inlay_hints = {
+                    background = true,
+                    style = { "bold", "italic" },
+                }
+            }
+        }
+    })
+<
+
+nvim-navbuddy>lua
+    require("neopywal").setup({
+        plugins = {
+            navbuddy = false
+        }
+    })
+<
+
+nvim-navic>lua
+    require("neopywal").setup({
+        plugins = {
+            navic = {
+                enabled = false,
+                dim_text = false, -- Whether the text should be dimmed.
+                hide_separator = false, -- Whether to hide the separator character.
+                text_style = { "bold", "italic" },
+    
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                bg_color = "",
+            }
+        }
+    })
+<
+
+Special ~
+
+>lua
+    -- You NEED to enable highlight in nvim-navic setting or it won't work.
+    require("nvim-navic").setup({ highlight = true })
+<
+
+If you want to make background color similar to what’s used on lualine/feline
+you can do the following:
+
+>lua
+    require("neopywal").setup({
+        plugins = {
+            navic = {
+                bg_color = function(C)
+                    local U = require("neopywal.utils.color")
+    
+                    -- `0.5` would match the color used on lualine's "b" section.
+                    return U.blend(C.color8, C.background, 0.3)
+                end
+            }
+        }
+    })
+<
+
+nvim-notify>lua
+    require("neopywal").setup({
+        plugins = {
+            notify = true
+        }
+    })
+<
+
+nvim-scrollbar>lua
+    require("neopywal").setup({
+        plugins = {
+            scrollbar = false
+        }
+    })
+<
+
+nvim-tree.lua>lua
+    require("neopywal").setup({
+        plugins = {
+            nvimtree = true
+        }
+    })
+<
+
+nvim-surround>lua
+    require("neopywal").setup({
+        plugins = {
+            surround = false
+        }
+    })
+<
+
+nvim-treesitter>lua
+    require("neopywal").setup({
+        plugins = {
+            treesitter = true
+        }
+    })
+<
+
+nvim-treesitter-context>lua
+    require("neopywal").setup({
+        plugins = {
+            ts_context = {
+                enabled = true,
+                dim_background = false,
+    
+                -- NOTE: This option only applies to the current context line.
+                -- You may want to disable "underline" if you configured the "separator" option within ts_context.
+                style = { "bold", "underline" },
+            }
+        }
+    })
+<
+
+nvim-ts-rainbow>lua
+    require("neopywal").setup({
+        plugins = {
+            ts_rainbow = false
+        }
+    })
+<
+
+nvim-ts-rainbow2>lua
+    require("neopywal").setup({
+        plugins = {
+            ts_rainbow2 = false
+        }
+    })
+<
+
+nvim-ufo>lua
+    require("neopywal").setup({
+        plugins = {
+            ufo = true
+        }
+    })
+<
+
+nvim-window-picker>lua
+    require("neopywal").setup({
+        plugins = {
+            window_picker = {
+                enabled = false,
+    
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                color = "",
+            }
+        }
+    })
+<
+
+octo.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            octo = false
+        }
+    })
+<
+
+overseer.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            overseer = false
+        }
+    })
+<
+
+pounce.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            pounce = {
+                enabled = false,
+                style = { "bold", "italic" }
+            }
+        }
+    })
+<
+
+rainbow-delimiters.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            rainbow = false
+        }
+    })
+<
+
+reactive.nvimSpecial ~
+
+Update your Reactive config to use the Neopywal theme:
+
+>lua
+    local has_reactive, reactive = pcall(require, "reactive")
+    if not has_reactive then return end
+    
+    local has_neopywal, neopywal_reactive = pcall(require, "neopywal.theme.plugins.reactive")
+    if not has_neopywal then return end
+    
+    neopywal_reactive.setup()
+    
+    reactive.setup({
+        -- Note that there are 2 available presets, `cursor` and `cursorline`.
+        load = { "neopywal-cursor", "neopywal-cursorline" }
+        -- The rest of your reactive config ...
+    })
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change the color settings per vim mode.
+
+>lua
+    local neopywal_reactive = require("neopywal.theme.plugins.reactive")
+    
+    neopywal_reactive.setup({
+        -- A higher percentage means more vibrant mode colors,
+        -- where "1" means to use "exactly" the mode color without any color transparency.
+        color_percentage = 0.3,
+    
+        -- Any of the color values can either be:
+        --   - A color exported by "get_colors()" (e.g.: `color8`)
+        --   - A hexadecimal color (e.g.: "#ff0000").
+        --   - A function with an optional "C" parameter that returns one of the two options above.
+        --     e.g: function(C) return C.color1 end
+        mode_colors = {
+            visual = "color5",
+            insert = "color6",
+            replace = "color2",
+    
+            -- Normal mode operations.
+            change = "color2",
+            delete = "color1",
+            pending = "color4",
+            yank = "color3",
+        }
+    })
+<
+
+snacks.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            snacks = {
+                enabled = false,
+    
+                -- These options either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                scope_color = "",
+                current_scope_color = "",
+                -- style = "nvchad"
+            }
+        }
+    })
+<
+
+symbols-outline.nvim
+  [!NOTE] This plugin has been archived by the author, consider using
+  outline.nvim <https://github.com/hedyhli/outline.nvim>
+>lua
+    require("neopywal").setup({
+        plugins = {
+            symbols_outline = false
+        }
+    })
+<
+
+telekasten.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            telekasten = false
+        }
+    })
+<
+
+telescope.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            telescope = {
+                enabled = true,
+                -- style = "nvchad"
+            }
+        }
+    })
+<
+
+trouble.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            trouble = false
+        }
+    })
+<
+
+undotree>lua
+    require("neopywal").setup({
+        plugins = {
+            undotree = true
+        }
+    })
+<
+
+vimwiki>lua
+    require("neopywal").setup({
+        plugins = {
+            vimwiki = false
+        }
+    })
+<
+
+vim-dadbod-ui>lua
+    require("neopywal").setup({
+        plugins = {
+            dadbod_ui = false
+        }
+    })
+<
+
+vim-airlineSpecial ~
+
+Update your Airline config to use the Neopywal theme:
+
+>vim
+    " Notice that the 'lua' block is necessary if you're configuring Lightline with vim-script.
+    
+    lua << EOF
+        local has_neopywal, neopywal_airline = pcall(require, "neopywal.theme.plugins.airline")
+        if not has_neopywal then return end
+    
+        neopywal_airline.setup()
+    EOF
+    
+    let g:airline_theme = 'neopywal'
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change style settings and the colors per vim mode.
+
+>vim
+    " Notice that the 'lua' block is necessary if you're configuring Lightline with vim-script.
+    
+    lua << EOF
+        local neopywal_airline = require("neopywal.theme.plugins.airline")
+    
+        neopywal_airline.setup({
+            -- Any of the color values can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            mode_colors = {
+                normal = "color4",
+                visual = "color5",
+                insert = "color6",
+                commandline = "color1",
+                replace = "color2",
+                terminal = "color3",
+            },
+    
+            -- This is the same as `mode_colors` except it uses cterm numbers instead (see `:h cterm`)
+            -- e.g.: "normal = 4" means "ctermfg=4".
+            cterm_colors = {
+                normal = 4,
+                visual = 5,
+                insert = 6,
+                commandline = 1,
+                replace = 2,
+                terminal = 3,
+            },
+            styles = {
+                a = { "bold" },
+                b = { "bold" },
+                c = { "bold" },
+                x = { "bold" },
+                y = { "bold" },
+                z = { "bold" },
+            },
+        })
+    EOF
+<
+
+vim-clapSpecial ~
+
+Update your Clap config to use the Neopywal theme:
+
+>vim
+    " Notice that the 'lua' block is necessary if you're configuring Lightline with vim-script.
+    
+    lua << EOF
+        local has_neopywal, neopywal_clap = pcall(require, "neopywal.theme.plugins.clap")
+        if not has_neopywal then return end
+    
+        neopywal_clap.setup()
+    EOF
+    
+    let g:clap_theme = 'neopywal'
+<
+
+Notice that calling `setup()` is optional. You may pass a lua table in order to
+change style settings and the text colors.
+
+>vim
+    " Notice that the 'lua' block is necessary if you're configuring Lightline with vim-script.
+    
+    lua << EOF
+        local neopywal_clap = require("neopywal.theme.plugins.clap")
+    
+        neopywal_clap.setup({
+            -- Any of the color values can either be:
+            --   - A color exported by "get_colors()" (e.g.: `color8`)
+            --   - A hexadecimal color (e.g.: "#ff0000").
+            --   - A function with an optional "C" parameter that returns one of the two options above.
+            --     e.g: function(C) return C.color1 end
+            colors = {
+                indicator = "color8", -- The text for the number of matches.
+                spinner = "color2", -- The text representing the mode.
+                selected = "color6", -- The text of the line of a selected item.
+                current_selection = "color4", -- The text of the line of the currently selected item.
+            },
+            styles = {
+                indicator = { "italic" }, -- The text for the number of matches.
+                spinner = { "bold" }, -- The text representing the mode.
+                selected = { "bold", "underline" }, -- The line for a selected item.
+                current_selection = { "bold" }, -- The line for the currently selected item.
+            },
+        })
+    EOF
+<
+
+vim-gitgutter>lua
+    require("neopywal").setup({
+        plugins = {
+            git_gutter = true
+        }
+    })
+<
+
+vim-glyph-palette>lua
+    require("neopywal").setup({
+        plugins = {
+            glyph_palette = false
+        }
+    })
+<
+
+vim-illuminate>lua
+    require("neopywal").setup({
+        plugins = {
+            illuminate = {
+                enabled = false,
+                lsp = true,
+                style = { "bold" },
+            }
+        }
+    })
+<
+
+vim-sandwich>lua
+    require("neopywal").setup({
+        plugins = {
+            sandwich = false
+        }
+    })
+<
+
+vim-sneak>lua
+    require("neopywal").setup({
+        plugins = {
+            sneak = {
+                enabled = false,
+                style = { "bold", "italic" },
+    
+                -- Can either be:
+                --   - A color exported by "get_colors()" (e.g.: `color8`)
+                --   - A hexadecimal color (e.g.: "#ff0000").
+                --   - A function with an optional "C" parameter that returns one of the two options above.
+                --     e.g: function(C) return C.color1 end
+                sneak_color = "",
+            }
+        }
+    })
+<
+
+which-key.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            which_key = true
+        }
+    })
+<
+
+yanky.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            yanky = false
+        }
+    })
+<
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:
