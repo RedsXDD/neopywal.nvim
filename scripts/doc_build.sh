@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Run this script on the cmd with `$ sh ./scripts/doc_build.sh`
 # while being on the root neopywal.nvim git path.
@@ -10,6 +10,10 @@ if ! which pandoc >/dev/null 2>&1; then
         echo 'ERROR: pandoc not installed!'
         exit 1
 fi
+
+CWD="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd | sed 's|/tests$||g')"
+CWD="${CWD}/.."
+cd "${CWD}" || exit 1
 
 PANVIMDOC_DIR="$(mktemp -d /tmp/tmp-panvimdoc.XXXXXXXX)"
 trap 'rm -rf "${PANVIMDOC_DIR}"' 0 1 15
