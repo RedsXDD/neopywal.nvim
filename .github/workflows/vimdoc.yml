@@ -6,6 +6,9 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   # Prevent from running on release commits.
   skip_on_release:
@@ -13,35 +16,17 @@ jobs:
     if: ${{ !startsWith(github.event.head_commit.message, 'chore(master)') }}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          exit 0
+      - run: exit 0
 
   docs-build:
-    timeout-minutes: 5
     runs-on: ubuntu-latest
     outputs:
       docs_matrix: ${{ steps.set-docs-matrix.outputs.docs_matrix }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Create doc directory.
-        run: rm -rvf doc; mkdir -pv doc
-
-      - name: Gen README.md
-        uses: kdheepak/panvimdoc@main
-        with:
-          vimdoc: neopywal
-          pandoc: "README.md"
-          toc: true
-          treesitter: true
-          demojify: true
-          version: "nvim >= 0.8.0"
-          description: "(Neo)pywal for (Neo)vim"
-
-      - id: set-docs-matrix
+      - uses: actions/checkout@v6
+      - name: Generate docs/*.md file matrix
+        id: set-docs-matrix
         run: |
-          # Create a JSON array of objects, each containing module, desc, and section
           first=true
           json_array="[]"
           docs_matrix="[]"
@@ -53,11 +38,12 @@ jobs:
                   while read -r file; do
                           if [ -f "$file" ]; then
                                   module="$file"
-                                  desc="$(basename "$file" .md | sed 's/-/ /g; s/[^ ]*/\u&/g')"
+                                  output_module="$(basename "$file" .md).txt"
                                   section="$(basename "$file" .md)"
+                                  desc="$(basename "$file" .md | sed 's/-/ /g; s/[^ ]*/\u&/g')"
 
                                   # Build JSON object manually
-                                  json_object="{\"module\":\"$module\",\"desc\":\"$desc\",\"section\":\"$section\"}"
+                                  json_object="{\"module\":\"$module\",\"output_module\":\"$output_module\",\"desc\":\"$desc\",\"section\":\"$section\"}"
 
                                   if [ "$first" = true ]; then
                                           first=false
@@ -80,58 +66,67 @@ jobs:
 
   docs-multi:
     name: Gen docs/*.md
-    needs:
-      - docs-build
-    permissions:
-      contents: write
+    needs: docs-build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         docs: ${{ fromJson(needs.docs-build.outputs.docs_matrix) }}
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: docs/*.md
+      - uses: actions/checkout@v6
+      - run: mkdir -pv doc
+      - name: Panvimdoc (${{ matrix.docs.module }})
         uses: kdheepak/panvimdoc@main
         with:
           toc: false
           demojify: true
           treesitter: true
           shiftheadinglevelby: -1
+          version: "nvim >= 0.8.0"
           pandoc: ${{ matrix.docs.module }}
           vimdoc: ${{ matrix.docs.section }}
           description: ${{ matrix.docs.desc }}
-          version: "nvim >= 0.8.0"
+      - name: Upload vimdoc artifact (./doc/${{ matrix.docs.output_module }})
+        uses: actions/upload-artifact@v7
+        with:
+          name: vimdoc-${{ matrix.docs.output_module }}
+          path: doc/${{ matrix.docs.output_module }}
 
   docs:
-    name: Finalize vimdocs
     needs:
       - docs-build
       - docs-multi
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Install Neovim
+      - uses: actions/checkout@v6
+      - name: Download vimdoc artifacts
+        if: ${{ needs.docs-build.outputs.docs_matrix != '[]' }}
+        uses: actions/download-artifact@v8
+        with:
+          pattern: vimdoc-*
+          path: doc/
+          merge-multiple: true
+      - name: Panvimdoc (./README.md)
+        uses: kdheepak/panvimdoc@main
+        with:
+          toc: true
+          treesitter: true
+          demojify: true
+          vimdoc: neopywal
+          pandoc: "README.md"
+          version: "nvim >= 0.8.0"
+          description: "(Neo)pywal for (Neo)vim"
+      - name: Setup Neovim
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: "stable"
-
-      - name: Neovim Version
-        run: nvim --version
-
-      - name: Gen helptags
-        run: nvim --headless -c 'echo "Generating helptags ...\n"' -c 'helptags ./doc' -c 'echo "Helptags generated.\n"' -c 'quit'
-
-      - name: Commit docs
-        if: ${{ !env.ACT }}
+      - run: nvim --version
+      - name: Generate vim helptags
+        run: |
+          nvim --headless -c 'echo "Generating helptags ...\n"' -c 'helptags ./doc' -c 'echo "Helptags generated.\n"' -c 'quit'
+      - if: ${{ !env.ACT }}
+        name: Commit docs
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: "docs: auto generate vimdocs"
-          # branch: ${{ github.head_ref }}
+          commit_message: "docs(build): auto generate vimdocs"
+          branch: ${{ github.head_ref }}
