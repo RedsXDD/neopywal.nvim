@@ -38,10 +38,8 @@ function M.notify(msg, level)
     notified[msg] = true
 end
 
-function M.error(msg) M.notify(msg, vim.log.levels.ERROR) end
-
-function M.warn(msg) M.notify(msg, vim.log.levels.WARN) end
-
 function M.info(msg) M.notify(msg, vim.log.levels.INFO) end
+function M.warn(msg) M.notify(msg, vim.log.levels.WARN) end
+function M.error(msg) M.notify(msg, vim.log.levels.ERROR) end
 
 return M
