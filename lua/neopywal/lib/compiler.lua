@@ -145,12 +145,15 @@ function M.compile()
     compile("light")
 end
 
-function M.recompile()
+---@param notify? boolean
+function M.recompile(notify)
+    if notify == nil then notify = true end
+
     for name, _ in pairs(package.loaded) do
         if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
     end
     M.compile()
-    Notify.info("Successfully compiled cache.")
+    if notify then Notify.info("Successfully compiled cache.") end
     vim.cmd.colorscheme("neopywal")
 end
 

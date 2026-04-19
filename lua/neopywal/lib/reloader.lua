@@ -65,10 +65,13 @@ Below is the error message that we captured:
                 return
             end
 
-            Notify.info(
-                string.format([[Change detected in template file "%s", recompiling colorscheme.]], template_path)
-            )
-            Compiler.recompile()
+            Notify.info(string.format(
+                [[
+Change detected in template file "%s",
+recompiling colorscheme ...]],
+                template_path
+            ))
+            Compiler.recompile(false)
         end)
     end)
 end

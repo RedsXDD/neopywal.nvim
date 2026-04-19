@@ -161,7 +161,7 @@
 ---@class Compiler
 ---@field options {path_sep: string, filename: string, compile_path: string}
 ---@field compile fun()
----@field recompile fun()
+---@field recompile fun(notify: boolean?)
 
 ---@class NeopywalConfig
 ---@field default_options NeopywalOptions
