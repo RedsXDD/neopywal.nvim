@@ -108,36 +108,43 @@ function M.get(theme_style, minimal_palette, extra_colors)
 
     ---@type string
     local colorscheme_file = fixPathSep(M.options.use_palette[theme_style])
+    local file, file_exists, file_is_requireable, file_is_sourceable, error_msg -- The gotos require me to declare the variables first, weird.
 
-    local file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
-    local file_is_requireable, file = pcall(require, colorscheme_file)
+    if colorscheme_file:match("neopywal%.palettes%..*") then
+        file_is_requireable, file = pcall(require, colorscheme_file)
+        if file_is_requireable and file.get and type(file.get) == "function" then
+            file.get()
+            goto setup_palette
+        end
+    end
 
-    if file_is_requireable then
-        file.get()
-    elseif not file_exists then
+    file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
+    if not file_exists then
         Notify.error(
             string.format(
                 "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
                 colorscheme_file
             )
         )
-    else
-        ---@diagnostic disable-next-line: param-type-mismatch
-        local could_source_file, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
-        if not could_source_file then
-            Notify.error(string.format(
-                [[
+        goto setup_palette
+    end
+
+    ---@diagnostic disable-next-line: param-type-mismatch
+    file_is_sourceable, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
+    if not file_is_sourceable then
+        Notify.error(string.format(
+            [[
 Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
 Below is the error message that we captured:
 %s]],
-                colorscheme_file,
-                error_msg
-            ))
-        end
+            colorscheme_file,
+            error_msg
+        ))
     end
 
     -- Use fallback colors if template file couldn't be loaded.
     -- Fallback colors reference: https://github.com/catppuccin/catppuccin
+    ::setup_palette::
     local palette = {
         dark = {
             background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
@@ -170,25 +177,14 @@ Below is the error message that we captured:
     }
 
     -- Reset all global variables that have been used.
-    vim.g.background = nil
-    vim.g.foreground = nil
-    vim.g.cursor = nil
-    vim.g.color0 = nil
-    vim.g.color1 = nil
-    vim.g.color2 = nil
-    vim.g.color3 = nil
-    vim.g.color4 = nil
-    vim.g.color5 = nil
-    vim.g.color6 = nil
-    vim.g.color7 = nil
-    vim.g.color8 = nil
-    vim.g.color9 = nil
-    vim.g.color10 = nil
-    vim.g.color11 = nil
-    vim.g.color12 = nil
-    vim.g.color13 = nil
-    vim.g.color14 = nil
-    vim.g.color15 = nil
+    local var_patterns = { "background", "foreground", "cursor" }
+    for i = 0, 15 do
+        table.insert(var_patterns, "color" .. i)
+    end
+
+    for _, var in ipairs(var_patterns) do
+        vim.g[var] = nil
+    end
 
     -- Return palette early if `minimal_palette` is enabled.
     local C = vim.tbl_deep_extend("keep", palette[theme_style], palette.colors)
