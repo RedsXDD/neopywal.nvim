@@ -416,7 +416,7 @@ make sure it's one of "all", "warn", "error" or "none".]])
     end
 
     -- Get current hash.
-    local minimal_palette = Palette.get(nil, true)
+    local minimal_palette = Palette.get_minpalette()
     local git_path = debug.getinfo(1).source:sub(2, -28) .. ".git"
     local git = vim.fn.getftime(git_path) -- 2x faster vim.loop.fs_stat
     local hash = require("neopywal.lib.hashing").hash({ user_config, minimal_palette })

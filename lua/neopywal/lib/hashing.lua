@@ -22,7 +22,7 @@ function M.hash(v) -- Xor hashing: https://codeforces.com/blog/entry/85900
         end
         return hash
     elseif t == "function" then
-        return M.hash(v(require("neopywal.lib.palette").get()))
+        return M.hash(v(require("neopywal.lib.palette").get_minpalette()))
     end
 
     return tostring(v)

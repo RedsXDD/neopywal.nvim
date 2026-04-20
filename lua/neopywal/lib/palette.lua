@@ -11,6 +11,80 @@ M.default_options = {
 }
 M.options = M.default_options
 
+-- This function only exists to return the most minimal possible palette for config.lua hashing algo,
+-- supposedly improving performance slightly. The palette is even more minimal than the one returned by
+-- require("neopywal").get_colors() as that one also requires extra processing power for the light theme variant.
+---@return NeopywalMinimalPalette
+function M.get_minpalette()
+    -- The gotos statements require me to declare the variables first, weird ...
+    local is_sourceable, error_msg
+    if not M.palette_metadata.file_exists then
+        Notify.error(
+            string.format(
+                "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
+                M.palette_metadata.filepath
+            )
+        )
+        goto return_palette
+    end
+
+    if M.palette_metadata.is_requireable then
+        local could_require, file = pcall(require, M.palette_metadata.filepath)
+        if could_require and file.get and type(file.get) == "function" then file.get() end
+        goto return_palette
+    end
+
+    ---@diagnostic disable-next-line: param-type-mismatch
+    is_sourceable, error_msg = pcall(vim.cmd, "source " .. M.palette_metadata.filepath)
+    if not is_sourceable then
+        Notify.error(string.format(
+            [[
+         Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
+         Below is the error message that we captured:
+         %s]],
+            M.palette_metadata.filepath,
+            error_msg
+        ))
+    end
+
+    -- Use fallback colors if template file couldn't be loaded.
+    -- Fallback colors reference: https://github.com/catppuccin/catppuccin
+    ::return_palette::
+    local ret = {
+        background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
+        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
+        cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#CDD6F4",
+        color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
+        color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
+        color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
+        color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF",
+        color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA",
+        color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7",
+        color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5",
+        color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE",
+        color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70",
+        color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8",
+        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1",
+        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF",
+        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA",
+        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
+        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
+        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
+    }
+
+    -- Reset all global variables that have been used.
+    local var_patterns = { "background", "foreground", "cursor" }
+    for i = 0, 15 do
+        table.insert(var_patterns, "color" .. i)
+    end
+
+    for _, var in ipairs(var_patterns) do
+        vim.g[var] = nil
+    end
+
+    return ret
+end
+
 ---@return string
 local function fixPathSep(path)
     if Compiler.options.path_sep == "\\" then
@@ -20,12 +94,10 @@ local function fixPathSep(path)
     end
 end
 
--- This is the function that setups the path for the colorscheme file, as well as the user custom colors which later can be appended to the final palette.
 M.did_setup = false
 ---@param config table?
 function M.setup(config)
     config = config or {}
-
     M.options = vim.tbl_deep_extend("keep", config, M.default_options)
 
     if type(M.options.use_palette) == "function" then M.options.use_palette = M.options.use_palette() end
@@ -76,28 +148,33 @@ function M.setup(config)
         ["tomorrow-night"] = true,
     }
 
-    for option, value in pairs(M.options.use_palette) do
-        local function getkey(key)
-            if builtin_palette_map[key] ~= nil then return key end
-        end
+    local function getkey(key)
+        if builtin_palette_map[key] ~= nil then return key end
+    end
 
-        local file_path = program_palette_map[value]
+    local metadata = {}
+    for theme_style, value in pairs(M.options.use_palette) do
+        local filepath = program_palette_map[value]
             or builtin_palette_map[value] and "neopywal.palettes." .. getkey(value)
             or value
 
-        M.options.use_palette[option] = fixPathSep(file_path)
+        filepath = fixPathSep(filepath)
+        metadata.filepath = filepath
+        metadata.is_requireable = builtin_palette_map[value] ~= nil
+
+        if metadata.is_requireable then
+            metadata.file_exists = true
+        else
+            if vim.fn.filereadable(filepath) then metadata.file_exists = true end
+        end
+
+        M.options.use_palette[theme_style] = metadata.filepath
     end
 
+    M.palette_metadata = metadata
     M.did_setup = true
 end
 
---[[
-    This is the function that actually exports the full palette. It has a few extra options compared to "M.get_colors()" which help for creating Neopywal's cache file and for setting up user colors.
-    It also has an extra argument at the end that allows to append an arbitrary table to the exported palette.
-    If a function is given the main "C" table will be passed to it as an argument.
-    E.g.:
-        M.get("dark", false, function(C) return { red = C.color1 }) end)
-]]
 ---@return NeopywalPalette
 ---@param theme_style? ThemeStyles
 ---@param minimal_palette? boolean
@@ -106,88 +183,16 @@ function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
-    ---@type string
-    local colorscheme_file = fixPathSep(M.options.use_palette[theme_style])
-    local file, file_exists, file_is_requireable, file_is_sourceable, error_msg -- The gotos require me to declare the variables first, weird.
-
-    if colorscheme_file:match("neopywal%.palettes%..*") then
-        file_is_requireable, file = pcall(require, colorscheme_file)
-        if file_is_requireable and file.get and type(file.get) == "function" then
-            file.get()
-            goto setup_palette
-        end
-    end
-
-    file_exists = vim.fn.filereadable(colorscheme_file) ~= 0
-    if not file_exists then
-        Notify.error(
-            string.format(
-                "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
-                colorscheme_file
-            )
-        )
-        goto setup_palette
-    end
-
-    ---@diagnostic disable-next-line: param-type-mismatch
-    file_is_sourceable, error_msg = pcall(vim.cmd, "source " .. colorscheme_file)
-    if not file_is_sourceable then
-        Notify.error(string.format(
-            [[
-Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
-Below is the error message that we captured:
-%s]],
-            colorscheme_file,
-            error_msg
-        ))
-    end
-
-    -- Use fallback colors if template file couldn't be loaded.
-    -- Fallback colors reference: https://github.com/catppuccin/catppuccin
-    ::setup_palette::
+    local LightTheme = require("neopywal.utils.light")
+    local minpalette = M.get_minpalette()
     local palette = {
-        dark = {
-            background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
-            foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
-        },
-        light = {
-            background = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
-            foreground = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
-        },
-        colors = {
-            none = "NONE",
-            cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#CDD6F4",
-            color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
-            color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
-            color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
-            color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF",
-            color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA",
-            color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7",
-            color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5",
-            color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE",
-            color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70",
-            color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8",
-            color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1",
-            color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF",
-            color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA",
-            color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
-            color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
-            color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
-        },
+        dark = minpalette,
+        light = LightTheme.convert_dark2light_theme(minpalette),
     }
 
-    -- Reset all global variables that have been used.
-    local var_patterns = { "background", "foreground", "cursor" }
-    for i = 0, 15 do
-        table.insert(var_patterns, "color" .. i)
-    end
-
-    for _, var in ipairs(var_patterns) do
-        vim.g[var] = nil
-    end
-
     -- Return palette early if `minimal_palette` is enabled.
-    local C = vim.tbl_deep_extend("keep", palette[theme_style], palette.colors)
+    palette.dark.none, palette.light.none = "NONE", "NONE"
+    local C = palette[theme_style]
     minimal_palette = minimal_palette or false
     if minimal_palette then return C end
 

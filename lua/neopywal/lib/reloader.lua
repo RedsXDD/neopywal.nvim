@@ -5,10 +5,9 @@ local Palette = require("neopywal.lib.palette")
 
 M.lock = false
 function M.init()
-    if M.lock then return end
-    M.lock = true
-
     if not Palette.did_setup then Palette.setup() end
+    if M.lock or Palette.palette_metadata.is_requireable then return end
+    M.lock = true
 
     if vim.g.neopywal_debug then
         vim.api.nvim_create_autocmd("BufWritePost", {
@@ -21,12 +20,11 @@ function M.init()
 
     ---@diagnostic disable-next-line: undefined-field
     local event
-    -- luv binding in 0.9
-    if vim.loop then event = vim.loop.new_fs_event() end
-    -- luv binding from 0.10 onwards
-    if vim.uv then event = vim.uv.new_fs_event() end
-    local bg = vim.o.background
-    local template_path = Palette.options.use_palette[bg]
+    if vim.loop then event = vim.loop.new_fs_event() end -- luv binding in 0.9.
+    if vim.uv then event = vim.uv.new_fs_event() end -- luv binding from 0.10 onwards.
+    if event == nil then return end
+
+    local template_path = Palette.options.use_palette[vim.o.background]
     event:start(template_path, {
         watch_entry = true,
         stat = true,
@@ -68,7 +66,8 @@ Below is the error message that we captured:
             Notify.info(string.format(
                 [[
 Change detected in template file "%s",
-recompiling colorscheme ...]],
+recompiling colorscheme ...
+]],
                 template_path
             ))
             Compiler.recompile(false)

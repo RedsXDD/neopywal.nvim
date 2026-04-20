@@ -37,7 +37,6 @@ describe("palette", function()
         Neopywal.setup()
         Palette.setup()
     end)
-
     --: setup works with default options {{{
     it("setup works with default options", function()
         local cache_dir
@@ -214,9 +213,9 @@ describe("palette", function()
     --: }}}
     --: can export a light theme style {{{
     it("can export a light theme style", function()
-        local expected = {
-            background = "#BBC2CF",
-            foreground = "#282C34",
+        local dark_palette = {
+            background = "#282C34",
+            foreground = "#BBC2CF",
             cursor = "#BBC2CF",
             color0 = "#1C1F24",
             color1 = "#FF6C6B",
@@ -237,7 +236,10 @@ describe("palette", function()
         }
 
         Palette.setup({ use_palette = "doomone" })
+        local LightTheme = require("neopywal.utils.light")
+        local expected = LightTheme.convert_dark2light_theme(dark_palette)
         local C = Palette.get("light")
+
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
         assert.equals(C.cursor, expected.cursor)
@@ -259,8 +261,110 @@ describe("palette", function()
         assert.equals(C.color15, expected.color15)
     end)
     --: }}}
-    --: can reset used global variables {{{
-    it("can reset used global variables", function()
+    --: can export fallback dark theme style {{{
+    it("can export fallback dark theme style", function()
+        local expected = {
+            none = "NONE",
+            background = "#1E1E2E",
+            foreground = "#CDD6F4",
+            cursor = "#CDD6F4",
+            color0 = "#45475A",
+            color1 = "#F38BA8",
+            color2 = "#A6E3A1",
+            color3 = "#F9E2AF",
+            color4 = "#89B4FA",
+            color5 = "#F5C2E7",
+            color6 = "#94E2D5",
+            color7 = "#BAC2DE",
+            color8 = "#585B70",
+            color9 = "#F38BA8",
+            color10 = "#A6E3A1",
+            color11 = "#F9E2AF",
+            color12 = "#89B4FA",
+            color13 = "#F5C2E7",
+            color14 = "#94E2D5",
+            color15 = "#A6ADC8",
+        }
+
+        vim.o.background = "dark"
+        Palette.setup({ use_palette = "null" })
+        local C = Palette.get()
+        assert.equals(C.none, expected.none)
+        assert.equals(C.background, expected.background)
+        assert.equals(C.foreground, expected.foreground)
+        assert.equals(C.cursor, expected.cursor)
+        assert.equals(C.color0, expected.color0)
+        assert.equals(C.color1, expected.color1)
+        assert.equals(C.color2, expected.color2)
+        assert.equals(C.color3, expected.color3)
+        assert.equals(C.color4, expected.color4)
+        assert.equals(C.color5, expected.color5)
+        assert.equals(C.color6, expected.color6)
+        assert.equals(C.color7, expected.color7)
+        assert.equals(C.color8, expected.color8)
+        assert.equals(C.color9, expected.color9)
+        assert.equals(C.color10, expected.color10)
+        assert.equals(C.color11, expected.color11)
+        assert.equals(C.color12, expected.color12)
+        assert.equals(C.color13, expected.color13)
+        assert.equals(C.color14, expected.color14)
+        assert.equals(C.color15, expected.color15)
+    end)
+    --: }}}
+    --: can export fallback light theme style {{{
+    it("can export fallback light theme style", function()
+        local dark_palette = {
+            background = "#1E1E2E",
+            foreground = "#CDD6F4",
+            cursor = "#CDD6F4",
+            color0 = "#45475A",
+            color1 = "#F38BA8",
+            color2 = "#A6E3A1",
+            color3 = "#F9E2AF",
+            color4 = "#89B4FA",
+            color5 = "#F5C2E7",
+            color6 = "#94E2D5",
+            color7 = "#BAC2DE",
+            color8 = "#585B70",
+            color9 = "#F38BA8",
+            color10 = "#A6E3A1",
+            color11 = "#F9E2AF",
+            color12 = "#89B4FA",
+            color13 = "#F5C2E7",
+            color14 = "#94E2D5",
+            color15 = "#A6ADC8",
+        }
+
+        vim.o.background = "light"
+        Palette.setup({ use_palette = "null" })
+        local LightTheme = require("neopywal.utils.light")
+        local expected = LightTheme.convert_dark2light_theme(dark_palette)
+        expected.none = "NONE"
+        local C = Palette.get()
+        assert.equals(C.none, expected.none)
+        assert.equals(C.background, expected.background)
+        assert.equals(C.foreground, expected.foreground)
+        assert.equals(C.cursor, expected.cursor)
+        assert.equals(C.color0, expected.color0)
+        assert.equals(C.color1, expected.color1)
+        assert.equals(C.color2, expected.color2)
+        assert.equals(C.color3, expected.color3)
+        assert.equals(C.color4, expected.color4)
+        assert.equals(C.color5, expected.color5)
+        assert.equals(C.color6, expected.color6)
+        assert.equals(C.color7, expected.color7)
+        assert.equals(C.color8, expected.color8)
+        assert.equals(C.color9, expected.color9)
+        assert.equals(C.color10, expected.color10)
+        assert.equals(C.color11, expected.color11)
+        assert.equals(C.color12, expected.color12)
+        assert.equals(C.color13, expected.color13)
+        assert.equals(C.color14, expected.color14)
+        assert.equals(C.color15, expected.color15)
+    end)
+    --: }}}
+    --: can reset global variables {{{
+    it("can reset global variables", function()
         Palette.setup({ use_palette = "doomone" })
         Palette.get()
         assert.is_nil(vim.g.background)
@@ -334,9 +438,9 @@ describe("palette", function()
     --: }}}
     --: respects vim.o.background = light {{{
     it("respects vim.o.background = light", function()
-        local expected = {
-            background = "#BBC2CF",
-            foreground = "#282C34",
+        local dark_palette = {
+            background = "#282C34",
+            foreground = "#BBC2CF",
             cursor = "#BBC2CF",
             color0 = "#1C1F24",
             color1 = "#FF6C6B",
@@ -358,6 +462,8 @@ describe("palette", function()
 
         vim.o.background = "light"
         Palette.setup({ use_palette = "doomone" })
+        local LightTheme = require("neopywal.utils.light")
+        local expected = LightTheme.convert_dark2light_theme(dark_palette)
         local C = Palette.get()
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
@@ -412,10 +518,9 @@ describe("palette", function()
     --: }}}
     --: can export a minimal light palette {{{
     it("can export a minimal light palette", function()
-        local expected = {
-            none = "NONE",
-            background = "#BBC2CF",
-            foreground = "#282C34",
+        local dark_palette = {
+            background = "#282C34",
+            foreground = "#BBC2CF",
             cursor = "#BBC2CF",
             color0 = "#1C1F24",
             color1 = "#FF6C6B",
@@ -436,57 +541,11 @@ describe("palette", function()
         }
 
         Palette.setup({ use_palette = "doomone" })
+        local LightTheme = require("neopywal.utils.light")
+        local expected = LightTheme.convert_dark2light_theme(dark_palette)
+        expected.none = "NONE"
         local C = Palette.get("light", true)
         assert.same(C, expected)
-    end)
-    --: }}}
-    --: can export the builtin fallback colorscheme {{{
-    it("can export the builtin fallback colorscheme", function()
-        local expected = {
-            none = "NONE",
-            background = "#1E1E2E",
-            foreground = "#CDD6F4",
-            cursor = "#CDD6F4",
-            color0 = "#45475A",
-            color1 = "#F38BA8",
-            color2 = "#A6E3A1",
-            color3 = "#F9E2AF",
-            color4 = "#89B4FA",
-            color5 = "#F5C2E7",
-            color6 = "#94E2D5",
-            color7 = "#BAC2DE",
-            color8 = "#585B70",
-            color9 = "#F38BA8",
-            color10 = "#A6E3A1",
-            color11 = "#F9E2AF",
-            color12 = "#89B4FA",
-            color13 = "#F5C2E7",
-            color14 = "#94E2D5",
-            color15 = "#A6ADC8",
-        }
-
-        Palette.setup({ use_palette = "null" })
-        local C = Palette.get()
-        assert.equals(C.none, expected.none)
-        assert.equals(C.background, expected.background)
-        assert.equals(C.foreground, expected.foreground)
-        assert.equals(C.cursor, expected.cursor)
-        assert.equals(C.color0, expected.color0)
-        assert.equals(C.color1, expected.color1)
-        assert.equals(C.color2, expected.color2)
-        assert.equals(C.color3, expected.color3)
-        assert.equals(C.color4, expected.color4)
-        assert.equals(C.color5, expected.color5)
-        assert.equals(C.color6, expected.color6)
-        assert.equals(C.color7, expected.color7)
-        assert.equals(C.color8, expected.color8)
-        assert.equals(C.color9, expected.color9)
-        assert.equals(C.color10, expected.color10)
-        assert.equals(C.color11, expected.color11)
-        assert.equals(C.color12, expected.color12)
-        assert.equals(C.color13, expected.color13)
-        assert.equals(C.color14, expected.color14)
-        assert.equals(C.color15, expected.color15)
     end)
     --: }}}
     --: setup can overwrite colors {{{

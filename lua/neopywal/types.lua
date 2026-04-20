@@ -85,6 +85,28 @@
 ---| "delimiter"
 ---| "specialcomment"
 
+---@class NeopywalMinimalPalette
+---@field none string
+---@field background string
+---@field foreground string
+---@field cursor string
+---@field color0 string
+---@field color1 string
+---@field color2 string
+---@field color3 string
+---@field color4 string
+---@field color5 string
+---@field color6 string
+---@field color7 string
+---@field color8 string
+---@field color9 string
+---@field color10 string
+---@field color11 string
+---@field color12 string
+---@field color13 string
+---@field color14 string
+---@field color15 string
+
 ---@class NeopywalPalette
 ---@field none string
 ---@field background string
