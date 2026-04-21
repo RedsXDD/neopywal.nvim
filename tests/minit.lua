@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-field
 local cwd = vim.uv.cwd()
-local root = "/tmp/neopywal_lazy_test"
+local root = "/tmp/neopywal_minit"
 
 if vim.fn.isdirectory(root) == 0 then vim.fn.mkdir(root, "p") end
 
