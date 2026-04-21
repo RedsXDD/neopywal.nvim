@@ -393,7 +393,7 @@ C.color4
 <td> <img src="../assets/docs/circles/color4.svg" /> </td>
 </tr>
 <!-- }}} -->
-<!-- Invert C.color4 {{{ -->
+<!-- saturate C.color4 {{{ -->
 <tr>
 <td>
 
@@ -421,8 +421,8 @@ The `invert()` simply takes an hexadecimal color code and, well ..., inverts it'
 local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
 local U = require("neopywal.utils.color")
 
-print(C.color4) -- For comparison: "#89B4FA"
-print(U.invert(C.color4)) -- Output: "#2276c9"
+print(C.background) -- For comparison: "#1E1E2E"
+print(U.invert(C.background)) -- Output: "#DCDCD4"
 ```
 
 <!-- panvimdoc-ignore-start -->
@@ -434,30 +434,30 @@ Here's some visual interpretation for the colors.
 <td> <b>Normal vs Invert</b> </td> <td> <b>Hex</b> </td> <td> <b>Color</b> </td>
 </tr>
 
-<!-- control C.color4 {{{ -->
+<!-- control C.background {{{ -->
 <tr>
 <td>
 
 ```lua
-C.color4
+C.background
 ```
 
 </td>
-<td> Hex: "#89B4FA" </td>
-<td> <img src="../assets/docs/circles/color4.svg" /> </td>
+<td> Hex: "#1E1E2E" </td>
+<td> <img src="../assets/docs/circles/background.svg" /> </td>
 </tr>
 <!-- }}} -->
-<!-- Invert C.color4 {{{ -->
+<!-- invert C.background {{{ -->
 <tr>
 <td>
 
 ```lua
-U.invert(C.color4)
+U.invert(C.background)
 ```
 
 </td>
-<td> Hex: "#2276C9"</td>
-<td> <img src="../assets/docs/circles/invert_color4.svg" /> </td>
+<td> Hex: "#DCDCD4"</td>
+<td> <img src="../assets/docs/circles/invert_background.svg" /> </td>
 </tr>
 <!-- }}} -->
 
