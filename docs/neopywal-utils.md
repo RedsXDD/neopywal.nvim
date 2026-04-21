@@ -2,7 +2,7 @@
 
 ## Manipulation Functions
 
-Neopywal offers a neat set of utility functions that allows the user to manipulate Neopywal's colors in case you want, for example, a darker color than `color1`. Or a brighter and more saturated version of the color `color3`. And so on ...
+Neopywal offers a neat set of utility functions that allows the user to manipulate Neopywal's colors in case you want, for example, a darker color than `color1`. Or a brighter and more saturated version of the color `color3`.
 \
 These functions are all present under `utils/color.lua` module and can be required like so:
 

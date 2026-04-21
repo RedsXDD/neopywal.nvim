@@ -66,7 +66,7 @@ And here's an example of a plugin configuration made from an external `setup()` 
 
 ```lua
 -- Note that you can call `require()` directly instead of wrapping it around the `pcall()` function.
--- However using `pcall()` is generally a safer approach as it can prevent Neovim from erring out
+-- However using `pcall()` is generally a safer approach as it can prevent Neovim from dying
 -- if Neopywal could not be loaded for X reason.
 
 local has_lualine, lualine = pcall(require, "lualine")
