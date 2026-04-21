@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Run this script on the cmd with `$ sh ./scripts/doc_build.sh`
 # while being on the root neopywal.nvim git path.
 # e.g, if the neopywal.nvim repo was cloned into ~/neopywal.nvim,
