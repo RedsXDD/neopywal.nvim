@@ -359,9 +359,9 @@ U.brighten(C.color1, 1)
 
 ### Saturate
 
-The `saturate()` function increases the saturation of a given color.
+The `saturate()` function increases/decreases the saturation of a given color.
 \
-It take two parameters, the first one is the hexadecimal code of color you want to saturate, and the second is an number between 0 and 1 that defines how much said color will be saturated.
+It take two parameters, the first one is the hexadecimal code of color you want to modify, and the second is an number between -1 and 1 that defines how much said color will be saturated/desaturated.
 
 ```lua
 local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
@@ -369,6 +369,7 @@ local U = require("neopywal.utils.color")
 
 print(C.color4) -- For comparison: "#89B4FA"
 print(U.saturate(C.color4, 0.7)) -- Output: "#FA4B8D"
+print(U.saturate(C.color4, -0.7)) -- Output: "#A1ADC6"
 ```
 
 <!-- panvimdoc-ignore-start -->
@@ -404,6 +405,19 @@ U.saturate(C.color4, 0.7)
 </td>
 <td> Hex: "#FA4B8D"</td>
 <td> <img src="../assets/docs/circles/saturate_color4_70.svg" /> </td>
+</tr>
+<!-- }}} -->
+<!-- desaturate C.color4 {{{ -->
+<tr>
+<td>
+
+```lua
+U.saturate(C.color4, -0.7)
+```
+
+</td>
+<td> hex: "#A1ADC6"</td>
+<td> <img src="../assets/docs/circles/desaturate_color4_70.svg" /> </td>
 </tr>
 <!-- }}} -->
 

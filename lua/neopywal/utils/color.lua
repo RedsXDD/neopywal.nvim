@@ -142,10 +142,18 @@ function M.brighten(color, percentage)
     return hsluv.hsluv_to_hex(hsl)
 end
 
-function M.saturate(color, percentage)
-    local rgb = M.hexToRgb(color)
+function M.invert(color)
+    if color ~= "NONE" then
+        local hsl = hsluv.hex_to_hsluv(color)
+        hsl[3] = 100 - hsl[3]
+        if hsl[3] < 40 then hsl[3] = hsl[3] + (100 - hsl[3]) * day_brightness end
+        return hsluv.hsluv_to_hex(hsl)
+    end
+    return color
+end
 
-    local saturation_float = percentage
+local function saturate(color, percentage)
+    local rgb = M.hexToRgb(color)
 
     table.sort(rgb)
     local rgb_intensity = {
@@ -154,15 +162,13 @@ function M.saturate(color, percentage)
         max = rgb[3] / 255,
     }
 
-    if rgb_intensity.max == rgb_intensity.min then
-        -- all colors have same intensity, which means
-        -- the original color is gray, so we can't change saturation.
-        return color
-    end
+    -- All colors have same intensity, which means the
+    -- original color is gray, so we can't change saturation.
+    if rgb_intensity.max == rgb_intensity.min then return color end
 
     local new_intensities = {}
     new_intensities.max = rgb_intensity.max
-    new_intensities.min = rgb_intensity.max * (1 - saturation_float)
+    new_intensities.min = rgb_intensity.max * (1 - percentage)
 
     if rgb_intensity.mid == rgb_intensity.min then
         new_intensities.mid = new_intensities.min
@@ -175,18 +181,28 @@ function M.saturate(color, percentage)
     for i, v in pairs(new_intensities) do
         new_intensities[i] = math.floor(v * 255)
     end
+
     table.sort(new_intensities)
     return (M.RgbToHex({ new_intensities.max, new_intensities.min, new_intensities.mid }))
 end
 
-function M.invert(color)
-    if color ~= "NONE" then
-        local hsl = hsluv.hex_to_hsluv(color)
-        hsl[3] = 100 - hsl[3]
-        if hsl[3] < 40 then hsl[3] = hsl[3] + (100 - hsl[3]) * day_brightness end
-        return hsluv.hsluv_to_hex(hsl)
-    end
-    return color
+local function desaturate(color, percentage)
+    local rgb = M.hexToRgb(color)
+    local r, g, b = rgb[1], rgb[2], rgb[3]
+
+    local gray = (r + g + b) / 3
+    local ret_r = r + (gray - r) * percentage
+    local ret_g = g + (gray - g) * percentage
+    local ret_b = b + (gray - b) * percentage
+
+    ret_r = math.floor(math.min(math.max(ret_r, 0), 255) + 0.5)
+    ret_g = math.floor(math.min(math.max(ret_g, 0), 255) + 0.5)
+    ret_b = math.floor(math.min(math.max(ret_b, 0), 255) + 0.5)
+
+    return M.RgbToHex({ ret_r, ret_g, ret_b })
 end
+
+-- stylua: ignore
+function M.saturate(color, percentage) return percentage > 0 and saturate(color, percentage) or desaturate(color, math.abs(percentage)) end
 
 return M
