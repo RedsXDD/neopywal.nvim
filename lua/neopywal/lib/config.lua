@@ -225,6 +225,18 @@ M.default_options = {
         telescope = {
             enabled = true,
         },
+        todo_comments = {
+            enabled = true,
+            style = {
+                fix = { "bold", "italic" },
+                hack = { "bold", "italic" },
+                todo = { "bold", "italic" },
+                note = { "bold", "italic" },
+                perf = { "bold", "italic" },
+                test = { "bold", "italic" },
+                warn = { "bold", "italic" },
+            },
+        },
         treesitter = true,
         trouble = false,
         ts_context = {
@@ -262,8 +274,8 @@ M.default_options = {
                 style = {
                     fixme = { "bold", "italic" },
                     hack = { "bold", "italic" },
-                    note = { "bold", "italic" },
                     todo = { "bold", "italic" },
+                    note = { "bold", "italic" },
                 },
             },
             icons = true,
@@ -427,7 +439,6 @@ make sure it's one of "all", "warn", "error" or "none".]])
 end
 
 -- Reference: https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/lib/collect.lua
-
 local function deep_copy(obj, seen)
     if type(obj) ~= "table" then return obj end
     if seen and seen[obj] then return seen[obj] end

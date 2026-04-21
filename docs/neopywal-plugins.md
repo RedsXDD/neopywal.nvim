@@ -37,8 +37,8 @@ require("neopywal").setup({
                 style = {
                     fixme = { "bold", "italic" },
                     hack = { "bold", "italic" },
-                    note = { "bold", "italic" },
                     todo = { "bold", "italic" },
+                    note = { "bold", "italic" },
                 }
             }
         }
@@ -1248,8 +1248,8 @@ require("neopywal").setup({
                 style = {
                     fixme = { "bold", "italic" },
                     hack = { "bold", "italic" },
-                    note = { "bold", "italic" },
                     todo = { "bold", "italic" },
+                    note = { "bold", "italic" },
                 }
             }
         }
@@ -2234,6 +2234,33 @@ require("neopywal").setup({
         telescope = {
             enabled = true,
             -- style = "nvchad"
+        }
+    }
+})
+```
+
+</td>
+</tr>
+<!-- }}} -->
+<!-- todo-comments.nvim {{{ -->
+<tr>
+<td> <a href="https://github.com/folke/todo-comments.nvim">todo-comments.nvim</a> </td>
+<td>
+
+```lua
+require("neopywal").setup({
+    plugins = {
+        todo_comments = {
+            enabled = true,
+            style = {
+                fix = { "bold", "italic" },
+                hack = { "bold", "italic" },
+                todo = { "bold", "italic" },
+                note = { "bold", "italic" },
+                perf = { "bold", "italic" },
+                test = { "bold", "italic" },
+                warn = { "bold", "italic" },
+            },
         }
     }
 })

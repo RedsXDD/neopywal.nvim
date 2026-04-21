@@ -312,6 +312,7 @@
 ---@field symbols_outline BasicModule?
 ---@field telekasten BasicModule?
 ---@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
+---@field todo_comments {enabled: boolean, style: {fix: HighlightStyles[]?, hack: HighlightStyles[]?, todo: HighlightStyles[]?, note: HighlightStyles[]?, perf: HighlightStyles[]?, test: HighlightStyles[]?, warn: HighlightStyles[]?}?} | boolean?
 ---@field ts_context {enabled: boolean, dim_background: boolean?, style: HighlightStyles[]?} | boolean?
 ---@field treesitter BasicModule?
 ---@field trouble BasicModule?
@@ -339,7 +340,7 @@
 ---@field deps BasicModule?
 ---@field diff BasicModule?
 ---@field files BasicModule?
----@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, note: HighlightStyles[]?, todo: HighlightStyles[]?}?} | boolean?
+---@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, todo: HighlightStyles[]?, note: HighlightStyles[]?}?} | boolean?
 ---@field icons BasicModule?
 ---@field indentscope {enabled: boolean, scope_color: ValidColorOptions?} | boolean?
 ---@field jump {enabled: boolean, style: HighlightStyles[]?} | boolean?

@@ -8,7 +8,7 @@ function M.get()
             styles = O.plugins.mini.hipatterns.style.fixme or {},
         },
         MiniHipatternsHack = {
-            bg = C.warn,
+            bg = C.hint,
             fg = C.background,
             styles = O.plugins.mini.hipatterns.style.hack or {},
         },
