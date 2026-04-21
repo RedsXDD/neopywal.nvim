@@ -204,7 +204,6 @@
 ---@field booleans HighlightStyles[]?
 ---@field types HighlightStyles[]?
 ---@field operators HighlightStyles[]?
----@field lsp NeopywalPluginsLSP?
 
 ---@class NeopywalFileformats
 ---@field c_cpp BasicModule?
