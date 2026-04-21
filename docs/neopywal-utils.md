@@ -19,7 +19,7 @@ U.invert(color)
 ```
 
 > [!IMPORTANT]
-> All color parameters for the functions have to be in hexadecimal format (e.g.: "#000000").
+> All `color` parameters for the functions have to be in hexadecimal format (e.g.: "#000000").
 
 <!-- Darken/Lighten {{{ -->
 
@@ -192,8 +192,16 @@ local C = require("neopywal").get_colors() -- Using catppuccin-mocha theme.
 local U = require("neopywal.utils.color")
 
 print(C.color1) -- For comparison: #F38BA8"
+
+print(U.darken(C.color1, 70)) -- For comparison: "#AD4562"
 print(U.blacken(C.color1, 0.7)) -- Output: "#621130"
+print(U.darken(C.color1, 100)) -- For comparison: "#8F2744"
+print(U.blacken(C.color1, 1)) -- Output: "#000000"
+
+print(U.lighten(C.color1, 70)) -- For comparison: "#FFD1EE"
 print(U.brighten(C.color1, 0.7)) -- Output: "#FBDEE4"
+print(U.lighten(C.color1, 100)) -- For comparison: "#FFEFFF"
+print(U.brighten(C.color1, 1)) -- Output: "#FFFFFF"
 ```
 
 <!-- panvimdoc-ignore-start -->
