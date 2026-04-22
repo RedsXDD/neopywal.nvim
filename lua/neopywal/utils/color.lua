@@ -143,13 +143,10 @@ function M.brighten(color, percentage)
 end
 
 function M.invert(color)
-    if color ~= "NONE" then
-        local hsl = hsluv.hex_to_hsluv(color)
-        hsl[3] = 100 - hsl[3]
-        if hsl[3] < 40 then hsl[3] = hsl[3] + (100 - hsl[3]) * day_brightness end
-        return hsluv.hsluv_to_hex(hsl)
-    end
-    return color
+    local hsl = hsluv.hex_to_hsluv(color)
+    hsl[3] = 100 - hsl[3]
+    if hsl[3] < 40 then hsl[3] = hsl[3] + (100 - hsl[3]) * day_brightness end
+    return hsluv.hsluv_to_hex(hsl)
 end
 
 local function saturate(color, percentage)
