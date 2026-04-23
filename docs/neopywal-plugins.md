@@ -589,6 +589,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 <td>
 
 ```lua
+-- I wonder were frieren.vim went ...
 require("neopywal").setup({
     plugins = {
         fern = false
