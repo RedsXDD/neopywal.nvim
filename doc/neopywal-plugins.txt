@@ -1,5 +1,5 @@
 *neopywal-plugins.txt*                                        Neopywal Plugins
-                               For nvim >= 0.8.0    Last change: 2026 April 19
+                               For nvim >= 0.8.0    Last change: 2026 April 23
 
 Neopywal provides theme support for other plugins in the Vim/Neovim ecosystem.
 Most of them can be configured under the `plugins` table on Neopywal’s
@@ -41,8 +41,8 @@ Neopywal’s main `plugin` table, here’s an example.
                     style = {
                         fixme = { "bold", "italic" },
                         hack = { "bold", "italic" },
-                        note = { "bold", "italic" },
                         todo = { "bold", "italic" },
+                        note = { "bold", "italic" },
                     }
                 }
             }
@@ -76,7 +76,7 @@ configuration made from an external `setup()` function not related to the
 
 >lua
     -- Note that you can call `require()` directly instead of wrapping it around the `pcall()` function.
-    -- However using `pcall()` is generally a safer approach as it can prevent Neovim from erring out
+    -- However using `pcall()` is generally a safer approach as it can prevent Neovim from dying
     -- if Neopywal could not be loaded for X reason.
     
     local has_lualine, lualine = pcall(require, "lualine")
@@ -891,8 +891,8 @@ mini.hipatterns>lua
                     style = {
                         fixme = { "bold", "italic" },
                         hack = { "bold", "italic" },
-                        note = { "bold", "italic" },
                         todo = { "bold", "italic" },
+                        note = { "bold", "italic" },
                     }
                 }
             }
@@ -1490,6 +1490,25 @@ telescope.nvim>lua
             telescope = {
                 enabled = true,
                 -- style = "nvchad"
+            }
+        }
+    })
+<
+
+todo-comments.nvim>lua
+    require("neopywal").setup({
+        plugins = {
+            todo_comments = {
+                enabled = true,
+                style = {
+                    fix = { "bold", "italic" },
+                    hack = { "bold", "italic" },
+                    todo = { "bold", "italic" },
+                    note = { "bold", "italic" },
+                    perf = { "bold", "italic" },
+                    test = { "bold", "italic" },
+                    warn = { "bold", "italic" },
+                },
             }
         }
     })

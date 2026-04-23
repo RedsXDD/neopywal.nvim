@@ -1,5 +1,5 @@
 *neopywal-palettes.txt*                                      Neopywal Palettes
-                               For nvim >= 0.8.0    Last change: 2026 April 19
+                               For nvim >= 0.8.0    Last change: 2026 April 23
 
 The `use_palette` is the gateway to all of Neopywal’s palette configuration,
 with it you select which custom palette you want Neopywal to use, as well as

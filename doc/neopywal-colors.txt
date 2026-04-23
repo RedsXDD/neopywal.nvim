@@ -1,5 +1,5 @@
 *neopywal-colors.txt*                                          Neopywal Colors
-                               For nvim >= 0.8.0    Last change: 2026 April 19
+                               For nvim >= 0.8.0    Last change: 2026 April 23
 
 Neopywal has a dedicated option for customizing colors within the `setup()`
 function. It is called `custom_colors` and it gives ability to create, modify

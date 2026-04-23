@@ -1,5 +1,5 @@
 *neopywal-highlights.txt*                                  Neopywal Highlights
-                               For nvim >= 0.8.0    Last change: 2026 April 19
+                               For nvim >= 0.8.0    Last change: 2026 April 23
 
 Neopywal has a dedicated option for customizing highlight groups within the
 `setup()` function. It is called `custom_highlights` and it gives the ability

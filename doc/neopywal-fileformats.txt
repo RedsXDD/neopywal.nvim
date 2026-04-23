@@ -1,5 +1,5 @@
 *neopywal-fileformats.txt*                                Neopywal Fileformats
-                               For nvim >= 0.8.0    Last change: 2026 April 19
+                               For nvim >= 0.8.0    Last change: 2026 April 23
 
 Neopywal provides theme support for extra syntax highlighting groups that are
 not dependent on treesitter. This is useful for users that don’t have
