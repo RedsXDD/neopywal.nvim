@@ -87,6 +87,7 @@ function M.get(theme_style)
     -- Get user-defined highlights.
     local custom_highlights = O.custom_highlights
     if type(custom_highlights) == "function" then custom_highlights = custom_highlights(C) end
+    if custom_highlights == nil then custom_highlights = {} end
 
     -- This section MUST happen AFTER all the manipulation on the "O" table has been done.
     theme.editor = require("neopywal.theme.editor").get()
