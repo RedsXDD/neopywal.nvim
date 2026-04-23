@@ -51,28 +51,29 @@ function M.get_minpalette()
     -- Fallback colors reference: https://github.com/catppuccin/catppuccin
     ::return_palette::
     local ret = {
-        background = (vim.g.background ~= nil) and vim.g.background or "#1E1E2E",
-        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#CDD6F4",
-        cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#CDD6F4",
-        color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475A",
-        color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#F38BA8",
-        color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#A6E3A1",
-        color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#F9E2AF",
-        color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89B4FA",
-        color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#F5C2E7",
-        color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94E2D5",
-        color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#BAC2DE",
-        color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585B70",
-        color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#F38BA8",
-        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#A6E3A1",
-        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#F9E2AF",
-        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89B4FA",
-        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#F5C2E7",
-        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94E2D5",
-        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#A6ADC8",
+        background = (vim.g.background ~= nil) and vim.g.background or "#1e1e2e",
+        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#cdd6f4",
+        cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#cdd6f4",
+        color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475a",
+        color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#f38ba8",
+        color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#a6e3a1",
+        color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#f9e2af",
+        color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89b4fa",
+        color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#f5c2e7",
+        color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94e2d5",
+        color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#bac2de",
+        color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585b70",
+        color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#f38ba8",
+        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#a6e3a1",
+        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#f9e2af",
+        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89b4fa",
+        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#f5c2e7",
+        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94e2d5",
+        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#a6adc8",
     }
 
     -- Reset all global variables that have been used.
+    -- Also string.lower() all color variables.
     local var_patterns = { "background", "foreground", "cursor" }
     for i = 0, 15 do
         table.insert(var_patterns, "color" .. i)
@@ -80,6 +81,7 @@ function M.get_minpalette()
 
     for _, var in ipairs(var_patterns) do
         vim.g[var] = nil
+        ret[var] = string.lower(ret[var])
     end
 
     return ret

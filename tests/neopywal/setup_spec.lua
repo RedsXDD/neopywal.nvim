@@ -503,11 +503,6 @@ describe("setup", function()
 
         local function assert_dark()
             local C = require("neopywal.lib.palette").get("dark", true, {})
-            C.color0 = string.lower(C.color0)
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color3 = string.lower(C.color3)
-
             vim.cmd.highlight("clear")
             Neopywal.load("dark")
 
@@ -516,28 +511,22 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(normal_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(normal_group_id, "fg", "gui"),
             }
-            normal_values.bg = string.lower(normal_values.bg)
-            normal_values.fg = string.lower(normal_values.fg)
 
             local normalnc_group_id = vim.api.nvim_get_hl_id_by_name("NormalNC")
             local normalnc_values = {
                 bg = vim.fn.synIDattr(normalnc_group_id, "bg", "gui"),
             }
-            normalnc_values.bg = string.lower(normalnc_values.bg)
 
             local search_group_id = vim.api.nvim_get_hl_id_by_name("Search")
             local search_values = {
                 bg = vim.fn.synIDattr(search_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
-            search_values.bg = string.lower(search_values.bg)
-            search_values.fg = string.lower(search_values.fg)
 
             local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
-            color_column_values.bg = string.lower(color_column_values.bg)
 
             assert.same(normal_values, { bg = C.color3, fg = C.color1 })
             assert.same(normalnc_values, { bg = C.color1 })
@@ -547,11 +536,6 @@ describe("setup", function()
 
         local function assert_light()
             local C = require("neopywal.lib.palette").get("light", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color3 = string.lower(C.color3)
-            C.color4 = string.lower(C.color4)
-            C.color7 = string.lower(C.color7)
-
             vim.cmd.highlight("clear")
             Neopywal.load("light")
 
@@ -560,28 +544,22 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(normal_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(normal_group_id, "fg", "gui"),
             }
-            normal_values.bg = string.lower(normal_values.bg)
-            normal_values.fg = string.lower(normal_values.fg)
 
             local normalnc_group_id = vim.api.nvim_get_hl_id_by_name("NormalNC")
             local normalnc_values = {
                 bg = vim.fn.synIDattr(normalnc_group_id, "bg", "gui"),
             }
-            normalnc_values.bg = string.lower(normalnc_values.bg)
 
             local search_group_id = vim.api.nvim_get_hl_id_by_name("Search")
             local search_values = {
                 bg = vim.fn.synIDattr(search_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
-            search_values.bg = string.lower(search_values.bg)
-            search_values.fg = string.lower(search_values.fg)
 
             local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
-            color_column_values.bg = string.lower(color_column_values.bg)
 
             assert.same(normal_values, { bg = C.color3, fg = C.color1 })
             assert.same(normalnc_values, { bg = C.color1 })
@@ -620,11 +598,6 @@ describe("setup", function()
 
         local function assert_dark()
             local C = require("neopywal.lib.palette").get("dark", true, {})
-            C.color0 = string.lower(C.color0)
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color3 = string.lower(C.color3)
-
             vim.cmd.highlight("clear")
             Neopywal.load("dark")
 
@@ -633,28 +606,22 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(normal_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(normal_group_id, "fg", "gui"),
             }
-            normal_values.bg = string.lower(normal_values.bg)
-            normal_values.fg = string.lower(normal_values.fg)
 
             local normalnc_group_id = vim.api.nvim_get_hl_id_by_name("NormalNC")
             local normalnc_values = {
                 bg = vim.fn.synIDattr(normalnc_group_id, "bg", "gui"),
             }
-            normalnc_values.bg = string.lower(normalnc_values.bg)
 
             local search_group_id = vim.api.nvim_get_hl_id_by_name("Search")
             local search_values = {
                 bg = vim.fn.synIDattr(search_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
-            search_values.bg = string.lower(search_values.bg)
-            search_values.fg = string.lower(search_values.fg)
 
             local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
-            color_column_values.bg = string.lower(color_column_values.bg)
 
             assert.same(normal_values, { bg = C.color3, fg = C.color1 })
             assert.same(normalnc_values, { bg = C.color1 })
@@ -664,11 +631,6 @@ describe("setup", function()
 
         local function assert_light()
             local C = require("neopywal.lib.palette").get("light", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color3 = string.lower(C.color3)
-            C.color4 = string.lower(C.color4)
-            C.color7 = string.lower(C.color7)
-
             vim.cmd.highlight("clear")
             Neopywal.load("light")
 
@@ -677,28 +639,22 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(normal_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(normal_group_id, "fg", "gui"),
             }
-            normal_values.bg = string.lower(normal_values.bg)
-            normal_values.fg = string.lower(normal_values.fg)
 
             local normalnc_group_id = vim.api.nvim_get_hl_id_by_name("NormalNC")
             local normalnc_values = {
                 bg = vim.fn.synIDattr(normalnc_group_id, "bg", "gui"),
             }
-            normalnc_values.bg = string.lower(normalnc_values.bg)
 
             local search_group_id = vim.api.nvim_get_hl_id_by_name("Search")
             local search_values = {
                 bg = vim.fn.synIDattr(search_group_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
-            search_values.bg = string.lower(search_values.bg)
-            search_values.fg = string.lower(search_values.fg)
 
             local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
-            color_column_values.bg = string.lower(color_column_values.bg)
 
             assert.same(normal_values, { bg = C.color3, fg = C.color1 })
             assert.same(normalnc_values, { bg = C.color1 })
@@ -784,11 +740,6 @@ describe("setup", function()
 
         local function assert_dark()
             local C = require("neopywal.lib.palette").get("dark", true, {})
-            C.color0 = string.lower(C.color0)
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color3 = string.lower(C.color3)
-
             vim.cmd.highlight("clear")
             Neopywal.load("dark")
 
@@ -797,16 +748,12 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
             }
-            newall_values.bg = string.lower(newall_values.bg)
-            newall_values.fg = string.lower(newall_values.fg)
 
             local newdark_id = vim.api.nvim_get_hl_id_by_name("NewDark")
             local newdark_values = {
                 bg = vim.fn.synIDattr(newdark_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newdark_id, "fg", "gui"),
             }
-            newdark_values.bg = string.lower(newdark_values.bg)
-            newdark_values.fg = string.lower(newdark_values.fg)
 
             assert.same(newall_values, { bg = C.color3, fg = C.color1 })
             assert.same(newdark_values, { bg = C.color0, fg = C.color2 })
@@ -814,11 +761,6 @@ describe("setup", function()
 
         local function assert_light()
             local C = require("neopywal.lib.palette").get("light", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color3 = string.lower(C.color3)
-            C.color4 = string.lower(C.color4)
-            C.color7 = string.lower(C.color7)
-
             vim.cmd.highlight("clear")
             Neopywal.load("light")
 
@@ -827,16 +769,12 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
             }
-            newall_values.bg = string.lower(newall_values.bg)
-            newall_values.fg = string.lower(newall_values.fg)
 
             local newlight_id = vim.api.nvim_get_hl_id_by_name("NewLight")
             local newlight_values = {
                 bg = vim.fn.synIDattr(newlight_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newlight_id, "fg", "gui"),
             }
-            newlight_values.bg = string.lower(newlight_values.bg)
-            newlight_values.fg = string.lower(newlight_values.fg)
 
             assert.same(newall_values, { bg = C.color3, fg = C.color1 })
             assert.same(newlight_values, { bg = C.color7, fg = C.color4 })
@@ -858,11 +796,6 @@ describe("setup", function()
 
         local function assert_dark()
             local C = require("neopywal.lib.palette").get("dark", true, {})
-            C.color0 = string.lower(C.color0)
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color3 = string.lower(C.color3)
-
             vim.cmd.highlight("clear")
             Neopywal.load("dark")
 
@@ -871,16 +804,12 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
             }
-            newall_values.bg = string.lower(newall_values.bg)
-            newall_values.fg = string.lower(newall_values.fg)
 
             local newdark_id = vim.api.nvim_get_hl_id_by_name("NewDark")
             local newdark_values = {
                 bg = vim.fn.synIDattr(newdark_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newdark_id, "fg", "gui"),
             }
-            newdark_values.bg = string.lower(newdark_values.bg)
-            newdark_values.fg = string.lower(newdark_values.fg)
 
             assert.same(newall_values, { bg = C.color3, fg = C.color1 })
             assert.same(newdark_values, { bg = C.color0, fg = C.color2 })
@@ -888,11 +817,6 @@ describe("setup", function()
 
         local function assert_light()
             local C = require("neopywal.lib.palette").get("light", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color3 = string.lower(C.color3)
-            C.color4 = string.lower(C.color4)
-            C.color7 = string.lower(C.color7)
-
             vim.cmd.highlight("clear")
             Neopywal.load("light")
 
@@ -901,16 +825,12 @@ describe("setup", function()
                 bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
             }
-            newall_values.bg = string.lower(newall_values.bg)
-            newall_values.fg = string.lower(newall_values.fg)
 
             local newlight_id = vim.api.nvim_get_hl_id_by_name("NewLight")
             local newlight_values = {
                 bg = vim.fn.synIDattr(newlight_id, "bg", "gui"),
                 fg = vim.fn.synIDattr(newlight_id, "fg", "gui"),
             }
-            newlight_values.bg = string.lower(newlight_values.bg)
-            newlight_values.fg = string.lower(newlight_values.fg)
 
             assert.same(newall_values, { bg = C.color3, fg = C.color1 })
             assert.same(newlight_values, { bg = C.color7, fg = C.color4 })
@@ -1004,10 +924,6 @@ describe("setup", function()
 
         local function assert_dark()
             local C = require("neopywal.lib.palette").get("dark", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color4 = string.lower(C.color4)
-
             vim.cmd.highlight("clear")
             Neopywal.load("dark")
 
@@ -1027,9 +943,6 @@ describe("setup", function()
 
         local function assert_light()
             local C = require("neopywal.lib.palette").get("light", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color4 = string.lower(C.color4)
 
             vim.cmd.highlight("clear")
             Neopywal.load("light")
@@ -1068,10 +981,6 @@ describe("setup", function()
 
         local function assert_dark()
             local C = require("neopywal.lib.palette").get("dark", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color4 = string.lower(C.color4)
-
             vim.cmd.highlight("clear")
             Neopywal.load("dark")
 
@@ -1091,10 +1000,6 @@ describe("setup", function()
 
         local function assert_light()
             local C = require("neopywal.lib.palette").get("light", true, {})
-            C.color1 = string.lower(C.color1)
-            C.color2 = string.lower(C.color2)
-            C.color4 = string.lower(C.color4)
-
             vim.cmd.highlight("clear")
             Neopywal.load("light")
 
