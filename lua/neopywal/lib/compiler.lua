@@ -4,14 +4,7 @@
 
 ---@type Compiler
 ---@diagnostic disable-next-line: missing-fields
-local M = {
-    options = {
-        ---@diagnostic disable-next-line: undefined-global
-        path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
-        filename = "neopywal",
-        compile_path = vim.fn.stdpath("cache") .. "/neopywal",
-    },
-}
+local M = {}
 local Notify = require("neopywal.utils.notify")
 
 local function inspect(t)
@@ -35,10 +28,12 @@ end
 local function compile(theme_style)
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
-    local O = require("neopywal.lib.config").options
-    local compile_path = M.options.compile_path
-    local path_sep = M.options.path_sep
-    local filename = M.options.filename .. "-" .. theme_style
+    local Config = require("neopywal.lib.config")
+    local O = Config.options
+    local compiler_opts = Config.compiler_opts
+    local compile_path = compiler_opts.compile_path
+    local path_sep = compiler_opts.path_sep
+    local filename = compiler_opts.filename .. "-" .. theme_style
 
     local theme = require("neopywal.lib.mapper").get(theme_style)
     local highlights = vim.tbl_deep_extend(

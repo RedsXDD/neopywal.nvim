@@ -1,5 +1,5 @@
 local M = {}
-local Compiler = require("neopywal.lib.compiler")
+local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
 local Notify = require("neopywal.utils.notify")
 
 M.default_options = {
@@ -89,7 +89,7 @@ end
 
 ---@return string
 local function fixPathSep(path)
-    if Compiler.options.path_sep == "\\" then
+    if path_sep == "\\" then
         return path:gsub("/", "\\")
     else
         return path
@@ -108,7 +108,7 @@ function M.setup(config)
     end
 
     local cache_dir
-    if Compiler.options.path_sep == "\\" then
+    if path_sep == "\\" then
         cache_dir = os.getenv("LOCALAPPDATA") -- Windows
     else
         cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS

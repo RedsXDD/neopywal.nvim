@@ -1,7 +1,7 @@
 local M = {}
 local Notify = require("neopywal.utils.notify")
-local Compiler = require("neopywal.lib.compiler")
 local Palette = require("neopywal.lib.palette")
+local compiler_opts = require("neopywal.lib.config").compiler_opts
 
 M.lock = false
 function M.init()
@@ -13,7 +13,7 @@ function M.init()
         vim.api.nvim_create_autocmd("BufWritePost", {
             pattern = { "*/neopywal/*", "*/neopywal.lua" },
             callback = function()
-                vim.schedule(function() Compiler.recompile() end)
+                vim.schedule(function() require("neopywal.lib.compiler").recompile() end)
             end,
         })
     end
@@ -30,8 +30,8 @@ function M.init()
         stat = true,
     }, function(err)
         if err then
-            local err_path = (Compiler.options.path_sep == "/" and "/tmp" or os.getenv("TMP"))
-                .. Compiler.options.path_sep
+            local err_path = (compiler_opts.path_sep == "/" and "/tmp" or os.getenv("TMP"))
+                .. compiler_opts.path_sep
                 .. "neopywal_reload_error.lua"
             Notify.error(string.format(
                 [[
@@ -70,7 +70,7 @@ recompiling colorscheme ...
 ]],
                 template_path
             ))
-            Compiler.recompile(false)
+            require("neopywal.lib.compiler").recompile(false)
         end)
     end)
 end

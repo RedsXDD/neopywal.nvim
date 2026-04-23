@@ -4,6 +4,12 @@ local M = {}
 local Palette = require("neopywal.lib.palette")
 local Compiler = require("neopywal.lib.compiler")
 
+M.compiler_opts = {
+    filename = "neopywal",
+    compile_path = vim.fn.stdpath("cache") .. "/neopywal",
+    path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
+}
+
 M.default_options = {
     use_palette = {
         dark = "pywal",
@@ -407,7 +413,7 @@ make sure it's one of "all", "warn", "error" or "none".]])
     })
 
     -- Get cached hash.
-    local cached_path = Compiler.options.compile_path .. Compiler.options.path_sep .. "cached"
+    local cached_path = M.compiler_opts.compile_path .. M.compiler_opts.path_sep .. "cached"
     local file = io.open(cached_path)
     local cached = nil
     if file then

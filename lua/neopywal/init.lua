@@ -29,8 +29,8 @@ function M.load(theme_style)
         end
     end
 
-    local filename = Compiler.options.filename .. "-" .. theme_style
-    local compiled_path = Compiler.options.compile_path .. Compiler.options.path_sep .. filename
+    local filename = Config.compiler_opts.filename .. "-" .. theme_style
+    local compiled_path = Config.compiler_opts.compile_path .. Config.compiler_opts.path_sep .. filename
 
     lock = true
     local f = loadfile(compiled_path)

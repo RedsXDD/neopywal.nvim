@@ -181,11 +181,11 @@
 ---@field setup fun(user_config: NeopywalOptions?)
 
 ---@class Compiler
----@field options {path_sep: string, filename: string, compile_path: string}
 ---@field compile fun()
 ---@field recompile fun(notify: boolean?)
 
 ---@class NeopywalConfig
+---@field compiler_opts {filename: string, compile_path: string, path_sep: string}
 ---@field default_options NeopywalOptions
 ---@field options NeopywalOptions
 ---@field setup fun(user_config: NeopywalOptions?)
