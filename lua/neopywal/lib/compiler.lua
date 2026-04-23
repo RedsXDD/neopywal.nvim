@@ -30,9 +30,10 @@ local function compile(theme_style)
     local Config = require("neopywal.lib.config")
     local O = Config.options
     local compiler_opts = Config.compiler_opts
-    local compile_path = compiler_opts.compile_path
     local path_sep = compiler_opts.path_sep
     local filename = compiler_opts.filename .. "-" .. theme_style
+    local compile_path = compiler_opts.compile_path
+    if path_sep == "\\" then compile_path = compile_path:gsub("/", "\\") end
 
     local theme = require("neopywal.lib.mapper").get(theme_style)
     local highlights = vim.tbl_deep_extend(
@@ -43,8 +44,6 @@ local function compile(theme_style)
         theme.fileformats,
         theme.plugins
     )
-
-    if path_sep == "\\" then compile_path = compile_path:gsub("/", "\\") end
 
     local lines = {
         string.format(
@@ -126,7 +125,7 @@ Below is the error message that we captured:
     end
 
     local file = assert(
-        io.open(compile_path .. path_sep .. filename, "wb"),
+        io.open(compile_path .. path_sep .. filename .. compiler_opts.file_ext, "wb"),
         "Permission denied while writing compiled file to " .. compile_path .. path_sep .. filename
     )
 

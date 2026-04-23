@@ -3,6 +3,7 @@
 local M = {}
 
 M.compiler_opts = {
+    file_ext = ".luac",
     filename = "neopywal",
     compile_path = vim.fn.stdpath("cache") .. "/neopywal",
     path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
