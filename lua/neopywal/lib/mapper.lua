@@ -1,7 +1,7 @@
 local M = {}
-local Notify = require("neopywal.utils.notify")
 
 local function couldnt_load(type, module)
+    local Notify = require("neopywal.utils.notify")
     Notify.error(string.format(
         [[
 Unable to load the "%s" %s module.

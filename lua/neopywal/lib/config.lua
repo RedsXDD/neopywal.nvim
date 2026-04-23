@@ -1,8 +1,6 @@
 ---@type NeopywalConfig
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local Palette = require("neopywal.lib.palette")
-local Compiler = require("neopywal.lib.compiler")
 
 M.compiler_opts = {
     filename = "neopywal",
@@ -407,6 +405,7 @@ make sure it's one of "all", "warn", "error" or "none".]])
     end
 
     -- Setup new palette configuration.
+    local Palette = require("neopywal.lib.palette")
     Palette.setup({
         use_palette = M.options.use_palette,
         custom_colors = M.options.custom_colors,
@@ -433,6 +432,7 @@ make sure it's one of "all", "warn", "error" or "none".]])
 
     -- Recompile if hash changed.
     if cached ~= hash then
+        local Compiler = require("neopywal.lib.compiler")
         Compiler.compile()
         file = io.open(cached_path, "wb")
         if file then

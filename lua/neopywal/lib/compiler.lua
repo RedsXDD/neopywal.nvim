@@ -5,7 +5,6 @@
 ---@type Compiler
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local Notify = require("neopywal.utils.notify")
 
 local function inspect(t)
     local list = {}
@@ -102,6 +101,7 @@ local h = vim.api.nvim_set_hl]],
     local ls = load or loadstring
     local f = ls(table.concat(lines, "\n"))
     if not f then
+        local Notify = require("neopywal.utils.notify")
         local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_compiler_error.lua"
         Notify.error(string.format(
             [[
@@ -135,6 +135,7 @@ Below is the error message that we captured:
 end
 
 function M.compile()
+    local Notify = require("neopywal.utils.notify")
     Notify.clear()
     compile("dark")
     compile("light")
@@ -148,8 +149,11 @@ function M.recompile(notify)
         if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
     end
     M.compile()
-    if notify then Notify.info("Successfully compiled cache.") end
     vim.cmd.colorscheme("neopywal")
+    if notify then
+        local Notify = require("neopywal.utils.notify")
+        Notify.info("Successfully compiled cache.")
+    end
 end
 
 return M

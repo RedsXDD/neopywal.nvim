@@ -1,7 +1,6 @@
 -- Reference: https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/interactive.lua
 
 local M = {}
-local Notify = require("neopywal.utils.notify")
 
 local function get_filetype() return vim["bo"] and vim.bo.filetype or vim.eval("&filetype") end
 
@@ -44,6 +43,8 @@ function M.toggle()
         attach()
     end
     M.state = not M.state
+
+    local Notify = require("neopywal.utils.notify")
     Notify.info(string.format([[%s interactive mode.]], M.state and "Enabled" or "Disabled"))
 end
 

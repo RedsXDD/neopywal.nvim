@@ -1,10 +1,8 @@
 local M = {}
-local Notify = require("neopywal.utils.notify")
-local Palette = require("neopywal.lib.palette")
-local compiler_opts = require("neopywal.lib.config").compiler_opts
 
 M.lock = false
 function M.init()
+    local Palette = require("neopywal.lib.palette")
     if not Palette.did_setup then Palette.setup() end
     if M.lock or Palette.palette_metadata.is_requireable then return end
     M.lock = true
@@ -30,6 +28,8 @@ function M.init()
         stat = true,
     }, function(err)
         if err then
+            local Notify = require("neopywal.utils.notify")
+            local compiler_opts = require("neopywal.lib.config").compiler_opts
             local err_path = (compiler_opts.path_sep == "/" and "/tmp" or os.getenv("TMP"))
                 .. compiler_opts.path_sep
                 .. "neopywal_reload_error.lua"
@@ -63,6 +63,7 @@ Below is the error message that we captured:
                 return
             end
 
+            local Notify = require("neopywal.utils.notify")
             Notify.info(string.format(
                 [[
 Change detected in template file "%s",

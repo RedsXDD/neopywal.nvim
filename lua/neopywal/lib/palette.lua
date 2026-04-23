@@ -1,6 +1,5 @@
 local M = {}
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
-local Notify = require("neopywal.utils.notify")
 
 M.default_options = {
     use_palette = {
@@ -19,6 +18,7 @@ function M.get_minpalette()
     -- The gotos statements require me to declare the variables first, weird ...
     local is_sourceable, error_msg
     if not M.palette_metadata.file_exists then
+        local Notify = require("neopywal.utils.notify")
         Notify.error(
             string.format(
                 "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
@@ -37,6 +37,7 @@ function M.get_minpalette()
     ---@diagnostic disable-next-line: param-type-mismatch
     is_sourceable, error_msg = pcall(vim.cmd, "source " .. M.palette_metadata.filepath)
     if not is_sourceable then
+        local Notify = require("neopywal.utils.notify")
         Notify.error(string.format(
             [[
          Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.

@@ -1,9 +1,8 @@
 ---@type Neopywal
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
-local Compiler = require("neopywal.lib.compiler")
-local Palette = require("neopywal.lib.palette")
 local Config = require("neopywal.lib.config")
+local Palette = require("neopywal.lib.palette")
 M.setup = Config.setup
 M.get_colors = Palette.get
 
@@ -35,6 +34,7 @@ function M.load(theme_style)
     lock = true
     local f = loadfile(compiled_path)
     if not f then
+        local Compiler = require("neopywal.lib.compiler")
         Compiler.compile()
         f = assert(loadfile(compiled_path), "could not load neopywal cache.")
     end
