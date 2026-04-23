@@ -583,9 +583,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 </td>
 </tr>
 <!-- }}} -->
-<!-- fern.vim {{{ -->
+<!-- vim-fern {{{ -->
 <tr>
-<td> <a href="https://github.com/lambdalisue/fern.vim">fern.vim</a> </td>
+<td> <a href="https://github.com/lambdalisue/vim-fern">vim-fern</a> </td>
 <td>
 
 ```lua
