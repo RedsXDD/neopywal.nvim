@@ -1,9 +1,7 @@
 -- Reference: https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/lib/log.lua
 
 local M = {}
-
 local notified = {}
-
 function M.clear() notified = {} end
 
 local function should_notify(level)

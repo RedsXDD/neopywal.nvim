@@ -1,7 +1,6 @@
 -- Reference: https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/interactive.lua
 
 local M = {}
-
 local function get_filetype() return vim["bo"] and vim.bo.filetype or vim.eval("&filetype") end
 
 local function attach()

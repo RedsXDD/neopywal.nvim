@@ -1,8 +1,8 @@
 local M = {}
 
 function M.get()
-    local C = require("neopywal.lib.palette").get()
     local U = require("neopywal.utils.color")
+    local C = require("neopywal.lib.palette").get()
 
     return {
         C.color1,
