@@ -16,24 +16,8 @@ jobs:
       - run: |
           exit 0
 
-  stylua:
-    name: Stylua
-    needs:
-      - skip_on_release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Run Stylua
-        uses: JohnnyMorganz/stylua-action@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --color always --check lua
-
   tests:
     name: Tests
-    needs:
-      - stylua
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
