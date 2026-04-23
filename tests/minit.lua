@@ -21,6 +21,10 @@ require("lazy").setup({
     dev = {
         path = debug.getinfo(1).source:sub(2, -21),
     },
+    profiling = {
+        loader = true,
+        require = true,
+    },
 })
 
 vim.g.neopywal_debug = true
