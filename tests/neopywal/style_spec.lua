@@ -7,7 +7,6 @@ describe("neopywal respects vim.o.background", function()
         vim.cmd.colorscheme("default")
         require("neopywal").setup()
     end)
-
     --: and did proper init {{{
     it("and proper init", function()
         assert.same("default", vim.g.colors_name)
