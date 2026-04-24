@@ -75,8 +75,61 @@ describe("palette", function()
             },
         })
 
+        local expected_tokyonight = {
+            none = "NONE",
+            background = "#1a1b26",
+            foreground = "#a9b1d6",
+            cursor = "#a9b1d6",
+            color0 = "#32344a",
+            color1 = "#f7768e",
+            color2 = "#9ece6a",
+            color3 = "#e0af68",
+            color4 = "#7aa2f7",
+            color5 = "#ad8ee6",
+            color6 = "#449dab",
+            color7 = "#787c99",
+            color8 = "#444b6a",
+            color9 = "#ff7a93",
+            color10 = "#b9f27c",
+            color11 = "#ff9e64",
+            color12 = "#7da6ff",
+            color13 = "#bb9af7",
+            color14 = "#0db9d7",
+            color15 = "#acb0d0",
+        }
+
+        local expected_doomone = {
+            background = "#282c34",
+            foreground = "#bbc2cf",
+            cursor = "#bbc2cf",
+            color0 = "#1c1f24",
+            color1 = "#ff6c6b",
+            color2 = "#98be65",
+            color3 = "#da8548",
+            color4 = "#51afef",
+            color5 = "#c678dd",
+            color6 = "#5699af",
+            color7 = "#abb2bf",
+            color8 = "#5b6268",
+            color9 = "#da8548",
+            color10 = "#4db5bd",
+            color11 = "#ecbe7b",
+            color12 = "#2257a0",
+            color13 = "#a9a1e1",
+            color14 = "#46d9ff",
+            color15 = "#dfdfdf",
+        }
+
+        local C_tokyonight = Neopywal.get_colors("dark", true, {})
+        local C_doomone = Neopywal.get_colors("light", true, {})
+        local LightTheme = require("neopywal.utils.light")
+        expected_doomone = LightTheme.convert_dark2light_theme(expected_doomone)
+        expected_doomone.none = "NONE"
+
         assert.equals(Palette.options.use_palette.dark, "neopywal.palettes.tokyonight")
         assert.equals(Palette.options.use_palette.light, "neopywal.palettes.doomone")
+        assert.are.same(C_tokyonight, expected_tokyonight)
+        assert.are.same(C_doomone, expected_doomone)
     end)
     --: }}}
     --: setup works with use_palette option as a filepath string {{{

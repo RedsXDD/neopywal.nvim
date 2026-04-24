@@ -1,6 +1,7 @@
 local M = {}
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
 
+M.palette_metadata = { dark = {}, light = {} }
 M.default_options = {
     use_palette = {
         dark = "pywal",
@@ -14,30 +15,32 @@ M.options = M.default_options
 -- supposedly improving performance slightly. The palette is even more minimal than the one returned by
 -- require("neopywal").get_colors() as that one also requires extra processing power for the light theme variant.
 ---@return NeopywalMinimalPalette
-function M.get_minpalette()
+---@param theme_style? ThemeStyles
+function M.get_minpalette(theme_style)
     if not M.did_setup then M.setup() end
+    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
     -- The gotos statements require me to declare the variables first, weird ...
     local is_sourceable, error_msg
-    if not M.palette_metadata.file_exists then
+    if not M.palette_metadata[theme_style].file_exists then
         local Notify = require("neopywal.utils.notify")
         Notify.error(
             string.format(
                 "Colorscheme file '%s' could not be found, falling back to the builtin colorscheme.",
-                M.palette_metadata.filepath
+                M.palette_metadata[theme_style].filepath
             )
         )
         goto return_palette
     end
 
-    if M.palette_metadata.is_requireable then
-        local could_require, file = pcall(require, M.palette_metadata.filepath)
+    if M.palette_metadata[theme_style].is_requireable then
+        local could_require, file = pcall(require, M.palette_metadata[theme_style].filepath)
         if could_require and file.get and type(file.get) == "function" then file.get() end
         goto return_palette
     end
 
     ---@diagnostic disable-next-line: param-type-mismatch
-    is_sourceable, error_msg = pcall(vim.cmd, "source " .. M.palette_metadata.filepath)
+    is_sourceable, error_msg = pcall(vim.cmd, "source " .. M.palette_metadata[theme_style].filepath)
     if not is_sourceable then
         local Notify = require("neopywal.utils.notify")
         Notify.error(string.format(
@@ -45,7 +48,7 @@ function M.get_minpalette()
          Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
          Below is the error message that we captured:
          %s]],
-            M.palette_metadata.filepath,
+            M.palette_metadata[theme_style].filepath,
             error_msg
         ))
     end
@@ -157,26 +160,28 @@ function M.setup(config)
         if builtin_palette_map[key] ~= nil then return key end
     end
 
-    local metadata = {}
+    local metadata = { dark = {}, light = {} }
     for theme_style, value in pairs(M.options.use_palette) do
-        local filepath = program_palette_map[value]
-            or builtin_palette_map[value] and "neopywal.palettes." .. getkey(value)
-            or value
+        if theme_style == "dark" or theme_style == "light" then
+            local filepath = program_palette_map[value]
+                or builtin_palette_map[value] and "neopywal.palettes." .. getkey(value)
+                or value
 
-        filepath = fixPathSep(filepath)
-        metadata.filepath = filepath
-        metadata.is_requireable = builtin_palette_map[value] ~= nil
+            filepath = fixPathSep(filepath)
+            metadata[theme_style].filepath = filepath
+            metadata[theme_style].is_requireable = builtin_palette_map[value] ~= nil
 
-        if metadata.is_requireable then
-            metadata.file_exists = true
-        else
-            if vim.fn.filereadable(filepath) then metadata.file_exists = true end
+            if metadata[theme_style].is_requireable then
+                metadata[theme_style].file_exists = true
+            else
+                if vim.fn.filereadable(filepath) then metadata[theme_style].file_exists = true end
+            end
+
+            M.palette_metadata[theme_style] = metadata[theme_style]
+            M.options.use_palette[theme_style] = metadata[theme_style].filepath
         end
-
-        M.options.use_palette[theme_style] = metadata.filepath
     end
 
-    M.palette_metadata = metadata
     M.did_setup = true
 end
 
@@ -189,7 +194,7 @@ function M.get(theme_style, minimal_palette, extra_colors)
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
     local LightTheme = require("neopywal.utils.light")
-    local minpalette = M.get_minpalette()
+    local minpalette = M.get_minpalette(theme_style)
     local palette = {
         dark = minpalette,
         light = LightTheme.convert_dark2light_theme(minpalette),
