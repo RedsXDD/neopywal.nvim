@@ -43,64 +43,81 @@ M.default_options = {
     custom_highlights = {},
     default_fileformats = true,
     default_plugins = true,
-    fileformats = {
-        c_cpp = true,
-        c_sharp = true,
+    fileformats = {}, -- setup below with function.
+    plugins = {}, -- setup below with function.
+}
+M.options = M.default_options
+
+---@param enable_default_fileformats boolean|nil
+local function setup_fileformats(enable_default_fileformats)
+    local enabled_bydefault = (enable_default_fileformats == nil) and M.default_options.default_fileformats
+        or enable_default_fileformats
+
+    return {
+        c_cpp = enabled_bydefault,
+        c_sharp = enabled_bydefault,
         clojure = false,
-        cmake = true,
+        cmake = enabled_bydefault,
         common_lisp = false,
-        css = true,
+        css = enabled_bydefault,
         dart = false,
-        diff = true,
+        diff = enabled_bydefault,
         elixir = false,
         erlang = false,
-        git_commit = true,
-        go = true,
+        git_commit = enabled_bydefault,
+        go = enabled_bydefault,
         haskell = false,
-        help = true,
-        html = true,
+        help = enabled_bydefault,
+        html = enabled_bydefault,
         ini = false,
         java = false,
-        javascript = true,
+        javascript = enabled_bydefault,
         javascript_react = false,
-        json = true,
+        json = enabled_bydefault,
         kotlin = false,
         latex = false,
         less = false,
-        lua = true,
-        makefile = true,
-        markdown = true,
+        lua = enabled_bydefault,
+        makefile = enabled_bydefault,
+        markdown = enabled_bydefault,
         matlab = false,
         objectivec = false,
         ocaml = false,
         perl = false,
-        php = true,
+        php = enabled_bydefault,
         powershell = false,
-        python = true,
+        python = enabled_bydefault,
         restructuredtext = false,
         ruby = false,
-        rust = true,
+        rust = enabled_bydefault,
         sass = false,
         scala = false,
-        shell = true,
+        shell = enabled_bydefault,
         swift = false,
-        toml = true,
-        typescript = true,
-        viml = true,
+        toml = enabled_bydefault,
+        typescript = enabled_bydefault,
+        viml = enabled_bydefault,
         xml = false,
-        yaml = true,
-        zsh = true,
-    },
-    plugins = {
-        aerial = true,
+        yaml = enabled_bydefault,
+        zsh = enabled_bydefault,
+    }
+end
+
+---@param enable_default_plugins boolean|nil
+local function setup_plugins(enable_default_plugins)
+    local enabled_bydefault = (enable_default_plugins == nil) and M.default_options.default_plugins
+        or enable_default_plugins
+
+    return {
+        aerial = enabled_bydefault,
         ale = false,
-        alpha = true,
+        alpha = enabled_bydefault,
         barbar = false,
         beacon = {
             enabled = false,
             color = "",
         },
-        blink_cmp = true,
+        blink_cmp = enabled_bydefault,
         coc = false,
         colorful_winsep = {
             enabled = false,
@@ -109,7 +126,7 @@ M.default_options = {
         dadbod_ui = false,
         dap = false,
         dap_ui = false,
-        dashboard = true,
+        dashboard = enabled_bydefault,
         diffview = false,
         dropbar = {
             enabled = false,
@@ -117,12 +134,12 @@ M.default_options = {
         },
         fern = false,
         flash = {
-            enabled = true,
+            enabled = enabled_bydefault,
             style = { "bold", "italic" },
         },
         fzf = false,
-        git_gutter = true,
-        gitsigns = true,
+        git_gutter = enabled_bydefault,
+        gitsigns = enabled_bydefault,
         glyph_palette = false,
         grug_far = false,
         harpoon = false,
@@ -137,7 +154,7 @@ M.default_options = {
             style = { "bold" },
         },
         indent_blankline = {
-            enabled = true,
+            enabled = enabled_bydefault,
             colored_indent_levels = false,
             scope_color = "",
         },
@@ -146,8 +163,8 @@ M.default_options = {
             scope_color = "",
             current_scope_color = "",
         },
-        lazy = true,
-        lazygit = true,
+        lazy = enabled_bydefault,
+        lazygit = enabled_bydefault,
         leap = {
             enabled = false,
             style = { "bold", "italic" },
@@ -157,7 +174,7 @@ M.default_options = {
             git_status = false,
         },
         lsp = {
-            enabled = true,
+            enabled = enabled_bydefault,
             virtual_text = {
                 errors = { "bold", "italic" },
                 hints = { "bold", "italic" },
@@ -186,7 +203,7 @@ M.default_options = {
             winbar_style = { "bold" },
         },
         markdown = false,
-        mason = true,
+        mason = enabled_bydefault,
         navbuddy = false,
         navic = {
             enabled = false,
@@ -197,14 +214,14 @@ M.default_options = {
         },
         neogit = false,
         neotest = false,
-        neotree = true,
-        netrw = true,
-        noice = true,
+        neotree = enabled_bydefault,
+        netrw = enabled_bydefault,
+        noice = enabled_bydefault,
         NormalNvim = false,
         notifier = false,
-        notify = true,
-        nvim_cmp = true,
-        nvimtree = true,
+        notify = enabled_bydefault,
+        nvim_cmp = enabled_bydefault,
+        nvimtree = enabled_bydefault,
         octo = false,
         overseer = false,
         pounce = {
@@ -228,10 +245,10 @@ M.default_options = {
         symbols_outline = false,
         telekasten = false,
         telescope = {
-            enabled = true,
+            enabled = enabled_bydefault,
         },
         todo_comments = {
-            enabled = true,
+            enabled = enabled_bydefault,
             style = {
                 fix = { "bold", "italic" },
                 hack = { "bold", "italic" },
@@ -242,40 +259,40 @@ M.default_options = {
                 warn = { "bold", "italic" },
             },
         },
-        treesitter = true,
+        treesitter = enabled_bydefault,
         trouble = false,
         ts_context = {
-            enabled = true,
+            enabled = enabled_bydefault,
             dim_background = false,
             style = { "underline" },
         },
         ts_rainbow = false,
         ts_rainbow2 = false,
-        ufo = true,
-        undotree = true,
+        ufo = enabled_bydefault,
+        undotree = enabled_bydefault,
         vimwiki = false,
-        which_key = true,
+        which_key = enabled_bydefault,
         window_picker = {
             enabled = false,
             color = "",
         },
         yanky = false,
         mini = {
-            animate = true,
-            clue = true,
+            animate = enabled_bydefault,
+            clue = enabled_bydefault,
             completion = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 parameter_style = { "underline" },
             },
             cursorword = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 style = { "underline" },
             },
-            deps = true,
-            diff = true,
-            files = true,
+            deps = enabled_bydefault,
+            diff = enabled_bydefault,
+            files = enabled_bydefault,
             hipatterns = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 style = {
                     fixme = { "bold", "italic" },
                     hack = { "bold", "italic" },
@@ -283,30 +300,30 @@ M.default_options = {
                     note = { "bold", "italic" },
                 },
             },
-            icons = true,
+            icons = enabled_bydefault,
             indentscope = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 scope_color = "",
             },
             jump = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 style = { "bold", "italic" },
             },
             jump2d = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 style = { "bold", "italic" },
             },
-            map = true,
-            notify = true,
-            operators = true,
-            pick = true,
+            map = enabled_bydefault,
+            notify = enabled_bydefault,
+            operators = enabled_bydefault,
+            pick = enabled_bydefault,
             snippets = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 style = { "underdouble" },
             },
-            starter = true,
+            starter = enabled_bydefault,
             statusline = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 mode_colors = {
                     normal = "color4",
                     visual = "color5",
@@ -316,60 +333,33 @@ M.default_options = {
                     other = "color3",
                 },
             },
-            surround = true,
-            tabline = true,
-            test = true,
+            surround = enabled_bydefault,
+            tabline = enabled_bydefault,
+            test = enabled_bydefault,
             trailspace = {
-                enabled = true,
+                enabled = enabled_bydefault,
                 color = "",
             },
         },
-    },
-}
-M.options = M.default_options
-
----@param original_table table
----@param default_option any
-local function disable_table(original_table, default_option)
-    return not default_option
-            and vim.tbl_map(function(option)
-                if type(option) == "table" and option.enabled then
-                    option.enabled = false
-                elseif option == true then
-                    option = false
-                end
-                return option
-            end, original_table)
-        or original_table
-end
-
-local function check_nil_option(option, fallback_result)
-    -- NOTE: `return option == nil and fallback_result or option`
-    -- doesn't work because "option" will be returned if "fallback_result" is false.
-    if option == nil then
-        return fallback_result
-    else
-        return option
-    end
+    }
 end
 
 M.did_setup = false
 ---@param user_config? NeopywalOptions
 function M.setup(user_config)
     user_config = user_config or {}
+    user_config.plugins = user_config.plugins or {}
+    M.default_options.plugins = setup_plugins(user_config.default_plugins)
 
-    -- Handle plugin tables.
-    user_config.plugins = check_nil_option(user_config.plugins, {})
-    M.default_options.default_plugins = check_nil_option(user_config.default_plugins, M.default_options.default_plugins)
-    M.default_options.plugins = disable_table(M.default_options.plugins, M.default_options.default_plugins)
-    M.default_options.plugins.mini = disable_table(M.default_options.plugins.mini, M.default_options.default_plugins)
-
+    -- stylua: ignore start
     -- Disable fileformats if treesitter is enabled (unless the user manually specifies otherwise).
-    M.default_options.default_fileformats = check_nil_option(
-        user_config.default_fileformats,
-        not check_nil_option(user_config.plugins.treesitter, M.default_options.plugins.treesitter)
-    )
-    M.default_options.fileformats = disable_table(M.default_options.fileformats, M.default_options.default_fileformats)
+    local user_enabled_fileformats = user_config.default_fileformats
+    local treesitter_enabled = (user_config.plugins.treesitter == nil) and M.default_options.plugins.treesitter or user_config.plugins.treesitter
+    local fileformats_are_enabled = (user_enabled_fileformats == nil) and not treesitter_enabled or user_enabled_fileformats
+    -- stylua: ignore end
+
+    M.default_options.default_fileformats = fileformats_are_enabled
+    M.default_options.fileformats = setup_fileformats(fileformats_are_enabled)
 
     -- Create the final configuration table.
     ---@diagnostic disable-next-line: assign-type-mismatch
@@ -394,14 +384,14 @@ make sure it's one of "all", "warn", "error" or "none".]])
     end
 
     -- Coc.nvim depends on lsp highlights.
-    if
-        M.options.plugins.coc == true
-        or type(M.options.plugins.coc) == "table" and M.options.plugins.coc.enabled == true
-    then
-        if type(M.options.plugins.lsp) == "table" and M.options.plugins.lsp.enabled ~= true then
-            M.options.plugins.lsp.enabled = true
-        elseif type(M.options.plugins.lsp) == "boolean" and M.options.plugins.lsp ~= true then
-            M.options.plugins.lsp = true
+    local coc = M.options.plugins.coc
+    local lsp = M.options.plugins.lsp
+    local coc_is_enabled = coc == true or type(coc) == "table" and coc.enabled == true
+    if coc_is_enabled then
+        if type(lsp) == "boolean" and lsp ~= true then
+            lsp = true
+        elseif type(lsp) == "table" and lsp.enabled ~= true then
+            lsp.enabled = true
         end
     end
 
@@ -458,7 +448,6 @@ local function deep_copy(obj, seen)
     end
     return setmetatable(res, getmetatable(obj))
 end
-
 function M.reset() M.options = deep_copy(M.default_options) end
 
 return M

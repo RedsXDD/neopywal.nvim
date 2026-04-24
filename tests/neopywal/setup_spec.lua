@@ -86,7 +86,17 @@ describe("setup", function()
     --: treesitter disables fileformats {{{
     it("treesitter disables fileformats", function()
         Neopywal.setup({ plugins = { treesitter = true } })
-        assert.same(Config.options.default_fileformats, false)
+        local function check(tbl)
+            for k, v in pairs(tbl) do
+                if type(v) == "table" then
+                    assert.equals(tbl[k].enabled, false)
+                else
+                    assert.equals(tbl[k], false)
+                end
+            end
+        end
+        check(Config.options.fileformats)
+        check(Config.default_options.fileformats)
     end)
     --: }}}
     --: disabling treesitter enables fileformats {{{
@@ -108,6 +118,17 @@ describe("setup", function()
 
         Neopywal.setup({ default_fileformats = true, plugins = { treesitter = false } })
         assert.equals(Config.options.default_fileformats, true)
+    end)
+    --: }}}
+    --: enabling coc.nvim enables lsp {{{
+    it("enabling coc.nvim enables lsp", function()
+        Neopywal.setup({ default_plugings = false, plugins = { coc = true } })
+        local lsp = Config.options.plugins.lsp
+        if type(lsp) == "boolean" then
+            assert.same(Config.options.plugins.lsp, true)
+        elseif type(lsp) == "table" then
+            assert.same(Config.options.plugins.lsp.enabled, true)
+        end
     end)
     --: }}}
     --: can overwrite styles {{{
