@@ -50,7 +50,7 @@ describe("palette", function()
         if path_sep == "\\" then expected_scheme_file = expected_scheme_file:gsub("/", "\\") end
 
         assert.equals(pcall(function() Palette.setup() end), true)
-        assert.equals(pcall(function() Palette.get() end), true)
+        assert.equals(pcall(function() Neopywal.get_colors() end), true)
 
         assert.equals(Palette.options.use_palette.dark, expected_scheme_file)
         assert.equals(Palette.options.use_palette.light, expected_scheme_file)
@@ -189,7 +189,7 @@ describe("palette", function()
         }
 
         Palette.setup({ use_palette = "doomone" })
-        local C = Palette.get("dark")
+        local C = Neopywal.get_colors("dark")
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
         assert.equals(C.cursor, expected.cursor)
@@ -238,7 +238,7 @@ describe("palette", function()
         Palette.setup({ use_palette = "doomone" })
         local LightTheme = require("neopywal.utils.light")
         local expected = LightTheme.convert_dark2light_theme(dark_palette)
-        local C = Palette.get("light")
+        local C = Neopywal.get_colors("light")
 
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
@@ -288,7 +288,7 @@ describe("palette", function()
 
         vim.o.background = "dark"
         Palette.setup({ use_palette = "null" })
-        local C = Palette.get()
+        local C = Neopywal.get_colors()
         assert.equals(C.none, expected.none)
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
@@ -340,7 +340,7 @@ describe("palette", function()
         local LightTheme = require("neopywal.utils.light")
         local expected = LightTheme.convert_dark2light_theme(dark_palette)
         expected.none = "NONE"
-        local C = Palette.get()
+        local C = Neopywal.get_colors()
         assert.equals(C.none, expected.none)
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
@@ -366,7 +366,7 @@ describe("palette", function()
     --: can reset global variables {{{
     it("can reset global variables", function()
         Palette.setup({ use_palette = "doomone" })
-        Palette.get()
+        Neopywal.get_colors()
         assert.is_nil(vim.g.background)
         assert.is_nil(vim.g.foreground)
         assert.is_nil(vim.g.cursor)
@@ -414,7 +414,7 @@ describe("palette", function()
 
         vim.o.background = "dark"
         Palette.setup({ use_palette = "doomone" })
-        local C = Palette.get()
+        local C = Neopywal.get_colors()
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
         assert.equals(C.cursor, expected.cursor)
@@ -464,7 +464,7 @@ describe("palette", function()
         Palette.setup({ use_palette = "doomone" })
         local LightTheme = require("neopywal.utils.light")
         local expected = LightTheme.convert_dark2light_theme(dark_palette)
-        local C = Palette.get()
+        local C = Neopywal.get_colors()
         assert.equals(C.background, expected.background)
         assert.equals(C.foreground, expected.foreground)
         assert.equals(C.cursor, expected.cursor)
@@ -512,7 +512,7 @@ describe("palette", function()
         }
 
         Palette.setup({ use_palette = "doomone" })
-        local C = Palette.get("dark", true)
+        local C = Neopywal.get_colors("dark", true)
         assert.same(C, expected)
     end)
     --: }}}
@@ -544,7 +544,7 @@ describe("palette", function()
         local LightTheme = require("neopywal.utils.light")
         local expected = LightTheme.convert_dark2light_theme(dark_palette)
         expected.none = "NONE"
-        local C = Palette.get("light", true)
+        local C = Neopywal.get_colors("light", true)
         assert.same(C, expected)
     end)
     --: }}}
@@ -564,12 +564,12 @@ describe("palette", function()
             },
         })
 
-        local C_dark = Palette.get("dark")
+        local C_dark = Neopywal.get_colors("dark")
         assert.same(C_dark.color1, "#ff0000")
         assert.same(C_dark.color3, "#ffff00")
         assert.are_not.same(C_dark.color2, "#00ff00")
 
-        local C_light = Palette.get("light")
+        local C_light = Neopywal.get_colors("light")
         assert.same(C_light.color2, "#00ff00")
         assert.same(C_light.color3, "#ffff00")
         assert.are_not.same(C_light.color1, "#ff0000")
@@ -577,8 +577,8 @@ describe("palette", function()
     --: }}}
     --: setup can overwrite colors using a function {{{
     it("setup can overwrite colors using a function", function()
-        local C_dark_old = Palette.get("dark")
-        local C_light_old = Palette.get("light")
+        local C_dark_old = Neopywal.get_colors("dark")
+        local C_light_old = Neopywal.get_colors("light")
 
         Palette.setup({
             custom_colors = function(C)
@@ -596,12 +596,12 @@ describe("palette", function()
             end,
         })
 
-        local C_dark = Palette.get("dark")
+        local C_dark = Neopywal.get_colors("dark")
         assert.same(C_dark.color1, C_dark_old.color3)
         assert.same(C_dark.color3, C_dark_old.color4)
         assert.are_not.same(C_dark.color2, C_dark_old.color6)
 
-        local C_light = Palette.get("light")
+        local C_light = Neopywal.get_colors("light")
         assert.same(C_light.color2, C_light_old.color6)
         assert.same(C_light.color3, C_light_old.color4)
         assert.are_not.same(C_light.color1, C_light_old.color3)
@@ -609,8 +609,8 @@ describe("palette", function()
     --: }}}
     --: setup can overwrite colors using individual functions {{{
     it("setup can overwrite colors using individual functions", function()
-        local C_dark_old = Palette.get("dark")
-        local C_light_old = Palette.get("light")
+        local C_dark_old = Neopywal.get_colors("dark")
+        local C_light_old = Neopywal.get_colors("light")
 
         Palette.setup({
             custom_colors = {
@@ -620,12 +620,12 @@ describe("palette", function()
             },
         })
 
-        local C_dark = Palette.get("dark")
+        local C_dark = Neopywal.get_colors("dark")
         assert.same(C_dark.color1, C_dark_old.color3)
         assert.same(C_dark.color3, C_dark_old.color4)
         assert.are_not.same(C_dark.color2, C_dark_old.color6)
 
-        local C_light = Palette.get("light")
+        local C_light = Neopywal.get_colors("light")
         assert.same(C_light.color2, C_light_old.color6)
         assert.same(C_light.color3, C_light_old.color4)
         assert.are_not.same(C_light.color1, C_light_old.color3)
@@ -647,12 +647,12 @@ describe("palette", function()
             },
         })
 
-        local C_dark = Palette.get("dark")
+        local C_dark = Neopywal.get_colors("dark")
         assert.same(C_dark.test_color_all, "#ff0000")
         assert.same(C_dark.test_color_dark, "#000000")
         assert.are_not.same(C_dark.test_color_light, "#ffffff")
 
-        local C_light = Palette.get("light")
+        local C_light = Neopywal.get_colors("light")
         assert.same(C_light.test_color_all, "#ff0000")
         assert.same(C_light.test_color_light, "#ffffff")
         assert.are_not.same(C_light.test_color_dark, "#000000")
@@ -676,12 +676,12 @@ describe("palette", function()
             end,
         })
 
-        local C_dark = Palette.get("dark")
+        local C_dark = Neopywal.get_colors("dark")
         assert.same(C_dark.test_color_all, C_dark.color1)
         assert.same(C_dark.test_color_dark, C_dark.color0)
         assert.are_not.same(C_dark.test_color_light, C_dark.color7)
 
-        local C_light = Palette.get("light")
+        local C_light = Neopywal.get_colors("light")
         assert.same(C_light.test_color_all, C_light.color1)
         assert.same(C_light.test_color_light, C_light.color7)
         assert.are_not.same(C_light.test_color_dark, C_light.color0)
@@ -697,12 +697,12 @@ describe("palette", function()
             },
         })
 
-        local C_dark = Palette.get("dark")
+        local C_dark = Neopywal.get_colors("dark")
         assert.same(C_dark.test_color_all, C_dark.color1)
         assert.same(C_dark.test_color_dark, C_dark.color0)
         assert.are_not.same(C_dark.test_color_light, C_dark.color7)
 
-        local C_light = Palette.get("light")
+        local C_light = Neopywal.get_colors("light")
         assert.same(C_light.test_color_all, C_light.color1)
         assert.same(C_light.test_color_light, C_light.color7)
         assert.are_not.same(C_light.test_color_dark, C_light.color0)
@@ -710,13 +710,13 @@ describe("palette", function()
     --: }}}
     --: get can overwrite and export colors {{{
     it("get can overwrite and export colors", function()
-        local C_dark = Palette.get("dark", false, {
+        local C_dark = Neopywal.get_colors("dark", false, {
             dark = { color0 = "#000000" },
             light = { color7 = "#ffffff" },
             all = { color1 = "#ff0000" },
         })
 
-        local C_light = Palette.get("light", false, {
+        local C_light = Neopywal.get_colors("light", false, {
             dark = { color6 = "#00ffff" },
             light = { color4 = "#0000ff" },
             all = { color3 = "#ffff00" },
@@ -733,10 +733,10 @@ describe("palette", function()
     --: }}}
     --: get can overwrite and export colors using a function {{{
     it("get can overwrite and export colors using a function", function()
-        local C_dark_old = Palette.get("dark")
-        local C_light_old = Palette.get("light")
+        local C_dark_old = Neopywal.get_colors("dark")
+        local C_light_old = Neopywal.get_colors("light")
 
-        local C_dark = Palette.get(
+        local C_dark = Neopywal.get_colors(
             "dark",
             false,
             function(C)
@@ -754,7 +754,7 @@ describe("palette", function()
             end
         )
 
-        local C_light = Palette.get(
+        local C_light = Neopywal.get_colors(
             "light",
             false,
             function(C)
@@ -783,16 +783,16 @@ describe("palette", function()
     --: }}}
     --: get can overwrite and export colors using individual functions {{{
     it("get can overwrite and export colors using individual functions", function()
-        local C_dark_old = Palette.get("dark")
-        local C_light_old = Palette.get("light")
+        local C_dark_old = Neopywal.get_colors("dark")
+        local C_light_old = Neopywal.get_colors("light")
 
-        local C_dark = Palette.get("dark", false, {
+        local C_dark = Neopywal.get_colors("dark", false, {
             dark = function(C) return { color1 = C.color0 } end,
             light = function(C) return { color2 = C.color6 } end,
             all = function(C) return { color3 = C.color4 } end,
         })
 
-        local C_light = Palette.get("light", false, {
+        local C_light = Neopywal.get_colors("light", false, {
             dark = function(C) return { color6 = C.color7 } end,
             light = function(C) return { color5 = C.color8 } end,
             all = function(C) return { color4 = C.color1 } end,
@@ -809,7 +809,7 @@ describe("palette", function()
     --: }}}
     --: get can create and export new colors {{{
     it("get can create and export new colors", function()
-        local C_dark = Palette.get("dark", false, {
+        local C_dark = Neopywal.get_colors("dark", false, {
             dark = {
                 dark_test_color_dark = "#000000",
             },
@@ -821,7 +821,7 @@ describe("palette", function()
             },
         })
 
-        local C_light = Palette.get("light", false, {
+        local C_light = Neopywal.get_colors("light", false, {
             dark = {
                 light_test_color_dark = "#00ffff",
             },
@@ -844,10 +844,10 @@ describe("palette", function()
     --: }}}
     --: get can create and export new colors using a function {{{
     it("get can create and export new colors using a function", function()
-        local C_dark_old = Palette.get("dark")
-        local C_light_old = Palette.get("light")
+        local C_dark_old = Neopywal.get_colors("dark")
+        local C_light_old = Neopywal.get_colors("light")
 
-        local C_dark = Palette.get(
+        local C_dark = Neopywal.get_colors(
             "dark",
             false,
             function(C)
@@ -865,7 +865,7 @@ describe("palette", function()
             end
         )
 
-        local C_light = Palette.get(
+        local C_light = Neopywal.get_colors(
             "light",
             false,
             function(C)
@@ -894,16 +894,16 @@ describe("palette", function()
     --: }}}
     --: get can create and export new colors using individual functions {{{
     it("get can create and export new colors using individual functions", function()
-        local C_dark_old = Palette.get("dark")
-        local C_light_old = Palette.get("light")
+        local C_dark_old = Neopywal.get_colors("dark")
+        local C_light_old = Neopywal.get_colors("light")
 
-        local C_dark = Palette.get("dark", false, {
+        local C_dark = Neopywal.get_colors("dark", false, {
             dark = function(C) return { dark_test_color_dark = C.color0 } end,
             light = function(C) return { dark_test_color_light = C.color7 } end,
             all = function(C) return { dark_test_color_all = C.color1 } end,
         })
 
-        local C_light = Palette.get("light", false, {
+        local C_light = Neopywal.get_colors("light", false, {
             dark = function(C) return { light_test_color_dark = C.color3 } end,
             light = function(C) return { light_test_color_light = C.color2 } end,
             all = function(C) return { light_test_color_all = C.color4 } end,
