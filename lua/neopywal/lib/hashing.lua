@@ -27,7 +27,26 @@ function M.hash(v)
         end
         return hash
     elseif t == "function" then
-        return M.hash(v(require("neopywal.lib.palette").get_minpalette()))
+        return M.hash(v({
+            background = "#000000",
+            foreground = "#000000",
+            color0 = "#000000",
+            color1 = "#000000",
+            color2 = "#000000",
+            color3 = "#000000",
+            color4 = "#000000",
+            color5 = "#000000",
+            color6 = "#000000",
+            color7 = "#000000",
+            color8 = "#000000",
+            color9 = "#000000",
+            color10 = "#000000",
+            color11 = "#000000",
+            color12 = "#000000",
+            color13 = "#000000",
+            color14 = "#000000",
+            color15 = "#000000",
+        }))
     end
 
     return tostring(v)
