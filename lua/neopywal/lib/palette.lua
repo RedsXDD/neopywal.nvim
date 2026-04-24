@@ -15,6 +15,8 @@ M.options = M.default_options
 -- require("neopywal").get_colors() as that one also requires extra processing power for the light theme variant.
 ---@return NeopywalMinimalPalette
 function M.get_minpalette()
+    if not M.did_setup then M.setup() end
+
     -- The gotos statements require me to declare the variables first, weird ...
     local is_sourceable, error_msg
     if not M.palette_metadata.file_exists then
