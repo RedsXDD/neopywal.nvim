@@ -5,9 +5,9 @@ local M = {}
 M.compiler_opts = {
     file_ext = ".luac",
     filename = "neopywal",
-    compile_path = vim.fn.stdpath("cache") .. "/neopywal",
     path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
 }
+M.compiler_opts.compile_path = vim.fn.stdpath("cache") .. M.compiler_opts.path_sep .. "neopywal"
 
 M.default_options = {
     use_palette = {
