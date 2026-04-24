@@ -30,5 +30,7 @@ require("lazy").setup({
 vim.g.neopywal_debug = true
 require("neopywal").setup({
     use_palette = "" .. cwd .. "/tests/colors-wal.vim",
+    default_fileformats = false,
+    default_plugins = false,
 })
 vim.cmd.colorscheme("neopywal")
