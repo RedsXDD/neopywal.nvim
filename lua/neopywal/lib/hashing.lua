@@ -5,7 +5,8 @@ local M = {}
 ---@diagnostic disable-next-line: undefined-global
 local B = bit or bit32 or require("neopywal.lib.bit")
 
-local hash_str = function(str) -- djb2, https://theartincode.stanis.me/008-djb2/
+-- djb2, https://theartincode.stanis.me/008-djb2/
+local hash_str = function(str)
     local hash = 5381
     for i = 1, #str do
         hash = B.lshift(hash, 5) + hash + string.byte(str, i)
@@ -13,7 +14,11 @@ local hash_str = function(str) -- djb2, https://theartincode.stanis.me/008-djb2/
     return hash
 end
 
-function M.hash(v) -- Xor hashing: https://codeforces.com/blog/entry/85900
+--[[
+    https://github.com/catppuccin/nvim/blob/bad9c23f12944683cd11484d9570560849efc101/lua/catppuccin/lib/hashing.lua
+    https://codeforces.com/blog/entry/85900 -- Xor hashing.
+]]
+function M.hash(v)
     local t = type(v)
     if t == "table" then
         local hash = 0
