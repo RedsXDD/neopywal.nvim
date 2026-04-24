@@ -2,9 +2,16 @@
 ---@diagnostic disable-next-line: missing-fields
 local M = {}
 local Config = require("neopywal.lib.config")
-local Palette = require("neopywal.lib.palette")
 M.setup = Config.setup
-M.get_colors = Palette.get
+
+---@return NeopywalPalette
+---@param theme_style? ThemeStyles
+---@param minimal_palette? boolean
+---@param extra_colors? CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }
+function M.get_colors(theme_style, minimal_palette, extra_colors)
+    local Palette = require("neopywal.lib.palette")
+    return Palette.get(theme_style, minimal_palette, extra_colors)
+end
 
 local lock = false -- Avoid g:colors_name reloading
 local did_load = false
