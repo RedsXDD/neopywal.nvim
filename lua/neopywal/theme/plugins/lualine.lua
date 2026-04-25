@@ -65,7 +65,6 @@ end
 
 function M.get()
     local neopywal = {}
-
     if not did_setup then M.setup() end
 
     local mode_colors = M.options.mode_colors
@@ -111,8 +110,14 @@ function M.get()
     }
 
     neopywal.inactive = {
-        a = { bg = C.background, fg = C.foreground, gui = styles.a },
-        z = { bg = C.background, fg = C.foreground, gui = styles.z },
+        a = { bg = C.color8, fg = C.foreground, gui = styles.a },
+        z = { bg = C.color8, fg = C.foreground, gui = styles.z },
+
+        b = { bg = neopywal.normal.b.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.b },
+        y = { bg = neopywal.normal.y.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.y },
+
+        c = { bg = neopywal.normal.c.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.c },
+        x = { bg = neopywal.normal.x.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.x },
     }
 
     return neopywal
