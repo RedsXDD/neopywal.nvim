@@ -34,12 +34,24 @@ M.default_options = {
 }
 M.options = M.default_options
 
--- This function only exists to return the most minimal possible palette for config.lua hashing algo,
--- supposedly improving performance slightly. The palette is even more minimal than the one returned by
--- require("neopywal").get_colors() as that one also requires extra processing power for the light theme variant.
+---@return { dark: number, light: number }
+function M.getftime()
+    if not M.did_setup then M.setup() end
+    local ftime = { dark = 0, light = 0 }
+
+    for _, theme_style in ipairs({ "dark", "light" }) do
+        local metadata = M.palette_metadata[theme_style]
+        if metadata.file_exists and not metadata.is_requireable then
+            ftime[theme_style] = vim.fn.getftime(metadata.filepath)
+        end
+    end
+
+    return ftime
+end
+
 ---@return NeopywalMinimalPalette
 ---@param theme_style? ThemeStyles
-function M.get_minpalette(theme_style)
+local function get_minpalette(theme_style)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
@@ -203,7 +215,7 @@ function M.get(theme_style, minimal_palette, extra_colors)
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
 
     local LightTheme = require("neopywal.utils.light")
-    local minpalette = M.get_minpalette(theme_style)
+    local minpalette = get_minpalette(theme_style)
     local palette = {
         dark = minpalette,
         light = LightTheme.convert_dark2light_theme(minpalette),
