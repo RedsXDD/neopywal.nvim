@@ -1,6 +1,6 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
----@diagnostic disable: undefined-global, undefined-field
+---@diagnostic disable: undefined-global, undefined-field, missing-parameter
 local Neopywal = require("neopywal")
 local Palette = require("neopywal.lib.palette")
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
