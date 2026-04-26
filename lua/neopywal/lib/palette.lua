@@ -156,15 +156,11 @@ function M.setup(config)
         ["tomorrow-night"] = true,
     }
 
-    local function getkey(key)
-        if builtin_palette_map[key] ~= nil then return key end
-    end
-
     local metadata = { dark = {}, light = {} }
     for theme_style, value in pairs(M.options.use_palette) do
         if theme_style == "dark" or theme_style == "light" then
             local filepath = program_palette_map[value]
-                or builtin_palette_map[value] and "neopywal.palettes." .. getkey(value)
+                or builtin_palette_map[value] and "neopywal.palettes." .. value
                 or value
 
             filepath = fixPathSep(filepath)
