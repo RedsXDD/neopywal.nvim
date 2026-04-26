@@ -80,9 +80,9 @@ local function get_minpalette(theme_style)
         local Notify = require("neopywal.utils.notify")
         Notify.error(string.format(
             [[
-         Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
-         Below is the error message that we captured:
-         %s]],
+Unable to load the colorscheme file '%s', falling back to the builtin colorscheme.
+Below is the error message that we captured:
+%s]],
             M.palette_metadata[theme_style].filepath,
             error_msg
         ))
