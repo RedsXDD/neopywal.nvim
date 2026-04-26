@@ -36,8 +36,8 @@ jobs:
       - name: colors-wal.vim (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          mkdir -p "$HOME/AppData/Local/wal/"
-          cp ./tests/colors-wal.vim "$HOME/AppData/Local/wal/"
+          mkdir -p "$HOME/.cache/wal/"
+          cp ./tests/colors-wal.vim "$HOME/.cache/wal/"
       - name: colors-wal.vim (Ubuntu/MacOS)
         if: matrix.os != 'windows-latest'
         run: |

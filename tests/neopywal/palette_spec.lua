@@ -8,7 +8,7 @@ local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config
 ---@type string?
 local cache_dir = ""
 if path_sep == "\\" then
-    cache_dir = os.getenv("LOCALAPPDATA") -- Windows
+    cache_dir = os.getenv("USERPROFILE") .. "\\.cache" -- Windows
 else
     cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
 end
