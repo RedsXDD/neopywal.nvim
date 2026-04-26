@@ -1,6 +1,29 @@
 local M = {}
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
 
+-- Reference: https://github.com/catppuccin/catppuccin
+local fallback_p = {
+    background = "#1e1e2e",
+    foreground = "#cdd6f4",
+    cursor = "#cdd6f4",
+    color0 = "#45475a",
+    color1 = "#f38ba8",
+    color2 = "#a6e3a1",
+    color3 = "#f9e2af",
+    color4 = "#89b4fa",
+    color5 = "#f5c2e7",
+    color6 = "#94e2d5",
+    color7 = "#bac2de",
+    color8 = "#585b70",
+    color9 = "#f38ba8",
+    color10 = "#a6e3a1",
+    color11 = "#f9e2af",
+    color12 = "#89b4fa",
+    color13 = "#f5c2e7",
+    color14 = "#94e2d5",
+    color15 = "#a6adc8",
+}
+
 M.palette_metadata = { dark = {}, light = {} }
 M.default_options = {
     use_palette = {
@@ -54,28 +77,27 @@ function M.get_minpalette(theme_style)
     end
 
     -- Use fallback colors if template file couldn't be loaded.
-    -- Fallback colors reference: https://github.com/catppuccin/catppuccin
     ::return_palette::
     local ret = {
-        background = (vim.g.background ~= nil) and vim.g.background or "#1e1e2e",
-        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or "#cdd6f4",
-        cursor = (vim.g.cursor ~= nil) and vim.g.cursor or "#cdd6f4",
-        color0 = (vim.g.color0 ~= nil) and vim.g.color0 or "#45475a",
-        color1 = (vim.g.color1 ~= nil) and vim.g.color1 or "#f38ba8",
-        color2 = (vim.g.color2 ~= nil) and vim.g.color2 or "#a6e3a1",
-        color3 = (vim.g.color3 ~= nil) and vim.g.color3 or "#f9e2af",
-        color4 = (vim.g.color4 ~= nil) and vim.g.color4 or "#89b4fa",
-        color5 = (vim.g.color5 ~= nil) and vim.g.color5 or "#f5c2e7",
-        color6 = (vim.g.color6 ~= nil) and vim.g.color6 or "#94e2d5",
-        color7 = (vim.g.color7 ~= nil) and vim.g.color7 or "#bac2de",
-        color8 = (vim.g.color8 ~= nil) and vim.g.color8 or "#585b70",
-        color9 = (vim.g.color9 ~= nil) and vim.g.color9 or "#f38ba8",
-        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or "#a6e3a1",
-        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or "#f9e2af",
-        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or "#89b4fa",
-        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or "#f5c2e7",
-        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or "#94e2d5",
-        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or "#a6adc8",
+        background = (vim.g.background ~= nil) and vim.g.background or fallback_p.background,
+        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or fallback_p.foreground,
+        cursor = (vim.g.cursor ~= nil) and vim.g.cursor or fallback_p.cursor,
+        color0 = (vim.g.color0 ~= nil) and vim.g.color0 or fallback_p.color0,
+        color1 = (vim.g.color1 ~= nil) and vim.g.color1 or fallback_p.color1,
+        color2 = (vim.g.color2 ~= nil) and vim.g.color2 or fallback_p.color2,
+        color3 = (vim.g.color3 ~= nil) and vim.g.color3 or fallback_p.color3,
+        color4 = (vim.g.color4 ~= nil) and vim.g.color4 or fallback_p.color4,
+        color5 = (vim.g.color5 ~= nil) and vim.g.color5 or fallback_p.color5,
+        color6 = (vim.g.color6 ~= nil) and vim.g.color6 or fallback_p.color6,
+        color7 = (vim.g.color7 ~= nil) and vim.g.color7 or fallback_p.color7,
+        color8 = (vim.g.color8 ~= nil) and vim.g.color8 or fallback_p.color8,
+        color9 = (vim.g.color9 ~= nil) and vim.g.color9 or fallback_p.color9,
+        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or fallback_p.color10,
+        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or fallback_p.color11,
+        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or fallback_p.color12,
+        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or fallback_p.color13,
+        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or fallback_p.color14,
+        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or fallback_p.color15,
     }
 
     -- Reset all global variables that have been used.
