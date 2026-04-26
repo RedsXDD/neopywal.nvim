@@ -1,5 +1,5 @@
 *neopywal-utils.txt*                                            Neopywal Utils
-                               For nvim >= 0.8.0    Last change: 2026 April 23
+                               For nvim >= 0.8.0    Last change: 2026 April 26
 
 ==============================================================================
 1. Manipulation Functions              *neopywal-utils-manipulation-functions*

@@ -1,5 +1,5 @@
 *neopywal-plugins.txt*                                        Neopywal Plugins
-                               For nvim >= 0.8.0    Last change: 2026 April 23
+                               For nvim >= 0.8.0    Last change: 2026 April 26
 
 Neopywal provides theme support for other plugins in the Vim/Neovim ecosystem.
 Most of them can be configured under the `plugins` table on Neopywal’s
@@ -460,7 +460,8 @@ Here are the defaults:
     })
 <
 
-fern.vim>lua
+vim-fern>lua
+    -- I wonder were frieren.vim went ...
     require("neopywal").setup({
         plugins = {
             fern = false
