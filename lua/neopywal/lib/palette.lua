@@ -93,15 +93,6 @@ function M.get_minpalette(theme_style)
     return ret
 end
 
----@return string
-local function fixPathSep(path)
-    if path_sep == "\\" then
-        return path:gsub("/", "\\")
-    else
-        return path
-    end
-end
-
 M.did_setup = false
 ---@param config table?
 function M.setup(config)
@@ -163,7 +154,7 @@ function M.setup(config)
                 or builtin_palette_map[value] and "neopywal.palettes." .. value
                 or value
 
-            filepath = fixPathSep(filepath)
+            filepath = path_sep == "\\" and filepath:gsub("/", "\\") or filepath
             metadata[theme_style].filepath = filepath
             metadata[theme_style].is_requireable = builtin_palette_map[value] ~= nil
 
