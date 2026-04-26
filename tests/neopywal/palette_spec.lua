@@ -5,6 +5,14 @@ local Neopywal = require("neopywal")
 local Palette = require("neopywal.lib.palette")
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
 
+---@type string?
+local cache_dir = ""
+if path_sep == "\\" then
+    cache_dir = os.getenv("LOCALAPPDATA") -- Windows
+else
+    cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
+end
+
 describe("palette", function()
     before_each(function()
         for name, _ in pairs(package.loaded) do
@@ -39,13 +47,6 @@ describe("palette", function()
     end)
     --: setup works with default options {{{
     it("setup works with default options", function()
-        local cache_dir
-        if path_sep == "\\" then
-            cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-        else
-            cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
-        end
-
         local expected_scheme_file = cache_dir .. "/wal/colors-wal.vim"
         if path_sep == "\\" then expected_scheme_file = expected_scheme_file:gsub("/", "\\") end
 
@@ -162,12 +163,6 @@ describe("palette", function()
     --: }}}
     --: setup works with use_palette set as 'wal' {{{
     it("setup works with use_palette set as 'wal'", function()
-        local cache_dir
-        if path_sep == "\\" then
-            cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-        else
-            cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
-        end
         local expectedcheme_file = cache_dir .. "/wal/colors-wal.vim"
         if path_sep == "\\" then expectedcheme_file = expectedcheme_file:gsub("/", "\\") end
 
@@ -181,12 +176,6 @@ describe("palette", function()
     --: }}}
     --: setup works with use_palette set as 'pywal' {{{
     it("setup works with use_palette set as 'pywal'", function()
-        local cache_dir
-        if path_sep == "\\" then
-            cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-        else
-            cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
-        end
         local expectedcheme_file = cache_dir .. "/wal/colors-wal.vim"
         if path_sep == "\\" then expectedcheme_file = expectedcheme_file:gsub("/", "\\") end
 
@@ -200,12 +189,6 @@ describe("palette", function()
     --: }}}
     --: setup works with use_palette set as 'wallust' {{{
     it("setup works with use_palette set as 'wallust'", function()
-        local cache_dir
-        if path_sep == "\\" then
-            cache_dir = os.getenv("LOCALAPPDATA") -- Windows
-        else
-            cache_dir = os.getenv("HOME") .. "/.cache" -- Linux/MacOS
-        end
         local expectedcheme_file = cache_dir .. "/wallust/colors_neopywal.vim"
         if path_sep == "\\" then expectedcheme_file = expectedcheme_file:gsub("/", "\\") end
 
