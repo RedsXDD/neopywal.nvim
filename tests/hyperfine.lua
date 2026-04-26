@@ -74,6 +74,7 @@ if colorscheme == "neopywal" then
     if not has_neopywal then return end
 
     vim.g.neopywal_debug = false
+    vim.g.neopywal_disable_reloader = false
     neopywal.setup({
         use_palette = "" .. cwd .. "/tests/colors-wal.vim",
         default_fileformats = false,

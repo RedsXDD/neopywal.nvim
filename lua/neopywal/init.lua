@@ -15,6 +15,7 @@ end
 
 local lock = false -- Avoid g:colors_name reloading
 local did_load = false
+local did_commands = false
 ---@param theme_style? ThemeStyles
 function M.load(theme_style)
     if lock then return end
@@ -48,13 +49,27 @@ function M.load(theme_style)
     f()
     lock = false
 
-    -- Initialize live reloading on template file changes.
-    vim.schedule(function() require("neopywal.lib.reloader").init() end)
+    -- Lazy load commands and reloader.
+    local timeout = 1000
+    vim.defer_fn(function()
+        -- Initialize live reloading on template file changes.
+        if not vim.g.neopywal_disable_reloader then require("neopywal.lib.reloader").init() end
+        if not did_commands then
+            did_commands = true
+            vim.api.nvim_create_user_command(
+                "NeopywalCompile",
+                function() require("neopywal.lib.compiler").recompile() end,
+                {}
+            )
+            vim.api.nvim_create_user_command(
+                "NeopywalInteractive",
+                function() require("neopywal.lib.interactive").toggle() end,
+                {}
+            )
+        end
+    end, timeout)
 
     did_load = true
 end
-
-vim.api.nvim_create_user_command("NeopywalCompile", function() require("neopywal.lib.compiler").recompile() end, {})
-vim.api.nvim_create_user_command("NeopywalInteractive", function() require("neopywal.lib.interactive").toggle() end, {})
 
 return M
