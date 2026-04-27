@@ -147,7 +147,8 @@ function M.recompile(notify)
         if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
     end
     M.compile()
-    vim.cmd.colorscheme("neopywal")
+
+    if vim.g.colors_name:match("^neopywal") then vim.cmd.colorscheme("neopywal") end
     if notify then
         local Notify = require("neopywal.utils.notify")
         Notify.info("Successfully compiled cache.")
