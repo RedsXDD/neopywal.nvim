@@ -13,7 +13,7 @@ function M.get()
         -- General.
         SnacksNormalNC = { link = "NormalNC" },
         SnacksWinBar = { link = "FloatTitle" },
-        SnacksWinBarNC = { fg = C.comment },
+        SnacksWinBarNC = { bg = C.dim_bg, fg = C.comment },
         SnacksZenIcon = { fg = C.color4 },
         SnacksScratchDesc = { bg = U.blend(C.foreground, C.background, 0.2), fg = C.foreground, styles = { "bold" } },
         SnacksScratchKey = { bg = U.blend(C.color2, C.background, 0.2), fg = C.color2, styles = { "bold" } },
