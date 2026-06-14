@@ -1,20 +1,36 @@
 ---@diagnostic disable: undefined-global, undefined-field
 describe("hash", function()
     local hash = require("neopywal.lib.hashing").hash
-    it("typo", function() assert.are_not.equals(hash({ custom_highlights = {} }), hash({ ustom_highlights = {} })) end)
+    it(
+        "typo",
+        function()
+            assert.are_not.equals(
+                hash({ custom_highlights = {} }),
+                hash({ ustom_highlights = {} })
+            )
+        end
+    )
     it(
         "when table order is shuffled",
         function()
             assert.equals(
                 hash({
                     custom_highlights = {
-                        Search = { fg = "#ff0000", bg = "#000000", style = { "bold" } },
+                        Search = {
+                            fg = "#ff0000",
+                            bg = "#000000",
+                            style = { "bold" },
+                        },
                         IncSearch = { fg = "#000000", bg = "#ff0000" },
                     },
                 }),
                 hash({
                     custom_highlights = {
-                        Search = { style = { "bold" }, bg = "#000000", fg = "#ff0000" },
+                        Search = {
+                            style = { "bold" },
+                            bg = "#000000",
+                            fg = "#ff0000",
+                        },
                         IncSearch = { bg = "#ff0000", fg = "#000000" },
                     },
                 })

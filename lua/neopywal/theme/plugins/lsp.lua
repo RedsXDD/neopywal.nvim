@@ -14,7 +14,8 @@ function M.get()
         LspCodeLens = { fg = C.comment }, -- virtual text of the codelens
         LspCodeLensSeparator = { link = "LspCodeLens" }, -- virtual text of the codelens separators
         LspInlayHint = {
-            bg = (O.transparent_background or not inlay_hints.background) and C.none
+            bg = (O.transparent_background or not inlay_hints.background)
+                    and C.none
                 or U.blend(C.inlay_hints, C.background, darkening_percentage),
             fg = U.blend(C.inlay_hints, C.foreground, 0.7),
             styles = inlay_hints.style or {},
@@ -53,16 +54,40 @@ function M.get()
         LspDiagnosticsVirtualTextInformation = { link = "DiagnosticInfo" }, -- Used for "Information" diagnostic virtual text
         LspDiagnosticsVirtualTextHint = { link = "DiagnosticHint" }, -- Used for "Hint" diagnostic virtual text
 
-        LspDiagnosticsUnderlineError = { sp = C.error, styles = underlines.errors or {} }, -- Used to underline "Error" diagnostics
-        LspDiagnosticsUnderlineWarning = { sp = C.warn, styles = underlines.warnings or {} }, -- Used to underline "Warning" diagnostics
-        LspDiagnosticsUnderlineInformation = { sp = C.info, styles = underlines.information or {} }, -- Used to underline "Information" diagnostics
-        LspDiagnosticsUnderlineHint = { sp = C.hint, styles = underlines.hints or {} }, -- Used to underline "Hint" diagnostics
+        LspDiagnosticsUnderlineError = {
+            sp = C.error,
+            styles = underlines.errors or {},
+        }, -- Used to underline "Error" diagnostics
+        LspDiagnosticsUnderlineWarning = {
+            sp = C.warn,
+            styles = underlines.warnings or {},
+        }, -- Used to underline "Warning" diagnostics
+        LspDiagnosticsUnderlineInformation = {
+            sp = C.info,
+            styles = underlines.information or {},
+        }, -- Used to underline "Information" diagnostics
+        LspDiagnosticsUnderlineHint = {
+            sp = C.hint,
+            styles = underlines.hints or {},
+        }, -- Used to underline "Hint" diagnostics
 
         DiagnosticUnderlineOk = { sp = C.ok, styles = underlines.ok or {} }, -- Used to underline "Ok" diagnostics
-        DiagnosticUnderlineError = { sp = C.error, styles = underlines.errors or {} }, -- Used to underline "Error" diagnostics
-        DiagnosticUnderlineWarn = { sp = C.warn, styles = underlines.warnings or {} }, -- Used to underline "Warning" diagnostics
-        DiagnosticUnderlineInfo = { sp = C.info, styles = underlines.information or {} }, -- Used to underline "Information" diagnostics
-        DiagnosticUnderlineHint = { sp = C.hint, styles = underlines.hints or {} }, -- Used to underline "Hint" diagnostics
+        DiagnosticUnderlineError = {
+            sp = C.error,
+            styles = underlines.errors or {},
+        }, -- Used to underline "Error" diagnostics
+        DiagnosticUnderlineWarn = {
+            sp = C.warn,
+            styles = underlines.warnings or {},
+        }, -- Used to underline "Warning" diagnostics
+        DiagnosticUnderlineInfo = {
+            sp = C.info,
+            styles = underlines.information or {},
+        }, -- Used to underline "Information" diagnostics
+        DiagnosticUnderlineHint = {
+            sp = C.hint,
+            styles = underlines.hints or {},
+        }, -- Used to underline "Hint" diagnostics
 
         DiagnosticFloatingOk = { link = "DiagnosticOk" }, -- Used to color "Ok" diagnostic messages in diagnostics float
         DiagnosticFloatingError = { link = "DiagnosticError" }, -- Used to color "Error" diagnostic messages in diagnostics float

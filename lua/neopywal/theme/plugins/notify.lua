@@ -4,23 +4,28 @@ function M.get()
     return {
         NotifyBackground = { bg = "#000000" },
         NotifyERRORBody = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
             fg = C.error,
         },
         NotifyWARNBody = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
             fg = C.warn,
         },
         NotifyINFOBody = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
             fg = C.info,
         },
         NotifyDEBUGBody = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
             fg = C.unnecessary,
         },
         NotifyTRACEBody = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
             fg = C.hint,
         },
 

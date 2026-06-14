@@ -5,15 +5,24 @@ local M = {}
 function M.get()
     return {
         -- Editor:
-        Normal = { bg = O.transparent_background and C.none or C.background, fg = C.foreground }, -- normal text
+        Normal = {
+            bg = O.transparent_background and C.none or C.background,
+            fg = C.foreground,
+        }, -- normal text
         NormalNC = {
-            bg = O.transparent_background and C.none or O.dim_inactive and C.dim_bg or C.background,
+            bg = O.transparent_background and C.none
+                or O.dim_inactive and C.dim_bg
+                or C.background,
         }, -- normal text in non-current windows.
         -- Terminal = { },
-        NormalFloat = { bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background }, -- Normal text in floating windows.
+        NormalFloat = {
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
+        }, -- Normal text in floating windows.
         FloatBorder = { link = "NormalFloat" }, -- Border used in floating windows.
         FloatTitle = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.background,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.background,
             fg = C.color2,
             styles = { "bold", "italic" },
         }, -- Title text in floating windows.
@@ -21,19 +30,26 @@ function M.get()
         NonText = { fg = C.color8 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
         EndOfBuffer = {
             fg = O.show_end_of_buffer and C.comment
-                or O.transparent_background and U.brighten(C.background, 0.05) -- Slightly brighter bg to make the EOF chars less visible on transparent windows (This trick only works on terminals with about 90%+ opacity).
+                or O.transparent_background
+                    and U.brighten(C.background, 0.05) -- Slightly brighter bg to make the EOF chars less visible on transparent windows (This trick only works on terminals with about 90%+ opacity).
                 or O.dim_inactive and U.blacken(C.background, 0.075) -- Can't be too dark otherwise EOF will visible on normal buffers and can't be too bright otherwise will visible on non-current buffers.
                 or C.background, -- If the above isn't met, that means that all windows have the same bg color and thus we can just match that.
         }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
         Title = { fg = C.color4, styles = { "bold" } }, -- titles for output from ":set all", ":autocmd" etc.
         VertSplit = { link = "WinSeparator" }, -- the column separating vertically split windows
         WinSeparator = {
-            bg = O.transparent_background and C.none or O.dim_inactive and C.dim_bg or C.background,
+            bg = O.transparent_background and C.none
+                or O.dim_inactive and C.dim_bg
+                or C.background,
             fg = (O.transparent_background or O.show_split_lines) and C.color8
                 or O.dim_inactive and C.dim_bg
                 or C.background,
         }, -- the column separating vertically split windows
-        Visual = { bg = U.blend(C.color5, C.background, 0.2), fg = C.color5, styles = { "bold" } }, -- Visual mode selection.
+        Visual = {
+            bg = U.blend(C.color5, C.background, 0.2),
+            fg = C.color5,
+            styles = { "bold" },
+        }, -- Visual mode selection.
         VisualNOS = {
             bg = U.blend(C.color5, C.background, 0.2),
             fg = C.color5,
@@ -64,10 +80,22 @@ function M.get()
         ColorColumn = { link = "CursorColumn" }, -- used for the columns set with 'colorcolumn'.
 
         -- Diff:
-        DiffAdd = { bg = U.blend(C.diff_added, C.background, 0.2), fg = C.diff_added }, -- diff mode: Added line |diff.txt|.
-        DiffChange = { bg = U.blend(C.diff_changed, C.background, 0.2), fg = C.diff_changed }, -- diff mode: Changed line |diff.txt|.
-        DiffDelete = { bg = U.blend(C.diff_removed, C.background, 0.2), fg = C.diff_removed }, -- diff mode: Deleted line |diff.txt|.
-        DiffText = { bg = U.blend(C.background, C.foreground, 0.5), fg = C.foreground }, -- diff mode: Changed text within a changed line |diff.txt|.
+        DiffAdd = {
+            bg = U.blend(C.diff_added, C.background, 0.2),
+            fg = C.diff_added,
+        }, -- diff mode: Added line |diff.txt|.
+        DiffChange = {
+            bg = U.blend(C.diff_changed, C.background, 0.2),
+            fg = C.diff_changed,
+        }, -- diff mode: Changed line |diff.txt|.
+        DiffDelete = {
+            bg = U.blend(C.diff_removed, C.background, 0.2),
+            fg = C.diff_removed,
+        }, -- diff mode: Deleted line |diff.txt|.
+        DiffText = {
+            bg = U.blend(C.background, C.foreground, 0.5),
+            fg = C.foreground,
+        }, -- diff mode: Changed text within a changed line |diff.txt|.
 
         -- Misc:
         Conceal = { fg = C.color8 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
@@ -89,14 +117,27 @@ function M.get()
 
         -- Search:
         Search = { bg = C.color2, fg = C.background, styles = { "bold" } }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
-        IncSearch = { bg = U.blend(C.color1, C.color3, 0.5), fg = C.background, styles = { "bold" } }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+        IncSearch = {
+            bg = U.blend(C.color1, C.color3, 0.5),
+            fg = C.background,
+            styles = { "bold" },
+        }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
         Substitute = { bg = C.color4, fg = C.background, styles = { "bold" } }, -- |:substitute| replacement text highlighting
 
         -- Pmenu:
         Pmenu = {
-            bg = (O.transparent_background and vim.o.winblend == 0 and vim.o.pumblend == 0) and C.none or C.dim_bg,
+            bg = (
+                O.transparent_background
+                and vim.o.winblend == 0
+                and vim.o.pumblend == 0
+            )
+                    and C.none
+                or C.dim_bg,
         }, -- Popup menu: normal item.
-        PmenuSel = { bg = U.blend(C.background, C.foreground, 0.75), styles = { "bold", "italic" } }, -- Popup menu: selected item.
+        PmenuSel = {
+            bg = U.blend(C.background, C.foreground, 0.75),
+            styles = { "bold", "italic" },
+        }, -- Popup menu: selected item.
         PmenuSbar = { bg = U.blend(C.background, C.foreground, 0.95) }, -- Popup menu: scrollbar.
         PmenuThumb = { link = "PmenuSel" }, -- Popup menu: Thumb of the scrollbar.
 
@@ -108,7 +149,8 @@ function M.get()
 
         -- Statusline:
         StatusLine = {
-            bg = O.transparent_background and C.none or U.blend(C.color8, C.background, 0.3),
+            bg = O.transparent_background and C.none
+                or U.blend(C.color8, C.background, 0.3),
             fg = C.foreground,
         }, -- status line of current window.
         StatusLineNC = { link = "StatusLine" }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
@@ -123,7 +165,8 @@ function M.get()
         }, -- tab pages line, not active tab page label.
         TabLineFill = { link = "TabLine" }, -- tab pages line, where there are no labels.
         TabLineSel = {
-            bg = O.transparent_background and U.lighten(C.background, 20) or C.background,
+            bg = O.transparent_background and U.lighten(C.background, 20)
+                or C.background,
             fg = C.color2,
             styles = { "bold" },
         }, -- tab pages line, active tab page label.

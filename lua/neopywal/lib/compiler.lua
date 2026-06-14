@@ -25,7 +25,9 @@ end
 
 ---@param theme_style? ThemeStyles
 local function compile(theme_style)
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
+    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+        theme_style = vim.o.background
+    end
 
     local Config = require("neopywal.lib.config")
     local O = Config.options
@@ -67,29 +69,51 @@ local h = vim.api.nvim_set_hl]],
         if properties.styles then
             for _, style in pairs(properties.styles) do
                 properties[style] = true
-                if O.no_italic and style == "italic" then properties[style] = false end
-                if O.no_bold and style == "bold" then properties[style] = false end
-                if O.no_underline and style == "underline" then properties[style] = false end
-                if O.no_undercurl and style == "undercurl" then properties[style] = false end
-                if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
+                if O.no_italic and style == "italic" then
+                    properties[style] = false
+                end
+                if O.no_bold and style == "bold" then
+                    properties[style] = false
+                end
+                if O.no_underline and style == "underline" then
+                    properties[style] = false
+                end
+                if O.no_undercurl and style == "undercurl" then
+                    properties[style] = false
+                end
+                if O.no_strikethrough and style == "strikethrough" then
+                    properties[style] = false
+                end
             end
         end
 
         properties.styles = nil
 
-        if properties.link and (theme.custom_highlights[group] and not theme.custom_highlights[group].link) then
+        if
+            properties.link
+            and (
+                theme.custom_highlights[group]
+                and not theme.custom_highlights[group].link
+            )
+        then
             properties.link = nil
         end
 
-        table.insert(lines, string.format([[h(0, "%s", %s)]], group, inspect(properties)))
+        table.insert(
+            lines,
+            string.format([[h(0, "%s", %s)]], group, inspect(properties))
+        )
     end
 
     table.insert(lines, "end, true)")
 
-    if vim.fn.isdirectory(compile_path) == 0 then vim.fn.mkdir(compile_path, "p") end
+    if vim.fn.isdirectory(compile_path) == 0 then
+        vim.fn.mkdir(compile_path, "p")
+    end
 
     if vim.g.neopywal_debug then -- Debugging purpose
-        local deb = io.open(compile_path .. path_sep .. filename .. ".lua", "wb")
+        local deb =
+            io.open(compile_path .. path_sep .. filename .. ".lua", "wb")
         if deb then
             deb:write(table.concat(lines, "\n"))
             deb:close()
@@ -101,7 +125,9 @@ local h = vim.api.nvim_set_hl]],
     local f = ls(table.concat(lines, "\n"))
     if not f then
         local Notify = require("neopywal.utils.notify")
-        local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP")) .. path_sep .. "neopywal_compiler_error.lua"
+        local err_path = (path_sep == "/" and "/tmp" or os.getenv("TMP"))
+            .. path_sep
+            .. "neopywal_compiler_error.lua"
         Notify.error(string.format(
             [[
 Most likely some mistake made in your Neopywal config
@@ -125,8 +151,14 @@ Below is the error message that we captured:
     end
 
     local file = assert(
-        io.open(compile_path .. path_sep .. filename .. compiler_opts.file_ext, "wb"),
-        "Permission denied while writing compiled file to " .. compile_path .. path_sep .. filename
+        io.open(
+            compile_path .. path_sep .. filename .. compiler_opts.file_ext,
+            "wb"
+        ),
+        "Permission denied while writing compiled file to "
+            .. compile_path
+            .. path_sep
+            .. filename
     )
 
     file:write(f())
@@ -144,11 +176,15 @@ end
 function M.recompile(notify)
     if notify == nil then notify = true end
     for name, _ in pairs(package.loaded) do
-        if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
+        if name:match("^neopywal.") and not name:match("^neopywal.lib.") then
+            package.loaded[name] = nil
+        end
     end
     M.compile()
 
-    if vim.g.colors_name:match("^neopywal") then vim.cmd.colorscheme("neopywal") end
+    if vim.g.colors_name:match("^neopywal") then
+        vim.cmd.colorscheme("neopywal")
+    end
     if notify then
         local Notify = require("neopywal.utils.notify")
         Notify.info("Successfully compiled cache.")

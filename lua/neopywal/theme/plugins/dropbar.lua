@@ -36,7 +36,8 @@ function M.get()
     for kind, kind_properties in pairs(kinds) do
         local basename_kinds = string.format("DropBarKind%s", kind)
         local basename_icon_kinds = string.format("DropBarIconKind%s", kind)
-        dropbar_kinds[basename_kinds] = color and kind_properties or { fg = C.foreground }
+        dropbar_kinds[basename_kinds] = color and kind_properties
+            or { fg = C.foreground }
         dropbar_icon_kinds[basename_icon_kinds] = kind_properties
     end
 

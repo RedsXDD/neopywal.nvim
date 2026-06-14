@@ -16,7 +16,10 @@ function M.get()
 
         -- Statements:
         Statement = { fg = C.statement }, -- (preferred) any statement
-        Conditional = { fg = C.conditional, styles = O.styles.conditionals or {} }, -- if, then, else, endif, switch, etc.
+        Conditional = {
+            fg = C.conditional,
+            styles = O.styles.conditionals or {},
+        }, -- if, then, else, endif, switch, etc.
         Repeat = { fg = C.loop, styles = O.styles.loops or {} }, -- for, do, while, etc.
         Label = { link = "Statement" }, -- case, default, etc.
         Exception = { fg = C.exception, styles = O.styles.keywords or {} }, -- try, catch, throw
@@ -65,12 +68,30 @@ function M.get()
         rainbow6 = { fg = require("neopywal.utils.rainbow").get()[6] },
 
         -- Diagnostics:
-        DiagnosticOk = { fg = C.ok, styles = O.plugins.lsp.virtual_text.ok or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-        DiagnosticError = { fg = C.error, styles = O.plugins.lsp.virtual_text.errors or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-        DiagnosticWarn = { fg = C.warn, styles = O.plugins.lsp.virtual_text.warnings or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-        DiagnosticInfo = { fg = C.info, styles = O.plugins.lsp.virtual_text.information or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-        DiagnosticHint = { fg = C.hint, styles = O.plugins.lsp.virtual_text.hints or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
-        DiagnosticUnnecessary = { fg = C.unnecessary, styles = O.plugins.lsp.virtual_text.unnecessary or {} }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+        DiagnosticOk = {
+            fg = C.ok,
+            styles = O.plugins.lsp.virtual_text.ok or {},
+        }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+        DiagnosticError = {
+            fg = C.error,
+            styles = O.plugins.lsp.virtual_text.errors or {},
+        }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+        DiagnosticWarn = {
+            fg = C.warn,
+            styles = O.plugins.lsp.virtual_text.warnings or {},
+        }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+        DiagnosticInfo = {
+            fg = C.info,
+            styles = O.plugins.lsp.virtual_text.information or {},
+        }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+        DiagnosticHint = {
+            fg = C.hint,
+            styles = O.plugins.lsp.virtual_text.hints or {},
+        }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
+        DiagnosticUnnecessary = {
+            fg = C.unnecessary,
+            styles = O.plugins.lsp.virtual_text.unnecessary or {},
+        }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default.
     }
 end
 

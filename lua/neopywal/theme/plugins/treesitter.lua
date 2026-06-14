@@ -82,11 +82,27 @@ function M.get()
         --: Comment {{{
         ["@comment"] = { link = "Comment" },
         ["@comment.documentation"] = { link = "Comment" }, -- For comments documenting code
-        ["@comment.error"] = { bg = C.error, fg = C.background, styles = { "bold", "italic" } },
-        ["@comment.warning"] = { bg = C.warn, fg = C.background, styles = { "bold", "italic" } },
-        ["@comment.hint"] = { bg = C.hint, fg = C.background, styles = { "bold", "italic" } },
+        ["@comment.error"] = {
+            bg = C.error,
+            fg = C.background,
+            styles = { "bold", "italic" },
+        },
+        ["@comment.warning"] = {
+            bg = C.warn,
+            fg = C.background,
+            styles = { "bold", "italic" },
+        },
+        ["@comment.hint"] = {
+            bg = C.hint,
+            fg = C.background,
+            styles = { "bold", "italic" },
+        },
         ["@comment.todo"] = { link = "Todo" },
-        ["@comment.note"] = { bg = C.info, fg = C.background, styles = { "bold", "italic" } },
+        ["@comment.note"] = {
+            bg = C.info,
+            fg = C.background,
+            styles = { "bold", "italic" },
+        },
         --: }}}
         --: Diff {{{
         ["@diff.plus"] = { link = "DiffAdd" }, -- added text (for diff files)
@@ -206,12 +222,19 @@ function M.get()
         ["@lsp.type.selfTypeKeyword"] = { link = "@variable.builtin" },
         ["@lsp.type.string"] = { link = "@string" },
         ["@lsp.type.typeAlias"] = { link = "@type.definition" },
-        ["@lsp.type.unresolvedReference"] = { link = "Error", styles = { "undercurl" } },
+        ["@lsp.type.unresolvedReference"] = {
+            link = "Error",
+            styles = { "undercurl" },
+        },
         ["@lsp.type.variable"] = {}, -- use treesitter styles for regular variables
         ["@lsp.typemod.class.defaultLibrary"] = { link = "@type.builtin" },
         ["@lsp.typemod.enum.defaultLibrary"] = { link = "@type.builtin" },
-        ["@lsp.typemod.enumMember.defaultLibrary"] = { link = "@constant.builtin" },
-        ["@lsp.typemod.function.defaultLibrary"] = { link = "@function.builtin" },
+        ["@lsp.typemod.enumMember.defaultLibrary"] = {
+            link = "@constant.builtin",
+        },
+        ["@lsp.typemod.function.defaultLibrary"] = {
+            link = "@function.builtin",
+        },
         ["@lsp.typemod.keyword.async"] = { link = "@keyword.coroutine" },
         ["@lsp.typemod.keyword.injected"] = { link = "@keyword" },
         ["@lsp.typemod.macro.defaultLibrary"] = { link = "@function.builtin" },
@@ -222,7 +245,9 @@ function M.get()
         ["@lsp.typemod.type.defaultLibrary"] = { fg = C.color4 },
         ["@lsp.typemod.typeAlias.defaultLibrary"] = { fg = C.color4 },
         ["@lsp.typemod.variable.callable"] = { link = "@function" },
-        ["@lsp.typemod.variable.defaultLibrary"] = { link = "@variable.builtin" },
+        ["@lsp.typemod.variable.defaultLibrary"] = {
+            link = "@variable.builtin",
+        },
         ["@lsp.typemod.variable.injected"] = { link = "@variable" },
         ["@lsp.typemod.variable.static"] = { link = "@constant" },
         -- NOTE: maybe add these with distinct highlights?

@@ -37,8 +37,16 @@ local default_highlights = {
 
     -- BufferLinePick command.
     pick = { bg = unselected_bg, fg = C.color6, styles = { "bold", "italic" } }, -- Pick selector for non-selected buffers.
-    pick_visible = { bg = unselected_bg, fg = C.color6, styles = { "bold", "italic" } }, -- Pick selector for selected buffer on non-current windows.
-    pick_selected = { bg = C.background, fg = C.color6, styles = { "bold", "italic" } }, -- Pick selector for selected buffer.
+    pick_visible = {
+        bg = unselected_bg,
+        fg = C.color6,
+        styles = { "bold", "italic" },
+    }, -- Pick selector for selected buffer on non-current windows.
+    pick_selected = {
+        bg = C.background,
+        fg = C.color6,
+        styles = { "bold", "italic" },
+    }, -- Pick selector for selected buffer.
 
     -- Truncation marker.
     trunc_marker = { bg = fill_bg, fg = C.color8 },
@@ -61,7 +69,11 @@ local default_highlights = {
 
     -- Tabs.
     tab = { bg = unselected_bg, fg = U.blend(C.background, C.foreground, 0.5) }, -- Text for non-selected tabs.
-    tab_selected = { bg = selected_bg, fg = C.foreground, styles = { "bold", "italic" } }, -- Text on selected tab.
+    tab_selected = {
+        bg = selected_bg,
+        fg = C.foreground,
+        styles = { "bold", "italic" },
+    }, -- Text on selected tab.
 
     -- Indicator.
     indicator_visible = { bg = unselected_bg, fg = C.color8 },
@@ -107,17 +119,28 @@ local default_highlights = {
 
 function M.setup(user_conf)
     user_conf = user_conf or {}
-    local highlights = vim.tbl_deep_extend("keep", user_conf, default_highlights)
+    local highlights =
+        vim.tbl_deep_extend("keep", user_conf, default_highlights)
 
     for _, properties in pairs(highlights) do
         if properties.styles then
             for _, style in pairs(properties.styles) do
                 properties[style] = true
-                if O.no_italic and style == "italic" then properties[style] = false end
-                if O.no_bold and style == "bold" then properties[style] = false end
-                if O.no_underline and style == "underline" then properties[style] = false end
-                if O.no_undercurl and style == "undercurl" then properties[style] = false end
-                if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
+                if O.no_italic and style == "italic" then
+                    properties[style] = false
+                end
+                if O.no_bold and style == "bold" then
+                    properties[style] = false
+                end
+                if O.no_underline and style == "underline" then
+                    properties[style] = false
+                end
+                if O.no_undercurl and style == "undercurl" then
+                    properties[style] = false
+                end
+                if O.no_strikethrough and style == "strikethrough" then
+                    properties[style] = false
+                end
             end
         end
         properties.styles = nil

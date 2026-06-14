@@ -80,7 +80,9 @@ function M.setup(user_config)
 end
 
 function M.get()
-    if require("neopywal.lib.config").options.transparent_background then M.options.sett.bkg = "NONE" end
+    if require("neopywal.lib.config").options.transparent_background then
+        M.options.sett.bkg = "NONE"
+    end
 
     local assets = M.options.assets
     local mode_colors = M.options.mode_colors
@@ -88,7 +90,9 @@ function M.get()
     local view = M.options.view
 
     local shortline = false
-    local mode_text = require("neopywal").current_style == "light" and C.foreground or C.background
+    local mode_text = require("neopywal").current_style == "light"
+            and C.foreground
+        or C.background
 
     local components = {
         active = { {}, {}, {} }, -- left, center, right
@@ -165,7 +169,9 @@ function M.get()
     }
 
     components.active[1][2] = {
-        provider = function() return assets.mode_icon .. " " .. mode_colors[vim.fn.mode()][1] end,
+        provider = function()
+            return assets.mode_icon .. " " .. mode_colors[vim.fn.mode()][1]
+        end,
         hl = vi_mode_hl,
     }
 
@@ -289,7 +295,12 @@ function M.get()
     --: Macro {{{
     components.active[1][12] = {
         provider = "macro",
-        enabled = function() return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0 end,
+        enabled = function()
+            return vim.api.nvim_get_option_value(
+                "cmdheight",
+                { scope = "global" }
+            ) == 0
+        end,
         hl = {
             fg = sett.extras,
             bg = sett.bkg,
@@ -300,7 +311,12 @@ function M.get()
     --: Search Count {{{
     components.active[1][13] = {
         provider = "search_count",
-        enabled = function() return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0 end,
+        enabled = function()
+            return vim.api.nvim_get_option_value(
+                "cmdheight",
+                { scope = "global" }
+            ) == 0
+        end,
         hl = {
             fg = sett.extras,
             bg = sett.bkg,
@@ -355,10 +371,22 @@ function M.get()
                 local frame = math.floor(ms / 120) % #spinners
 
                 if percentage >= 70 then
-                    return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
+                    return string.format(
+                        " %%<%s %s %s (%s%%%%) ",
+                        success_icon[frame + 1],
+                        title,
+                        msg,
+                        percentage
+                    )
                 end
 
-                return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+                return string.format(
+                    " %%<%s %s %s (%s%%%%) ",
+                    spinners[frame + 1],
+                    title,
+                    msg,
+                    percentage
+                )
             end
 
             return ""
@@ -373,7 +401,9 @@ function M.get()
     --: General Diagnostics (errors, warnings. info and hints) {{{
     components.active[2][2] = {
         provider = "diagnostic_errors",
-        enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR) end,
+        enabled = function()
+            return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
+        end,
 
         hl = {
             fg = C.error,
@@ -384,7 +414,9 @@ function M.get()
 
     components.active[2][3] = {
         provider = "diagnostic_warnings",
-        enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.WARN) end,
+        enabled = function()
+            return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
+        end,
         hl = {
             fg = C.warn,
             bg = sett.bkg,
@@ -394,7 +426,9 @@ function M.get()
 
     components.active[2][4] = {
         provider = "diagnostic_info",
-        enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.INFO) end,
+        enabled = function()
+            return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
+        end,
         hl = {
             fg = C.info,
             bg = sett.bkg,
@@ -404,7 +438,9 @@ function M.get()
 
     components.active[2][5] = {
         provider = "diagnostic_hints",
-        enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.HINT) end,
+        enabled = function()
+            return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
+        end,
         hl = {
             fg = C.hint,
             bg = sett.bkg,
@@ -420,19 +456,25 @@ function M.get()
             local active_clients = vim.lsp.get_clients({ bufnr = 0 })
 
             -- show an indicator that we have running lsps
-            if view.lsp.name == false and next(active_clients) ~= nil then return assets.lsp.server .. " " .. "Lsp" end
+            if view.lsp.name == false and next(active_clients) ~= nil then
+                return assets.lsp.server .. " " .. "Lsp"
+            end
 
             -- show the actual name of the running lsps
             local index = 0
             local lsp_names = ""
             for _, lsp_config in ipairs(active_clients) do
-                if is_lsp_in_excluded_list(lsp_config.name) then goto continue end
+                if is_lsp_in_excluded_list(lsp_config.name) then
+                    goto continue
+                end
 
                 index = index + 1
                 if index == 1 then
                     lsp_names = assets.lsp.server .. " " .. lsp_config.name
                 else
-                    lsp_names = lsp_names .. view.lsp.separator .. lsp_config.name
+                    lsp_names = lsp_names
+                        .. view.lsp.separator
+                        .. lsp_config.name
                 end
 
                 ::continue::
@@ -455,8 +497,14 @@ function M.get()
             local filename = vim.fn.expand("%:t")
             local extension = vim.fn.expand("%:e")
             local present, icons = pcall(require, "nvim-web-devicons")
-            local icon = present and icons.get_icon(filename, extension) or assets.file
-            return (sett.show_modified and "%m" or "") .. " " .. icon .. " " .. filename .. " "
+            local icon = present and icons.get_icon(filename, extension)
+                or assets.file
+            return (sett.show_modified and "%m" or "")
+                .. " "
+                .. icon
+                .. " "
+                .. filename
+                .. " "
         end,
         enabled = is_enabled(70),
         hl = {

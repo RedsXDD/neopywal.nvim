@@ -6,11 +6,14 @@ function M.get()
             and not O.transparent_background
             and {
                 TelescopeBorder = {
-                    bg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
-                    fg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
+                    bg = O.dim_inactive and C.background
+                        or U.blend(C.background, "#000000", 0.8),
+                    fg = O.dim_inactive and C.background
+                        or U.blend(C.background, "#000000", 0.8),
                 },
                 TelescopeNormal = {
-                    bg = O.dim_inactive and C.background or U.blend(C.background, "#000000", 0.8),
+                    bg = O.dim_inactive and C.background
+                        or U.blend(C.background, "#000000", 0.8),
                 },
                 TelescopePromptBorder = {
                     bg = C.cursorline,

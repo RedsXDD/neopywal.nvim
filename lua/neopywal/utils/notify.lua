@@ -8,7 +8,9 @@ local function should_notify(level)
     local notify = require("neopywal.lib.config").options.notify
     if notify == "none" then return false end
     if notify == "error" then return level == vim.log.levels.ERROR end
-    if notify == "warn" then return level == vim.log.levels.WARN or level == vim.log.levels.ERROR end
+    if notify == "warn" then
+        return level == vim.log.levels.WARN or level == vim.log.levels.ERROR
+    end
     return true
 end
 
@@ -18,7 +20,10 @@ function M.notify(msg, level)
     if not should_notify(level) then return end
 
     if type(msg) == "table" then
-        msg = table.concat(vim.tbl_filter(function(line) return line or false end, msg), "\n")
+        msg = table.concat(
+            vim.tbl_filter(function(line) return line or false end, msg),
+            "\n"
+        )
     end
 
     if notified[msg] then return end

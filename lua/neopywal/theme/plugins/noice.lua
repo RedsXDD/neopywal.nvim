@@ -1,12 +1,16 @@
 local M = {}
 
 function M.get()
-    local kinds = require("neopywal.utils.kinds").get("NoiceCompletionItemKind%s")
+    local kinds =
+        require("neopywal.utils.kinds").get("NoiceCompletionItemKind%s")
     return vim.tbl_deep_extend("force", kinds, {
         NoiceCmdlinePopup = { link = "NormalFloat" },
 
         NoiceMini = { link = "NoiceLspProgressTitle" },
-        NoiceLspProgressTitle = { bg = U.darken(C.background, 8), fg = C.foreground },
+        NoiceLspProgressTitle = {
+            bg = U.darken(C.background, 8),
+            fg = C.foreground,
+        },
         NoiceLspProgressClient = {
             bg = U.darken(C.background, 8),
             fg = C.color4,
@@ -32,7 +36,9 @@ function M.get()
         NoiceCmdlinePopupBorderLua = { link = "NoiceCmdlineIconLua" },
 
         NoiceCmdlineIconCalculator = { fg = C.color6 },
-        NoiceCmdlinePopupBorderCalculator = { link = "NoiceCmdlineIconCalculator" },
+        NoiceCmdlinePopupBorderCalculator = {
+            link = "NoiceCmdlineIconCalculator",
+        },
 
         NoiceCmdlineIconIncRename = { fg = C.color5 },
         NoiceCmdlinePopupBorderIncRename = { link = "NoiceCmdlinePopupBorder" },

@@ -2,7 +2,9 @@ local M = {}
 
 local did_augroups = false
 ---@param name string
-local function augroup(name) return vim.api.nvim_create_augroup("neopywal_" .. name, { clear = true }) end
+local function augroup(name)
+    return vim.api.nvim_create_augroup("neopywal_" .. name, { clear = true })
+end
 
 ---@return function
 ---@param schedule boolean
@@ -27,13 +29,18 @@ local function augroups()
         desc = "Source neopywal *.lua files for debug.",
         group = augroup("debug_resource_files"),
         pattern = { "*/neopywal/*", "*/neopywal.lua" },
-        callback = setup_callback(true, function() require("neopywal.lib.compiler").recompile() end),
+        callback = setup_callback(
+            true,
+            function() require("neopywal.lib.compiler").recompile() end
+        ),
     })
 end
 
 M.lock = { dark = false, light = false }
 local function init(theme_style, template_path)
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
+    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+        theme_style = vim.o.background
+    end
     if M.lock[theme_style] then return end
     M.lock[theme_style] = true
 
@@ -52,7 +59,9 @@ local function init(theme_style, template_path)
         if err then
             local Notify = require("neopywal.utils.notify")
             local compiler_opts = require("neopywal.lib.config").compiler_opts
-            local err_path = (compiler_opts.path_sep == "/" and "/tmp" or os.getenv("TMP"))
+            local err_path = (
+                compiler_opts.path_sep == "/" and "/tmp" or os.getenv("TMP")
+            )
                 .. compiler_opts.path_sep
                 .. "neopywal_reload_error.lua"
             Notify.error(string.format(
@@ -89,15 +98,17 @@ Below is the error message that we captured:
             local current_theme_style = vim.o.background
             if M.both == true or fetched_theme_style == current_theme_style then
                 local Notify = require("neopywal.utils.notify")
-                Notify.info(string.format(
-                    [[
+                Notify.info(
+                    string.format(
+                        [[
 Change detected in template file
 "%s"
 for the "%s" theme style,
 recompiling colorscheme ...]],
-                    template_path,
-                    current_theme_style
-                ))
+                        template_path,
+                        current_theme_style
+                    )
+                )
             end
             require("neopywal.lib.compiler").recompile(false)
         end)
@@ -111,7 +122,10 @@ function M.init()
     if not Palette.did_setup then Palette.setup() end
 
     -- We really don't need two separate events for the same file.
-    if Palette.palette_metadata.dark.filepath == Palette.palette_metadata.light.filepath then
+    if
+        Palette.palette_metadata.dark.filepath
+        == Palette.palette_metadata.light.filepath
+    then
         M.both = true
         init("dark", Palette.palette_metadata.dark.filepath)
         return

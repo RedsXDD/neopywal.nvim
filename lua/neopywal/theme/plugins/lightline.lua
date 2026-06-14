@@ -25,7 +25,8 @@ function M.setup(user_config)
         local default_color = C[M.default_options.mode_colors[option]]
         local final_color = M.options.mode_colors[option]
         if type(final_color) == "function" then final_color = final_color(C) end
-        final_color = require("neopywal.utils.color").validate(final_color, default_color)
+        final_color =
+            require("neopywal.utils.color").validate(final_color, default_color)
         M.options.mode_colors[option] = final_color
     end
 
@@ -39,36 +40,72 @@ function M.get()
     local mode_colors = M.options.mode_colors
 
     neopywal.normal = {
-        left = { { C.background, mode_colors.normal }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        left = {
+            { C.background, mode_colors.normal },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
         middle = { { C.foreground, U.blend(C.color8, C.background, 0.3) } },
-        right = { { C.background, mode_colors.normal }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        right = {
+            { C.background, mode_colors.normal },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
         error = { { C.background, C.error } },
         warning = { { C.background, C.warn } },
     }
 
     neopywal.visual = {
-        left = { { C.background, mode_colors.visual }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
-        right = { { C.background, mode_colors.visual }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        left = {
+            { C.background, mode_colors.visual },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
+        right = {
+            { C.background, mode_colors.visual },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
     }
 
     neopywal.insert = {
-        left = { { C.background, mode_colors.insert }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
-        right = { { C.background, mode_colors.insert }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        left = {
+            { C.background, mode_colors.insert },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
+        right = {
+            { C.background, mode_colors.insert },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
     }
 
     neopywal.command = {
-        left = { { C.background, mode_colors.command }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
-        right = { { C.background, mode_colors.command }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        left = {
+            { C.background, mode_colors.command },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
+        right = {
+            { C.background, mode_colors.command },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
     }
 
     neopywal.replace = {
-        left = { { C.background, mode_colors.replace }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
-        right = { { C.background, mode_colors.replace }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        left = {
+            { C.background, mode_colors.replace },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
+        right = {
+            { C.background, mode_colors.replace },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
     }
 
     neopywal.terminal = {
-        left = { { C.background, mode_colors.terminal }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
-        right = { { C.background, mode_colors.terminal }, { C.foreground, U.blend(C.color8, C.background, 0.5) } },
+        left = {
+            { C.background, mode_colors.terminal },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
+        right = {
+            { C.background, mode_colors.terminal },
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+        },
     }
 
     neopywal.inactive = {
@@ -84,10 +121,16 @@ function M.get()
     }
 
     neopywal.tabline = {
-        left = { { C.foreground, U.blend(C.color8, C.background, 0.5) }, { C.color8, C.background } },
+        left = {
+            { C.foreground, U.blend(C.color8, C.background, 0.5) },
+            { C.color8, C.background },
+        },
         middle = { { C.foreground, U.blend(C.color8, C.background, 0.3) } },
         right = { { C.background, C.color1 } },
-        tabsel = { { C.background, mode_colors.normal }, { C.color8, C.background } },
+        tabsel = {
+            { C.background, mode_colors.normal },
+            { C.color8, C.background },
+        },
     }
 
     return neopywal

@@ -13,7 +13,10 @@ function M.get()
         GrugFarInputLabel = { fg = C.color4, styles = { "bold", "italic" } },
         GrugFarHelpHeader = { fg = C.color6, styles = { "bold", "italic" } },
         GrugFarHelpHeaderKey = { fg = C.color2, styles = { "bold", "italic" } },
-        GrugFarHelpWinActionPrefix = { fg = C.warn, styles = { "bold", "italic" } },
+        GrugFarHelpWinActionPrefix = {
+            fg = C.warn,
+            styles = { "bold", "italic" },
+        },
         GrugFarHelpWinActionText = { link = "GrugFarHelpWinActionPrefix" },
         GrugFarHelpWinActionKey = { link = "Comment" },
     }

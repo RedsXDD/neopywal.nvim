@@ -3,11 +3,15 @@ local M = {}
 function M.get()
     local scope_color = O.plugins.snacks.scope_color
     if type(scope_color) == "function" then scope_color = scope_color(C) end
-    scope_color = require("neopywal.utils.color").validate(scope_color, C.comment)
+    scope_color =
+        require("neopywal.utils.color").validate(scope_color, C.comment)
 
     local current_scope_color = O.plugins.snacks.current_scope_color
-    if type(current_scope_color) == "function" then current_scope_color = current_scope_color(C) end
-    current_scope_color = require("neopywal.utils.color").validate(current_scope_color, C.color4)
+    if type(current_scope_color) == "function" then
+        current_scope_color = current_scope_color(C)
+    end
+    current_scope_color =
+        require("neopywal.utils.color").validate(current_scope_color, C.color4)
 
     local hl = {
         -- General.
@@ -15,10 +19,21 @@ function M.get()
         SnacksWinBar = { link = "FloatTitle" },
         SnacksWinBarNC = { bg = C.dim_bg, fg = C.comment },
         SnacksZenIcon = { fg = C.color4 },
-        SnacksScratchDesc = { bg = U.blend(C.foreground, C.background, 0.2), fg = C.foreground, styles = { "bold" } },
-        SnacksScratchKey = { bg = U.blend(C.color2, C.background, 0.2), fg = C.color2, styles = { "bold" } },
+        SnacksScratchDesc = {
+            bg = U.blend(C.foreground, C.background, 0.2),
+            fg = C.foreground,
+            styles = { "bold" },
+        },
+        SnacksScratchKey = {
+            bg = U.blend(C.color2, C.background, 0.2),
+            fg = C.color2,
+            styles = { "bold" },
+        },
         SnacksIndent = { fg = scope_color, styles = { "nocombine" } },
-        SnacksIndentScope = { fg = current_scope_color, styles = { "nocombine" } },
+        SnacksIndentScope = {
+            fg = current_scope_color,
+            styles = { "nocombine" },
+        },
 
         -- Input.
         -- SnacksBackdrop = {},
@@ -27,8 +42,14 @@ function M.get()
         SnacksInputTitle = { fg = C.foreground, styles = { "bold" } },
 
         -- Profiler.
-        SnacksProfilerIconInfo = { bg = U.blend(C.foreground, C.background, 0.2), fg = C.foreground },
-        SnacksProfilerBadgeInfo = { bg = U.blend(C.foreground, C.background, 0.1), fg = C.foreground },
+        SnacksProfilerIconInfo = {
+            bg = U.blend(C.foreground, C.background, 0.2),
+            fg = C.foreground,
+        },
+        SnacksProfilerBadgeInfo = {
+            bg = U.blend(C.foreground, C.background, 0.1),
+            fg = C.foreground,
+        },
 
         -- Dashboard.
         SnacksDashboardDesc = { fg = C.foreground },
@@ -47,7 +68,10 @@ function M.get()
         SnacksPickerInputTitle = { link = "SnacksTitle" },
         SnacksPickerTitle = { fg = C.color3 },
         SnacksPickerPrompt = { fg = C.color4, styles = { "bold" } },
-        SnacksPickerListCursorLine = { bg = U.blend(C.color4, C.background, 0.2), fg = C.color4 },
+        SnacksPickerListCursorLine = {
+            bg = U.blend(C.color4, C.background, 0.2),
+            fg = C.color4,
+        },
         SnacksPickerPreviewCursorLine = { link = "SnacksPickerListCursorLine" },
 
         -- Notifier.
@@ -94,7 +118,10 @@ function M.get()
                 SnacksPickerTitle = { bg = C.color3, fg = C.background },
                 -- SnacksPickerBox = { bg = C.cursorline },
                 SnacksPickerInput = { bg = C.cursorline },
-                SnacksPickerInputBorder = { bg = C.cursorline, fg = C.cursorline },
+                SnacksPickerInputBorder = {
+                    bg = C.cursorline,
+                    fg = C.cursorline,
+                },
             })
         or hl
 

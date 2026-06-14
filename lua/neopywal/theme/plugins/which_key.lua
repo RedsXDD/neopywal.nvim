@@ -3,15 +3,22 @@ local M = {}
 function M.get()
     return {
         WhichKey = { fg = C.color1 },
-        WhichKeyBorder = { bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.dim_bg },
+        WhichKeyBorder = {
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.dim_bg,
+        },
         WhichKeyDesc = { fg = C.foreground },
         WhichKeyFloat = { link = "WhichKeyNormal" },
         WhichKeyGroup = { fg = C.color6 },
-        WhichKeyNormal = { bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.dim_bg },
+        WhichKeyNormal = {
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.dim_bg,
+        },
         WhichKeySeperator = { link = "WhichKeyValue" },
         WhichKeyValue = { fg = C.comment },
         WhichKeyTitle = {
-            bg = (O.transparent_background and vim.o.winblend == 0) and C.none or C.dim_bg,
+            bg = (O.transparent_background and vim.o.winblend == 0) and C.none
+                or C.dim_bg,
             fg = C.color2,
         },
     }

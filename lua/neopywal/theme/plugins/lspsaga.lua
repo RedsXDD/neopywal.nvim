@@ -1,13 +1,20 @@
 local M = {}
 
 function M.get()
-    local saga_kinds = require("neopywal.utils.kinds").get("Saga%s", { styles = O.plugins.lspsaga.winbar_style or {} })
+    local saga_kinds = require("neopywal.utils.kinds").get(
+        "Saga%s",
+        { styles = O.plugins.lspsaga.winbar_style or {} }
+    )
     local lsp_kinds = require("neopywal.utils.kinds").get("LspKind%s")
     return vim.tbl_deep_extend("force", saga_kinds, lsp_kinds, {
         -- General.
         SagaBeacon = { bg = U.blend(C.color4, C.background, 0.2) },
         RenameNormal = { fg = C.foreground },
-        SagaActionTitle = { bg = C.color6, fg = C.background, styles = { "bold", "italic" } },
+        SagaActionTitle = {
+            bg = C.color6,
+            fg = C.background,
+            styles = { "bold", "italic" },
+        },
         SagaImpIcon = { fg = C.color1 },
         SagaButton = { link = "SagaActionTitle" },
         SagaLightBulb = { link = "DiagnosticHint" },

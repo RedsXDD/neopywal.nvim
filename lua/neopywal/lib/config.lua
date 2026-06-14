@@ -5,9 +5,12 @@ local M = {}
 M.compiler_opts = {
     file_ext = ".luac",
     filename = "neopywal",
-    path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1),
+    path_sep = jit and (jit.os == "Windows" and "\\" or "/")
+        or package.config:sub(1, 1),
 }
-M.compiler_opts.compile_path = vim.fn.stdpath("cache") .. M.compiler_opts.path_sep .. "neopywal"
+M.compiler_opts.compile_path = vim.fn.stdpath("cache")
+    .. M.compiler_opts.path_sep
+    .. "neopywal"
 
 M.default_options = {
     use_palette = {
@@ -50,7 +53,8 @@ M.options = M.default_options
 
 ---@param enable_default_fileformats boolean|nil
 local function setup_fileformats(enable_default_fileformats)
-    local enabled_bydefault = (enable_default_fileformats == nil) and M.default_options.default_fileformats
+    local enabled_bydefault = (enable_default_fileformats == nil)
+            and M.default_options.default_fileformats
         or enable_default_fileformats
 
     return {
@@ -105,7 +109,8 @@ end
 
 ---@param enable_default_plugins boolean|nil
 local function setup_plugins(enable_default_plugins)
-    local enabled_bydefault = (enable_default_plugins == nil) and M.default_options.default_plugins
+    local enabled_bydefault = (enable_default_plugins == nil)
+            and M.default_options.default_plugins
         or enable_default_plugins
 
     return {
@@ -386,7 +391,8 @@ make sure it's one of "all", "warn", "error" or "none".]])
     -- Coc.nvim depends on lsp highlights.
     local coc = M.options.plugins.coc
     local lsp = M.options.plugins.lsp
-    local coc_is_enabled = coc == true or type(coc) == "table" and coc.enabled == true
+    local coc_is_enabled = coc == true
+        or type(coc) == "table" and coc.enabled == true
     if coc_is_enabled then
         if type(lsp) == "boolean" and lsp ~= true then
             lsp = true
@@ -403,7 +409,9 @@ make sure it's one of "all", "warn", "error" or "none".]])
     })
 
     -- Get cached hash.
-    local cached_path = M.compiler_opts.compile_path .. M.compiler_opts.path_sep .. "cached"
+    local cached_path = M.compiler_opts.compile_path
+        .. M.compiler_opts.path_sep
+        .. "cached"
     local file = io.open(cached_path)
     local cached = nil
     if file then

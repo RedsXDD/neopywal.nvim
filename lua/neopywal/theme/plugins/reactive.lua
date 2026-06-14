@@ -23,14 +23,17 @@ function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
-    if type(M.options.color_percentage) == "function" then M.options.color_percentage = M.options.color_percentage() end
+    if type(M.options.color_percentage) == "function" then
+        M.options.color_percentage = M.options.color_percentage()
+    end
     vim.validate({ color_percentage = { M.options.color_percentage, "number" } })
 
     for option in pairs(M.options.mode_colors) do
         local default_color = C[M.default_options.mode_colors[option]]
         local final_color = M.options.mode_colors[option]
         if type(final_color) == "function" then final_color = final_color(C) end
-        final_color = require("neopywal.utils.color").validate(final_color, default_color)
+        final_color =
+            require("neopywal.utils.color").validate(final_color, default_color)
         M.options.mode_colors[option] = final_color
     end
 
@@ -40,10 +43,17 @@ end
 ---@param theme_type string? either "cursor" or "cursorline", defaults to "cursor".
 function M.get(theme_type)
     if not did_setup then M.setup() end
-    if not theme_type or theme_type ~= "cursor" and theme_type ~= "cursorline" then theme_type = "cursor" end
+    if
+        not theme_type
+        or theme_type ~= "cursor" and theme_type ~= "cursorline"
+    then
+        theme_type = "cursor"
+    end
 
     local mode_colors = M.options.mode_colors
-    local function blend(color) return U.blend(color, C.background, M.options.color_percentage) end
+    local function blend(color)
+        return U.blend(color, C.background, M.options.color_percentage)
+    end
 
     local cursor_theme = {
         name = "neopywal-cursor",

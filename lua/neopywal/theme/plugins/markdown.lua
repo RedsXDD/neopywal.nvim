@@ -25,7 +25,8 @@ function M.get()
 
     for i, color in ipairs(require("neopywal.utils.rainbow").get()) do
         hl["RenderMarkdownH" .. i] = { fg = color, bold = true }
-        hl["RenderMarkdownH" .. i .. "Bg"] = { bg = U.blend(color, C.background, 0.2) }
+        hl["RenderMarkdownH" .. i .. "Bg"] =
+            { bg = U.blend(color, C.background, 0.2) }
         hl["RenderMarkdownH" .. i .. "Fg"] = { fg = color, bold = true }
     end
 

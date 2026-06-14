@@ -64,7 +64,8 @@ function M.convert_dark2light_theme(dark_theme)
         local darken_f = 15
         local lighten_f = 50
         local is_white = M.bg_iswhite(palette.background)
-        palette["color" .. i] = is_white and U.darken(palette["color" .. i], darken_f)
+        palette["color" .. i] = is_white
+                and U.darken(palette["color" .. i], darken_f)
             or U.lighten(palette["color" .. i], lighten_f)
     end
 

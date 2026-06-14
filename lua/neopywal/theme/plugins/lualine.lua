@@ -40,7 +40,8 @@ function M.setup(user_config)
         local default_color = C[M.default_options.mode_colors[option]]
         local final_color = M.options.mode_colors[option]
         if type(final_color) == "function" then final_color = final_color(C) end
-        final_color = require("neopywal.utils.color").validate(final_color, default_color)
+        final_color =
+            require("neopywal.utils.color").validate(final_color, default_color)
         M.options.mode_colors[option] = final_color
     end
 
@@ -49,11 +50,21 @@ function M.setup(user_config)
         local properties = {}
 
         for _, style in pairs(section_styles) do
-            if not O.no_italic and style == "italic" then table.insert(properties, style) end
-            if not O.no_bold and style == "bold" then table.insert(properties, style) end
-            if not O.no_underline and style == "underline" then table.insert(properties, style) end
-            if not O.no_undercurl and style == "undercurl" then table.insert(properties, style) end
-            if not O.no_strikethrough and style == "strikethrough" then table.insert(properties, style) end
+            if not O.no_italic and style == "italic" then
+                table.insert(properties, style)
+            end
+            if not O.no_bold and style == "bold" then
+                table.insert(properties, style)
+            end
+            if not O.no_underline and style == "underline" then
+                table.insert(properties, style)
+            end
+            if not O.no_undercurl and style == "undercurl" then
+                table.insert(properties, style)
+            end
+            if not O.no_strikethrough and style == "strikethrough" then
+                table.insert(properties, style)
+            end
         end
 
         final_styles[section] = table.concat(properties, ",")
@@ -71,17 +82,37 @@ function M.get()
     local styles = M.options.styles
 
     -- Fix background colors for separators on the edge of statusline.
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = C.background, fg = C.foreground })
+    vim.api.nvim_set_hl(
+        0,
+        "StatusLine",
+        { bg = C.background, fg = C.foreground }
+    )
 
     neopywal.normal = {
         a = { bg = mode_colors.normal, fg = C.background, gui = styles.a },
         z = { bg = mode_colors.normal, fg = C.background, gui = styles.z },
 
-        b = { bg = U.blend(C.color8, C.background, 0.5), fg = C.foreground, gui = styles.b },
-        y = { bg = U.blend(C.color8, C.background, 0.5), fg = C.foreground, gui = styles.y },
+        b = {
+            bg = U.blend(C.color8, C.background, 0.5),
+            fg = C.foreground,
+            gui = styles.b,
+        },
+        y = {
+            bg = U.blend(C.color8, C.background, 0.5),
+            fg = C.foreground,
+            gui = styles.y,
+        },
 
-        c = { bg = U.blend(C.color8, C.background, 0.3), fg = C.foreground, gui = styles.c },
-        x = { bg = U.blend(C.color8, C.background, 0.3), fg = C.foreground, gui = styles.x },
+        c = {
+            bg = U.blend(C.color8, C.background, 0.3),
+            fg = C.foreground,
+            gui = styles.c,
+        },
+        x = {
+            bg = U.blend(C.color8, C.background, 0.3),
+            fg = C.foreground,
+            gui = styles.x,
+        },
     }
 
     neopywal.visual = {
@@ -113,11 +144,27 @@ function M.get()
         a = { bg = C.color8, fg = C.foreground, gui = styles.a },
         z = { bg = C.color8, fg = C.foreground, gui = styles.z },
 
-        b = { bg = neopywal.normal.b.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.b },
-        y = { bg = neopywal.normal.y.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.y },
+        b = {
+            bg = neopywal.normal.b.bg,
+            fg = U.blend(C.color8, C.foreground, 0.25),
+            gui = styles.b,
+        },
+        y = {
+            bg = neopywal.normal.y.bg,
+            fg = U.blend(C.color8, C.foreground, 0.25),
+            gui = styles.y,
+        },
 
-        c = { bg = neopywal.normal.c.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.c },
-        x = { bg = neopywal.normal.x.bg, fg = U.blend(C.color8, C.foreground, 0.25), gui = styles.x },
+        c = {
+            bg = neopywal.normal.c.bg,
+            fg = U.blend(C.color8, C.foreground, 0.25),
+            gui = styles.c,
+        },
+        x = {
+            bg = neopywal.normal.x.bg,
+            fg = U.blend(C.color8, C.foreground, 0.25),
+            gui = styles.x,
+        },
     }
 
     return neopywal

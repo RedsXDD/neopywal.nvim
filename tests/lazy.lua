@@ -1,7 +1,8 @@
 ---@diagnostic disable: undefined-field, undefined-global
 local cwd = vim.uv.cwd()
 
-local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
+local path_sep = jit and (jit.os == "Windows" and "\\" or "/")
+    or package.config:sub(1, 1)
 if path_sep == "\\" then cwd = cwd:gsub("/", "\\") end
 
 local status, error = pcall(function()
@@ -12,7 +13,13 @@ local status, error = pcall(function()
 
     local lazypath = root .. "/plugins/lazy.nvim"
     if not vim.loop.fs_stat(lazypath) then
-        vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazypath })
+        vim.fn.system({
+            "git",
+            "clone",
+            "--filter=blob:none",
+            "https://github.com/folke/lazy.nvim.git",
+            lazypath,
+        })
     end
     vim.opt.runtimepath:prepend(lazypath)
 

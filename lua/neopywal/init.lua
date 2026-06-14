@@ -22,22 +22,33 @@ function M.load(theme_style)
     if not Config.did_setup then Config.setup() end
     if did_load then
         for name, _ in pairs(package.loaded) do
-            if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
+            if
+                name:match("^neopywal.") and not name:match("^neopywal.lib.")
+            then
+                package.loaded[name] = nil
+            end
         end
     end
 
     local bg = vim.o.background
-    theme_style = (theme_style ~= "dark" and theme_style ~= "light") and bg or theme_style
+    theme_style = (theme_style ~= "dark" and theme_style ~= "light") and bg
+        or theme_style
     if theme_style ~= bg then
         if vim.g.colors_name == "neopywal-" .. theme_style then
-            theme_style = (bg == "light" and theme_style == "dark") and "light" or "dark"
+            theme_style = (bg == "light" and theme_style == "dark") and "light"
+                or "dark"
         else
             vim.o.background = theme_style
         end
     end
 
-    local filename = Config.compiler_opts.filename .. "-" .. theme_style .. Config.compiler_opts.file_ext
-    local compiled_path = Config.compiler_opts.compile_path .. Config.compiler_opts.path_sep .. filename
+    local filename = Config.compiler_opts.filename
+        .. "-"
+        .. theme_style
+        .. Config.compiler_opts.file_ext
+    local compiled_path = Config.compiler_opts.compile_path
+        .. Config.compiler_opts.path_sep
+        .. filename
 
     lock = true
     local f = loadfile(compiled_path)
@@ -53,7 +64,9 @@ function M.load(theme_style)
     local timeout = 1000
     vim.defer_fn(function()
         -- Initialize live reloading on template file changes.
-        if not vim.g.neopywal_disable_reloader then require("neopywal.lib.reloader").init() end
+        if not vim.g.neopywal_disable_reloader then
+            require("neopywal.lib.reloader").init()
+        end
         if not did_commands then
             did_commands = true
             vim.api.nvim_create_user_command(

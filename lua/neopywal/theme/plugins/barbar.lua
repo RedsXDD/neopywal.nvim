@@ -2,21 +2,38 @@ local M = {}
 
 function M.get()
     local current_style = { "bold", "italic" }
-    local fill_bg = O.transparent_background and C.background or U.darken(C.dim_bg, 4)
+    local fill_bg = O.transparent_background and C.background
+        or U.darken(C.dim_bg, 4)
     local unselected_bg = O.transparent_background and C.none or C.dim_bg
     local selected_bg = O.transparent_background and C.none or C.background
     -- local alternate_bg = O.transparent_background and C.none or U.blend(C.background, C.foreground, 0.9)
 
     return {
-        BufferScrollArrow = { bg = fill_bg, fg = C.color8, styles = current_style },
+        BufferScrollArrow = {
+            bg = fill_bg,
+            fg = C.color8,
+            styles = current_style,
+        },
         BufferOffset = { link = "BufferScrollArrow" },
 
         BufferTabpageFill = { bg = fill_bg },
-        BufferTabpages = { bg = selected_bg, fg = C.foreground, styles = current_style },
+        BufferTabpages = {
+            bg = selected_bg,
+            fg = C.foreground,
+            styles = current_style,
+        },
         BufferTabpagesSep = { link = "BufferTabpages" },
 
-        BufferCurrent = { bg = selected_bg, fg = C.foreground, styles = current_style },
-        BufferCurrentIndex = { bg = selected_bg, fg = C.foreground, styles = current_style },
+        BufferCurrent = {
+            bg = selected_bg,
+            fg = C.foreground,
+            styles = current_style,
+        },
+        BufferCurrentIndex = {
+            bg = selected_bg,
+            fg = C.foreground,
+            styles = current_style,
+        },
         BufferCurrentNumber = { link = "BufferCurrentIndex" },
         -- BufferCurrentIcon = {},
         BufferCurrentBtn = { bg = selected_bg, fg = C.color1 },
@@ -26,14 +43,46 @@ function M.get()
         BufferCurrentPinBtn = { bg = selected_bg, fg = C.color1 },
         BufferCurrentSign = { bg = selected_bg, fg = C.color4 },
         BufferCurrentSignRight = { link = "BufferCurrentSign" },
-        BufferCurrentTarget = { bg = selected_bg, fg = C.color6, styles = { "bold", "italic" } },
-        BufferCurrentADDED = { bg = selected_bg, fg = C.diff_added, styles = current_style },
-        BufferCurrentCHANGED = { bg = selected_bg, fg = C.diff_changed, styles = current_style },
-        BufferCurrentDELETED = { bg = selected_bg, fg = C.diff_removed, styles = current_style },
-        BufferCurrentERROR = { bg = selected_bg, fg = C.error, styles = current_style },
-        BufferCurrentWARN = { bg = selected_bg, fg = C.warn, styles = current_style },
-        BufferCurrentHINT = { bg = selected_bg, fg = C.hint, styles = current_style },
-        BufferCurrentINFO = { bg = selected_bg, fg = C.info, styles = current_style },
+        BufferCurrentTarget = {
+            bg = selected_bg,
+            fg = C.color6,
+            styles = { "bold", "italic" },
+        },
+        BufferCurrentADDED = {
+            bg = selected_bg,
+            fg = C.diff_added,
+            styles = current_style,
+        },
+        BufferCurrentCHANGED = {
+            bg = selected_bg,
+            fg = C.diff_changed,
+            styles = current_style,
+        },
+        BufferCurrentDELETED = {
+            bg = selected_bg,
+            fg = C.diff_removed,
+            styles = current_style,
+        },
+        BufferCurrentERROR = {
+            bg = selected_bg,
+            fg = C.error,
+            styles = current_style,
+        },
+        BufferCurrentWARN = {
+            bg = selected_bg,
+            fg = C.warn,
+            styles = current_style,
+        },
+        BufferCurrentHINT = {
+            bg = selected_bg,
+            fg = C.hint,
+            styles = current_style,
+        },
+        BufferCurrentINFO = {
+            bg = selected_bg,
+            fg = C.info,
+            styles = current_style,
+        },
 
         BufferInactive = { bg = unselected_bg, fg = C.color8 },
         BufferInactiveIndex = { link = "BufferInactive" },
@@ -46,7 +95,11 @@ function M.get()
         BufferInactivePinBtn = { link = "BufferInactive" },
         BufferInactiveSign = { bg = fill_bg, fg = fill_bg },
         BufferInactiveSignRight = { link = "BufferInactiveSign" },
-        BufferInactiveTarget = { bg = unselected_bg, fg = C.color6, styles = { "bold", "italic" } },
+        BufferInactiveTarget = {
+            bg = unselected_bg,
+            fg = C.color6,
+            styles = { "bold", "italic" },
+        },
         BufferInactiveADDED = { link = "BufferInactive" },
         BufferInactiveCHANGED = { link = "BufferInactive" },
         BufferInactiveDELETED = { link = "BufferInactive" },

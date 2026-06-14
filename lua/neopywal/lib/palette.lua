@@ -1,5 +1,6 @@
 local M = {}
-local path_sep = jit and (jit.os == "Windows" and "\\" or "/") or package.config:sub(1, 1)
+local path_sep = jit and (jit.os == "Windows" and "\\" or "/")
+    or package.config:sub(1, 1)
 
 -- Reference: https://github.com/catppuccin/catppuccin
 local fallback_p = {
@@ -53,7 +54,9 @@ end
 ---@param theme_style? ThemeStyles
 local function get_minpalette(theme_style)
     if not M.did_setup then M.setup() end
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
+    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+        theme_style = vim.o.background
+    end
 
     -- The gotos statements require me to declare the variables first, weird ...
     local is_sourceable, error_msg
@@ -69,13 +72,17 @@ local function get_minpalette(theme_style)
     end
 
     if M.palette_metadata[theme_style].is_requireable then
-        local could_require, file = pcall(require, M.palette_metadata[theme_style].filepath)
-        if could_require and file.get and type(file.get) == "function" then file.get() end
+        local could_require, file =
+            pcall(require, M.palette_metadata[theme_style].filepath)
+        if could_require and file.get and type(file.get) == "function" then
+            file.get()
+        end
         goto return_palette
     end
 
     ---@diagnostic disable-next-line: param-type-mismatch
-    is_sourceable, error_msg = pcall(vim.cmd, "source " .. M.palette_metadata[theme_style].filepath)
+    is_sourceable, error_msg =
+        pcall(vim.cmd, "source " .. M.palette_metadata[theme_style].filepath)
     if not is_sourceable then
         local Notify = require("neopywal.utils.notify")
         Notify.error(string.format(
@@ -91,8 +98,10 @@ Below is the error message that we captured:
     -- Use fallback colors if template file couldn't be loaded.
     ::return_palette::
     local ret = {
-        background = (vim.g.background ~= nil) and vim.g.background or fallback_p.background,
-        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or fallback_p.foreground,
+        background = (vim.g.background ~= nil) and vim.g.background
+            or fallback_p.background,
+        foreground = (vim.g.foreground ~= nil) and vim.g.foreground
+            or fallback_p.foreground,
         cursor = (vim.g.cursor ~= nil) and vim.g.cursor or fallback_p.cursor,
         color0 = (vim.g.color0 ~= nil) and vim.g.color0 or fallback_p.color0,
         color1 = (vim.g.color1 ~= nil) and vim.g.color1 or fallback_p.color1,
@@ -104,12 +113,18 @@ Below is the error message that we captured:
         color7 = (vim.g.color7 ~= nil) and vim.g.color7 or fallback_p.color7,
         color8 = (vim.g.color8 ~= nil) and vim.g.color8 or fallback_p.color8,
         color9 = (vim.g.color9 ~= nil) and vim.g.color9 or fallback_p.color9,
-        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or fallback_p.color10,
-        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or fallback_p.color11,
-        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or fallback_p.color12,
-        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or fallback_p.color13,
-        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or fallback_p.color14,
-        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or fallback_p.color15,
+        color10 = (vim.g.color10 ~= nil) and vim.g.color10
+            or fallback_p.color10,
+        color11 = (vim.g.color11 ~= nil) and vim.g.color11
+            or fallback_p.color11,
+        color12 = (vim.g.color12 ~= nil) and vim.g.color12
+            or fallback_p.color12,
+        color13 = (vim.g.color13 ~= nil) and vim.g.color13
+            or fallback_p.color13,
+        color14 = (vim.g.color14 ~= nil) and vim.g.color14
+            or fallback_p.color14,
+        color15 = (vim.g.color15 ~= nil) and vim.g.color15
+            or fallback_p.color15,
     }
 
     -- Reset all global variables that have been used.
@@ -133,9 +148,12 @@ function M.setup(config)
     config = config or {}
     M.options = vim.tbl_deep_extend("keep", config, M.default_options)
 
-    if type(M.options.use_palette) == "function" then M.options.use_palette = M.options.use_palette() end
+    if type(M.options.use_palette) == "function" then
+        M.options.use_palette = M.options.use_palette()
+    end
     if type(M.options.use_palette) == "string" then
-        M.options.use_palette = { dark = M.options.use_palette, light = M.options.use_palette }
+        M.options.use_palette =
+            { dark = M.options.use_palette, light = M.options.use_palette }
     end
 
     local cache_dir
@@ -190,12 +208,15 @@ function M.setup(config)
 
             filepath = path_sep == "\\" and filepath:gsub("/", "\\") or filepath
             metadata[theme_style].filepath = filepath
-            metadata[theme_style].is_requireable = builtin_palette_map[value] ~= nil
+            metadata[theme_style].is_requireable = builtin_palette_map[value]
+                ~= nil
 
             if metadata[theme_style].is_requireable then
                 metadata[theme_style].file_exists = true
             else
-                if vim.fn.filereadable(filepath) then metadata[theme_style].file_exists = true end
+                if vim.fn.filereadable(filepath) then
+                    metadata[theme_style].file_exists = true
+                end
             end
 
             M.palette_metadata[theme_style] = metadata[theme_style]
@@ -212,7 +233,9 @@ end
 ---@param extra_colors? CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }
 function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
-    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then theme_style = vim.o.background end
+    if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
+        theme_style = vim.o.background
+    end
 
     local LightTheme = require("neopywal.utils.light")
     local minpalette = get_minpalette(theme_style)
@@ -234,22 +257,30 @@ function M.get(theme_style, minimal_palette, extra_colors)
 
     -- Import from require("neopywal").setup({ custom_colors = {} })
     local custom_colors = M.options.custom_colors
-    if type(custom_colors) == "function" then custom_colors = custom_colors(C) end
+    if type(custom_colors) == "function" then
+        custom_colors = custom_colors(C)
+    end
     ---@cast extra_colors table
     extra_colors = vim.tbl_deep_extend(
         "keep",
 
         -- Handle extra_colors function paramater.
-        type(extra_colors[theme_style]) == "function" and extra_colors[theme_style](C)
+        type(extra_colors[theme_style]) == "function"
+                and extra_colors[theme_style](C)
             or extra_colors[theme_style]
             or {},
-        type(extra_colors.all) == "function" and extra_colors.all(C) or extra_colors.all or {},
+        type(extra_colors.all) == "function" and extra_colors.all(C)
+            or extra_colors.all
+            or {},
 
         -- Handle M.options.custom_colors table
-        type(custom_colors[theme_style]) == "function" and custom_colors[theme_style](C)
+        type(custom_colors[theme_style]) == "function"
+                and custom_colors[theme_style](C)
             or custom_colors[theme_style]
             or {},
-        type(custom_colors.all) == "function" and custom_colors.all(C) or custom_colors.all or {}
+        type(custom_colors.all) == "function" and custom_colors.all(C)
+            or custom_colors.all
+            or {}
     )
 
     local U = require("neopywal.utils.color")

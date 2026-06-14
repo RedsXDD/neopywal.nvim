@@ -55,7 +55,8 @@ function M.get(pattern, append_to_hls)
         if pattern ~= "" then basename = pattern:format(kind) end
 
         if type(append_to_hls) == "table" and next(append_to_hls) ~= nil then
-            hl[basename] = vim.tbl_extend("keep", append_to_hls, kind_properties)
+            hl[basename] =
+                vim.tbl_extend("keep", append_to_hls, kind_properties)
         else
             hl[basename] = kind_properties
         end

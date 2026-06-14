@@ -8,7 +8,11 @@ local Config = require("neopywal.lib.config")
 describe("setup", function()
     before_each(function()
         for name, _ in pairs(package.loaded) do
-            if name:match("^neopywal.") and not name:match("^neopywal.lib.") then package.loaded[name] = nil end
+            if
+                name:match("^neopywal.") and not name:match("^neopywal.lib.")
+            then
+                package.loaded[name] = nil
+            end
         end
 
         for i = 0, 15 do
@@ -31,19 +35,32 @@ describe("setup", function()
     --: doesn't change default options {{{
     it("doesn't change default options", function()
         Neopywal.setup({ transparent_background = true })
-        assert.are_not.equals(Config.options.transparent_background, Config.default_options.transparent_background)
+        assert.are_not.equals(
+            Config.options.transparent_background,
+            Config.default_options.transparent_background
+        )
     end)
     --: }}}
     --: can overwrite fileformats {{{
     it("can overwrite fileformats", function()
-        Neopywal.setup({ fileformats = { lua = not Config.default_options.fileformats.lua } })
-        assert.are_not.equals(Config.options.fileformats.lua, Config.default_options.fileformats.lua)
+        Neopywal.setup({
+            fileformats = { lua = not Config.default_options.fileformats.lua },
+        })
+        assert.are_not.equals(
+            Config.options.fileformats.lua,
+            Config.default_options.fileformats.lua
+        )
     end)
     --: }}}
     --: can overwrite plugins {{{
     it("can overwrite plugins", function()
-        Neopywal.setup({ plugins = { coc = not Config.default_options.plugins.coc } })
-        assert.are_not.equals(Config.options.plugins.coc, Config.default_options.plugins.coc)
+        Neopywal.setup({
+            plugins = { coc = not Config.default_options.plugins.coc },
+        })
+        assert.are_not.equals(
+            Config.options.plugins.coc,
+            Config.default_options.plugins.coc
+        )
     end)
     --: }}}
     --: disables default fileformats {{{
@@ -107,16 +124,28 @@ describe("setup", function()
     --: }}}
     --: default_fileformats has precedence over treesitter {{{
     it("default_fileformats has precedence over treesitter", function()
-        Neopywal.setup({ default_fileformats = true, plugins = { treesitter = true } })
+        Neopywal.setup({
+            default_fileformats = true,
+            plugins = { treesitter = true },
+        })
         assert.equals(Config.options.default_fileformats, true)
 
-        Neopywal.setup({ default_fileformats = false, plugins = { treesitter = false } })
+        Neopywal.setup({
+            default_fileformats = false,
+            plugins = { treesitter = false },
+        })
         assert.equals(Config.options.default_fileformats, false)
 
-        Neopywal.setup({ default_fileformats = false, plugins = { treesitter = true } })
+        Neopywal.setup({
+            default_fileformats = false,
+            plugins = { treesitter = true },
+        })
         assert.equals(Config.options.default_fileformats, false)
 
-        Neopywal.setup({ default_fileformats = true, plugins = { treesitter = false } })
+        Neopywal.setup({
+            default_fileformats = true,
+            plugins = { treesitter = false },
+        })
         assert.equals(Config.options.default_fileformats, true)
     end)
     --: }}}
@@ -144,13 +173,21 @@ describe("setup", function()
         local comment_group_id = vim.api.nvim_get_hl_id_by_name("Comment")
         local comment_values = {
             bold = vim.fn.synIDattr(comment_group_id, "bold", "cterm"),
-            strikethrough = vim.fn.synIDattr(comment_group_id, "strikethrough", "cterm"),
+            strikethrough = vim.fn.synIDattr(
+                comment_group_id,
+                "strikethrough",
+                "cterm"
+            ),
         }
         assert.same(comment_values, { bold = "1", strikethrough = "1" })
 
         local repeat_group_id = vim.api.nvim_get_hl_id_by_name("Repeat")
         local repeat_group_values = {
-            strikethrough = vim.fn.synIDattr(repeat_group_id, "strikethrough", "cterm"),
+            strikethrough = vim.fn.synIDattr(
+                repeat_group_id,
+                "strikethrough",
+                "cterm"
+            ),
         }
         assert.same(repeat_group_values, { strikethrough = "1" })
     end)
@@ -201,7 +238,11 @@ describe("setup", function()
 
         local comment_group_id = vim.api.nvim_get_hl_id_by_name("Comment")
         local comment_values = {
-            underline = vim.fn.synIDattr(comment_group_id, "underline", "cterm"),
+            underline = vim.fn.synIDattr(
+                comment_group_id,
+                "underline",
+                "cterm"
+            ),
         }
         assert.are_not.same(comment_values, { underline = "1" })
     end)
@@ -218,7 +259,11 @@ describe("setup", function()
 
         local comment_group_id = vim.api.nvim_get_hl_id_by_name("Comment")
         local comment_values = {
-            undercurl = vim.fn.synIDattr(comment_group_id, "undercurl", "cterm"),
+            undercurl = vim.fn.synIDattr(
+                comment_group_id,
+                "undercurl",
+                "cterm"
+            ),
         }
         assert.are_not.same(comment_values, { undercurl = "1" })
     end)
@@ -235,7 +280,11 @@ describe("setup", function()
 
         local comment_group_id = vim.api.nvim_get_hl_id_by_name("Comment")
         local comment_values = {
-            strikethrough = vim.fn.synIDattr(comment_group_id, "strikethrough", "cterm"),
+            strikethrough = vim.fn.synIDattr(
+                comment_group_id,
+                "strikethrough",
+                "cterm"
+            ),
         }
         assert.are_not.same(comment_values, { strikethrough = "1" })
     end)
@@ -454,7 +503,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
 
-            local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
+            local color_column_group_id =
+                vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
@@ -486,7 +536,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
 
-            local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
+            local color_column_group_id =
+                vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
@@ -544,7 +595,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
 
-            local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
+            local color_column_group_id =
+                vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
@@ -577,7 +629,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
 
-            local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
+            local color_column_group_id =
+                vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
@@ -639,7 +692,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
 
-            local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
+            local color_column_group_id =
+                vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
@@ -672,7 +726,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(search_group_id, "fg", "gui"),
             }
 
-            local color_column_group_id = vim.api.nvim_get_hl_id_by_name("ColorColumn")
+            local color_column_group_id =
+                vim.api.nvim_get_hl_id_by_name("ColorColumn")
             local color_column_values = {
                 bg = vim.fn.synIDattr(color_column_group_id, "bg", "gui"),
             }
@@ -806,60 +861,69 @@ describe("setup", function()
     end)
     --: }}}
     --: can create highlights if they don't exist using individual functions {{{
-    it("can create highlights if they don't exist using individual functions", function()
-        Neopywal.setup({
-            custom_highlights = {
-                all = function(C) return { NewAll = { bg = C.color3, fg = C.color1 } } end,
-                dark = function(C) return { NewDark = { bg = C.color0, fg = C.color2 } } end,
-                light = function(C) return { NewLight = { bg = C.color7, fg = C.color4 } } end,
-            },
-        })
+    it(
+        "can create highlights if they don't exist using individual functions",
+        function()
+            Neopywal.setup({
+                custom_highlights = {
+                    all = function(C)
+                        return { NewAll = { bg = C.color3, fg = C.color1 } }
+                    end,
+                    dark = function(C)
+                        return { NewDark = { bg = C.color0, fg = C.color2 } }
+                    end,
+                    light = function(C)
+                        return { NewLight = { bg = C.color7, fg = C.color4 } }
+                    end,
+                },
+            })
 
-        local function assert_dark()
-            local C = require("neopywal.lib.palette").get("dark", true, {})
-            vim.cmd.highlight("clear")
-            Neopywal.load("dark")
+            local function assert_dark()
+                local C = require("neopywal.lib.palette").get("dark", true, {})
+                vim.cmd.highlight("clear")
+                Neopywal.load("dark")
 
-            local newall_id = vim.api.nvim_get_hl_id_by_name("NewAll")
-            local newall_values = {
-                bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
-                fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
-            }
+                local newall_id = vim.api.nvim_get_hl_id_by_name("NewAll")
+                local newall_values = {
+                    bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
+                    fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
+                }
 
-            local newdark_id = vim.api.nvim_get_hl_id_by_name("NewDark")
-            local newdark_values = {
-                bg = vim.fn.synIDattr(newdark_id, "bg", "gui"),
-                fg = vim.fn.synIDattr(newdark_id, "fg", "gui"),
-            }
+                local newdark_id = vim.api.nvim_get_hl_id_by_name("NewDark")
+                local newdark_values = {
+                    bg = vim.fn.synIDattr(newdark_id, "bg", "gui"),
+                    fg = vim.fn.synIDattr(newdark_id, "fg", "gui"),
+                }
 
-            assert.same(newall_values, { bg = C.color3, fg = C.color1 })
-            assert.same(newdark_values, { bg = C.color0, fg = C.color2 })
+                assert.same(newall_values, { bg = C.color3, fg = C.color1 })
+                assert.same(newdark_values, { bg = C.color0, fg = C.color2 })
+            end
+
+            local function assert_light()
+                local C = require("neopywal.lib.palette").get("light", true, {})
+                vim.cmd.highlight("clear")
+                Neopywal.load("light")
+
+                local newall_id = vim.api.nvim_get_hl_id_by_name("NewAll")
+                local newall_values = {
+                    bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
+                    fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
+                }
+
+                local newlight_id = vim.api.nvim_get_hl_id_by_name("NewLight")
+                local newlight_values = {
+                    bg = vim.fn.synIDattr(newlight_id, "bg", "gui"),
+                    fg = vim.fn.synIDattr(newlight_id, "fg", "gui"),
+                }
+
+                assert.same(newall_values, { bg = C.color3, fg = C.color1 })
+                assert.same(newlight_values, { bg = C.color7, fg = C.color4 })
+            end
+
+            assert_dark()
+            assert_light()
         end
-
-        local function assert_light()
-            local C = require("neopywal.lib.palette").get("light", true, {})
-            vim.cmd.highlight("clear")
-            Neopywal.load("light")
-
-            local newall_id = vim.api.nvim_get_hl_id_by_name("NewAll")
-            local newall_values = {
-                bg = vim.fn.synIDattr(newall_id, "bg", "gui"),
-                fg = vim.fn.synIDattr(newall_id, "fg", "gui"),
-            }
-
-            local newlight_id = vim.api.nvim_get_hl_id_by_name("NewLight")
-            local newlight_values = {
-                bg = vim.fn.synIDattr(newlight_id, "bg", "gui"),
-                fg = vim.fn.synIDattr(newlight_id, "fg", "gui"),
-            }
-
-            assert.same(newall_values, { bg = C.color3, fg = C.color1 })
-            assert.same(newlight_values, { bg = C.color7, fg = C.color4 })
-        end
-
-        assert_dark()
-        assert_light()
-    end)
+    )
     --: }}}
     --: can overwrite existing highlight group links {{{
     it("can overwrite existing highlight group links", function()
@@ -908,7 +972,8 @@ describe("setup", function()
                 fg = vim.fn.synIDattr(all_id, "fg", "gui"),
             }
 
-            local light_id = vim.api.nvim_get_hl_id_by_name("TestHighlightLight")
+            local light_id =
+                vim.api.nvim_get_hl_id_by_name("TestHighlightLight")
             local light_values = {
                 fg = vim.fn.synIDattr(light_id, "fg", "gui"),
             }
@@ -922,124 +987,144 @@ describe("setup", function()
     end)
     --: }}}
     --: can overwrite existing highlight group links using a function {{{
-    it("can overwrite existing highlight group links using a function", function()
-        vim.api.nvim_set_hl(0, "TestHighlightAll", { link = "Normal" })
-        vim.api.nvim_set_hl(0, "TestHighlightDark", { link = "Normal" })
-        vim.api.nvim_set_hl(0, "TestHighlightLight", { link = "Normal" })
+    it(
+        "can overwrite existing highlight group links using a function",
+        function()
+            vim.api.nvim_set_hl(0, "TestHighlightAll", { link = "Normal" })
+            vim.api.nvim_set_hl(0, "TestHighlightDark", { link = "Normal" })
+            vim.api.nvim_set_hl(0, "TestHighlightLight", { link = "Normal" })
 
-        Neopywal.setup({
-            custom_highlights = function(C)
-                return {
-                    all = {
-                        TestHighlightAll = { fg = C.color1 },
-                    },
-                    dark = {
-                        TestHighlightDark = { fg = C.color2 },
-                    },
-                    light = {
-                        TestHighlightLight = { fg = C.color4 },
-                    },
+            Neopywal.setup({
+                custom_highlights = function(C)
+                    return {
+                        all = {
+                            TestHighlightAll = { fg = C.color1 },
+                        },
+                        dark = {
+                            TestHighlightDark = { fg = C.color2 },
+                        },
+                        light = {
+                            TestHighlightLight = { fg = C.color4 },
+                        },
+                    }
+                end,
+            })
+
+            local function assert_dark()
+                local C = require("neopywal.lib.palette").get("dark", true, {})
+                vim.cmd.highlight("clear")
+                Neopywal.load("dark")
+
+                local all_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
+                local all_values = {
+                    fg = vim.fn.synIDattr(all_id, "fg", "gui"),
                 }
-            end,
-        })
 
-        local function assert_dark()
-            local C = require("neopywal.lib.palette").get("dark", true, {})
-            vim.cmd.highlight("clear")
-            Neopywal.load("dark")
+                local dark_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightDark")
+                local dark_values = {
+                    fg = vim.fn.synIDattr(dark_id, "fg", "gui"),
+                }
 
-            local all_id = vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
-            local all_values = {
-                fg = vim.fn.synIDattr(all_id, "fg", "gui"),
-            }
+                assert.same(all_values, { fg = C.color1 })
+                assert.same(dark_values, { fg = C.color2 })
+            end
 
-            local dark_id = vim.api.nvim_get_hl_id_by_name("TestHighlightDark")
-            local dark_values = {
-                fg = vim.fn.synIDattr(dark_id, "fg", "gui"),
-            }
+            local function assert_light()
+                local C = require("neopywal.lib.palette").get("light", true, {})
 
-            assert.same(all_values, { fg = C.color1 })
-            assert.same(dark_values, { fg = C.color2 })
+                vim.cmd.highlight("clear")
+                Neopywal.load("light")
+
+                local all_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
+                local all_values = {
+                    fg = vim.fn.synIDattr(all_id, "fg", "gui"),
+                }
+
+                local light_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightLight")
+                local light_values = {
+                    fg = vim.fn.synIDattr(light_id, "fg", "gui"),
+                }
+
+                assert.same(all_values, { fg = C.color1 })
+                assert.same(light_values, { fg = C.color4 })
+            end
+
+            assert_dark()
+            assert_light()
         end
-
-        local function assert_light()
-            local C = require("neopywal.lib.palette").get("light", true, {})
-
-            vim.cmd.highlight("clear")
-            Neopywal.load("light")
-
-            local all_id = vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
-            local all_values = {
-                fg = vim.fn.synIDattr(all_id, "fg", "gui"),
-            }
-
-            local light_id = vim.api.nvim_get_hl_id_by_name("TestHighlightLight")
-            local light_values = {
-                fg = vim.fn.synIDattr(light_id, "fg", "gui"),
-            }
-
-            assert.same(all_values, { fg = C.color1 })
-            assert.same(light_values, { fg = C.color4 })
-        end
-
-        assert_dark()
-        assert_light()
-    end)
+    )
     --: }}}
     --: can overwrite existing highlight group links using individual functions {{{
-    it("can overwrite existing highlight group links using individual functions", function()
-        vim.api.nvim_set_hl(0, "TestHighlightAll", { link = "Normal" })
-        vim.api.nvim_set_hl(0, "TestHighlightDark", { link = "Normal" })
-        vim.api.nvim_set_hl(0, "TestHighlightLight", { link = "Normal" })
+    it(
+        "can overwrite existing highlight group links using individual functions",
+        function()
+            vim.api.nvim_set_hl(0, "TestHighlightAll", { link = "Normal" })
+            vim.api.nvim_set_hl(0, "TestHighlightDark", { link = "Normal" })
+            vim.api.nvim_set_hl(0, "TestHighlightLight", { link = "Normal" })
 
-        Neopywal.setup({
-            custom_highlights = {
-                all = function(C) return { TestHighlightAll = { fg = C.color1 } } end,
-                dark = function(C) return { TestHighlightDark = { fg = C.color2 } } end,
-                light = function(C) return { TestHighlightLight = { fg = C.color4 } } end,
-            },
-        })
+            Neopywal.setup({
+                custom_highlights = {
+                    all = function(C)
+                        return { TestHighlightAll = { fg = C.color1 } }
+                    end,
+                    dark = function(C)
+                        return { TestHighlightDark = { fg = C.color2 } }
+                    end,
+                    light = function(C)
+                        return { TestHighlightLight = { fg = C.color4 } }
+                    end,
+                },
+            })
 
-        local function assert_dark()
-            local C = require("neopywal.lib.palette").get("dark", true, {})
-            vim.cmd.highlight("clear")
-            Neopywal.load("dark")
+            local function assert_dark()
+                local C = require("neopywal.lib.palette").get("dark", true, {})
+                vim.cmd.highlight("clear")
+                Neopywal.load("dark")
 
-            local all_id = vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
-            local all_values = {
-                fg = vim.fn.synIDattr(all_id, "fg", "gui"),
-            }
+                local all_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
+                local all_values = {
+                    fg = vim.fn.synIDattr(all_id, "fg", "gui"),
+                }
 
-            local dark_id = vim.api.nvim_get_hl_id_by_name("TestHighlightDark")
-            local dark_values = {
-                fg = vim.fn.synIDattr(dark_id, "fg", "gui"),
-            }
+                local dark_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightDark")
+                local dark_values = {
+                    fg = vim.fn.synIDattr(dark_id, "fg", "gui"),
+                }
 
-            assert.same(all_values, { fg = C.color1 })
-            assert.same(dark_values, { fg = C.color2 })
+                assert.same(all_values, { fg = C.color1 })
+                assert.same(dark_values, { fg = C.color2 })
+            end
+
+            local function assert_light()
+                local C = require("neopywal.lib.palette").get("light", true, {})
+                vim.cmd.highlight("clear")
+                Neopywal.load("light")
+
+                local all_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
+                local all_values = {
+                    fg = vim.fn.synIDattr(all_id, "fg", "gui"),
+                }
+
+                local light_id =
+                    vim.api.nvim_get_hl_id_by_name("TestHighlightLight")
+                local light_values = {
+                    fg = vim.fn.synIDattr(light_id, "fg", "gui"),
+                }
+
+                assert.same(all_values, { fg = C.color1 })
+                assert.same(light_values, { fg = C.color4 })
+            end
+
+            assert_dark()
+            assert_light()
         end
-
-        local function assert_light()
-            local C = require("neopywal.lib.palette").get("light", true, {})
-            vim.cmd.highlight("clear")
-            Neopywal.load("light")
-
-            local all_id = vim.api.nvim_get_hl_id_by_name("TestHighlightAll")
-            local all_values = {
-                fg = vim.fn.synIDattr(all_id, "fg", "gui"),
-            }
-
-            local light_id = vim.api.nvim_get_hl_id_by_name("TestHighlightLight")
-            local light_values = {
-                fg = vim.fn.synIDattr(light_id, "fg", "gui"),
-            }
-
-            assert.same(all_values, { fg = C.color1 })
-            assert.same(light_values, { fg = C.color4 })
-        end
-
-        assert_dark()
-        assert_light()
-    end)
+    )
     --: }}}
 end)

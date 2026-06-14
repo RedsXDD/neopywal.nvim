@@ -42,7 +42,11 @@ local function make_bitop(t)
     return make_bitop_uncached(op2, 2 ^ (t.n or 1))
 end
 
-local bxor = make_bitop({ [0] = { [0] = 0, [1] = 1 }, [1] = { [0] = 1, [1] = 0 }, n = 4 })
+local bxor = make_bitop({
+    [0] = { [0] = 0, [1] = 1 },
+    [1] = { [0] = 1, [1] = 0 },
+    n = 4,
+})
 
 local lshift, rshift
 

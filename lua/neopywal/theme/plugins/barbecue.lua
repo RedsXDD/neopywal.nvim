@@ -45,11 +45,17 @@ function M.get()
 
         ellipsis = { fg = background_color },
         modified = { fg = C.diff_changed },
-        separator = { bg = background_color, fg = M.options.hide_separator and background_color or context_color },
+        separator = {
+            bg = background_color,
+            fg = M.options.hide_separator and background_color or context_color,
+        },
 
         context = { fg = context_color, styles = M.options.context_style or {} },
         dirname = { fg = dirname_color, styles = M.options.dirname_style or {} },
-        basename = { fg = C.foreground, styles = M.options.basename_style or {} },
+        basename = {
+            fg = C.foreground,
+            styles = M.options.basename_style or {},
+        },
 
         context_array = kinds.Array,
         context_boolean = kinds.Boolean,
@@ -79,16 +85,27 @@ function M.get()
         context_variable = kinds.Variable,
     }
 
-    local final_theme = vim.tbl_deep_extend("keep", M.options.theme, default_theme)
+    local final_theme =
+        vim.tbl_deep_extend("keep", M.options.theme, default_theme)
     for _, properties in pairs(final_theme) do
         if properties.styles then
             for _, style in pairs(properties.styles) do
                 properties[style] = true
-                if O.no_italic and style == "italic" then properties[style] = false end
-                if O.no_bold and style == "bold" then properties[style] = false end
-                if O.no_underline and style == "underline" then properties[style] = false end
-                if O.no_undercurl and style == "undercurl" then properties[style] = false end
-                if O.no_strikethrough and style == "strikethrough" then properties[style] = false end
+                if O.no_italic and style == "italic" then
+                    properties[style] = false
+                end
+                if O.no_bold and style == "bold" then
+                    properties[style] = false
+                end
+                if O.no_underline and style == "underline" then
+                    properties[style] = false
+                end
+                if O.no_undercurl and style == "undercurl" then
+                    properties[style] = false
+                end
+                if O.no_strikethrough and style == "strikethrough" then
+                    properties[style] = false
+                end
             end
         end
         properties.styles = nil

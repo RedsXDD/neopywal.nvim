@@ -30,7 +30,13 @@ function M.validate(hex_color, fallback_color)
     fallback_color = fallback_color or ""
 
     local hex_chars = "[abcdef0-9][abcdef0-9]"
-    local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
+    local pattern = "^#("
+        .. hex_chars
+        .. ")("
+        .. hex_chars
+        .. ")("
+        .. hex_chars
+        .. ")$"
 
     hex_color = hex_color ~= "" and hex_color or fallback_color
     hex_color = string.lower(hex_color)
@@ -43,10 +49,19 @@ end
 
 function M.hexToRgb(hex_color)
     local hex_chars = "[abcdef0-9][abcdef0-9]"
-    local pattern = "^#(" .. hex_chars .. ")(" .. hex_chars .. ")(" .. hex_chars .. ")$"
+    local pattern = "^#("
+        .. hex_chars
+        .. ")("
+        .. hex_chars
+        .. ")("
+        .. hex_chars
+        .. ")$"
     hex_color = string.lower(hex_color)
 
-    assert(string.find(hex_color, pattern) ~= nil, "hex_to_rgb: invalid hex_str: " .. tostring(hex_color))
+    assert(
+        string.find(hex_color, pattern) ~= nil,
+        "hex_to_rgb: invalid hex_str: " .. tostring(hex_color)
+    )
 
     local r, g, b = string.match(hex_color, pattern)
     return {
@@ -82,7 +97,9 @@ end
 
 function M.blend(color1, color2, percentage)
     -- Convert factor to a number if it's a hex string. Making sure it's betwheen 0 and 1.
-    percentage = type(percentage) == "string" and math.abs((tonumber(percentage, 16) / 0xff)) or math.abs(percentage)
+    percentage = type(percentage) == "string"
+            and math.abs((tonumber(percentage, 16) / 0xff))
+        or math.abs(percentage)
 
     -- Convert hex colors to RGB.
     local rgb_color1 = M.hexToRgb(color1)
@@ -90,12 +107,19 @@ function M.blend(color1, color2, percentage)
 
     -- Function to blend a single color channel.
     local blendChannel = function(i)
-        local result = (percentage * rgb_color1[i] + ((1 - percentage) * rgb_color2[i]))
+        local result = (
+            percentage * rgb_color1[i] + ((1 - percentage) * rgb_color2[i])
+        )
         return ensureColor(result)
     end
 
     -- Convert the blended RGB color back to hexadecimal and return it.
-    return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
+    return string.format(
+        "#%02x%02x%02x",
+        blendChannel(1),
+        blendChannel(2),
+        blendChannel(3)
+    )
 end
 
 function M.darken(color, factor)
@@ -109,7 +133,12 @@ function M.darken(color, factor)
     end
 
     -- Convert the darkened RGB color back to hexadecimal and return it.
-    return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
+    return string.format(
+        "#%02x%02x%02x",
+        blendChannel(1),
+        blendChannel(2),
+        blendChannel(3)
+    )
 end
 
 function M.lighten(color, factor)
@@ -123,7 +152,12 @@ function M.lighten(color, factor)
     end
 
     -- Convert the lightened RGB color back to hexadecimal and return it.
-    return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
+    return string.format(
+        "#%02x%02x%02x",
+        blendChannel(1),
+        blendChannel(2),
+        blendChannel(3)
+    )
 end
 
 function M.blacken(color, percentage)
@@ -170,9 +204,11 @@ local function saturate(color, percentage)
     if rgb_intensity.mid == rgb_intensity.min then
         new_intensities.mid = new_intensities.min
     else
-        local intensity_proportion = (rgb_intensity.max - rgb_intensity.mid) / (rgb_intensity.mid - rgb_intensity.min)
-        new_intensities.mid = (intensity_proportion * new_intensities.min + rgb_intensity.max)
-            / (intensity_proportion + 1)
+        local intensity_proportion = (rgb_intensity.max - rgb_intensity.mid)
+            / (rgb_intensity.mid - rgb_intensity.min)
+        new_intensities.mid = (
+            intensity_proportion * new_intensities.min + rgb_intensity.max
+        ) / (intensity_proportion + 1)
     end
 
     for i, v in pairs(new_intensities) do
@@ -180,7 +216,13 @@ local function saturate(color, percentage)
     end
 
     table.sort(new_intensities)
-    return (M.RgbToHex({ new_intensities.max, new_intensities.min, new_intensities.mid }))
+    return (
+        M.RgbToHex({
+            new_intensities.max,
+            new_intensities.min,
+            new_intensities.mid,
+        })
+    )
 end
 
 local function desaturate(color, percentage)
