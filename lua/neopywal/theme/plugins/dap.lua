@@ -7,7 +7,7 @@ function M.get()
         DapBreakpointRejected = { fg = C.error },
         DapLogPoint = { fg = C.color4 },
         DapStopped = { fg = C.color5 },
-        DapStoppedLine = { bg = C.warn }, -- Used for "Warning" diagnostic virtual text
+        DapStoppedLine = { bg = U.blend(C.warn, C.background, 0.2) }, -- Used for "Warning" diagnostic virtual text
     }
 end
 
