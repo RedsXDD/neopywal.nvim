@@ -343,7 +343,11 @@ local function setup_plugins(enable_default_plugins)
             test = enabled_bydefault,
             trailspace = {
                 enabled = enabled_bydefault,
-                color = "",
+                style = { "underdouble" },
+                color = {
+                    bg = "",
+                    fg = "",
+                },
             },
         },
     }

@@ -377,7 +377,7 @@
 ---@field surround BasicModule?
 ---@field tabline BasicModule?
 ---@field test BasicModule?
----@field trailspace {enabled: boolean, color: ValidColorOptions?} | boolean?
+---@field trailspace {enabled: boolean, style: HighlightStyles[]?, color: { bg: ValidColorOptions?, fg: ValidColorOptions? }? } | boolean?
 
 ---@class NeopywalPluginsBarbecue
 ---@field default_options NeopywalPluginsBarbecueOptions

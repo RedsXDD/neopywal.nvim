@@ -1558,13 +1558,24 @@ require("neopywal").setup({
         mini = {
             trailspace = {
                 enabled = true,
+                style = { "underdouble" },
 
-                -- Can either be:
+                -- These options can either be:
                 --   - A color exported by "get_colors()" (e.g.: `color8`)
                 --   - A hexadecimal color (e.g.: "#ff0000").
                 --   - A function with an optional "C" parameter that returns one of the two options above.
                 --     e.g: function(C) return C.color1 end
-                color = "",
+                color = {
+                    bg = "",
+                    fg = "",
+                },
+
+                -- NOTE: the `color` table in of itself
+                -- can be a string for configuration.
+                --   E.g.:
+                --     color = "warn",
+                --   which is exactly the same as:
+                --     color = { bg = "warn", fg = "warn" },
             }
         }
     }
