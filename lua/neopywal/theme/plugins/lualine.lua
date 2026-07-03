@@ -3,8 +3,7 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 
----@type NeopywalPluginsLualine
----@diagnostic disable-next-line: missing-fields
+---@class Neopywal.theme.plugins.lualine
 local M = {}
 local O = require("neopywal.lib.config").options
 local C = require("neopywal.lib.palette").get()
@@ -31,7 +30,7 @@ M.default_options = {
 M.options = M.default_options
 
 local did_setup = false
----@param user_config NeopywalPluginsLualineOptions?
+---@param user_config Neopywal.theme.plugins.lualine.options?
 function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)

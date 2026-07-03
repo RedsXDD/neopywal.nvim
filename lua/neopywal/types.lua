@@ -1,24 +1,40 @@
----@class ValidHighlights
----@field fg string?
----@field bg string?
----@field style HighlightStyles[]?
----@field link string?
+--- vim:fileencoding=utf-8:foldmethod=marker:foldenable
+--- Boilerplate {{{
+---@class Neopywal.valid_highlights
+---@field bg? string
+---@field blend? number
+---@field ctermbg? string
+---@field ctermfg? string
+---@field fg? string
+---@field font? string
+---@field gui? NeopywalAlias.highlight_styles[]
+---@field guibg? string
+---@field guifg? string
+---@field guisp? string
+---@field link? string
+---@field style? NeopywalAlias.highlight_styles[]
 
----@class CustomHighlightsOption
----@field all? { [string]: ValidHighlights? } | fun(C: table<ValidColors[]>?): { [string]: ValidHighlights? }
----@field dark? { [string]: ValidHighlights? } | fun(C: table<ValidColors[]>?): { [string]: ValidHighlights? }
----@field light? { [string]: ValidHighlights? } | fun(C: table<ValidColors[]>?): { [string]: ValidHighlights? }
+---@alias NeopywalAlias.theme_styles "dark" | "light"
+---@alias NeopywalAlias.basic_module boolean | { enabled: boolean }
+---@alias NeopywalAlias.basic_module.get { [string]: table<Neopywal.valid_highlights> }
+---@alias NeopywalAlias.valid_color_options string<string<NeopywalAlias.valid_colors[]> | fun(C: table<NeopywalAlias.valid_colors[]>?): NeopywalAlias.valid_colors[]? | "">
+---@alias NeopywalAlias.highlight_styles
+---| "bold"
+---| "underline"
+---| "undercurl"
+---| "underdouble"
+---| "underdotted"
+---| "underdashed"
+---| "strikethrough"
+---| "reverse"
+---| "inverse"
+---| "italic"
+---| "standout"
+---| "altfont"
+---| "nocombine"
+---| "NONE"
 
----@class CustomColorsOption
----@field all? { [string]: string? } | fun(C: table<ValidColors[]>?): { [string]: string? }
----@field dark? { [string]: string? } | fun(C: table<ValidColors[]>?): { [string]: string? }
----@field light? { [string]: string? } | fun(C: table<ValidColors[]>?): { [string]: string? }
-
----@alias BasicModule {enabled: boolean} | boolean
----@alias ThemeStyles "dark" | "light" | nil
----@alias HighlightStyles "bold" | "underline" | "undercurl" | "underdouble" | "underdotted" | "underdashed" | "strikethrough" | "reverse" | "inverse" | "italic" | "standout" | "altfont" | "nocombine" | "NONE"
----@alias ValidColorOptions string<string<ValidColors[]> | fun(C: table<ValidColors[]>?): ValidColors[]? | "">
----@alias ValidColors
+---@alias NeopywalAlias.valid_colors --
 ---| "background"
 ---| "foreground"
 ---| "cursor"
@@ -85,7 +101,7 @@
 ---| "delimiter"
 ---| "specialcomment"
 
----@class NeopywalMinimalPalette
+---@class Neopywal.minimal_palette
 ---@field none string
 ---@field background string
 ---@field foreground string
@@ -107,7 +123,7 @@
 ---@field color14 string
 ---@field color15 string
 
----@class NeopywalPalette
+---@class Neopywal.palette
 ---@field none string
 ---@field background string
 ---@field foreground string
@@ -174,269 +190,700 @@
 ---@field tag string
 ---@field delimiter string
 ---@field specialcomment string
-
----@class Neopywal
----@field get_colors fun(theme_style: ThemeStyles?, minimal_palette: boolean?, extra_colors: CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }?): NeopywalPalette
----@field load fun(theme_style: ThemeStyles?)
----@field setup fun(user_config: NeopywalOptions?)
-
----@class Compiler
+-- }}}
+---@class Neopywal{{{
+---@field load fun(theme_style?: NeopywalAlias.theme_styles)
+---@field setup fun(user_config?: Neopywal.lib.config.options)
+---@field get_colors fun(
+---    theme_style?: NeopywalAlias.theme_styles,
+---    minimal_palette?: boolean,
+---    extra_colors?: Neopywal.lib.config.options.custom_colors | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: string }): Neopywal.palette
+-- }}}
+---@class Neopywal.lib.compiler{{{
 ---@field compile fun()
----@field recompile fun(notify: boolean?)
-
----@class NeopywalConfig
----@field compiler_opts {file_ext: string, filename: string, compile_path: string, path_sep: string}
----@field default_options NeopywalOptions
----@field options NeopywalOptions
----@field setup fun(user_config: NeopywalOptions?)
----@field reset fun()
+---@field recompile fun(notify?: boolean)
+-- }}}
+---@class Neopywal.lib.palette{{{
+---@field palette_metadate Neopywal.lib.palette.palette_metadata
 ---@field did_setup boolean
+---@field default_options Neopywal.lib.palette.options
+---@field options Neopywal.lib.palette.options
+---@field getftime fun(): Neopywal.lib.palette.getftime
+---@field setup fun(config?: Neopywal.lib.palette.options)
+---@field get fun(
+---    theme_style?: NeopywalAlias.theme_styles,
+---    minimal_palette?: boolean,
+---    extra_colors?: Neopywal.lib.config.options.custom_colors | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: string }): Neopywal.palette
 
----@class NeopywalOptions
----@field use_palette {dark: string?, light: string?} | string?
----@field transparent_background boolean?
----@field dim_inactive boolean?
----@field terminal_colors boolean?
----@field show_end_of_buffer boolean?
----@field show_split_lines boolean?
+---@class Neopywal.lib.palette.options
+---@field use_palette Neopywal.lib.config.options.use_palette
+---@field custom_colors Neopywal.lib.config.options.custom_colors
+
+---@class Neopywal.lib.palette.getftime
+---@field dark number
+---@field light number
+
+---@class Neopywal.lib.palette.palette_metadata
+---@field dark Neopywal.lib.palette.palette_metadata-fields
+---@field light Neopywal.lib.palette.palette_metadata-fields
+
+---@class Neopywal.lib.palette.palette_metadata-fields
+---@field filepath? string
+---@field is_requireable? boolean
+---@field file_exists? boolean
+-- }}}
+---@class Neopywal.lib.mapper{{{
+---@field get fun(theme_style?: NeopywalAlias.theme_styles): Neopywal.lib.mapper.get
+
+---@class Neopywal.lib.mapper.get
+---@field editor NeopywalAlias.basic_module.get
+---@field syntax NeopywalAlias.basic_module.get
+---@field terminal { [string]: string<Neopywal.palette> }
+---@field fileformats NeopywalAlias.basic_module.get
+---@field plugins NeopywalAlias.basic_module.get
+---@field custom_highlights Neopywal.lib.config.options.custom_highlights
+-- }}}
+---@class Neopywal.lib.config{{{
+---@field compiler_opts Neopywal.lib.config.compiler_opts
+---@field default_options Neopywal.lib.config.options
+---@field did_setup boolean
+---@field options Neopywal.lib.config.options
+---@field reset fun()
+---@field setup fun(user_config?: Neopywal.lib.config.options)
+-- }}}
+---@class Neopywal.lib.config.compiler_opts{{{
+---@field file_ext string
+---@field filename string
+---@field compile_path string
+---@field path_sep string
+-- }}}
+---@class Neopywal.lib.config.options{{{
+---@field use_palette? string | Neopywal.lib.config.options.use_palette
+---@field transparent_background? boolean
+---@field dim_inactive? boolean
+---@field terminal_colors? boolean
+---@field show_end_of_buffer? boolean
+---@field show_split_lines? boolean
 ---@field notify? "all" | "warn" | "error" | "none"
----@field no_italic boolean?
----@field no_bold boolean?
----@field no_underline boolean?
----@field no_undercurl boolean?
----@field no_strikethrough boolean?
----@field styles NeopywalStyles?
----@field custom_colors? CustomColorsOption | fun(C: table<ValidColors[]>?): CustomColorsOption?
----@field custom_highlights? CustomHighlightsOption | fun(C: table<ValidColors[]>?): CustomHighlightsOption?
----@field default_fileformats boolean?
----@field default_plugins boolean?
----@field fileformats NeopywalFileformats?
----@field plugins NeopywalPlugins?
-
----@class NeopywalStyles
----@field comments HighlightStyles[]?
----@field conditionals HighlightStyles[]?
----@field loops HighlightStyles[]?
----@field functions HighlightStyles[]?
----@field keywords HighlightStyles[]?
----@field includes HighlightStyles[]?
----@field strings HighlightStyles[]?
----@field variables HighlightStyles[]?
----@field numbers HighlightStyles[]?
----@field booleans HighlightStyles[]?
----@field types HighlightStyles[]?
----@field operators HighlightStyles[]?
-
----@class NeopywalFileformats
----@field c_cpp BasicModule?
----@field c_sharp BasicModule?
----@field clojure BasicModule?
----@field cmake BasicModule?
----@field common_lisp BasicModule?
----@field css BasicModule?
----@field dart BasicModule?
----@field diff BasicModule?
----@field elixir BasicModule?
----@field erlang BasicModule?
----@field git_commit BasicModule?
----@field go BasicModule?
----@field haskell BasicModule?
----@field help BasicModule?
----@field html BasicModule?
----@field ini BasicModule?
----@field java BasicModule?
----@field javascript BasicModule?
----@field javascript_react BasicModule?
----@field json BasicModule?
----@field kotlin BasicModule?
----@field latex BasicModule?
----@field less BasicModule?
----@field lua BasicModule?
----@field makefile BasicModule?
----@field markdown BasicModule?
----@field matlab BasicModule?
----@field objectivec BasicModule?
----@field ocaml BasicModule?
----@field perl BasicModule?
----@field php BasicModule?
----@field powershell BasicModule?
----@field python BasicModule?
----@field restructuredtext BasicModule?
----@field ruby BasicModule?
----@field rust BasicModule?
----@field sass BasicModule?
----@field scala BasicModule?
----@field shell BasicModule?
----@field swift BasicModule?
----@field toml BasicModule?
----@field typescript BasicModule?
----@field viml BasicModule?
----@field xml BasicModule?
----@field yaml BasicModule?
----@field zsh BasicModule?
-
----@class NeopywalPlugins
----@field aerial BasicModule?
----@field ale BasicModule?
----@field alpha BasicModule?
----@field barbar BasicModule?
----@field beacon {enabled: boolean, color: ValidColorOptions?} | boolean?
----@field coc BasicModule?
----@field colorful_winsep {enabled: boolean, color: ValidColorOptions?} | boolean?
----@field dadbod_ui BasicModule?
----@field dap BasicModule?
----@field dap_ui BasicModule?
----@field dashboard BasicModule?
----@field diffview BasicModule?
----@field dropbar {enabled: boolean, colored_text: boolean?}?
----@field fern BasicModule?
----@field flash {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field fzf BasicModule?
----@field git_gutter BasicModule?
----@field gitsigns BasicModule?
----@field glyph_palette BasicModule?
----@field grug_far BasicModule?
----@field harpoon BasicModule?
----@field headlines BasicModule?
----@field hop {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field illuminate {enabled: boolean, lsp: boolean?, style: HighlightStyles[]?} | boolean?
----@field indent_blankline {enabled: boolean, scope_color: ValidColorOptions?, colored_indent_levels: boolean?} | boolean?
----@field indentmini {enabled: boolean, scope_color: ValidColorOptions?, current_scope_color: ValidColorOptions?} | boolean?
----@field lazy BasicModule?
----@field lazygit BasicModule?
----@field leap {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field lir {enabled: boolean, git_status: boolean?} | boolean?
----@field lsp NeopywalPluginsLSP | boolean?
----@field lspsaga {enabled: boolean, dim_folder: boolean?, dim_filename: boolean?, dim_separator: boolean?, winbar_style: HighlightStyles[]?} | boolean?
----@field markdown BasicModule?
----@field mason BasicModule?
----@field navbuddy BasicModule?
----@field navic {enabled: boolean, dim_text: boolean?, hide_separator: boolean?, bg_color: ValidColorOptions?} | boolean?
----@field neogit BasicModule?
----@field neotest BasicModule?
----@field neotree BasicModule?
----@field netrw BasicModule?
----@field noice BasicModule?
----@field NormalNvim BasicModule?
----@field notifier BasicModule?
----@field notify BasicModule?
----@field nvim_cmp BasicModule?
----@field nvimtree BasicModule?
----@field octo BasicModule?
----@field overseer BasicModule?
----@field pounce {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field rainbow BasicModule?
----@field sandwich BasicModule?
----@field scrollbar BasicModule?
----@field snacks {enabled: boolean, style: "classic" | "nvchad" | nil?, scope_color: ValidColorOptions?, current_scope_color: ValidColorOptions?} | boolean?
----@field sneak {enabled: boolean, sneak_color: ValidColorOptions?, style: HighlightStyles[]?} | boolean?
----@field surround BasicModule?
----@field symbols_outline BasicModule?
----@field telekasten BasicModule?
----@field telescope {enabled: boolean, style: "classic" | "nvchad" | nil?} | boolean?
----@field todo_comments {enabled: boolean, style: {fix: HighlightStyles[]?, hack: HighlightStyles[]?, todo: HighlightStyles[]?, note: HighlightStyles[]?, perf: HighlightStyles[]?, test: HighlightStyles[]?, warn: HighlightStyles[]?}?} | boolean?
----@field ts_context {enabled: boolean, dim_background: boolean?, style: HighlightStyles[]?} | boolean?
----@field treesitter BasicModule?
----@field trouble BasicModule?
----@field ts_rainbow BasicModule?
----@field ts_rainbow2 BasicModule?
----@field ufo BasicModule?
----@field undotree BasicModule?
----@field vimwiki BasicModule?
----@field which_key BasicModule?
----@field window_picker {enabled: boolean, color: ValidColorOptions?} | boolean?
----@field yanky BasicModule?
----@field mini NeopywalPluginsMiniNvim?
-
----@class NeopywalPluginsLSP
+---@field no_italic? boolean
+---@field no_bold? boolean
+---@field no_underline? boolean
+---@field no_undercurl? boolean
+---@field no_strikethrough? boolean
+---@field styles? Neopywal.lib.config.options.styles
+---@field custom_colors? Neopywal.lib.config.options.custom_colors
+---| fun(C?: table<NeopywalAlias.valid_colors[]>): Neopywal.lib.config.options.custom_colors
+---@field custom_highlights? Neopywal.lib.config.options.custom_highlights
+---| fun(C?: table<NeopywalAlias.valid_colors[]>): Neopywal.lib.config.options.custom_highlights
+---@field default_fileformats? boolean
+---@field default_plugins? boolean
+---@field fileformats? Neopywal.lib.config.options.fileformats
+---@field plugins? Neopywal.lib.config.options.plugins
+-- }}}
+---@class Neopywal.lib.config.options.custom_highlights{{{
+---@field all? { [string]: Neopywal.valid_highlights } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: Neopywal.valid_highlights }
+---@field dark? { [string]: Neopywal.valid_highlights } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: Neopywal.valid_highlights }
+---@field light? { [string]: Neopywal.valid_highlights } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: Neopywal.valid_highlights }
+-- }}}
+---@class Neopywal.lib.config.options.custom_colors{{{
+---@field all? { [string]: string } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: string }
+---@field dark? { [string]: string } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: string }
+---@field light? { [string]: string } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: string }
+-- }}}
+---@class Neopywal.lib.config.options.use_palette{{{
+---@field dark? string
+---@field light? string
+-- }}}
+---@class Neopywal.lib.config.options.styles{{{
+---@field comments? NeopywalAlias.highlight_styles[]
+---@field conditionals? NeopywalAlias.highlight_styles[]
+---@field loops? NeopywalAlias.highlight_styles[]
+---@field functions? NeopywalAlias.highlight_styles[]
+---@field keywords? NeopywalAlias.highlight_styles[]
+---@field includes? NeopywalAlias.highlight_styles[]
+---@field strings? NeopywalAlias.highlight_styles[]
+---@field variables? NeopywalAlias.highlight_styles[]
+---@field numbers? NeopywalAlias.highlight_styles[]
+---@field booleans? NeopywalAlias.highlight_styles[]
+---@field types? NeopywalAlias.highlight_styles[]
+---@field operators? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.fileformats{{{
+---@field c_cpp? NeopywalAlias.basic_module
+---@field c_sharp? NeopywalAlias.basic_module
+---@field clojure? NeopywalAlias.basic_module
+---@field cmake? NeopywalAlias.basic_module
+---@field common_lisp? NeopywalAlias.basic_module
+---@field css? NeopywalAlias.basic_module
+---@field dart? NeopywalAlias.basic_module
+---@field diff? NeopywalAlias.basic_module
+---@field elixir? NeopywalAlias.basic_module
+---@field erlang? NeopywalAlias.basic_module
+---@field git_commit? NeopywalAlias.basic_module
+---@field go? NeopywalAlias.basic_module
+---@field haskell? NeopywalAlias.basic_module
+---@field help? NeopywalAlias.basic_module
+---@field html? NeopywalAlias.basic_module
+---@field ini? NeopywalAlias.basic_module
+---@field java? NeopywalAlias.basic_module
+---@field javascript? NeopywalAlias.basic_module
+---@field javascript_react? NeopywalAlias.basic_module
+---@field json? NeopywalAlias.basic_module
+---@field kotlin? NeopywalAlias.basic_module
+---@field latex? NeopywalAlias.basic_module
+---@field less? NeopywalAlias.basic_module
+---@field lua? NeopywalAlias.basic_module
+---@field makefile? NeopywalAlias.basic_module
+---@field markdown? NeopywalAlias.basic_module
+---@field matlab? NeopywalAlias.basic_module
+---@field objectivec? NeopywalAlias.basic_module
+---@field ocaml? NeopywalAlias.basic_module
+---@field perl? NeopywalAlias.basic_module
+---@field php? NeopywalAlias.basic_module
+---@field powershell? NeopywalAlias.basic_module
+---@field python? NeopywalAlias.basic_module
+---@field restructuredtext? NeopywalAlias.basic_module
+---@field ruby? NeopywalAlias.basic_module
+---@field rust? NeopywalAlias.basic_module
+---@field sass? NeopywalAlias.basic_module
+---@field scala? NeopywalAlias.basic_module
+---@field shell? NeopywalAlias.basic_module
+---@field swift? NeopywalAlias.basic_module
+---@field toml? NeopywalAlias.basic_module
+---@field typescript? NeopywalAlias.basic_module
+---@field viml? NeopywalAlias.basic_module
+---@field xml? NeopywalAlias.basic_module
+---@field yaml? NeopywalAlias.basic_module
+---@field zsh? NeopywalAlias.basic_module
+-- }}}
+---@class Neopywal.lib.config.options.plugins{{{
+---@field aerial? NeopywalAlias.basic_module
+---@field ale? NeopywalAlias.basic_module
+---@field alpha? NeopywalAlias.basic_module
+---@field barbar? NeopywalAlias.basic_module
+---@field beacon? boolean | Neopywal.lib.config.options.plugins.beacon
+---@field coc? NeopywalAlias.basic_module
+---@field colorful_winsep? boolean | Neopywal.lib.config.options.plugins.colorful_winsep
+---@field dadbod_ui? NeopywalAlias.basic_module
+---@field dap? NeopywalAlias.basic_module
+---@field dap_ui? NeopywalAlias.basic_module
+---@field dashboard? NeopywalAlias.basic_module
+---@field diffview? NeopywalAlias.basic_module
+---@field dropbar? boolean | Neopywal.lib.config.options.plugins.dropbar
+---@field fern? NeopywalAlias.basic_module
+---@field flash? boolean | Neopywal.lib.config.options.plugins.flash
+---@field fzf? NeopywalAlias.basic_module
+---@field git_gutter? NeopywalAlias.basic_module
+---@field gitsigns? NeopywalAlias.basic_module
+---@field glyph_palette? NeopywalAlias.basic_module
+---@field grug_far? NeopywalAlias.basic_module
+---@field harpoon? NeopywalAlias.basic_module
+---@field headlines? NeopywalAlias.basic_module
+---@field hop? boolean | Neopywal.lib.config.options.plugins.hop
+---@field illuminate? boolean | Neopywal.lib.config.options.plugins.illuminate
+---@field indent_blankline? boolean | Neopywal.lib.config.options.plugins.indent_blankline
+---@field indentmini? boolean | Neopywal.lib.config.options.plugins.indentmini
+---@field lazy? NeopywalAlias.basic_module
+---@field lazygit? NeopywalAlias.basic_module
+---@field leap? boolean | Neopywal.lib.config.options.plugins.leap
+---@field lir? boolean | Neopywal.lib.config.options.plugins.lir
+---@field lsp? boolean | Neopywal.lib.config.options.plugins.lsp
+---@field lspsaga? boolean | Neopywal.lib.config.options.plugins.lspsaga
+---@field markdown? NeopywalAlias.basic_module
+---@field mason? NeopywalAlias.basic_module
+---@field navbuddy? NeopywalAlias.basic_module
+---@field navic? boolean | Neopywal.lib.config.options.plugins.navic
+---@field neogit? NeopywalAlias.basic_module
+---@field neotest? NeopywalAlias.basic_module
+---@field neotree? NeopywalAlias.basic_module
+---@field netrw? NeopywalAlias.basic_module
+---@field noice? NeopywalAlias.basic_module
+---@field NormalNvim? NeopywalAlias.basic_module
+---@field notifier? NeopywalAlias.basic_module
+---@field notify? NeopywalAlias.basic_module
+---@field nvim_cmp? NeopywalAlias.basic_module
+---@field nvimtree? NeopywalAlias.basic_module
+---@field octo? NeopywalAlias.basic_module
+---@field overseer? NeopywalAlias.basic_module
+---@field pounce? boolean | Neopywal.lib.config.options.plugins.pounce
+---@field rainbow? NeopywalAlias.basic_module
+---@field sandwich? NeopywalAlias.basic_module
+---@field scrollbar? NeopywalAlias.basic_module
+---@field snacks? boolean | Neopywal.lib.config.options.plugins.snacks
+---@field sneak? boolean | Neopywal.lib.config.options.plugins.sneak
+---@field surround? NeopywalAlias.basic_module
+---@field symbols_outline? NeopywalAlias.basic_module
+---@field telekasten? NeopywalAlias.basic_module
+---@field telescope? boolean | Neopywal.lib.config.options.plugins.telescope
+---@field todo_comments? boolean | Neopywal.lib.config.options.plugins.todo_comments
+---@field ts_context? boolean | Neopywal.lib.config.options.plugins.ts_context
+---@field treesitter? NeopywalAlias.basic_module
+---@field trouble? NeopywalAlias.basic_module
+---@field ts_rainbow? NeopywalAlias.basic_module
+---@field ts_rainbow2? NeopywalAlias.basic_module
+---@field ufo? NeopywalAlias.basic_module
+---@field undotree? NeopywalAlias.basic_module
+---@field vimwiki? NeopywalAlias.basic_module
+---@field which_key? NeopywalAlias.basic_module
+---@field window_picker? boolean | Neopywal.lib.config.options.plugins.window_picker
+---@field yanky? NeopywalAlias.basic_module
+---@field mini? Neopywal.lib.config.options.plugins.mini
+-- }}}
+---@class Neopywal.lib.config.options.plugins.beacon{{{
+---@field enabled? boolean
+---@field color? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.colorful_winsep{{{
+---@field enabled? boolean
+---@field color? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.dropbar{{{
+---@field enabled? boolean
+---@field colored_text? boolean
+-- }}}
+---@class Neopywal.lib.config.options.plugins.flash{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.hop{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.illuminate{{{
+---@field enabled? boolean
+---@field lsp? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.indent_blankline{{{
+---@field enabled? boolean
+---@field scope_color? NeopywalAlias.valid_color_options
+---@field colored_indent_levels? boolean
+-- }}}
+---@class Neopywal.lib.config.options.plugins.indentmini{{{
+---@field enabled? boolean
+---@field scope_color? NeopywalAlias.valid_color_options
+---@field current_scope_color? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.leap{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.lir{{{
+---@field enabled? boolean
+---@field git_status? boolean
+-- }}}
+---@class Neopywal.lib.config.options.plugins.lsp{{{
 ---@field enabled boolean
----@field virtual_text {errors: HighlightStyles[]?, hints: HighlightStyles[]?, information: HighlightStyles[]?, ok: HighlightStyles[]?, warnings: HighlightStyles[]?, unnecessary: HighlightStyles[]?}?
----@field underlines {errors: HighlightStyles[]?, hints: HighlightStyles[]?, information: HighlightStyles[]?, ok: HighlightStyles[]?, warnings: HighlightStyles[]?}?
----@field inlay_hints {background: boolean?, style: HighlightStyles[]?}?
+---@field inlay_hints? Neopywal.lib.config.options.plugins.lsp.inlay_hints
+---@field underlines? Neopywal.lib.config.options.plugins.lsp.underlines
+---@field virtual_text? Neopywal.lib.config.options.plugins.lsp.virtual_text
+-- }}}
+---@class Neopywal.lib.config.options.plugins.lsp.inlay_hints{{{
+---@field background? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.lsp.underlines{{{
+---@field errors? NeopywalAlias.highlight_styles[]
+---@field hints? NeopywalAlias.highlight_styles[]
+---@field information? NeopywalAlias.highlight_styles[]
+---@field ok? NeopywalAlias.highlight_styles[]
+---@field warnings? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.lsp.virtual_text{{{
+---@field errors? NeopywalAlias.highlight_styles[]
+---@field hints? NeopywalAlias.highlight_styles[]
+---@field information? NeopywalAlias.highlight_styles[]
+---@field ok? NeopywalAlias.highlight_styles[]
+---@field warnings? NeopywalAlias.highlight_styles[]
+---@field unnecessary? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.lspsaga{{{
+---@field enabled? boolean
+---@field dim_folder? boolean
+---@field dim_filename? boolean
+---@field dim_separator? boolean
+---@field winbar_style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini{{{
+---@field animate? NeopywalAlias.basic_module
+---@field clue? NeopywalAlias.basic_module
+---@field completion? boolean | Neopywal.lib.config.options.plugins.mini.completion
+---@field cursorword? boolean | Neopywal.lib.config.options.plugins.mini.cursorword
+---@field deps? NeopywalAlias.basic_module
+---@field diff? NeopywalAlias.basic_module
+---@field files? NeopywalAlias.basic_module
+---@field hipatterns? boolean| Neopywal.lib.config.options.plugins.mini.hipatterns
+---@field icons? NeopywalAlias.basic_module
+---@field indentscope? boolean | Neopywal.lib.config.options.plugins.mini.indentscope
+---@field jump? boolean | Neopywal.lib.config.options.plugins.mini.jump?
+---@field jump2d? boolean | Neopywal.lib.config.options.plugins.mini.jump2d?
+---@field map? NeopywalAlias.basic_module
+---@field notify? NeopywalAlias.basic_module
+---@field operators? NeopywalAlias.basic_module
+---@field pick? NeopywalAlias.basic_module
+---@field snippets? boolean | Neopywal.lib.config.options.plugins.mini.snippets
+---@field starter? NeopywalAlias.basic_module
+---@field statusline? boolean | Neopywal.lib.config.options.plugins.mini.statusline
+---@field surround? NeopywalAlias.basic_module
+---@field tabline? NeopywalAlias.basic_module
+---@field test? NeopywalAlias.basic_module
+---@field trailspace? boolean | Neopywal.lib.config.options.plugins.mini.trailspace
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.completion{{{
+---@field enabled? boolean
+---@field parameter_style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.cursorword{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.hipatterns{{{
+---@field enabled? boolean
+---@field style? Neopywal.lib.config.options.plugins.mini.hipatterns.style
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.hipatterns.style{{{
+---@field fixme? NeopywalAlias.highlight_styles[]
+---@field hack? NeopywalAlias.highlight_styles[]
+---@field todo? NeopywalAlias.highlight_styles[]
+---@field note? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.indentscope{{{
+---@field enabled? boolean
+---@field scope_color? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.jump{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.jump2d{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.snippets{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.statusline{{{
+---@field enabled? boolean
+---@field mode_colors? Neopywal.lib.config.options.plugins.mini.statusline.mode_colors
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.statusline.mode_colors{{{
+---@field normal? NeopywalAlias.valid_color_options
+---@field visual? NeopywalAlias.valid_color_options
+---@field insert? NeopywalAlias.valid_color_options
+---@field command? NeopywalAlias.valid_color_options
+---@field replace? NeopywalAlias.valid_color_options
+---@field other? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.trailspace{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+---@field color? Neopywal.lib.config.options.plugins.mini.trailspace.color
+-- }}}
+---@class Neopywal.lib.config.options.plugins.mini.trailspace.color{{{
+---@field bg? NeopywalAlias.valid_color_options
+---@field fg? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.navic{{{
+---@field enabled? boolean
+---@field dim_text? boolean
+---@field hide_separator? boolean
+---@field bg_color? NeopywalAlias.valid_color_options
+---@field text_style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.pounce{{{
+---@field enabled? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.snacks{{{
+---@field enabled? boolean
+---@field style? "classic" | "nvchad"
+---@field scope_color? NeopywalAlias.valid_color_options
+---@field current_scope_color? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.lib.config.options.plugins.sneak{{{
+---@field enabled? boolean
+---@field sneak_color? NeopywalAlias.valid_color_options
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.telescope{{{
+---@field enabled? boolean
+---@field style? "classic" | "nvchad"
+-- }}}
+---@class Neopywal.lib.config.options.plugins.todo_comments{{{
+---@field enabled? boolean
+---@field style? Neopywal.lib.config.options.plugins.todo_comments.style
+-- }}}
+---@class Neopywal.lib.config.options.plugins.todo_comments.style{{{
+---@field fix? NeopywalAlias.highlight_styles[]
+---@field hack? NeopywalAlias.highlight_styles[]
+---@field todo? NeopywalAlias.highlight_styles[]
+---@field note? NeopywalAlias.highlight_styles[]
+---@field perf? NeopywalAlias.highlight_styles[]
+---@field test? NeopywalAlias.highlight_styles[]
+---@field warn? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.ts_context{{{
+---@field enabled? boolean
+---@field dim_background? boolean
+---@field style? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.lib.config.options.plugins.window_picker{{{
+---@field enabled? boolean
+---@field color? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.theme.plugins.barbecue{{{
+---@field default_options Neopywal.theme.plugins.barbecue.options
+---@field options Neopywal.theme.plugins.barbecue.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.barbecue.options)
+---@field get fun(): { [string]: Neopywal.valid_highlights }
+-- }}}
+---@class Neopywal.theme.plugins.barbecue.options{{{
+---@field dim_background? boolean
+---@field dim_context? boolean
+---@field dim_dirname? boolean
+---@field hide_separator? boolean
+---@field basename_style? NeopywalAlias.highlight_styles[]
+---@field context_style? NeopywalAlias.highlight_styles[]
+---@field dirname_style? NeopywalAlias.highlight_styles[]
+---@field theme? { [string]: string } | fun(C?: table<NeopywalAlias.valid_colors[]>): { [string]: string }
+-- }}}
+---@class Neopywal.theme.plugins.feline{{{
+---@field default_options Neopywal.theme.plugins.feline.options
+---@field options Neopywal.theme.plugins.feline.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.feline.options)
+---@field get fun(): { [string]: string }
+-- }}}
+---@class Neopywal.theme.plugins.feline.options{{{
+---@field assets? Neopywal.theme.plugins.feline.options.assets
+---@field sett? Neopywal.theme.plugins.feline.options.sett
+---@field view? Neopywal.theme.plugins.feline.options.view
+---@field mode_colors table<string, table<string<NeopywalAlias.valid_feline_mode_colors>, string<NeopywalAlias.valid_colors>>>
+-- }}}
+---@alias NeopywalAlias.valid_feline_mode_colors --{{{
+---| "NORMAL"
+---| "N-PENDING"
+---| "INSERT"
+---| "TERMINAL"
+---| "VISUAL"
+---| "V-LINE"
+---| "V-BLOCK"
+---| "REPLACE"
+---| "V-REPLACE"
+---| "SELECT"
+---| "S-LINE"
+---| "S-BLOCK"
+---| "COMMAND"
+---| "PROMPT"
+---| "MORE"
+---| "CONFIRM"
+---| "SHELL"
+-- }}}
+---@class Neopywal.theme.plugins.feline.options.assets{{{
+---@field left_separator? string
+---@field right_separator? string
+---@field mode_icon? string
+---@field dir? string
+---@field file? string
+---@field lsp? Neopywal.theme.plugins.feline.options.assets.lsp
+---@field git? Neopywal.theme.plugins.feline.options.assets.git
+-- }}}
+---@class Neopywal.theme.plugins.feline.options.assets.lsp{{{
+---@field server? string
+---@field error? string
+---@field warning? string
+---@field info? string
+---@field hint? string
+-- }}}
+---@class Neopywal.theme.plugins.feline.options.assets.git{{{
+---@field branch? string
+---@field added? string
+---@field changed? string
+---@field removed? string
+-- }}}
+---@class Neopywal.theme.plugins.feline.options.sett{{{
+---@field text? string<NeopywalAlias.valid_colors[]>
+---@field bkg? string<NeopywalAlias.valid_colors[]>
+---@field diffs? string<NeopywalAlias.valid_colors[]>
+---@field extras? string<NeopywalAlias.valid_colors[]>
+---@field curr_file? string<NeopywalAlias.valid_colors[]>
+---@field curr_dir? string<NeopywalAlias.valid_colors[]>
+---@field show_modified? boolean
+---@field show_lazy_updates? boolean
+-- }}}
+---@class Neopywal.theme.plugins.feline.options.view{{{
+---@field lsp? Neopywal.theme.plugins.feline.options.view.lsp
+-- }}}
+---@class Neopywal.theme.plugins.feline.options.view.lsp{{{
+---@field progress? boolean
+---@field name? boolean
+---@field exclude_lsp_names? table
+---@field separator? string
+-- }}}
+---@class Neopywal.theme.plugins.lualine{{{
+---@field default_options Neopywal.theme.plugins.lualine.options
+---@field options Neopywal.theme.plugins.lualine.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.lualine.options)
+---@field get fun(): Neopywal.theme.plugins.lualine.get
 
----@class NeopywalPluginsMiniNvim
----@field animate BasicModule?
----@field clue BasicModule?
----@field completion {enabled: boolean, parameter_style: HighlightStyles[]?} | boolean?
----@field cursorword {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field deps BasicModule?
----@field diff BasicModule?
----@field files BasicModule?
----@field hipatterns {enabled: boolean, style: {fixme: HighlightStyles[]?, hack: HighlightStyles[]?, todo: HighlightStyles[]?, note: HighlightStyles[]?}?} | boolean?
----@field icons BasicModule?
----@field indentscope {enabled: boolean, scope_color: ValidColorOptions?} | boolean?
----@field jump {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field jump2d {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field map BasicModule?
----@field notify BasicModule?
----@field operators BasicModule?
----@field pick BasicModule?
----@field snippets {enabled: boolean, style: HighlightStyles[]?} | boolean?
----@field starter BasicModule?
----@field statusline {enabled: boolean, mode_colors: {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, other: ValidColorOptions?}?} | boolean?
----@field surround BasicModule?
----@field tabline BasicModule?
----@field test BasicModule?
----@field trailspace {enabled: boolean, style: HighlightStyles[]?, color: { bg: ValidColorOptions?, fg: ValidColorOptions? }? } | boolean?
+---@class Neopywal.theme.plugins.lualine.get
+---@field command Neopywal.theme.plugins.lualine.get.ret
+---@field inactive Neopywal.theme.plugins.lualine.get.ret
+---@field insert Neopywal.theme.plugins.lualine.get.ret
+---@field normal Neopywal.theme.plugins.lualine.get.ret
+---@field replace Neopywal.theme.plugins.lualine.get.ret
+---@field terminal Neopywal.theme.plugins.lualine.get.ret
+---@field visual Neopywal.theme.plugins.lualine.get.ret
 
----@class NeopywalPluginsBarbecue
----@field default_options NeopywalPluginsBarbecueOptions
----@field options NeopywalPluginsBarbecueOptions
----@field setup fun(user_config: NeopywalPluginsBarbecueOptions?)
+---@class Neopywal.theme.plugins.lualine.get.ret
+---@field a? Neopywal.valid_highlights
+---@field b? Neopywal.valid_highlights
+---@field c? Neopywal.valid_highlights
+---@field x? Neopywal.valid_highlights
+---@field y? Neopywal.valid_highlights
+---@field z? Neopywal.valid_highlights
+-- }}}
+---@class Neopywal.theme.plugins.lualine.options{{{
+---@field mode_colors? Neopywal.theme.plugins.lualine.options.mode_colors
+---@field styles? Neopywal.theme.plugins.lualine.options.styles
+-- }}}
+---@class Neopywal.theme.plugins.lualine.options.mode_colors{{{
+---@field normal? NeopywalAlias.valid_color_options
+---@field visual? NeopywalAlias.valid_color_options
+---@field insert? NeopywalAlias.valid_color_options
+---@field command? NeopywalAlias.valid_color_options
+---@field replace? NeopywalAlias.valid_color_options
+---@field terminal? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.theme.plugins.lualine.options.styles{{{
+---@field a? NeopywalAlias.highlight_styles[]
+---@field b? NeopywalAlias.highlight_styles[]
+---@field c? NeopywalAlias.highlight_styles[]
+---@field x? NeopywalAlias.highlight_styles[]
+---@field y? NeopywalAlias.highlight_styles[]
+---@field z? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.theme.plugins.reactive{{{
+---@field default_options Neopywal.theme.plugins.reactive.options
+---@field options Neopywal.theme.plugins.reactive.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.reactive.options)
 ---@field get fun(): table
+-- }}}
+---@class Neopywal.theme.plugins.reactive.options{{{
+---@field color_percentage? number
+---@field mode_colors? Neopywal.theme.plugins.reactive.mode_colors
+-- }}}
+---@class Neopywal.theme.plugins.reactive.mode_colors{{{
+---@field visual? NeopywalAlias.valid_color_options
+---@field insert? NeopywalAlias.valid_color_options
+---@field replace? NeopywalAlias.valid_color_options
+---@field change? NeopywalAlias.valid_color_options
+---@field delete? NeopywalAlias.valid_color_options
+---@field pending? NeopywalAlias.valid_color_options
+---@field yank? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.theme.plugins.fidget.highlights{{{
+---@field FidgetDone? Neopywal.valid_highlights
+---@field FidgetGroup? Neopywal.valid_highlights
+---@field FidgetIcon? Neopywal.valid_highlights
+---@field FidgetNormal? Neopywal.valid_highlights
+---@field FidgetProgress? Neopywal.valid_highlights
+---@field FidgetSeparator? Neopywal.valid_highlights
+-- }}}
+---@class Neopywal.theme.plugins.lightline{{{
+---@field default_options Neopywal.theme.plugins.lualine.options
+---@field options Neopywal.theme.plugins.lualine.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.lualine.options)
+---@field get fun(): Neopywal.theme.plugins.lightline.get
 
----@class NeopywalPluginsBarbecueOptions
----@field dim_background boolean?
----@field dim_context boolean?
----@field dim_dirname boolean?
----@field hide_separator boolean?
----@field basename_style HighlightStyles[]?
----@field context_style HighlightStyles[]?
----@field dirname_style HighlightStyles[]?
----@field theme table | function<table>
+---@class Neopywal.theme.plugins.lightline.get
+---@field command Neopywal.theme.plugins.lightline.get.ret
+---@field inactive Neopywal.theme.plugins.lightline.get.ret
+---@field insert Neopywal.theme.plugins.lightline.get.ret
+---@field normal Neopywal.theme.plugins.lightline.get.ret
+---@field replace Neopywal.theme.plugins.lightline.get.ret
+---@field tabline Neopywal.theme.plugins.lightline.get.ret
+---@field terminal Neopywal.theme.plugins.lightline.get.ret
+---@field visual Neopywal.theme.plugins.lightline.get.ret
 
----@class NeopywalPluginsFeline
----@field default_options NeopywalPluginsFelineOptions
----@field options NeopywalPluginsFelineOptions
----@field setup fun(user_config: NeopywalPluginsFelineOptions?)
----@field get fun(): table
-
----@class NeopywalPluginsFelineOptions
----@field assets {left_separator: string?, right_separator: string?, mode_icon: string?, dir: string?, file: string?, lsp: {server: string?, error: string?, warning: string?, info: string?, hint: string?}?, git: {branch: string?, added: string?, changed: string?, removed: string?}? }
----@field mode_colors table<string, table<string, string<ValidColors[]>>>
----@field sett {text: string<ValidColors[]>?, bkg: string<ValidColors[]>?, diffs: string<ValidColors[]>?, extras: string<ValidColors[]>?, curr_file: string<ValidColors[]>?, curr_dir: string<ValidColors[]>?, show_modified: boolean?, show_lazy_updates: boolean?}
----@field view {lsp: {progress: boolean?, name: boolean?, exclude_lsp_names: table?, separator: string?}?}
-
----@class NeopywalPluginsLualine
----@field default_options NeopywalPluginsLualineOptions
----@field options NeopywalPluginsLualineOptions
----@field setup fun(user_config: NeopywalPluginsLualineOptions?)
----@field get fun(): table
-
----@class NeopywalPluginsLualineOptions
----@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
----@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}
-
----@class NeopywalPluginsReactiveOptions
----@field color_percentage number
----@field mode_colors {visual: ValidColorOptions?, insert: ValidColorOptions?, replace: ValidColorOptions?, change: ValidColorOptions?, delete: ValidColorOptions?, pending: ValidColorOptions?, yank: ValidColorOptions?}
-
----@class NeopywalPluginsFidgetGroups
----@field FidgetDone table?
----@field FidgetGroup table?
----@field FidgetIcon table?
----@field FidgetNormal table?
----@field FidgetProgress table?
----@field FidgetSeparator table?
-
----@class NeopywalPluginsLightlineOptions
----@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, command: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
-
----@class NeopywalPluginsClapOptions
----@field colors {indicator: ValidColorOptions?, spinner: ValidColorOptions?, selected: ValidColorOptions?, current_selection: ValidColorOptions?}
----@field styles {indicator: HighlightStyles[]?, spinner: HighlightStyles[]?, selected: HighlightStyles[]?, current_selection: HighlightStyles[]?}
-
----@class NeopywalPluginsAirlineOptions
----@field mode_colors {normal: ValidColorOptions?, visual: ValidColorOptions?, insert: ValidColorOptions?, commandline: ValidColorOptions?, replace: ValidColorOptions?, terminal: ValidColorOptions?}
----@field cterm_colors {normal: number?, visual: number?, insert: number?, commandline: number?, replace: number?, terminal: number?}
----@field styles {a: HighlightStyles[]?, b: HighlightStyles[]?, c: HighlightStyles[]?, x: HighlightStyles[]?, y: HighlightStyles[]?, z: HighlightStyles[]?}
+---@class Neopywal.theme.plugins.lightline.get.ret
+---@field left? table<table<string[]>[]>
+---@field middle? table<table<string[]>[]>
+---@field right? table<table<string[]>[]>
+---@field error? table<table<string[]>[]>
+---@field warning? table<table<string[]>[]>
+---@field tabsel? table<table<string[]>[]>
+-- }}}
+---@class Neopywal.theme.plugins.lightline.options{{{
+---@field mode_colors Neopywal.theme.plugins.lightline.options.mode_colors
+-- }}}
+---@class Neopywal.theme.plugins.lightline.options.mode_colors{{{
+---@field normal? NeopywalAlias.valid_color_options
+---@field visual? NeopywalAlias.valid_color_options
+---@field insert? NeopywalAlias.valid_color_options
+---@field command? NeopywalAlias.valid_color_options
+---@field replace? NeopywalAlias.valid_color_options
+---@field terminal? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.theme.plugins.clap{{{
+---@field default_options Neopywal.theme.plugins.clap.options
+---@field options Neopywal.theme.plugins.clap.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.clap.options)
+---@field get fun(): { [string]: Neopywal.theme.plugins.clap.get }
+-- }}}
+---@class Neopywal.theme.plugins.clap.get{{{
+---@field guifg? string
+---@field guibg? string
+---@field gui? NeopywalAlias.highlight_styles
+-- }}}
+---@class Neopywal.theme.plugins.clap.options{{{
+---@field colors? Neopywal.theme.plugins.clap.options.colors
+---@field styles? Neopywal.theme.plugins.clap.options.styles
+-- }}}
+---@class Neopywal.theme.plugins.clap.options.colors{{{
+---@field indicator? NeopywalAlias.valid_color_options
+---@field spinner? NeopywalAlias.valid_color_options
+---@field selected? NeopywalAlias.valid_color_options
+---@field current_selection? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.theme.plugins.clap.options.styles{{{
+---@field indicator? NeopywalAlias.highlight_styles[]
+---@field spinner? NeopywalAlias.highlight_styles[]
+---@field selected? NeopywalAlias.highlight_styles[]
+---@field current_selection? NeopywalAlias.highlight_styles[]
+-- }}}
+---@class Neopywal.theme.plugins.airline{{{
+---@field default_options Neopywal.theme.plugins.airline.options
+---@field options Neopywal.theme.plugins.airline.options
+---@field setup fun(user_config?: Neopywal.theme.plugins.airline.options)
+---@field get fun(): { [string]: { [string]: string|number|table } }
+--}}}
+---@class Neopywal.theme.plugins.airline.options{{{
+---@field mode_colors? Neopywal.theme.plugins.airline.options.mode_colors
+---@field cterm_colors? Neopywal.theme.plugins.airline.options.cterm_colors
+---@field styles? Neopywal.theme.plugins.airline.options.styles
+-- }}}
+---@class Neopywal.theme.plugins.airline.options.mode_colors{{{
+---@field normal? NeopywalAlias.valid_color_options
+---@field visual? NeopywalAlias.valid_color_options
+---@field insert? NeopywalAlias.valid_color_options
+---@field commandline? NeopywalAlias.valid_color_options
+---@field replace? NeopywalAlias.valid_color_options
+---@field terminal? NeopywalAlias.valid_color_options
+-- }}}
+---@class Neopywal.theme.plugins.airline.options.cterm_colors{{{
+---@field normal? number
+---@field visual? number
+---@field insert? number
+---@field commandline? number
+---@field replace? number
+---@field terminal? number
+-- }}}
+---@class Neopywal.theme.plugins.airline.options.styles{{{
+---@field a? NeopywalAlias.highlight_styles[]
+---@field b? NeopywalAlias.highlight_styles[]
+---@field c? NeopywalAlias.highlight_styles[]
+---@field x? NeopywalAlias.highlight_styles[]
+---@field y? NeopywalAlias.highlight_styles[]
+---@field z? NeopywalAlias.highlight_styles[]
+-- }}}

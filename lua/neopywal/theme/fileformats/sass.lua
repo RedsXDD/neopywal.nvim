@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- scss-syntax: https://github.com/cakebaker/scss-syntax.vim:

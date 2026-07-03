@@ -1,9 +1,9 @@
+---@class Neopywal.theme.plugins.airline
 local M = {}
 local C = require("neopywal.lib.palette").get()
 local U = require("neopywal.utils.color")
 local O = require("neopywal.lib.config").options
 
----@type NeopywalPluginsAirlineOptions
 M.default_options = {
     mode_colors = {
         normal = "color4",
@@ -33,7 +33,7 @@ M.default_options = {
 M.options = M.default_options
 
 local did_setup = false
----@param user_config NeopywalPluginsAirlineOptions?
+---@param user_config? Neopywal.theme.plugins.airline.options
 function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)

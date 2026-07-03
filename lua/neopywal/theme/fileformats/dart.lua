@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- dart-lang: https://github.com/dart-lang/dart-vim-plugin:

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- These groups are for the coc.nvim, see ":h coc-highlights"

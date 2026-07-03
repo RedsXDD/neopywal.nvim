@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         MiniDepsChangeAdded = { fg = C.diff_added },

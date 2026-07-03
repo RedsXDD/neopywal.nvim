@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         NotifierTitle = { fg = C.color4, styles = { "bold", "italic" } },

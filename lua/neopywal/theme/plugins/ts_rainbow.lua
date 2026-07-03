@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         rainbowcol1 = { fg = require("neopywal.utils.rainbow").get()[1] },

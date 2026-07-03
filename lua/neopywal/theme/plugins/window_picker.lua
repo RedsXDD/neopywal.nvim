@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local color = O.plugins.window_picker.color
     if type(color) == "function" then color = color(C) end

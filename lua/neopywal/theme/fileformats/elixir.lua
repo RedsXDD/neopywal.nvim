@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- vim-elixir: https://github.com/elixir-editors/vim-elixir:

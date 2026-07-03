@@ -1,7 +1,6 @@
--- vim:fileencoding=utf-8:foldmethod=marker:foldenable
-
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- Editor:

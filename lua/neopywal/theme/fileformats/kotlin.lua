@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- kotlin-vim: https://github.com/udalov/kotlin-vim:

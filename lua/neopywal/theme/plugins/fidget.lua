@@ -1,6 +1,6 @@
 local M = {}
 
----@param user_hightlights NeopywalPluginsFidgetGroups?
+---@param user_hightlights? Neopywal.theme.plugins.fidget.highlights
 function M.setup(user_hightlights)
     local O = require("neopywal.lib.config").options
     local C = require("neopywal.lib.palette").get()
@@ -35,7 +35,9 @@ function M.setup(user_hightlights)
     local highlights =
         vim.tbl_deep_extend("keep", user_hightlights, default_highlights)
 
-    for group, properties in pairs(highlights) do
+    for group, properties in
+        pairs(highlights --[[@as table]])
+    do
         -- You can argue whether this line is needed or not, i just added it to prevent the user
         -- from using the setup() function to create arbitrary highlights groups.
         if not default_highlights[group] then goto continue end

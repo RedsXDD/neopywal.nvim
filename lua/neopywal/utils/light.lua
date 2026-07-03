@@ -3,6 +3,8 @@ local U = require("neopywal.utils.color")
 local hsluv = require("neopywal.utils.hsluv")
 
 ---@return string
+---@param color string
+---@param percentage number
 function M.saturate_hsl(color, percentage)
     local hsl = hsluv.hex_to_hsluv(color)
     hsl[2] = hsl[2] * (1 + percentage) % 100
@@ -10,6 +12,7 @@ function M.saturate_hsl(color, percentage)
 end
 
 ---@return boolean
+---@param bg string
 function M.bg_iswhite(bg)
     local hsl = hsluv.hex_to_hsluv(U.invert(bg))
     local bg_lightness = hsl[3]
@@ -17,6 +20,7 @@ function M.bg_iswhite(bg)
 end
 
 ---@return string
+---@param color string
 function M.setup_green(color)
     color = U.invert(color)
     color = U.brighten(color, 0.4)
@@ -25,6 +29,7 @@ function M.setup_green(color)
 end
 
 ---@return string
+---@param color string
 function M.setup_yellow(color)
     color = M.saturate_hsl(color, 0.1)
     color = U.blacken(color, 0.13)
@@ -32,8 +37,8 @@ function M.setup_yellow(color)
     return color
 end
 
----@return NeopywalMinimalPalette
----@param dark_theme NeopywalMinimalPalette
+---@return Neopywal.minimal_palette
+---@param dark_theme Neopywal.minimal_palette
 function M.convert_dark2light_theme(dark_theme)
     local dark = dark_theme
     local palette = {

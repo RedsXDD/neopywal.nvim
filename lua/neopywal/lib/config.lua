@@ -1,16 +1,15 @@
----@type NeopywalConfig
----@diagnostic disable-next-line: missing-fields
+---@class Neopywal.lib.config
 local M = {}
+
+local path_sep = jit and (jit.os == "Windows" and "\\" or "/")
+    or package.config:sub(1, 1)
 
 M.compiler_opts = {
     file_ext = ".luac",
     filename = "neopywal",
-    path_sep = jit and (jit.os == "Windows" and "\\" or "/")
-        or package.config:sub(1, 1),
+    path_sep = path_sep,
+    compile_path = vim.fn.stdpath("cache") .. path_sep .. "neopywal",
 }
-M.compiler_opts.compile_path = vim.fn.stdpath("cache")
-    .. M.compiler_opts.path_sep
-    .. "neopywal"
 
 M.default_options = {
     use_palette = {
@@ -52,6 +51,7 @@ M.default_options = {
 M.options = M.default_options
 
 ---@param enable_default_fileformats boolean|nil
+---@return Neopywal.lib.config.options.fileformats
 local function setup_fileformats(enable_default_fileformats)
     local enabled_bydefault = (enable_default_fileformats == nil)
             and M.default_options.default_fileformats
@@ -108,6 +108,7 @@ local function setup_fileformats(enable_default_fileformats)
 end
 
 ---@param enable_default_plugins boolean|nil
+---@return Neopywal.lib.config.options.plugins
 local function setup_plugins(enable_default_plugins)
     local enabled_bydefault = (enable_default_plugins == nil)
             and M.default_options.default_plugins
@@ -354,7 +355,7 @@ local function setup_plugins(enable_default_plugins)
 end
 
 M.did_setup = false
----@param user_config? NeopywalOptions
+---@param user_config? Neopywal.lib.config.options
 function M.setup(user_config)
     user_config = user_config or {}
     user_config.plugins = user_config.plugins or {}
@@ -371,7 +372,6 @@ function M.setup(user_config)
     M.default_options.fileformats = setup_fileformats(fileformats_are_enabled)
 
     -- Create the final configuration table.
-    ---@diagnostic disable-next-line: assign-type-mismatch
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
 
     -- Neovide doesn't play well with transparent background colors.

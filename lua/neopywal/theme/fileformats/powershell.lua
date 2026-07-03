@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- vim-ps1: https://github.com/PProvost/vim-ps1:

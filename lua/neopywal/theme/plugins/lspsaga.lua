@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local saga_kinds = require("neopywal.utils.kinds").get(
         "Saga%s",
@@ -50,6 +51,7 @@ function M.get()
     })
 end
 
+---@return { [string]: string[] }
 function M.get_kinds()
     return {
         Array = { " ", "LspKindArray" },

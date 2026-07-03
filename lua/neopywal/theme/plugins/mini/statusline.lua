@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local mode_colors = O.plugins.mini.statusline.mode_colors
     local default_mode_colors =

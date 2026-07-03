@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- vim-jsx-pretty: https://github.com/maxmellon/vim-jsx-pretty:

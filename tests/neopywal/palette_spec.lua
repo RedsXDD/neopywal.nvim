@@ -1,12 +1,11 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
----@diagnostic disable: undefined-global, undefined-field, missing-parameter
+---@diagnostic disable: undefined-global, undefined-field
 local Neopywal = require("neopywal")
 local Palette = require("neopywal.lib.palette")
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/")
     or package.config:sub(1, 1)
 
----@type string?
 local cache_dir = ""
 if path_sep == "\\" then
     cache_dir = os.getenv("USERPROFILE") .. "\\.cache" -- Windows

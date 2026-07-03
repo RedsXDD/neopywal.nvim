@@ -2,6 +2,7 @@ local M = {}
 local C = require("neopywal.lib.palette").get()
 
 -- LSP symbol kind and completion kind highlights.
+---@type { [string]: Neopywal.valid_highlights }
 local kinds = {
     Array = { fg = C.special }, --  Links to "@punctuation.bracket" => "Special".
     Boolean = { fg = C.boolean }, --  Links to "@boolean" => "Boolean".
@@ -44,8 +45,9 @@ local kinds = {
     Variable = { fg = C.variable }, --  Links to "@variable" => "Variable".
 }
 
----@param pattern string?
----@param append_to_hls table?
+---@return { [string]: Neopywal.valid_highlights }
+---@param pattern? string
+---@param append_to_hls? Neopywal.valid_highlights
 function M.get(pattern, append_to_hls)
     local hl = {}
     pattern = pattern or ""

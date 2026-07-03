@@ -1,8 +1,8 @@
+---@class Neopywal.theme.plugins.reactive
 local M = {}
 local C = require("neopywal.lib.palette").get()
 local U = require("neopywal.utils.color")
 
----@type NeopywalPluginsReactiveOptions
 M.default_options = {
     color_percentage = 0.3,
     mode_colors = {
@@ -18,7 +18,7 @@ M.default_options = {
 M.options = M.default_options
 
 local did_setup = false
----@param user_config NeopywalPluginsReactiveOptions?
+---@param user_config? Neopywal.theme.plugins.reactive.options
 function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)

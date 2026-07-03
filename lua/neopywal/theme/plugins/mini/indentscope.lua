@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local scope_color = O.plugins.mini.indentscope.scope_color
     if type(scope_color) == "function" then scope_color = scope_color(C) end

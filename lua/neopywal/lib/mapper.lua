@@ -1,3 +1,4 @@
+---@class Neopywal.lib.mapper
 local M = {}
 
 local function couldnt_load(type, module)
@@ -15,7 +16,7 @@ which %s module couldn't be loaded.
     ))
 end
 
----@param theme_style? ThemeStyles
+---@param theme_style? NeopywalAlias.theme_styles
 function M.get(theme_style)
     local theme = {}
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then

@@ -2,6 +2,7 @@
 
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     -- Reference: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
     return {

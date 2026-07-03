@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- builtin: http://www.drchip.org/astronaut/vim/index.html#SYNTAX_TEX:

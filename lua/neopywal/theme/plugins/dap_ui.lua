@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         DapUIBreakpointsCurrentLine = { fg = C.color2, styles = { "bold" } },

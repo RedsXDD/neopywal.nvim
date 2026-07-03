@@ -1,5 +1,6 @@
 local M = {}
 
+---@return string[]
 function M.get()
     local U = require("neopywal.utils.color")
     local C = require("neopywal.lib.palette").get()

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local current_style = { "bold", "italic" }
     local fill_bg = O.transparent_background and C.background

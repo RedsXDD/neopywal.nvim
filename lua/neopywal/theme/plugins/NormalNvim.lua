@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         MarkdownTask = { fg = C.color6, styles = { "bold" } },

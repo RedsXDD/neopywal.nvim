@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local sneak_color = O.plugins.sneak.sneak_color
     if type(sneak_color) == "function" then sneak_color = sneak_color(C) end

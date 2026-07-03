@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local hl = {
         Headline = { bg = U.blend(C.color8, C.background, 0.2) },

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local text_color = O.plugins.navic.dim_text and C.color8 or C.foreground
     local fallback_bg = O.transparent_background and C.none or C.background

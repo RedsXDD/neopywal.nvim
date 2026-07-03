@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         YankyPut = { bg = U.blend(C.ok, C.background, 0.2), fg = C.ok },

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local virtual_text = O.plugins.lsp.virtual_text
     local underlines = O.plugins.lsp.underlines

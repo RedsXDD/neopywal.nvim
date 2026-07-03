@@ -4,6 +4,8 @@ local M = {}
 local notified = {}
 function M.clear() notified = {} end
 
+---@return boolean|number
+---@param level string
 local function should_notify(level)
     local notify = require("neopywal.lib.config").options.notify
     if notify == "none" then return false end
@@ -41,8 +43,11 @@ function M.notify(msg, level)
     notified[msg] = true
 end
 
+---@param msg string|string[]
 function M.info(msg) M.notify(msg, vim.log.levels.INFO) end
+---@param msg string|string[]
 function M.warn(msg) M.notify(msg, vim.log.levels.WARN) end
+---@param msg string|string[]
 function M.error(msg) M.notify(msg, vim.log.levels.ERROR) end
 
 return M

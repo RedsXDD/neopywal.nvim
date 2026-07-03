@@ -1,8 +1,8 @@
+---@class Neopywal.theme.plugins.clap
 local M = {}
 local C = require("neopywal.lib.palette").get()
 local O = require("neopywal.lib.config").options
 
----@type NeopywalPluginsClapOptions
 M.default_options = {
     colors = {
         indicator = "color8",
@@ -20,7 +20,7 @@ M.default_options = {
 M.options = M.default_options
 
 local did_setup = false
----@param user_config NeopywalPluginsClapOptions?
+---@param user_config? Neopywal.theme.plugins.clap.options?
 function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)

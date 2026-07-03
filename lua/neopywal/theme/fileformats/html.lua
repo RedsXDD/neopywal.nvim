@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- builtin: https://notabug.org/jorgesumle/vim-html-syntax:

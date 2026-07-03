@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local bg = O.transparent_background and C.none
         or O.plugins.ts_context.dim_background and C.dim_bg

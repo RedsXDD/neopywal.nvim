@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     -- These groups are not listed as default vim groups, but they are defacto standard group names for syntax highlighting.
     return {

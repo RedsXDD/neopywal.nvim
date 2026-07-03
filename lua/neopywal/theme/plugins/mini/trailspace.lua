@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local color_opts = O.plugins.mini.trailspace.color
     if type(color_opts) == "table" then

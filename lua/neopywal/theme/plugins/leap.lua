@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local bg = O.transparent_background and C.none
         or U.blend(C.foreground, C.background, 0.2)

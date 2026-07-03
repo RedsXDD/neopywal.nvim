@@ -1,7 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 
----@diagnostic disable: undefined-global, undefined-field, missing-fields
----@type Neopywal
+---@diagnostic disable: undefined-global, undefined-field
+---@class Neopywal
 local Neopywal = require("neopywal")
 local Config = require("neopywal.lib.config")
 

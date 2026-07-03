@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         AlphaShortcut = { fg = U.blend(C.color1, C.color3, 0.5) },

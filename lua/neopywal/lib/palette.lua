@@ -1,3 +1,4 @@
+---@class Neopywal.lib.palette
 local M = {}
 local path_sep = jit and (jit.os == "Windows" and "\\" or "/")
     or package.config:sub(1, 1)
@@ -35,7 +36,7 @@ M.default_options = {
 }
 M.options = M.default_options
 
----@return { dark: number, light: number }
+---@return Neopywal.lib.palette.getftime
 function M.getftime()
     if not M.did_setup then M.setup() end
     local ftime = { dark = 0, light = 0 }
@@ -50,8 +51,8 @@ function M.getftime()
     return ftime
 end
 
----@return NeopywalMinimalPalette
----@param theme_style? ThemeStyles
+---@return Neopywal.minimal_palette
+---@param theme_style? NeopywalAlias.theme_styles
 local function get_minpalette(theme_style)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
@@ -143,7 +144,7 @@ Below is the error message that we captured:
 end
 
 M.did_setup = false
----@param config table?
+---@param config Neopywal.lib.palette.options?
 function M.setup(config)
     config = config or {}
     M.options = vim.tbl_deep_extend("keep", config, M.default_options)
@@ -152,8 +153,10 @@ function M.setup(config)
         M.options.use_palette = M.options.use_palette()
     end
     if type(M.options.use_palette) == "string" then
-        M.options.use_palette =
-            { dark = M.options.use_palette, light = M.options.use_palette }
+        M.options.use_palette = {
+            dark = M.options.use_palette --[[@as string]],
+            light = M.options.use_palette --[[@as string]],
+        }
     end
 
     local cache_dir
@@ -227,10 +230,10 @@ function M.setup(config)
     M.did_setup = true
 end
 
----@return NeopywalPalette
----@param theme_style? ThemeStyles
+---@return Neopywal.palette | Neopywal.minimal_palette
+---@param theme_style? NeopywalAlias.theme_styles
 ---@param minimal_palette? boolean
----@param extra_colors? CustomColorsOption | fun(C: table<ValidColors[]>?): { [string]: string }
+---@param extra_colors? Neopywal.lib.config.options.custom_colors | fun(C: table<NeopywalAlias.valid_colors[]>?): { [string]: string }
 function M.get(theme_style, minimal_palette, extra_colors)
     if not M.did_setup then M.setup() end
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then

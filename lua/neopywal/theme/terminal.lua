@@ -1,5 +1,6 @@
 local M = {}
 
+---@return { [string]: string<Neopywal.palette> }
 function M.get()
     return {
         terminal_color_0 = C.color0,

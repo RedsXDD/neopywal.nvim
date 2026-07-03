@@ -1,8 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker:foldenable
 -- Inspiration: https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/integrations/feline.lua
 
----@type NeopywalPluginsFeline
----@diagnostic disable-next-line: missing-fields
+---@class Neopywal.theme.plugins.feline
 local M = {}
 
 local C = require("neopywal.lib.palette").get()
@@ -73,7 +72,7 @@ M.default_options = {
 }
 M.options = M.default_options
 
----@param user_config NeopywalPluginsFelineOptions?
+---@param user_config? Neopywal.theme.plugins.feline.options
 function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local beacon_color = O.plugins.beacon.color
     if type(beacon_color) == "function" then beacon_color = beacon_color(C) end

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return O.plugins.telescope.style ~= nil
             and string.lower(O.plugins.telescope.style) == "nvchad"

@@ -2,8 +2,7 @@
 -- https://github.com/catppuccin/nvim -- Where i took the original compiler code.
 -- https://github.com/EdenEast/nightfox.nvim -- The plugin catppuccin credits.
 
----@type Compiler
----@diagnostic disable-next-line: missing-fields
+---@class Neopywal.lib.compiler
 local M = {}
 
 local function inspect(t)
@@ -23,7 +22,7 @@ local function inspect(t)
     return string.format([[{ %s }]], table.concat(list, ", "))
 end
 
----@param theme_style? ThemeStyles
+---@param theme_style? NeopywalAlias.theme_styles
 local function compile(theme_style)
     if not theme_style or theme_style ~= "dark" and theme_style ~= "light" then
         theme_style = vim.o.background
@@ -185,6 +184,7 @@ function M.recompile(notify)
     if vim.g.colors_name:match("^neopywal") then
         vim.cmd.colorscheme("neopywal")
     end
+
     if notify then
         local Notify = require("neopywal.utils.notify")
         Notify.info("Successfully compiled cache.")

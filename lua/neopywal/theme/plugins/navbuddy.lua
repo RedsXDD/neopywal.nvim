@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local kinds = require("neopywal.utils.kinds").get("Navbuddy%s")
     local cursorline_kinds = require("neopywal.utils.kinds").get(

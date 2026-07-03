@@ -1,5 +1,4 @@
----@type NeopywalPluginsBarbecue
----@diagnostic disable-next-line: missing-fields
+---@class Neopywal.theme.plugins.barbecue
 local M = {}
 local O = require("neopywal.lib.config").options
 local C = require("neopywal.lib.palette").get()
@@ -17,16 +16,20 @@ M.default_options = {
 M.options = M.default_options
 
 local did_setup = false
----@param user_config NeopywalPluginsBarbecueOptions?
+---@param user_config? Neopywal.theme.plugins.barbecue.options
 function M.setup(user_config)
     user_config = user_config or {}
 
     -- Get user-defined theme.
-    local user_theme = user_config.theme or {}
+    local user_theme = user_config.theme --[[@as function]] or {}
     if type(user_theme) == "function" then user_theme = user_theme(C) end
     user_config.theme = user_theme
 
-    M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)
+    M.options = vim.tbl_deep_extend(
+        "keep",
+        user_config --[[@as table]],
+        M.default_options
+    )
     did_setup = true
 end
 
@@ -85,8 +88,11 @@ function M.get()
         context_variable = kinds.Variable,
     }
 
-    local final_theme =
-        vim.tbl_deep_extend("keep", M.options.theme, default_theme)
+    local final_theme = vim.tbl_deep_extend(
+        "keep",
+        M.options.theme --[[@as table]],
+        default_theme
+    )
     for _, properties in pairs(final_theme) do
         if properties.styles then
             for _, style in pairs(properties.styles) do
@@ -112,7 +118,7 @@ function M.get()
     end
     M.options.theme = final_theme
 
-    return M.options.theme
+    return final_theme
 end
 
 return M

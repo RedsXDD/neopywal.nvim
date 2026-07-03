@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     local winsep_color = O.plugins.colorful_winsep.color
     if type(winsep_color) == "function" then winsep_color = winsep_color(C) end

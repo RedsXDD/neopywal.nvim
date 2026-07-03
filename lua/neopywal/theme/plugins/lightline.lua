@@ -1,8 +1,8 @@
+---@class Neopywal.theme.plugins.lightline
 local M = {}
 local C = require("neopywal.lib.palette").get()
 local U = require("neopywal.utils.color")
 
----@type NeopywalPluginsLightlineOptions
 M.default_options = {
     mode_colors = {
         normal = "color4",
@@ -16,7 +16,7 @@ M.default_options = {
 M.options = M.default_options
 
 local did_setup = false
----@param user_config NeopywalPluginsLightlineOptions?
+---@param user_config? Neopywal.theme.plugins.lightline.options
 function M.setup(user_config)
     user_config = user_config or {}
     M.options = vim.tbl_deep_extend("keep", user_config, M.default_options)

@@ -1,5 +1,6 @@
 local M = {}
 
+---@return NeopywalAlias.basic_module.get
 function M.get()
     return {
         -- vim-cpp-enhanced-highlight: https://github.com/octol/vim-cpp-enhanced-highlight:

@@ -3,6 +3,8 @@ local M = {}
 local day_brightness = 0.3
 local hsluv = require("neopywal.utils.hsluv")
 
+---@return number
+---@param color number
 local function ensureColor(color)
     local result = color
 
@@ -21,8 +23,9 @@ local function ensureColor(color)
     return result
 end
 
----@param hex_color string? The color you want to validate as a valid hexadecimal color.
----@param fallback_color string? A fallback color in case the first parameter color turns out to be invalid.
+---@return string
+---@param hex_color? string The color you want to validate as a valid hexadecimal color.
+---@param fallback_color? string A fallback color in case the first parameter color turns out to be invalid.
 function M.validate(hex_color, fallback_color)
     local C = require("neopywal.lib.palette").get()
 
@@ -47,6 +50,8 @@ function M.validate(hex_color, fallback_color)
     return hex_color
 end
 
+---@return { [1]: number, [2]: number, [3]: number }
+---@param hex_color string
 function M.hexToRgb(hex_color)
     local hex_chars = "[abcdef0-9][abcdef0-9]"
     local pattern = "^#("
@@ -71,6 +76,8 @@ function M.hexToRgb(hex_color)
     }
 end
 
+---@return string
+---@param rgb { [1]: number, [2]: number, [3]: number }
 function M.RgbToHex(rgb)
     local hexadecimal = "#"
 
@@ -95,6 +102,10 @@ function M.RgbToHex(rgb)
     return hexadecimal
 end
 
+---@return string
+---@param color1 string
+---@param color2 string
+---@param percentage number
 function M.blend(color1, color2, percentage)
     -- Convert factor to a number if it's a hex string. Making sure it's betwheen 0 and 1.
     percentage = type(percentage) == "string"
@@ -122,6 +133,8 @@ function M.blend(color1, color2, percentage)
     )
 end
 
+---@return string
+---@param color string
 function M.darken(color, factor)
     factor = math.abs(factor)
     local rgb_color = M.hexToRgb(color)
@@ -141,6 +154,8 @@ function M.darken(color, factor)
     )
 end
 
+---@return string
+---@param color string
 function M.lighten(color, factor)
     factor = math.abs(factor)
     local rgb_color = M.hexToRgb(color)
@@ -160,6 +175,9 @@ function M.lighten(color, factor)
     )
 end
 
+---@return string
+---@param color string
+---@param percentage number
 function M.blacken(color, percentage)
     local hsl = hsluv.hex_to_hsluv(color)
     local larpSpace = hsl[3]
@@ -168,6 +186,9 @@ function M.blacken(color, percentage)
     return hsluv.hsluv_to_hex(hsl)
 end
 
+---@return string
+---@param color string
+---@param percentage number
 function M.brighten(color, percentage)
     local hsl = hsluv.hex_to_hsluv(color)
     local larpSpace = 100 - hsl[3]
@@ -176,6 +197,8 @@ function M.brighten(color, percentage)
     return hsluv.hsluv_to_hex(hsl)
 end
 
+---@return string
+---@param color string
 function M.invert(color)
     local hsl = hsluv.hex_to_hsluv(color)
     hsl[3] = 100 - hsl[3]
@@ -183,6 +206,9 @@ function M.invert(color)
     return hsluv.hsluv_to_hex(hsl)
 end
 
+---@return string
+---@param color string
+---@param percentage number
 local function saturate(color, percentage)
     local rgb = M.hexToRgb(color)
 
@@ -225,6 +251,9 @@ local function saturate(color, percentage)
     )
 end
 
+---@return string
+---@param color string
+---@param percentage number
 local function desaturate(color, percentage)
     local rgb = M.hexToRgb(color)
     local r, g, b = rgb[1], rgb[2], rgb[3]
@@ -241,7 +270,12 @@ local function desaturate(color, percentage)
     return M.RgbToHex({ ret_r, ret_g, ret_b })
 end
 
--- stylua: ignore
-function M.saturate(color, percentage) return percentage > 0 and saturate(color, percentage) or desaturate(color, math.abs(percentage)) end
+---@return string
+---@param color string
+---@param percentage number
+function M.saturate(color, percentage)
+    return percentage > 0 and saturate(color, percentage)
+        or desaturate(color, math.abs(percentage))
+end
 
 return M
