@@ -90,27 +90,14 @@ local function get_minpalette(theme_style)
 
     -- Use fallback colors if template file couldn't be loaded.
     ::return_palette::
-    local ret = {
-        background = (vim.g.background ~= nil) and vim.g.background or fallback_p.background,
-        foreground = (vim.g.foreground ~= nil) and vim.g.foreground or fallback_p.foreground,
-        cursor = (vim.g.cursor ~= nil) and vim.g.cursor or fallback_p.cursor,
-        color0 = (vim.g.color0 ~= nil) and vim.g.color0 or fallback_p.color0,
-        color1 = (vim.g.color1 ~= nil) and vim.g.color1 or fallback_p.color1,
-        color2 = (vim.g.color2 ~= nil) and vim.g.color2 or fallback_p.color2,
-        color3 = (vim.g.color3 ~= nil) and vim.g.color3 or fallback_p.color3,
-        color4 = (vim.g.color4 ~= nil) and vim.g.color4 or fallback_p.color4,
-        color5 = (vim.g.color5 ~= nil) and vim.g.color5 or fallback_p.color5,
-        color6 = (vim.g.color6 ~= nil) and vim.g.color6 or fallback_p.color6,
-        color7 = (vim.g.color7 ~= nil) and vim.g.color7 or fallback_p.color7,
-        color8 = (vim.g.color8 ~= nil) and vim.g.color8 or fallback_p.color8,
-        color9 = (vim.g.color9 ~= nil) and vim.g.color9 or fallback_p.color9,
-        color10 = (vim.g.color10 ~= nil) and vim.g.color10 or fallback_p.color10,
-        color11 = (vim.g.color11 ~= nil) and vim.g.color11 or fallback_p.color11,
-        color12 = (vim.g.color12 ~= nil) and vim.g.color12 or fallback_p.color12,
-        color13 = (vim.g.color13 ~= nil) and vim.g.color13 or fallback_p.color13,
-        color14 = (vim.g.color14 ~= nil) and vim.g.color14 or fallback_p.color14,
-        color15 = (vim.g.color15 ~= nil) and vim.g.color15 or fallback_p.color15,
-    }
+    local is_hellwal = M.palette_metadata[theme_style].is_hellwal or vim.g.hellwal_background ~= nil
+    local ret = {}
+    for name, fallback in pairs(fallback_p) do
+        local source_name = name
+        if is_hellwal then source_name = name:match("^color(%d+)$") or name end
+        local value = vim.g[is_hellwal and "hellwal_" .. source_name or source_name]
+        ret[name] = value ~= nil and value or fallback
+    end
 
     -- Reset all global variables that have been used.
     -- Also string.lower() all color variables.
@@ -121,8 +108,13 @@ local function get_minpalette(theme_style)
 
     for _, var in ipairs(var_patterns) do
         vim.g[var] = nil
+        if is_hellwal then
+            local source_name = var:match("^color(%d+)$") or var
+            vim.g["hellwal_" .. source_name] = nil
+        end
         ret[var] = string.lower(ret[var])
     end
+    if is_hellwal then vim.g.hellwal_border = nil end
 
     return ret
 end
@@ -149,6 +141,7 @@ function M.setup(config)
         wal = cache_dir .. "/wal/colors-wal.vim",
         pywal = cache_dir .. "/wal/colors-wal.vim",
         wallust = cache_dir .. "/wallust/colors_neopywal.vim",
+        hellwal = cache_dir .. "/hellwal/colors.vim",
     }
 
     -- List of supported builting palettes.
@@ -191,6 +184,7 @@ function M.setup(config)
             filepath = path_sep == "\\" and filepath:gsub("/", "\\") or filepath
             metadata[theme_style].filepath = filepath
             metadata[theme_style].is_requireable = builtin_palette_map[value] ~= nil
+            metadata[theme_style].is_hellwal = value == "hellwal"
 
             if metadata[theme_style].is_requireable then
                 metadata[theme_style].file_exists = true

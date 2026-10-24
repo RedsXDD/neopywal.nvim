@@ -38,6 +38,12 @@ describe("palette", function()
         vim.g.color13 = nil
         vim.g.color14 = nil
         vim.g.color15 = nil
+        for i = 0, 15 do
+            vim.g["hellwal_" .. i] = nil
+        end
+        vim.g.hellwal_background = nil
+        vim.g.hellwal_foreground = nil
+        vim.g.hellwal_cursor = nil
 
         vim.o.background = "dark"
         vim.cmd.colorscheme("default")
@@ -198,6 +204,34 @@ describe("palette", function()
 
         assert.equals(Palette.options.use_palette.dark, expectedcheme_file)
         assert.equals(Palette.options.use_palette.light, expectedcheme_file)
+    end)
+    --: }}}
+    --: setup works with use_palette set as 'hellwal' {{{
+    it("setup works with use_palette set as 'hellwal'", function()
+        local expected_scheme_file = cache_dir .. "/hellwal/colors.vim"
+        if path_sep == "\\" then expected_scheme_file = expected_scheme_file:gsub("/", "\\") end
+
+        Palette.setup({ use_palette = "hellwal" })
+
+        assert.equals(Palette.options.use_palette.dark, expected_scheme_file)
+        assert.equals(Palette.options.use_palette.light, expected_scheme_file)
+    end)
+    --: }}}
+    it("loads and maps Hellwal palette globals", function()
+        local fixture = vim.fn.getcwd() .. "/tests/colors-hellwal.vim"
+        Palette.setup({ use_palette = fixture })
+
+        local colors = Neopywal.get_colors("dark", true)
+        assert.equals(colors.background, "#100e0b")
+        assert.equals(colors.foreground, "#a09e9a")
+        assert.equals(colors.cursor, "#a09e9a")
+        assert.equals(colors.color0, "#100e0b")
+        assert.equals(colors.color1, "#858584")
+        assert.equals(colors.color10, "#96928d")
+        assert.equals(colors.color15, "#a09e9a")
+        assert.is_nil(vim.g.hellwal_0)
+        assert.is_nil(vim.g.hellwal_background)
+        assert.is_nil(vim.g.hellwal_border)
     end)
     --: }}}
     --: can export a dark theme style {{{
