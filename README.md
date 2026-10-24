@@ -28,7 +28,7 @@
 - Support for dark and light themes.
 - Importable and customizable [color palette](./docs/neopywal-palettes.md).
 - Fail safe fallback theme if required palette files can't be loaded.
-- Supports [Pywal](https://github.com/dylanaraps/pywal) and [Wallust](https://codeberg.org/explosion-mental/wallust).
+- Supports [Pywal](https://github.com/dylanaraps/pywal), [Wallust](https://codeberg.org/explosion-mental/wallust), and [Hellwal](https://github.com/danihek/hellwal) (requires installing Hellwal's [`colors.vim` template](https://github.com/danihek/hellwal/blob/main/templates/colors.vim); see the [palette guide](./docs/neopywal-palettes.md#hellwal)).
 - Automatic reloading of colorscheme with Pywal theme changes.
 - Support for LSP, treesitter and [a bunch of plugins](./docs/neopywal-plugins.md).
 - Enhanced syntax highlighting for [fileformats](./docs/neopywal-fileformats.md) (without treesitter).
