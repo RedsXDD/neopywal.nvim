@@ -52,8 +52,7 @@ function M.load(theme_style)
     lock = true
     local f = loadfile(compiled_path)
     if not f then
-        local Compiler = require("neopywal.lib.compiler")
-        Compiler.compile()
+        require("neopywal.lib.compiler").compile()
         f = assert(loadfile(compiled_path), "could not load neopywal cache.")
     end
     f()
