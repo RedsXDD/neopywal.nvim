@@ -1,5 +1,5 @@
 *neopywal.txt*                                         (Neo)pywal for (Neo)vim
-                               For nvim >= 0.8.0    Last change: 2026 April 26
+                            For nvim >= 0.8.0    Last change: 2026 November 08
 
 ==============================================================================
 Table of Contents                                 *neopywal-table-of-contents*
@@ -25,8 +25,8 @@ FEATURES                                                   *neopywal-features*
 - Automatic reloading of colorscheme with Pywal theme changes.
 - Support for LSP, treesitter and a bunch of plugins <./docs/neopywal-plugins.md>.
 - Enhanced syntax highlighting for fileformats <./docs/neopywal-fileformats.md> (without treesitter).
-- |neopywal-compiled| user’s configuration for fast startup times.
-- |neopywal-interactive| mode for live config re-loading.
+- Compiled user’s configuration for fast startup times.
+- Interactive mode for live config re-loading.
 
 
 INSTALLATION                                           *neopywal-installation*
@@ -254,7 +254,7 @@ configuration tables for each of Neopywal’s theme variants as shown below:
                 light = { mylightcolor = C.color3 },
             }
         end,
-    
+
         -- The same kinds of options are available to `custom_highlights`
         -- custom_highlights can also be set to a function itself just like custom_colors.
         custom_highlights = {
