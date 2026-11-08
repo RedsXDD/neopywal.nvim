@@ -61,7 +61,7 @@ function M.get()
         SnacksDashboardIcon = { fg = C.color4 },
         SnacksDashboardKey = { fg = C.color1, styles = { "bold" } },
         SnacksDashboardSpecial = { fg = C.color5, styles = { "bold" } },
-        SnacksDashboardTerminal = { fg = C.error, styles = { "bold" } },
+        SnacksDashboardTerminal = { link = "SnacksDashboardNormal" },
         SnacksDashboardTitle = { fg = C.color4, styles = { "bold" } },
 
         -- Picker
