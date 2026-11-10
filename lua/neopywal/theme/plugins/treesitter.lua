@@ -192,9 +192,14 @@ function M.get()
         ["@function.method.call.php"] = { link = "Function" },
         --: }}}
         --: C/CPP {{{
+        ["@property.cpp"] = { fg = C.foreground },
         ["@lsp.typemod.type.defaultLibrary.c"] = { link = "@type.builtin.c" },
         ["@lsp.typemod.type.defaultLibrary.cpp"] = { link = "@type.builtin.c" },
-        ["@property.cpp"] = { fg = C.foreground },
+
+        -- FIX: #if and #elif preprocessor directives having commented out code blocks.
+        -- REF: https://www.reddit.com/r/neovim/comments/13tzjz7/neovim_c_highlighting_define_from_other_file_issue/
+        ["@lsp.type.comment.c"] = {},
+        ["@lsp.type.comment.cpp"] = {},
         --: }}}
         --: Gitcommit {{{
         ["@comment.warning.gitcommit"] = { fg = C.color3 },
