@@ -1,5 +1,5 @@
 *neopywal-plugins.txt*                                        Neopywal Plugins
-                            For nvim >= 0.8.0    Last change: 2026 November 08
+                            For nvim >= 0.8.0    Last change: 2026 November 10
 
 Neopywal provides theme support for other plugins in the Vim/Neovim ecosystem.
 Most of them can be configured under the `plugins` table on Neopywal’s
